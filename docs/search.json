@@ -1,0 +1,206 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "SKL402 — Introduction to R",
+    "section": "",
+    "text": "Welcome\nWelcome to SKL402 — Introduction to R. This is a digital seminar designed as a fundamental skills module for the Master in Economics and Business Administration (MØA) at the Norwegian School of Economics. The course will take you from zero to a working knowledge of R programming, covering everything from installation and basic programming to data wrangling, visualisation, and reporting. The content of the course has been selected to serve as a prerequisite for other courses at NHH that use R as their programming language. The aim is not to make you a master of R, but to bring you to a working level — operational enough to quickly find your footing and take on substantial analytical tasks in other courses across the programme.\nR is a free, open-source programming language built specifically for statistical computing and data analysis. First released in 1993 and maintained by a global community, it has become one of the most widely used tools in economics, finance, and the social sciences. Its strength lies in a rich ecosystem of up-to-date packages that can be easily installed on top of the language itself and that extend it to almost any analytical task. Throughout this course we will explore some of the most central and user-friendly third-party packages for working with, analysing, and visualising data. Because R is both powerful and freely available, it is widely used in science, business, the public sector, and beyond. Think of R as the Swiss Army knife of data analysis that can get you out of just about any tight spot, as long as you know how to use it.\nVideo will be embedded here.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#course-overview",
+    "href": "index.html#course-overview",
+    "title": "SKL402 — Introduction to R",
+    "section": "Course overview",
+    "text": "Course overview\nThe course is organised into five topics:\n\nGetting Started and Working Effectively — Installing R, navigating files, writing scripts, and understanding basic data structures.\nProgramming Fundamentals — Logical operators, control flow, loops, and writing your own functions.\nData Wrangling — Importing, cleaning, and transforming data with dplyr.\nGraphics — Building publication-ready visualisations with ggplot2.\nAnalysis, Reporting, and Wrap-up — Linear regression, exporting results, Quarto reports, debugging, and using AI responsibly.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#how-the-course-works",
+    "href": "index.html#how-the-course-works",
+    "title": "SKL402 — Introduction to R",
+    "section": "How the course works",
+    "text": "How the course works\nThe material is presented as short video lessons, each covering a single topic. The videos are followed by a series of programming problems of varying difficulty, and it is crucial that you spend time on these problems in order to develop your own muscle memory and to get a sense of where you are in your own learning process. The course material is self-contained, which means that you can start learning whenever and wherever you want.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#using-artificial-intelligence-while-learning",
+    "href": "index.html#using-artificial-intelligence-while-learning",
+    "title": "SKL402 — Introduction to R",
+    "section": "Using Artificial Intelligence while learning",
+    "text": "Using Artificial Intelligence while learning\nThere is an important difference between learning to program and programming efficiently as a professional. Once you know a language well, AI tools can be a powerful way to write code faster and handle routine work. But that is not what this course is about. Here, the goal is for you to build real understaning and skills, and that only comes from working through problems yourself, making mistakes, and using your own brain to figure out why something does or does not work.\nFor that reason, you should not lean on AI to write your code for you while you are learning. Used carelessly, it deprives you of the incredibly valuable, but sometimes uncomfortable struggle that builds lasting skill. Used carefully, however, AI can be a valuable learning companion: a patient tutor to help you make sense of a confusing error message, talk through a difficult problem, or explain an unfamiliar concept in a different way. The distinction is whether the AI is doing the thinking for you, or helping you do your own thinking in a better way.\nAll students at NHH have access to a privacy-friendly AI assistant through Sikt KI, which you are welcome to use as a learning companion in this spirit.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#where-to-get-up-to-date-information",
+    "href": "index.html#where-to-get-up-to-date-information",
+    "title": "SKL402 — Introduction to R",
+    "section": "Where to get up-to-date information",
+    "text": "Where to get up-to-date information\nThis web-page only contains the contents of the course, in the form of video lessons and accompanying problem sets. For semester-specific information such as announcements, dates and locations for physical learning sessions, you should consult the course’s Canvas page, to which you will gain access once you have completed your semester registration.\nFor exam dates, see the official schedule information from NHH.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "01-getting-started-and-working-effectively/01-04-writing-scripts.html",
+    "href": "01-getting-started-and-working-effectively/01-04-writing-scripts.html",
+    "title": "Writing Scripts",
+    "section": "",
+    "text": "Exercises\nWe write our first R script, learn how to run code line by line and in bulk, and discuss the difference between the console and a saved script file. This is the code that we saved in our script:",
+    "crumbs": [
+      "1 - Getting Started and Working Effectively",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>1.4 Writing Scripts</span>"
+    ]
+  },
+  {
+    "objectID": "01-getting-started-and-working-effectively/01-04-writing-scripts.html#exercises",
+    "href": "01-getting-started-and-working-effectively/01-04-writing-scripts.html#exercises",
+    "title": "Writing Scripts",
+    "section": "",
+    "text": "Exercise 1.4.1\nCreate a new script file called exercises_topic1.R in your scripts/ folder. At the top, write a comment with your name and today’s date. Save the file.\n\n\nSolution\n\n# exercises_topic1.R\n# Author: [Your name]\n# Date:   [Today's date]\n# Topic 1 exercises for SKL400\nSave as scripts/exercises_topic1.R.\n\n\n\nExercise 1.4.2\nIn your script, write code that computes and prints the result of:\n\n17 modulo 5 (the remainder when 17 is divided by 5)\nInteger division of 17 by 5\n\nRun the lines from the script. (Hint: the modulo operator in R is %% and integer division is %/%.)\n\n\nSolution\n\n# 1. Modulo\n17 %% 5\n[1] 2\n# 2. Integer division\n17 %/% 5\n[1] 3\nCheck: 5 × 3 + 2 = 17. ✓\n\n\n\nExercise 1.4.3\nWrite a comment in your script explaining what the following line of code does, then run it:\nceiling(7.3)\n\n\nSolution\n\n# ceiling() rounds a number UP to the nearest integer\nceiling(7.3)\n[1] 8\nRelated functions: floor() rounds down, round() rounds to the nearest integer (or specified number of decimal places).\n\n\n\nExercise 1.4.4\nExperiment with the keyboard shortcuts in Positron. Write three lines of code in your script:\n10 + 5\n10 - 5\n10 * 5\nRun them one at a time using the keyboard shortcut (Ctrl+Enter or Cmd+Enter). Then select all three lines and run them as a block. What is the difference in how the output appears?\n\n\nSolution\n\nRunning one at a time: each line is sent to the console individually, and the result appears after each line.\nRunning as a block: all three lines are sent together, and you see them executed in sequence:\n&gt; 10 + 5\n[1] 15\n&gt; 10 - 5\n[1] 5\n&gt; 10 * 5\n[1] 50\nThe results are the same, but running line by line gives you more control for checking intermediate results.\n\n\n\nExercise 1.4.5\nOn purpose, write a line of code that will produce an error, for example:\n5 + \"hello\"\nRun it. Read the error message. Can you understand what it is telling you? Fix the line so it runs without error (for example, change it to 5 + 3).\n\n\nSolution\n\n5 + \"hello\"\nError in 5 + \"hello\" : non-numeric argument to binary operator\nThe error tells us that the + operator (a “binary operator” because it takes two arguments) received a non-numeric argument (\"hello\" is a character string). R cannot add a number and a string.\nFix:\n5 + 3\n[1] 8",
+    "crumbs": [
+      "1 - Getting Started and Working Effectively",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>1.4 Writing Scripts</span>"
+    ]
+  },
+  {
+    "objectID": "01-getting-started-and-working-effectively/01-05-packages.html",
+    "href": "01-getting-started-and-working-effectively/01-05-packages.html",
+    "title": "Packages",
+    "section": "",
+    "text": "Exercises\nR’s power comes from its ecosystem of packages. This video shows how to install and load packages and introduces the tidyverse collection we will use throughout the course.",
+    "crumbs": [
+      "1 - Getting Started and Working Effectively",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1.5 Packages</span>"
+    ]
+  },
+  {
+    "objectID": "01-getting-started-and-working-effectively/01-05-packages.html#exercises",
+    "href": "01-getting-started-and-working-effectively/01-05-packages.html#exercises",
+    "title": "Packages",
+    "section": "",
+    "text": "Exercise 1.5.1\nLoad the tidyverse with library(tidyverse). What packages are listed as “Attaching core tidyverse packages” in the message?\n\n\nSolution\n\nlibrary(tidyverse)\n── Attaching core tidyverse packages ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2\nThe core packages are: dplyr, forcats, ggplot2, lubridate, purrr, readr, stringr, tibble, and tidyr. (The exact versions will depend on when you installed.)\n\n\n\nExercise 1.5.2\nWhat happens if you try to use a function from a package you have not loaded? Run the following without loading readxl first:\nread_excel(\"test.xlsx\")\nWhat error do you get? Now load the package and explain why the error would go away (you do not need an actual Excel file).\n\n\nSolution\n\nread_excel(\"test.xlsx\")\nError in read_excel(\"test.xlsx\") : could not find function \"read_excel\"\nThe error says R cannot find the function. This is because read_excel lives in the readxl package, which has not been loaded. After running library(readxl), R knows where to find the function. (You would then get a different error about the file not existing, which is expected since we have no such file.)\n\n\n\nExercise 1.5.3\nRun installed.packages() inside of the nrow()-function to count how many packages are installed on your system:\nnrow(installed.packages())\n\n\nSolution\n\n\nnrow(installed.packages())\n\n[1] 130\n\n\nYour number wil probably be differenty. The tidyverse alone installs many other packages upon which it depends, so even a fresh R installation with tidyverse will have 100+ packages.\n\n\n\nExercise 1.5.4\nThe function sessionInfo() prints information about your R session, including which packages are loaded. Run it. Can you identify the “attached” packages (those you loaded explicitly with library()) versus the “loaded via a namespace” packages (dependencies loaded automatically)?\n\n\nSolution\n\nThe output will contain a section like:\n\nsessionInfo()\n\nR version 4.5.1 (2025-06-13 ucrt)\nPlatform: x86_64-w64-mingw32/x64\nRunning under: Windows 11 x64 (build 26100)\n\nMatrix products: default\n  LAPACK version 3.12.1\n\nlocale:\n[1] LC_COLLATE=Norwegian Bokmål_Norway.utf8 \n[2] LC_CTYPE=Norwegian Bokmål_Norway.utf8   \n[3] LC_MONETARY=Norwegian Bokmål_Norway.utf8\n[4] LC_NUMERIC=C                            \n[5] LC_TIME=Norwegian Bokmål_Norway.utf8    \n\ntime zone: Europe/Oslo\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nloaded via a namespace (and not attached):\n [1] compiler_4.5.1  fastmap_1.2.0   cli_3.6.5       tools_4.5.1    \n [5] htmltools_0.5.9 otel_0.2.0      rmarkdown_2.31  knitr_1.51     \n [9] jsonlite_2.0.0  xfun_0.58       digest_0.6.39   rlang_1.1.7    \n[13] evaluate_1.0.5 \n\n\n“Attached” packages are those whose functions are directly available by name. “Loaded via namespace” packages are available internally (other packages can use them) but their functions are not directly on the search path — you would need to use package::function() to call them.\n\n\n\nExercise 1.5.5\nTry installing a package that does not exist:\ninstall.packages(\"this_package_does_not_exist_xyz\")\nWhat does the error/warning message say? Understanding installation error messages is useful for diagnosing real problems (typos in package names, network issues, etc.).\n\n\nSolution\n\n\ninstall.packages(\"this_package_does_not_exist_xyz\")\n\nInstalling package into 'C:/Users/s14754/AppData/Local/R/win-library/4.5'\n(as 'lib' is unspecified)\n\n\nError in `contrib.url()`:\n! trying to use CRAN without setting a mirror\n\n\nThe message says the package is “not available”. In practice, if you get this message for a real package, the most common causes are: (1) a typo in the name, (2) the package was removed from CRAN, or (3) a network connectivity problem.",
+    "crumbs": [
+      "1 - Getting Started and Working Effectively",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>1.5 Packages</span>"
+    ]
+  },
+  {
+    "objectID": "01-getting-started-and-working-effectively/01-06-variables-and-types.html",
+    "href": "01-getting-started-and-working-effectively/01-06-variables-and-types.html",
+    "title": "Variables and types",
+    "section": "",
+    "text": "Exercises\nWe introduce variables as named containers for data and explore R’s basic data types: numeric, character, logical, and factors.",
+    "crumbs": [
+      "1 - Getting Started and Working Effectively",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>1.6 Variables and Types</span>"
+    ]
+  },
+  {
+    "objectID": "01-getting-started-and-working-effectively/01-06-variables-and-types.html#exercises",
+    "href": "01-getting-started-and-working-effectively/01-06-variables-and-types.html#exercises",
+    "title": "Variables and types",
+    "section": "",
+    "text": "Exercise 1.6.1\nCreate three variables: product with the value \"laptop\", price with the value 8999.50, and in_stock with the value TRUE. Check the type of each using class().\n\n\nSolution\n\n\nproduct &lt;- \"laptop\"\nprice &lt;- 8999.50\nin_stock &lt;- TRUE\n\nclass(product)\n\n[1] \"character\"\n\nclass(price)\n\n[1] \"numeric\"\n\nclass(in_stock)\n\n[1] \"logical\"\n\n\n\n\n\nExercise 1.6.2\nWhat happens when you run the following code? Explain each line.\na &lt;- 10\nb &lt;- a\na &lt;- 20\nb\n\n\nSolution\n\n\na &lt;- 10   # a is assigned the value 10\nb &lt;- a    # b is assigned the current value of a, which is 10\na &lt;- 20   # a is reassigned to 20; b is NOT affected\nb         # b is still 10\n\n[1] 10\n\n\nThe key insight is that b &lt;- a copies the value of a at that moment. It does not create a link between a and b. Changing a later does not change b. Python users, beware!\n\n\n\nExercise 1.6.3\nTry the following and explain the results:\nTRUE + TRUE\nFALSE + TRUE\nTRUE * 5\nsum(c(TRUE, FALSE, TRUE, TRUE))\n\n\nSolution\n\n\nTRUE + TRUE\n\n[1] 2\n\nFALSE + TRUE\n\n[1] 1\n\nTRUE * 5\n\n[1] 5\n\nsum(c(TRUE, FALSE, TRUE, TRUE))\n\n[1] 3\n\n\nWhen used in arithmetic, R converts TRUE to 1 and FALSE to 0. This is why sum() of a logical vector counts the number of TRUE values, which is a very useful trick.\n\n\n\nExercise 1.6.4\nWhat is the result of each of the following? Before running them, try to predict the answer:\nclass(5L)\nclass(5)\nclass(\"5\")\nclass(5 &gt; 3)\n\n\nSolution\n\n\nclass(5L)\n\n[1] \"integer\"\n\nclass(5)\n\n[1] \"numeric\"\n\nclass(\"5\")\n\n[1] \"character\"\n\nclass(5 &gt; 3)\n\n[1] \"logical\"\n\n\n5L is explicitly an integer (the L suffix forces it). 5 without L is a double-precision numeric (Rs default). \"5\" is a character string (the quotes make it text). 5 &gt; 3 evaluates to TRUE, which is a logical.\n\n\n\nExercise 1.6.5\nWhat happens if you assign a value to a variable named mean? Can you still use the mean() function afterwards? Try it:\nmean &lt;- 42\nmean\nmean(c(1, 2, 3))\nWhat is going on, and why should you be careful about naming variables?\n\n\nSolution\n\nmean &lt;- 42\nmean\n[1] 42\nmean(c(1, 2, 3))\n[1] 2\nBoth work! When you type mean alone, R finds your variable. When you type mean(...) with parentheses, R recognises it as a function call and finds the built-in mean() function. R keeps variables and functions in slightly different places.\nHowever, this is dangerous and confusing. While R can often sort it out, it makes your code much harder to read. As a rule: never name your variables after existing R functions. Avoid names like mean, sum, data, df, c, t, list, etc.\nTo clean up:\nrm(mean)  # remove the variable, restoring the function name",
+    "crumbs": [
+      "1 - Getting Started and Working Effectively",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>1.6 Variables and Types</span>"
+    ]
+  },
+  {
+    "objectID": "01-getting-started-and-working-effectively/01-07-vectors.html",
+    "href": "01-getting-started-and-working-effectively/01-07-vectors.html",
+    "title": "Vectors",
+    "section": "",
+    "text": "Exercises\nVectors are the fundamental data structure in R. This video covers how to create and manipulate vectors and introduces vectorised operations.",
+    "crumbs": [
+      "1 - Getting Started and Working Effectively",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>1.7 Vectors</span>"
+    ]
+  },
+  {
+    "objectID": "01-getting-started-and-working-effectively/01-07-vectors.html#exercises",
+    "href": "01-getting-started-and-working-effectively/01-07-vectors.html#exercises",
+    "title": "Vectors",
+    "section": "",
+    "text": "Exercise 1.7.1\nCreate a vector called temps containing the values 18.5, 21.0, 16.3, 22.7, 19.8. Compute the mean and standard deviation.\n\n\nSolution\n\n\ntemps &lt;- c(18.5, 21.0, 16.3, 22.7, 19.8)\nmean(temps)\n\n[1] 19.66\n\nsd(temps)\n\n[1] 2.433721\n\n\n\n\n\nExercise 1.7.2\nCreate a vector of all even numbers from 2 to 20 using seq(). Compute the sum.\n\n\nSolution\n\n\nevens &lt;- seq(from = 2, to = 20, by = 2)\nevens\n\n [1]  2  4  6  8 10 12 14 16 18 20\n\nsum(evens)\n\n[1] 110\n\n\n\n\n\nExercise 1.7.3\nGiven the following vector:\nsales &lt;- c(120, 85, 200, 340, 95, 180, 420, 60, 275, 150)\nHow many values are above 200? What proportion of values is above 200?\n\n\nSolution\n\n\nsales &lt;- c(120, 85, 200, 340, 95, 180, 420, 60, 275, 150)\n\n# Count\nsum(sales &gt; 200)\n\n[1] 3\n\n# Proportion\nmean(sales &gt; 200)\n\n[1] 0.3\n\n\nThree values (340, 420, 275) are strictly above 200, which is 30% of the 10 values. The mean() of a logical vector gives the proportion of TRUE values.\n\n\n\nExercise 1.7.4\nCreate two vectors:\n\nprices &lt;- c(50, 30, 80, 120, 45)\nquantities &lt;- c(10, 25, 5, 2, 15)\n\nCompute a vector of revenues (price × quantity). What is the total revenue? Which product has the highest revenue?\n\n\nSolution\n\n\nrevenue &lt;- prices * quantities\nrevenue\n\n[1] 500 750 400 240 675\n\nsum(revenue)\n\n[1] 2565\n\nwhich.max(revenue)\n\n[1] 2\n\n\nTotal revenue is 2565. Product 2 (price 30, quantity 25) has the highest revenue at 750.\n\n\n\nExercise 1.7.5\nWhat happens when you combine different types in one vector? Predict the result, then check:\nmixed &lt;- c(1, 2, \"three\", 4, TRUE)\nmixed\nclass(mixed)\nCan you explain the rule R uses?\n\n\nSolution\n\n\nmixed &lt;- c(1, 2, \"three\", 4, TRUE)\nmixed\n\n[1] \"1\"     \"2\"     \"three\" \"4\"     \"TRUE\" \n\nclass(mixed)\n\n[1] \"character\"\n\n\nEverything was converted to character strings. R uses type coercion: a vector can only hold one type, so R converts all elements to the most general type. The hierarchy is: logical → numeric → character. Since \"three\" is a character, everything becomes character. This is an important source of bugs, for example, if a column in a CSV has one non-numeric entry, the whole column may be read as text if you are not careful.",
+    "crumbs": [
+      "1 - Getting Started and Working Effectively",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>1.7 Vectors</span>"
+    ]
+  },
+  {
+    "objectID": "01-getting-started-and-working-effectively/01-08-indexing-and-subsetting.html",
+    "href": "01-getting-started-and-working-effectively/01-08-indexing-and-subsetting.html",
+    "title": "Indexing and subsetting",
+    "section": "",
+    "text": "Exercises\nWe learn how to extract specific elements from a vector using integer indices and logical conditions, which is the basis for all subsetting in R.",
+    "crumbs": [
+      "1 - Getting Started and Working Effectively",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>1.8 Indexing and Subsetting</span>"
+    ]
+  },
+  {
+    "objectID": "01-getting-started-and-working-effectively/01-08-indexing-and-subsetting.html#exercises",
+    "href": "01-getting-started-and-working-effectively/01-08-indexing-and-subsetting.html#exercises",
+    "title": "Indexing and subsetting",
+    "section": "",
+    "text": "Exercise 1.8.1\nUsing the vector:\nmonths &lt;- c(\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\",\n            \"Jul\", \"Aug\", \"Sep\", \"Oct\", \"Nov\", \"Dec\")\nExtract the third element. Extract the last three elements.\n\n\nSolution\n\n\nmonths &lt;- c(\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\",\n            \"Jul\", \"Aug\", \"Sep\", \"Oct\", \"Nov\", \"Dec\")\n\nmonths[3]\n\n[1] \"Mar\"\n\nmonths[10:12]\n\n[1] \"Oct\" \"Nov\" \"Dec\"\n\n\nAlternatively for the last three: tail(months, 3).\n\n\n\nExercise 1.8.2\nUsing the vector sales &lt;- c(120, 85, 200, 340, 95, 180, 420, 60, 275, 150), extract all values that are between 100 and 300 (inclusive).\n\n\nSolution\n\n\nsales &lt;- c(120, 85, 200, 340, 95, 180, 420, 60, 275, 150)\n\n# We can do this in two steps with what we have learned so far:\nsales2 &lt;- sales[sales &gt;= 100]\nsales2[sales2 &lt;= 300]\n\n[1] 120 200 180 275 150\n\n# But it is easier to use a logical \"AND\", which we will learn in the next topic:\nsales[sales &gt;= 100 & sales &lt;= 300]\n\n[1] 120 200 180 275 150\n\n\n\n\n\nExercise 1.8.3\nReplace all values in sales that are below 100 with 100 (a “floor” operation). Print the result.\n\n\nSolution\n\nsales[sales &lt; 100] &lt;- 100\nsales\n[1] 120 100 200 340 100 180 420 100 275 150\nAlternatively, you can use pmax(sales, 100) which returns the element-wise maximum of sales and 100.\n\n\n\nExercise 1.8.4\nGiven:\nx &lt;- c(5, 3, 8, 1, 9, 2, 7)\nUse sort() and order() on x. What does each return? How are they different?\n\n\nSolution\n\n\nx &lt;- c(5, 3, 8, 1, 9, 2, 7)\n\nsort(x)\n\n[1] 1 2 3 5 7 8 9\n\norder(x)\n\n[1] 4 6 2 1 7 3 5\n\n\nsort(x) returns the values in sorted order. order(x) returns the positions that would sort the vector: the 4th element (1) is smallest, the 6th element (2) is next, etc.\nYou can use order() to sort one vector by another: x[order(x)] is the same as sort(x).\n\n\n\nExercise 1.8.5\nWhat does the following code return? Think carefully before running it.\n\nx &lt;- 1:10\nx[-c(3, 5, 7)] * 2\n\n[1]  2  4  8 12 16 18 20\n\n\n\n\nSolution\n\nx &lt;- 1:10 x[-c(3, 5, 7)] * 2\nx[-c(3, 5, 7)] removes elements at positions 3, 5, and 7, giving c(1, 2, 4, 6, 8, 9, 10). Multiplying by 2 gives c(2, 4, 8, 12, 16, 18, 20).",
+    "crumbs": [
+      "1 - Getting Started and Working Effectively",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>1.8 Indexing and Subsetting</span>"
+    ]
+  },
+  {
+    "objectID": "01-getting-started-and-working-effectively/01-09-data-frames.html",
+    "href": "01-getting-started-and-working-effectively/01-09-data-frames.html",
+    "title": "Data frames",
+    "section": "",
+    "text": "Exercises\nData frames are R’s representation of tabular data. This video introduces how to create, inspect, and perform basic operations on data frames.",
+    "crumbs": [
+      "1 - Getting Started and Working Effectively",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>1.9 Data Frames</span>"
+    ]
+  },
+  {
+    "objectID": "01-getting-started-and-working-effectively/01-09-data-frames.html#exercises",
+    "href": "01-getting-started-and-working-effectively/01-09-data-frames.html#exercises",
+    "title": "Data frames",
+    "section": "",
+    "text": "Exercise 1.9.1\nCreate a tibble called students with three columns: name (character), grade (numeric), and passed (logical), containing at least four rows of made-up data.\n\n\nSolution\n\n\nlibrary(tidyverse)\n\nWarning: package 'tidyverse' was built under R version 4.5.3\n\n\nWarning: package 'ggplot2' was built under R version 4.5.3\n\n\nWarning: package 'tibble' was built under R version 4.5.2\n\n\nWarning: package 'tidyr' was built under R version 4.5.3\n\n\nWarning: package 'readr' was built under R version 4.5.3\n\n\nWarning: package 'purrr' was built under R version 4.5.3\n\n\nWarning: package 'dplyr' was built under R version 4.5.2\n\n\nWarning: package 'stringr' was built under R version 4.5.3\n\n\nWarning: package 'forcats' was built under R version 4.5.3\n\n\nWarning: package 'lubridate' was built under R version 4.5.3\n\nstudents &lt;- tibble(\n  name = c(\"Anna\", \"Bob\", \"Charlie\", \"David\"),\n  grade = c(85, 62, 91, 45),\n  passed = c(TRUE, TRUE, TRUE, FALSE)\n)\n\nstudents\n\n# A tibble: 4 × 3\n  name    grade passed\n  &lt;chr&gt;   &lt;dbl&gt; &lt;lgl&gt; \n1 Anna       85 TRUE  \n2 Bob        62 TRUE  \n3 Charlie    91 TRUE  \n4 David      45 FALSE \n\n\n\n\n\nExercise 1.9.2\nUsing your students tibble, compute the average grade using $ to extract the column.\n\n\nSolution\n\n\nmean(students$grade)\n\n[1] 70.75\n\n\n\n\n\nExercise 1.9.3\nUse nrow(), ncol(), names(), and glimpse() on the built-in dataset mtcars. How many cars (rows) and variables (columns) are there? What types are the columns?\n\n\nSolution\n\n\nnrow(mtcars)\n\n[1] 32\n\nncol(mtcars)\n\n[1] 11\n\nnames(mtcars)\n\n [1] \"mpg\"  \"cyl\"  \"disp\" \"hp\"   \"drat\" \"wt\"   \"qsec\" \"vs\"   \"am\"   \"gear\"\n[11] \"carb\"\n\nglimpse(mtcars)\n\nRows: 32\nColumns: 11\n$ mpg  &lt;dbl&gt; 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8,…\n$ cyl  &lt;dbl&gt; 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8,…\n$ disp &lt;dbl&gt; 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 140.8, 16…\n$ hp   &lt;dbl&gt; 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180…\n$ drat &lt;dbl&gt; 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92, 3.92,…\n$ wt   &lt;dbl&gt; 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3.150, 3.…\n$ qsec &lt;dbl&gt; 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 22.90, 18…\n$ vs   &lt;dbl&gt; 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0,…\n$ am   &lt;dbl&gt; 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0,…\n$ gear &lt;dbl&gt; 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3,…\n$ carb &lt;dbl&gt; 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1, 2,…\n\n\nThere are 32 cars and 11 variables. All columns are &lt;dbl&gt; (numeric/double).\n\n\n\nExercise 1.9.4\nUsing bracket notation [row, column] on mtcars, extract:\n\nThe value in row 3, column 1\nAll of row 1\nAll rows where mpg is greater than 30\n\n\n\nSolution\n\n\nmtcars[3, 1]\n\n[1] 22.8\n\nmtcars[1, ]\n\n          mpg cyl disp  hp drat   wt  qsec vs am gear carb\nMazda RX4  21   6  160 110  3.9 2.62 16.46  0  1    4    4\n\nmtcars[mtcars$mpg &gt; 30, ]\n\n                mpg cyl disp  hp drat    wt  qsec vs am gear carb\nFiat 128       32.4   4 78.7  66 4.08 2.200 19.47  1  1    4    1\nHonda Civic    30.4   4 75.7  52 4.93 1.615 18.52  1  1    4    2\nToyota Corolla 33.9   4 71.1  65 4.22 1.835 19.90  1  1    4    1\nLotus Europa   30.4   4 95.1 113 3.77 1.513 16.90  1  1    5    2\n\n\n\n\n\nExercise 1.9.5\nThere is a subtle but important difference between mtcars[\"mpg\"] and mtcars[[\"mpg\"]] (single vs. double brackets). Run both and check the result with class(). What type does each return?\n\n\nSolution\n\n\nclass(mtcars[\"mpg\"])\n\n[1] \"data.frame\"\n\nclass(mtcars[[\"mpg\"]])\n\n[1] \"numeric\"\n\n\nSingle brackets [\"mpg\"] return a data frame (a table with one column). Double brackets [[\"mpg\"]] return the column as a vector. The $ operator (mtcars$mpg) behaves like double brackets — it extracts the vector. This distinction matters when you need a vector (for arithmetic, passing to functions) versus when you want to keep the data frame structure.",
+    "crumbs": [
+      "1 - Getting Started and Working Effectively",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>1.9 Data Frames</span>"
+    ]
+  },
+  {
+    "objectID": "01-getting-started-and-working-effectively/01-10-basic-data-frame-manipulation-and-the-pipe.html",
+    "href": "01-getting-started-and-working-effectively/01-10-basic-data-frame-manipulation-and-the-pipe.html",
+    "title": "Basic data frame manipulation and the pipe",
+    "section": "",
+    "text": "Exercises\nWe introduce the native pipe operator |&gt;, which lets you chain operations together in a readable left-to-right sequence, and apply it to a small end-to-end example.",
+    "crumbs": [
+      "1 - Getting Started and Working Effectively",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>1.10 The pipe and basic operations</span>"
+    ]
+  },
+  {
+    "objectID": "01-getting-started-and-working-effectively/01-10-basic-data-frame-manipulation-and-the-pipe.html#exercises",
+    "href": "01-getting-started-and-working-effectively/01-10-basic-data-frame-manipulation-and-the-pipe.html#exercises",
+    "title": "Basic data frame manipulation and the pipe",
+    "section": "",
+    "text": "Exercise 1.10.1\nRewrite the following using the pipe |&gt;:\nhead(mtcars, 3)\n\n\nSolution\n\n\nmtcars |&gt; head(3)\n\n               mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4     21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710    22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\n\n\n\n\n\nExercise 1.10.2\nUse the pipe to chain summary() on the mtcars dataset:\nmtcars |&gt; summary()\nNow try piping mtcars through colMeans(). Does it work? Why or why not?\n\n\nSolution\n\n\nmtcars |&gt; summary()\n\n      mpg             cyl             disp             hp       \n Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  \n 1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  \n Median :19.20   Median :6.000   Median :196.3   Median :123.0  \n Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  \n 3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  \n Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  \n      drat             wt             qsec             vs        \n Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  \n 1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  \n Median :3.695   Median :3.325   Median :17.71   Median :0.0000  \n Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  \n 3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  \n Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  \n       am              gear            carb      \n Min.   :0.0000   Min.   :3.000   Min.   :1.000  \n 1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  \n Median :0.0000   Median :4.000   Median :2.000  \n Mean   :0.4062   Mean   :3.688   Mean   :2.812  \n 3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  \n Max.   :1.0000   Max.   :5.000   Max.   :8.000  \n\nmtcars |&gt; colMeans()\n\n       mpg        cyl       disp         hp       drat         wt       qsec \n 20.090625   6.187500 230.721875 146.687500   3.596563   3.217250  17.848750 \n        vs         am       gear       carb \n  0.437500   0.406250   3.687500   2.812500 \n\n\nBoth work because summary() and colMeans() take a data frame as their first argument, which is what the pipe provides. If a function does not take a data frame as its first argument, the pipe will not work as smoothly.\n\n\n\nExercise 1.10.3\nChain three operations with pipes: take mtcars, extract just the mpg column with $, then compute the range():\nmtcars$mpg |&gt; range()\nNow write the same thing without the pipe. Which version do you find more readable?\n\n\nSolution\n\n\n# With pipe\nmtcars$mpg |&gt; range()\n\n[1] 10.4 33.9\n\n# Without pipe\nrange(mtcars$mpg)\n\n[1] 10.4 33.9\n\n\nFor a single function call, the non-pipe version is arguably simpler. The pipe becomes more useful when chaining two or more operations together. There is no need to force the pipe when a simple function call is clearer.\n\n\n\nExercise 1.10.4\nExamine the difference between the two pipe operators. Run:\nmtcars |&gt; head(3)\nNow load the magrittr-package (it is installed as part of the tidyverse) and try:\nlibrary(magrittr)\nmtcars %&gt;% head(3)\nBoth should give the same result. When you look up R code online (Stack Overflow, blog posts, etc.), which pipe are you more likely to see? Why?\n\n\nSolution\n\nBoth give identical results:\n               mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4     21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710    22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nYou will see %&gt;% far more often online, because it has been available since 2014 (via the magrittr package), while |&gt; was only introduced in R 4.1 (2021). Most existing tutorials, Stack Overflow answers, and blog posts were written before the native pipe existed. Both work essentially the same way for our purposes. We use |&gt; in this course because it requires no extra packages and is the modern standard.",
+    "crumbs": [
+      "1 - Getting Started and Working Effectively",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>1.10 The pipe and basic operations</span>"
+    ]
+  }
+]

@@ -1,0 +1,46 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "SKL402 — Introduction to R"
+  author: "Håkon Otneim, Department of Business and Management Science, NHH"
+  chapters:
+    - index.qmd
+    - part: "1 - Getting Started and Working Effectively"
+      chapters:
+        - file: 01-getting-started-and-working-effectively/01-04-writing-scripts.qmd
+          text: "1.4 Writing Scripts"
+        - file: 01-getting-started-and-working-effectively/01-05-packages.qmd
+          text: "1.5 Packages"
+        - file: 01-getting-started-and-working-effectively/01-06-variables-and-types.qmd
+          text: "1.6 Variables and Types"
+        - file: 01-getting-started-and-working-effectively/01-07-vectors.qmd
+          text: "1.7 Vectors"
+        - file: 01-getting-started-and-working-effectively/01-08-indexing-and-subsetting.qmd
+          text: "1.8 Indexing and Subsetting"
+        - file: 01-getting-started-and-working-effectively/01-09-data-frames.qmd
+          text: "1.9 Data Frames"
+        - file: 01-getting-started-and-working-effectively/01-10-basic-data-frame-manipulation-and-the-pipe.qmd
+          text: "1.10 The pipe and basic operations"
+    - part: "2 - Programming Fundamentals"
+      chapters:
+        - file: 02-programming-fundamentals/02-01-placeholder.qmd
+          text: "2.1 Placeholder"
+    - part: "3 - Data Wrangling"
+      chapters:
+        - file: 03-data-wrangling/03-01-placeholder.qmd
+          text: "3.1 Placeholder"
+    - part: "4 - Graphics"
+      chapters:
+        - file: 04-graphics/04-01-placeholder.qmd
+          text: "4.1 Placeholder"
+    - part: "5 - Analysis, Reporting, and Wrap-up"
+      chapters:
+        - file: 05-analysis-reporting-and-wrap-up/05-01-placeholder.qmd
+          text: "5.1 Placeholder"
+
+format:
+  html:
+    number-sections: false
+    theme: cosmo

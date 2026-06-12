@@ -1,0 +1,135 @@
+## Indexing and subsetting
+
+{{< video https://vimeo.com/1198722235/140449fd65?fl=ml&fe=ec >}}
+
+We learn how to extract specific elements from a vector using integer indices and logical conditions, which is the basis for all subsetting in R.
+
+
+```{r, eval = FALSE}
+prices   <- c(29.90, 35, 11, 12.5, 48, 22.75)
+product  <- c("coffee", "tea", "juice", "sandwich", "cookie")
+
+# Indexing a vector
+prices[3]                    # By position
+prices[c(1, 2, 5)]           # By several positions
+prices[2:4]                  # Using a sequence
+prices[-1]                   # Excluding elements
+
+# Using logical vectors, and thus conditions
+prices[c(TRUE, FALSE, TRUE, FALSE, TRUE)]
+prices[prices > 30]
+products[prices > 30]
+
+# Using indexing to change specific elements
+prices[3] <- 15
+prices[prices > 30] <- prices[prices > 30] * 0.8 
+```
+
+## Exercises
+
+### Exercise 1.8.1
+
+Using the vector:
+
+```r
+months <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+```
+
+Extract the third element. Extract the last three elements.
+
+<details> <summary>Solution</summary>
+
+```{r}
+months <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+
+months[3]
+months[10:12]
+```
+
+Alternatively for the last three: `tail(months, 3)`.
+
+</details>
+
+### Exercise 1.8.2
+
+Using the vector `sales <- c(120, 85, 200, 340, 95, 180, 420, 60, 275, 150)`, extract all values that are between 100 and 300 (inclusive).
+
+<details> <summary>Solution</summary>
+
+```{r}
+sales <- c(120, 85, 200, 340, 95, 180, 420, 60, 275, 150)
+
+# We can do this in two steps with what we have learned so far:
+sales2 <- sales[sales >= 100]
+sales2[sales2 <= 300]
+
+# But it is easier to use a logical "AND", which we will learn in the next topic:
+sales[sales >= 100 & sales <= 300]
+```
+</details>
+
+### Exercise 1.8.3
+
+Replace all values in `sales` that are below 100 with 100 (a "floor" operation). Print the result.
+
+<details> <summary>Solution</summary>
+
+```r
+sales[sales < 100] <- 100
+sales
+```
+
+```
+[1] 120 100 200 340 100 180 420 100 275 150
+```
+
+Alternatively, you can use `pmax(sales, 100)` which returns the element-wise maximum of `sales` and 100.
+
+</details>
+
+### Exercise 1.8.4
+
+Given:
+
+```r
+x <- c(5, 3, 8, 1, 9, 2, 7)
+```
+
+Use `sort()` and `order()` on `x`. What does each return? How are they different?
+
+<details> <summary>Solution</summary>
+
+```{r}
+x <- c(5, 3, 8, 1, 9, 2, 7)
+
+sort(x)
+order(x)
+```
+
+`sort(x)` returns the values in sorted order. `order(x)` returns the _positions_ that would sort the vector: the 4th element (1) is smallest, the 6th element (2) is next, etc.
+
+You can use `order()` to sort one vector by another: `x[order(x)]` is the same as `sort(x)`.
+
+</details>
+
+### Exercise 1.8.5
+
+What does the following code return? Think carefully before running it.
+
+```{r}
+x <- 1:10
+x[-c(3, 5, 7)] * 2
+```
+
+<details> <summary>Solution</summary>
+
+```{r}
+x <- 1:10
+x[-c(3, 5, 7)] * 2
+
+`x[-c(3, 5, 7)]` removes elements at positions 3, 5, and 7, giving `c(1, 2, 4, 6, 8, 9, 10)`. Multiplying by 2 gives `c(2, 4, 8, 12, 16, 18, 20)`.
+
+</details>
+

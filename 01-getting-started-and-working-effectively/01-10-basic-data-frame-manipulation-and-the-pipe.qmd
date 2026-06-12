@@ -1,0 +1,133 @@
+## Basic data frame manipulation and the pipe
+
+{{< video https://vimeo.com/1198722461/cd2f768130?fl=ml&fe=ec >}}
+
+We introduce the native pipe operator `|>`, which lets you chain operations together in a readable left-to-right sequence, and apply it to a small end-to-end example.
+
+
+```{r, eval = FALSE}
+library(tidyverse)
+
+prices <- c(29.90, 35, 11, 12.5, 48, 22.75)
+products <- c("coffee", "tea", "juice", "sandwich", "cookie")
+quantities <- c(3, 5, 0, 2, 8)
+
+sales <- tibble(
+  product = products,
+  price = prices,
+  quantity = quantities
+)
+
+# Creating a new column
+sales$revenue <- sales$price * sales$quantity
+
+# The pipe
+head(sales, n = 2)        # Without the pipe
+sales |> head(n = 2)      # The same operation, but with the pipe
+
+# Using the pipe for data frame operations
+sales |> 
+  head(n = 2) |> 
+  nrow()
+
+# Quick demonstration, requires the tidyverse package to be loaded.
+sales |> 
+  filter(quantity > 0) |> 
+  arrange(revenue)
+```
+
+## Exercises
+
+### Exercise 1.10.1
+
+Rewrite the following using the pipe `|>`:
+
+```r
+head(mtcars, 3)
+```
+
+<details> <summary>Solution</summary>
+
+```{r}
+mtcars |> head(3)
+```
+
+</details>
+
+### Exercise 1.10.2
+
+Use the pipe to chain `summary()` on the `mtcars` dataset:
+
+```r
+mtcars |> summary()
+```
+
+Now try piping `mtcars` through `colMeans()`. Does it work? Why or why not?
+
+<details> <summary>Solution</summary>
+
+```{r}
+mtcars |> summary()
+
+mtcars |> colMeans()
+```
+
+Both work because `summary()` and `colMeans()` take a data frame as their first argument, which is what the pipe provides. If a function does not take a data frame as its first argument, the pipe will not work as smoothly.
+
+</details>
+
+### Exercise 1.10.3
+
+Chain three operations with pipes: take `mtcars`, extract just the `mpg` column with `$`, then compute the `range()`:
+
+```r
+mtcars$mpg |> range()
+```
+
+Now write the same thing without the pipe. Which version do you find more readable?
+
+<details> <summary>Solution</summary>
+
+```{r}
+# With pipe
+mtcars$mpg |> range()
+
+# Without pipe
+range(mtcars$mpg)
+```
+
+For a single function call, the non-pipe version is arguably simpler. The pipe becomes more useful when chaining two or more operations together. There is no need to force the pipe when a simple function call is clearer.
+
+</details>
+
+### Exercise 1.10.4
+
+Examine the difference between the two pipe operators. Run:
+
+```r
+mtcars |> head(3)
+```
+
+Now load the magrittr-package (it is installed as part of the tidyverse) and try:
+
+```r
+library(magrittr)
+mtcars %>% head(3)
+```
+
+Both should give the same result. When you look up R code online (Stack Overflow, blog posts, etc.), which pipe are you more likely to see? Why?
+
+<details> <summary>Solution</summary>
+
+Both give identical results:
+
+```
+               mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4     21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710    22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+```
+
+You will see `%>%` far more often online, because it has been available since 2014 (via the magrittr package), while `|>` was only introduced in R 4.1 (2021). Most existing tutorials, Stack Overflow answers, and blog posts were written before the native pipe existed. Both work essentially the same way for our purposes. We use `|>` in this course because it requires no extra packages and is the modern standard.
+
+</details>

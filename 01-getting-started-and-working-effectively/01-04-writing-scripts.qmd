@@ -1,0 +1,156 @@
+# Writing Scripts
+
+{{< video https://vimeo.com/1198721981/ebd1da6e9f?fl=ml&fe=ec >}}
+
+We write our first R script, learn how to run code line by line and in bulk, and discuss the difference between the console and a saved script file. This is the code that we saved in our script:
+
+
+```{r filename="01-getting-started.R", eval = FALSE}
+# My first R script
+# SKL402 - Getting started
+
+# Some basic arithmetic
+2 + 3
+10 / 3
+sqrt(16)
+```
+
+## Exercises
+
+### Exercise 1.4.1
+
+Create a new script file called `exercises_topic1.R` in your `scripts/` folder. At the top, write a comment with your name and today's date. Save the file.
+
+<details> <summary>Solution</summary>
+
+```r
+# exercises_topic1.R
+# Author: [Your name]
+# Date:   [Today's date]
+# Topic 1 exercises for SKL400
+```
+
+Save as `scripts/exercises_topic1.R`.
+
+</details>
+
+### Exercise 1.4.2
+
+In your script, write code that computes and prints the result of:
+
+1. 17 modulo 5 (the remainder when 17 is divided by 5)
+2. Integer division of 17 by 5
+
+Run the lines from the script. (_Hint_: the modulo operator in R is `%%` and integer division is `%/%`.)
+
+<details> <summary>Solution</summary>
+
+```r
+# 1. Modulo
+17 %% 5
+```
+
+```
+[1] 2
+```
+
+```r
+# 2. Integer division
+17 %/% 5
+```
+
+```
+[1] 3
+```
+
+Check: 5 × 3 + 2 = 17. ✓
+
+</details>
+
+### Exercise 1.4.3
+
+Write a comment in your script explaining what the following line of code does, then run it:
+
+```r
+ceiling(7.3)
+```
+
+<details> <summary>Solution</summary>
+
+```r
+# ceiling() rounds a number UP to the nearest integer
+ceiling(7.3)
+```
+
+```
+[1] 8
+```
+
+Related functions: `floor()` rounds down, `round()` rounds to the nearest integer (or specified number of decimal places).
+
+</details>
+
+### Exercise 1.4.4
+
+Experiment with the keyboard shortcuts in Positron. Write three lines of code in your script:
+
+```r
+10 + 5
+10 - 5
+10 * 5
+```
+
+Run them one at a time using the keyboard shortcut (Ctrl+Enter or Cmd+Enter). Then select all three lines and run them as a block. What is the difference in how the output appears?
+
+<details> <summary>Solution</summary>
+
+Running one at a time: each line is sent to the console individually, and the result appears after each line.
+
+Running as a block: all three lines are sent together, and you see them executed in sequence:
+
+```
+> 10 + 5
+[1] 15
+> 10 - 5
+[1] 5
+> 10 * 5
+[1] 50
+```
+
+The results are the same, but running line by line gives you more control for checking intermediate results.
+
+</details>
+
+### Exercise 1.4.5
+
+On purpose, write a line of code that will produce an error, for example:
+
+```r
+5 + "hello"
+```
+
+Run it. Read the error message. Can you understand what it is telling you? Fix the line so it runs without error (for example, change it to `5 + 3`).
+
+<details> <summary>Solution</summary>
+
+```r
+5 + "hello"
+```
+
+```
+Error in 5 + "hello" : non-numeric argument to binary operator
+```
+
+The error tells us that the `+` operator (a "binary operator" because it takes two arguments) received a non-numeric argument (`"hello"` is a character string). R cannot add a number and a string.
+
+Fix:
+
+```r
+5 + 3
+```
+
+```
+[1] 8
+```
+
+</details>
