@@ -1,0 +1,262 @@
+## Variables and basic data types
+
+We introduce variables as named containers for data and explore Python's basic data types: integers, floats, strings, and booleans.
+
+{{< video https://vimeo.com/1194660308/e7bb247a9b?fl=ml&fe=ec >}}
+
+```python
+# Assigning a value to a variable
+x = 5
+print(x)
+
+# Use variables in calculations
+y = 10
+print(x + y)
+
+# Overwrite a variable
+x = 5
+x = 100
+print(x)
+
+# Good variable names
+monthly_revenue = 5000
+gdp_per_capita_2007 = 82500
+
+# Avoid these names
+# MonthlyRevenue = 50000   # CamelCase — works but not conventional in Python
+# x = 50000                # Too vague for real code
+# print = 50000            # Will overwrite print() function
+# 2nd_quarter = 50000      # Invalid — cannot start with a number
+
+# Integer (whole numbers)
+quantity = 7
+
+# Float (decimal numbers)
+price = 99.75
+
+# String (text, enclosed in single or double quotes)
+product = "coffee"
+
+# Boolean (True or False - note the capital letters)
+in_stock = True
+
+print(type(quantity))    # <class 'int'>
+print(type(price))       # <class 'float'>
+print(type(product))     # <class 'str'>
+print(type(in_stock))    # <class 'bool'>
+
+# Convert integer to float
+print(float(quantity))
+
+# Convert float to integer
+print(int(price))
+
+# Round a float
+print(round(price))    # round to nearest integer
+print(round(price, 1)) # round to nearest one decimal
+
+# A number stored as a string 
+val_as_text = str(quantity)
+print(val_as_text)
+print(type(val_as_text))  
+
+# Convert number stored as string
+print(int("42"))
+
+# TypeError - Cannot convert a word to a number
+# print(int("coffee"))
+```
+
+## Exercises
+
+### Exercise 1.7.1
+Add a new comment header for Topic 1.7 in your `exercises_topic1.py` script. Then create
+variables to describe a product of your choice. Your variables should include at least one
+of each of the four basic data types: integer, float, string, and boolean. Print the value
+and type of each variable.
+
+<details>
+<summary>Solution</summary>
+
+```python
+# ── 1.7 Variables and basic data types ────────────────────────────────────────
+
+product_name  = "coffee"       # str
+price         = 29.90          # float
+quantity      = 3              # int
+in_stock      = True           # bool
+
+print(product_name, type(product_name))
+print(price,        type(price))
+print(quantity,     type(quantity))
+print(in_stock,     type(in_stock))
+```
+```
+coffee <class 'str'>
+29.9 <class 'float'>
+3 <class 'int'>
+True <class 'bool'>
+```
+</details>
+
+---
+
+### Exercise 1.7.2
+The three variables below contain errors that will either cause an immediate error or
+produce unexpected results. Identify and fix each one.
+
+```python
+2nd_quarter = 15000
+revenue = "50000"
+is_available = true
+```
+
+<details>
+<summary>Solution</summary>
+
+```python
+# 1. Variable names cannot start with a number
+quarter_2 = 15000
+
+# 2. The number is stored as a string — arithmetic will not work as expected
+revenue = 50000
+
+# 3. Boolean values must be capitalised in Python
+is_available = True
+```
+
+- `2nd_quarter` raises a `SyntaxError` because variable names cannot begin with a digit.
+- `"50000"` is valid Python but stores the number as text. Trying to do arithmetic with
+  it later will raise a `TypeError`.
+- `true` (lowercase) raises a `NameError` because Python does not recognise it — the
+  correct boolean value is `True` with a capital T.
+</details>
+
+---
+
+### Exercise 1.7.3
+You have a float variable `price = 47.60`. Perform the following conversions and print
+each result:
+1. Convert `price` to an integer using `int()`. What happens to the decimal part?
+2. Round `price` to the nearest whole number using `round()`. Is the result different
+   from the one in step 1?
+3. Convert `price` to a string using `str()`. Verify that the type has changed.
+
+<details>
+<summary>Solution</summary>
+
+```python
+price = 47.60
+
+# 1. Convert to integer
+print(int(price))
+print(type(int(price)))
+```
+```
+47
+<class 'int'>
+```
+```python
+# 2. Round to nearest whole number
+print(round(price))
+print(type(round(price)))
+```
+```
+48
+<class 'int'>
+```
+```python
+# 3. Convert to string
+price_str = str(price)
+print(price_str)
+print(type(price_str))
+```
+```
+47.6
+<class 'str'>
+```
+`int()` truncates the decimal part entirely (47), whereas `round()` rounds to the nearest
+integer (48). The two give the same result when the decimal is below .5, but differ
+otherwise — make sure you choose the right one for your purpose.
+</details>
+
+---
+
+### Exercise 1.7.4
+The variable `tax_rate` has been stored as a string. Without changing the original
+assignment, write code that converts it to a float and uses it to calculate the tax on a
+price of 199.90. Then try converting the variable `city` to a float and explain what
+happens.
+
+```python
+tax_rate = "0.25"
+city = "Oslo"
+```
+
+<details>
+<summary>Solution</summary>
+
+```python
+tax_rate = "0.25"
+city = "Oslo"
+
+# Convert tax_rate and calculate tax
+tax = float(tax_rate) * 199.90
+print(round(tax, 2))
+```
+```
+49.97
+```
+```python
+# Try converting a word to a float
+print(float(city))
+```
+```
+ValueError: could not convert string to float: 'Oslo'
+```
+`float()` can convert a string like `"0.25"` because its contents are a valid number.
+It cannot convert `"Oslo"` because there is no sensible numeric interpretation of a word.
+This situation comes up often when importing data — numeric columns are sometimes read in
+as strings and need to be converted before you can do arithmetic with them.
+</details>
+
+---
+
+### Exercise 1.7.5
+Create two variables, `gdp_2022` and `gdp_2023`, representing a country's GDP in two
+consecutive years. Choose any values you like. Then compute and print:
+1. The absolute change in GDP.
+2. The percentage change in GDP, rounded to two decimal places.
+3. A descriptive sentence using an f-string, for example:
+   _"GDP grew from 450000 to 512000, a change of 13.78%."_
+
+<details>
+<summary>Solution</summary>
+
+```python
+gdp_2022 = 450_000
+gdp_2023 = 512_000
+
+# 1. Absolute change
+abs_change = gdp_2023 - gdp_2022
+print(abs_change)
+```
+```
+62000
+```
+```python
+# 2. Percentage change
+pct_change = round((gdp_2023 - gdp_2022) / gdp_2022 * 100, 2)
+print(pct_change)
+```
+```
+13.78
+```
+```python
+# 3. Descriptive f-string
+print(f"GDP grew from {gdp_2022:,} to {gdp_2023:,}, a change of {pct_change}%.")
+```
+```
+GDP grew from 450,000 to 512,000, a change of 13.78%.
+```
+</details>

@@ -1,0 +1,5 @@
+# Installing and touring Positron
+
+We install Positron, take a tour of its main panels — the editor, console, environment, and plots pane — and run our first Python command.
+
+*Video will be embedded here.*

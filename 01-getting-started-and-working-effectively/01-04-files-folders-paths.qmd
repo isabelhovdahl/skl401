@@ -1,0 +1,23 @@
+# Files, folders and paths
+
+We explain the difference between absolute and relative paths, set up a clean project folder structure for the course, and open it as our working directory in Positron.
+
+{{< video https://vimeo.com/1194354318/f0c8077b97?fl=ml&fe=ec >}}
+
+```python
+# Absolute path on Windows
+# "C:/Users/yourname/Documents/skl401/data/gapminder.csv"
+
+# Absolute path on Mac/Linux
+# "/Users/yourname/Documents/skl401/data/gapminder.csv"
+
+# Relative path (if your working directory is the skl401 folder)
+# "data/gapminder.csv"
+
+# Print current working directory
+import os
+os.getcwd()
+```
+
+## Exercises
+

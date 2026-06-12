@@ -1,0 +1,160 @@
+## Installing and importing packages
+
+We install the core packages used throughout the course using pip, and learn how to import them into a script at the start of each session.
+
+*Video will be embedded here.*
+
+```python
+# Purpose: verify that all course packages are installed and importable
+# Note: packages must first be installed
+#   In the Terminal, run this once:
+#   pip install pandas openpyxl matplotlib statsmodels seaborn numpy
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import statsmodels.formula.api as smf
+import seaborn as sns
+import numpy as np
+
+# Check versions
+print("pandas:", pd.__version__)
+print("numpy:", np.__version__)
+print("All packages imported successfully.")
+```
+
+## Exercises
+
+### Exercise 1.6.1
+Open the Terminal in Positron (not the console) and install the following packages in a
+single command: `pandas`, `openpyxl`, `matplotlib`, `statsmodels`, `seaborn`, and `numpy`.
+If any packages are already installed, pip will skip them automatically.
+
+<details>
+<summary>Solution</summary>
+
+In the Terminal tab, run:
+```bash
+pip install pandas openpyxl matplotlib statsmodels seaborn numpy
+```
+You should see output ending with `Successfully installed ...` or confirmation that the
+packages are already up to date. If `pip` is not recognised on Mac, use `pip3` instead.
+</details>
+
+---
+
+### Exercise 1.6.2
+Create a new section in your `exercises_topic1.py` script with a comment header for
+Topic 1.6. Write import statements for all six packages using the conventional aliases
+used in the course, and run them. If any import fails with a `ModuleNotFoundError`, it
+means that package was not installed correctly — go back and reinstall it via the Terminal.
+
+<details>
+<summary>Solution</summary>
+
+```python
+# ── 1.6 Installing and importing packages ─────────────────────────────────────
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import statsmodels.formula.api as smf
+import seaborn as sns
+import numpy as np
+import openpyxl
+```
+No output and no errors means all imports succeeded. A `ModuleNotFoundError` on any line
+means that package needs to be installed first via `pip install <package>` in the Terminal.
+</details>
+
+---
+
+### Exercise 1.6.3
+After your import statements, add code that prints the version number of `pandas` and
+`numpy`. Then look up how you would check the version of `matplotlib` — the pattern is
+the same across all packages.
+
+<details>
+<summary>Solution</summary>
+
+```python
+print("pandas:", pd.__version__)
+print("numpy:", np.__version__)
+print("matplotlib:", plt.matplotlib.__version__)
+```
+```
+pandas: 2.2.3
+numpy: 2.2.5
+matplotlib: 3.10.1
+```
+The exact version numbers on your machine may differ. The `.__version__` attribute follows
+the same pattern for virtually all Python packages.
+</details>
+
+---
+
+### Exercise 1.6.4
+The two statements below will both cause errors. Run each one and read the error message.
+Explain in your own words what each error means and how to fix it.
+
+```python
+import Pandas as pd
+```
+```python
+print(pd.DataFrame())
+```
+_(Run the second line in a fresh console session where pandas has not yet been imported.)_
+
+<details>
+<summary>Solution</summary>
+
+**First error:**
+```
+ModuleNotFoundError: No module named 'Pandas'
+```
+Python package names are case-sensitive. The correct name is `pandas` (all lowercase), not
+`Pandas`. Fix: `import pandas as pd`.
+
+**Second error:**
+```
+NameError: name 'pd' is not defined
+```
+Even though pandas is installed, it has not been imported in this session. The fix is to
+add `import pandas as pd` at the top of the script before using it. This is why import
+statements always go at the very top of every script — they must run before any code that
+depends on them.
+</details>
+
+---
+
+### Exercise 1.6.5
+Run the following command in the Terminal and read the error message carefully. What does
+it tell you? Then list the most common reasons why a `pip install` command might fail.
+
+```bash
+pip install pandaas
+```
+
+<details>
+<summary>Solution</summary>
+
+Running the command produces an error along the lines of:
+```
+ERROR: Could not find a version that satisfies the requirement pandaas
+ERROR: No matching distribution found for pandaas
+```
+pip searched the Python Package Index (PyPI) and found no package with that name.
+
+The most common reasons a `pip install` command fails are:
+
+- **Typo in the package name** — package names are case-sensitive and must be spelled
+  exactly right. `Pandas`, `PANDAS`, and `pandaas` will all fail; the correct name is
+  `pandas`.
+- **Wrong tool** — running `pip install` in the Python console instead of the Terminal.
+  The console runs Python code; `pip` is a Terminal command. In Positron, make sure you
+  are in the Terminal tab, not the console.
+- **No internet connection** — pip downloads packages from PyPI, so installation requires
+  an active internet connection.
+- **pip not recognised** — on some Mac setups, `pip` is not on the PATH and you need to
+  use `pip3` instead. Alternatively, `python -m pip install pandas` always works because
+  it calls pip through Python directly.
+
+</details>

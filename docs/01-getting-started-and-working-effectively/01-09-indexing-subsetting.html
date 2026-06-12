@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Basic data frame manipulation and the pipe – SKL401 — Introduction to Python</title>
+<title>Indexing and subsetting – SKL401 — Introduction to Python</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,8 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../02-programming-fundamentals/02-01-placeholder.html" rel="next">
-<link href="../01-getting-started-and-working-effectively/01-09-data-frames.html" rel="prev">
+<link href="../01-getting-started-and-working-effectively/01-10-dataframes.html" rel="next">
+<link href="../01-getting-started-and-working-effectively/01-08-lists-dicts-arrays.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -120,7 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-04-writing-scripts.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-10-basic-data-frame-manipulation-and-the-pipe.html"><span class="chapter-title">1.10 The pipe and basic operations</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-02-installing-python.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-09-indexing-subsetting.html"><span class="chapter-title">1.9 Indexing and Subsetting</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -162,37 +162,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-04-writing-scripts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.4 Writing Scripts</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-02-installing-python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.2 Installing Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-05-packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Packages</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3 Installing and Touring Positron</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-06-variables-and-types.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6 Variables and Types</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-04-files-folders-paths.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.4 Files, Folders and Paths</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-07-vectors.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.7 Vectors</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Writing and Running Your First Script</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-08-indexing-and-subsetting.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.8 Indexing and Subsetting</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-06-packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6 Installing and Importing Packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-09-data-frames.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.9 Data Frames</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-07-variables-data-types.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.7 Variables and Basic Data Types</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-10-basic-data-frame-manipulation-and-the-pipe.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">1.10 The pipe and basic operations</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-08-lists-dicts-arrays.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.8 Lists, Dictionaries and Arrays</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-09-indexing-subsetting.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">1.9 Indexing and Subsetting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-10-dataframes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.10 DataFrames: Your Most Important Object</span></a>
   </div>
 </li>
       </ul>
@@ -273,10 +283,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
-  <li><a href="#exercise-1.10.1" id="toc-exercise-1.10.1" class="nav-link" data-scroll-target="#exercise-1.10.1">Exercise 1.10.1</a></li>
-  <li><a href="#exercise-1.10.2" id="toc-exercise-1.10.2" class="nav-link" data-scroll-target="#exercise-1.10.2">Exercise 1.10.2</a></li>
-  <li><a href="#exercise-1.10.3" id="toc-exercise-1.10.3" class="nav-link" data-scroll-target="#exercise-1.10.3">Exercise 1.10.3</a></li>
-  <li><a href="#exercise-1.10.4" id="toc-exercise-1.10.4" class="nav-link" data-scroll-target="#exercise-1.10.4">Exercise 1.10.4</a></li>
+  <li><a href="#exercise-1.9.1" id="toc-exercise-1.9.1" class="nav-link" data-scroll-target="#exercise-1.9.1">Exercise 1.9.1</a></li>
+  <li><a href="#exercise-1.9.2" id="toc-exercise-1.9.2" class="nav-link" data-scroll-target="#exercise-1.9.2">Exercise 1.9.2</a></li>
+  <li><a href="#exercise-1.9.3" id="toc-exercise-1.9.3" class="nav-link" data-scroll-target="#exercise-1.9.3">Exercise 1.9.3</a></li>
+  <li><a href="#exercise-1.9.4" id="toc-exercise-1.9.4" class="nav-link" data-scroll-target="#exercise-1.9.4">Exercise 1.9.4</a></li>
+  <li><a href="#exercise-1.9.5" id="toc-exercise-1.9.5" class="nav-link" data-scroll-target="#exercise-1.9.5">Exercise 1.9.5</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -284,9 +295,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-04-writing-scripts.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-10-basic-data-frame-manipulation-and-the-pipe.html"><span class="chapter-title">1.10 The pipe and basic operations</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-02-installing-python.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-09-indexing-subsetting.html"><span class="chapter-title">1.9 Indexing and Subsetting</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Basic data frame manipulation and the pipe</span></h1>
+<h1 class="title"><span class="chapter-title">Indexing and subsetting</span></h1>
 </div>
 
 
@@ -303,146 +314,208 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1198722461?h=cd2f768130" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>We introduce the native pipe operator <code>|&gt;</code>, which lets you chain operations together in a readable left-to-right sequence, and apply it to a small end-to-end example.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<p>We cover how to extract individual elements and slices from lists and strings using Python’s zero-based indexing system.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1194660309?h=d33b534cee" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>products <span class="op">=</span> [<span class="st">"coffee"</span>, <span class="st">"tea"</span>, <span class="st">"juice"</span>, <span class="st">"sandwich"</span>, <span class="st">"cookie"</span>]</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>prices <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">29.90</span>, <span class="dv">35</span>, <span class="dv">11</span>, <span class="fl">12.5</span>, <span class="dv">48</span>, <span class="fl">22.75</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>products <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"coffee"</span>, <span class="st">"tea"</span>, <span class="st">"juice"</span>, <span class="st">"sandwich"</span>, <span class="st">"cookie"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>quantities <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">8</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>sales <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">product =</span> products,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">price =</span> prices,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">quantity =</span> quantities</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a new column</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>sales<span class="sc">$</span>revenue <span class="ot">&lt;-</span> sales<span class="sc">$</span>price <span class="sc">*</span> sales<span class="sc">$</span>quantity</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the first element (position 0)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">0</span>])    <span class="co"># coffee</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the third element (position 2)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">2</span>])    <span class="co"># juice</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the last element</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="bu">len</span>(products)<span class="op">-</span><span class="dv">1</span>])    <span class="co"># cookie</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Negative indexing</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="op">-</span><span class="dv">1</span>])   <span class="co"># cookie (last element)</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="op">-</span><span class="dv">2</span>])   <span class="co"># sandwich (second to last)</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># The pipe</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sales, <span class="at">n =</span> <span class="dv">2</span>)        <span class="co"># Without the pipe</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>sales <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">2</span>)      <span class="co"># The same operation, but with the pipe</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the pipe for data frame operations</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>sales <span class="sc">|&gt;</span> </span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>product <span class="op">=</span> {</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>: <span class="st">"coffee"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"price"</span>: <span class="fl">29.90</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"in_stock"</span>: <span class="va">True</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Cannot index a dict</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># print(product[0])</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick demonstration, requires the tidyverse package to be loaded.</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>sales <span class="sc">|&gt;</span> </span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(quantity <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(revenue)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract value associated with key</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(product[<span class="st">"name"</span>])    <span class="co"># coffee</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Elements at positions 1, 2, 3 (stop=4 is excluded)</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">1</span>:<span class="dv">4</span>])    <span class="co"># ['tea', 'juice', 'sandwich']</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># From the beginning up to (but not including) position 3</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[:<span class="dv">3</span>])     <span class="co"># ['coffee', 'tea', 'juice']</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># From position 2 to the end</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">2</span>:])     <span class="co"># ['juice', 'sandwich', 'cookie']</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Slicing a string</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>country <span class="op">=</span> <span class="st">"Norway"</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country[<span class="dv">0</span>])      <span class="co"># N</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country[<span class="op">-</span><span class="dv">1</span>])     <span class="co"># y</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country[<span class="dv">0</span>:<span class="dv">3</span>])    <span class="co"># Nor</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country[<span class="dv">3</span>:])     <span class="co"># way</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Modify element in list at index 0</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>products[<span class="dv">0</span>] <span class="op">=</span> <span class="st">"apples"</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
-<section id="exercise-1.10.1" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.10.1">Exercise 1.10.1</h3>
-<p>Rewrite the following using the pipe <code>|&gt;</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="exercise-1.9.1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.9.1">Exercise 1.9.1</h3>
+<p>Add a new comment header for Topic 1.9 in your <code>exercises_topic1.py</code> script. Then create the list below and retrieve the following elements using indexing: 1. The first element. 2. The third element. 3. The last element using negative indexing. 4. The second-to-last element using negative indexing.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cities <span class="op">=</span> [<span class="st">"Oslo"</span>, <span class="st">"Bergen"</span>, <span class="st">"Trondheim"</span>, <span class="st">"Stavanger"</span>, <span class="st">"Tromsø"</span>, <span class="st">"Kristiansand"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details>
 <summary>
 Solution
 </summary>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>               mpg cyl disp  hp drat    wt  qsec vs am gear carb
-Mazda RX4     21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-Datsun 710    22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</code></pre>
-</div>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ── 1.9 Indexing and subsetting ───────────────────────────────────────────────</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>cities <span class="op">=</span> [<span class="st">"Oslo"</span>, <span class="st">"Bergen"</span>, <span class="st">"Trondheim"</span>, <span class="st">"Stavanger"</span>, <span class="st">"Tromsø"</span>, <span class="st">"Kristiansand"</span>]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. First element</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities[<span class="dv">0</span>])</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Third element</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities[<span class="dv">2</span>])</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Last element</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Second-to-last element</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities[<span class="op">-</span><span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Oslo
+Trondheim
+Kristiansand
+Tromsø</code></pre>
 </details>
+<hr>
 </section>
-<section id="exercise-1.10.2" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.10.2">Exercise 1.10.2</h3>
-<p>Use the pipe to chain <code>summary()</code> on the <code>mtcars</code> dataset:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Now try piping <code>mtcars</code> through <code>colMeans()</code>. Does it work? Why or why not?</p>
+<section id="exercise-1.9.2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.9.2">Exercise 1.9.2</h3>
+<p>Using the same <code>cities</code> list, extract the following slices and print each result: 1. The first three cities. 2. The last three cities. 3. Everything except the first and last city.</p>
 <details>
 <summary>
 Solution
 </summary>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      mpg             cyl             disp             hp       
- Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  
- 1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  
- Median :19.20   Median :6.000   Median :196.3   Median :123.0  
- Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  
- 3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  
- Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  
-      drat             wt             qsec             vs        
- Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  
- 1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  
- Median :3.695   Median :3.325   Median :17.71   Median :0.0000  
- Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  
- 3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  
- Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  
-       am              gear            carb      
- Min.   :0.0000   Min.   :3.000   Min.   :1.000  
- 1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  
- Median :0.0000   Median :4.000   Median :2.000  
- Mean   :0.4062   Mean   :3.688   Mean   :2.812  
- 3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  
- Max.   :1.0000   Max.   :5.000   Max.   :8.000  </code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span> <span class="fu">colMeans</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       mpg        cyl       disp         hp       drat         wt       qsec 
- 20.090625   6.187500 230.721875 146.687500   3.596563   3.217250  17.848750 
-        vs         am       gear       carb 
-  0.437500   0.406250   3.687500   2.812500 </code></pre>
-</div>
-</div>
-<p>Both work because <code>summary()</code> and <code>colMeans()</code> take a data frame as their first argument, which is what the pipe provides. If a function does not take a data frame as its first argument, the pipe will not work as smoothly.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. First three cities</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities[:<span class="dv">3</span>])</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Last three cities</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities[<span class="op">-</span><span class="dv">3</span>:])</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Everything except first and last</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities[<span class="dv">1</span>:<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>['Oslo', 'Bergen', 'Trondheim']
+['Stavanger', 'Tromsø', 'Kristiansand']
+['Bergen', 'Trondheim', 'Stavanger', 'Tromsø']</code></pre>
 </details>
+<hr>
 </section>
-<section id="exercise-1.10.3" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.10.3">Exercise 1.10.3</h3>
-<p>Chain three operations with pipes: take <code>mtcars</code>, extract just the <code>mpg</code> column with <code>$</code>, then compute the <code>range()</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>mpg <span class="sc">|&gt;</span> <span class="fu">range</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Now write the same thing without the pipe. Which version do you find more readable?</p>
+<section id="exercise-1.9.3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.9.3">Exercise 1.9.3</h3>
+<p>Create the dictionary below and retrieve the following values using their keys. Then add a new key <code>"language"</code> with the value <code>"Norwegian"</code> and print the updated dictionary.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>country <span class="op">=</span> {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>:        <span class="st">"Norway"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"capital"</span>:     <span class="st">"Oslo"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"population"</span>:  <span class="dv">5_400_000</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"in_eu"</span>:       <span class="va">False</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>The capital city.</li>
+<li>The population.</li>
+<li>Try retrieving a key that does not exist, e.g.&nbsp;<code>"gdp_per_cap"</code>. What error do you get?</li>
+</ol>
 <details>
 <summary>
 Solution
 </summary>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With pipe</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>mtcars<span class="sc">$</span>mpg <span class="sc">|&gt;</span> <span class="fu">range</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.4 33.9</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Without pipe</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(mtcars<span class="sc">$</span>mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.4 33.9</code></pre>
-</div>
-</div>
-<p>For a single function call, the non-pipe version is arguably simpler. The pipe becomes more useful when chaining two or more operations together. There is no need to force the pipe when a simple function call is clearer.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>country <span class="op">=</span> {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>:        <span class="st">"Norway"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"capital"</span>:     <span class="st">"Oslo"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"population"</span>:  <span class="dv">5_400_000</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"in_eu"</span>:       <span class="va">False</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Capital city</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country[<span class="st">"capital"</span>])</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Population</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country[<span class="st">"population"</span>])</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Non-existent key</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># print(country["gdp_per_cap"])</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Oslo
+5400000</code></pre>
+<p>Attempting to access a key that does not exist raises a <code>KeyError</code>:</p>
+<pre><code>KeyError: 'gdp_per_cap'</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add new key</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>country[<span class="st">"language"</span>] <span class="op">=</span> <span class="st">"Norwegian"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>{'name': 'Norway', 'capital': 'Oslo', 'population': 5400000, 'in_eu': False, 'language': 'Norwegian'}</code></pre>
+Unlike lists, which raise an <code>IndexError</code> when you go out of bounds, dictionaries raise a <code>KeyError</code> when you try to access a key that does not exist. Both are signals that you are asking for something that is not there.
 </details>
+<hr>
 </section>
-<section id="exercise-1.10.4" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.10.4">Exercise 1.10.4</h3>
-<p>Examine the difference between the two pipe operators. Run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Now load the magrittr-package (it is installed as part of the tidyverse) and try:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Both should give the same result. When you look up R code online (Stack Overflow, blog posts, etc.), which pipe are you more likely to see? Why?</p>
+<section id="exercise-1.9.4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.9.4">Exercise 1.9.4</h3>
+<p>Apply slicing to the string below to extract the following substrings and print each result: 1. The first three characters. 2. The last four characters using negative indexing. 3. The word <code>"Python"</code> (characters 7 through 12).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"Hello, Python!"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details>
 <summary>
 Solution
 </summary>
-<p>Both give identical results:</p>
-<pre><code>               mpg cyl disp  hp drat    wt  qsec vs am gear carb
-Mazda RX4     21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-Datsun 710    22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</code></pre>
-<p>You will see <code>%&gt;%</code> far more often online, because it has been available since 2014 (via the magrittr package), while <code>|&gt;</code> was only introduced in R 4.1 (2021). Most existing tutorials, Stack Overflow answers, and blog posts were written before the native pipe existed. Both work essentially the same way for our purposes. We use <code>|&gt;</code> in this course because it requires no extra packages and is the modern standard.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"Hello, Python!"</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. First three characters</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text[:<span class="dv">3</span>])</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Last four characters</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text[<span class="op">-</span><span class="dv">4</span>:])</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. The word "Python"</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text[<span class="dv">7</span>:<span class="dv">13</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Hel
+hon!
+Python</code></pre>
+Remember that the stop index in a slice is excluded, so to include the character at position 12 you must use 13 as the stop index.
+</details>
+<hr>
+</section>
+<section id="exercise-1.9.5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.9.5">Exercise 1.9.5</h3>
+<p>The code below contains three common indexing mistakes. Identify and fix each one, and explain what was wrong.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>products <span class="op">=</span> [<span class="st">"coffee"</span>, <span class="st">"tea"</span>, <span class="st">"juice"</span>, <span class="st">"sandwich"</span>, <span class="st">"cookie"</span>]</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Retrieve the first element</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">1</span>])</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Retrieve the last element</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">5</span>])</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Retrieve the first three elements</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">0</span>:<span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details>
+<summary>
+Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>products <span class="op">=</span> [<span class="st">"coffee"</span>, <span class="st">"tea"</span>, <span class="st">"juice"</span>, <span class="st">"sandwich"</span>, <span class="st">"cookie"</span>]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. First element is at position 0, not 1</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">0</span>])</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. The list has 5 elements (positions 0–4); position 5 does not exist</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="op">-</span><span class="dv">1</span>])   <span class="co"># or products[4]</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. The slice [0:2] only returns positions 0 and 1 — stop index is excluded</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">0</span>:<span class="dv">3</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>coffee
+cookie
+['coffee', 'tea', 'juice']</code></pre>
+All three mistakes are variations of the same off-by-one confusion that comes from zero-based indexing. A list of 5 elements has valid positions 0 through 4 — there is no position 5. And a slice <code>[0:2]</code> returns 2 elements (positions 0 and 1), not 3. These errors are extremely common and worth recognising early.
 </details>
 
 
@@ -852,13 +925,13 @@ Datsun 710    22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../01-getting-started-and-working-effectively/01-09-data-frames.html" class="pagination-link" aria-label="1.9 Data Frames">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1.9 Data Frames</span></span>
+      <a href="../01-getting-started-and-working-effectively/01-08-lists-dicts-arrays.html" class="pagination-link" aria-label="1.8 Lists, Dictionaries and Arrays">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1.8 Lists, Dictionaries and Arrays</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../02-programming-fundamentals/02-01-placeholder.html" class="pagination-link" aria-label="2.1 Placeholder">
-        <span class="nav-page-text"><span class="chapter-title">2.1 Placeholder</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../01-getting-started-and-working-effectively/01-10-dataframes.html" class="pagination-link" aria-label="1.10 DataFrames: Your Most Important Object">
+        <span class="nav-page-text"><span class="chapter-title">1.10 DataFrames: Your Most Important Object</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

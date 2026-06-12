@@ -1,0 +1,8 @@
+# Installing Python
+
+We install Python from python.org, walk through the setup on both Windows and Mac, and verify the installation by checking the version in the terminal.
+
+*Video will be embedded here.*
+
+
+

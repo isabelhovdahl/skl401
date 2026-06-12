@@ -1,0 +1,251 @@
+## Lists, dictionaries and arrays
+
+We introduce three ways of storing collections of values in Python: lists for ordered sequences, dictionaries for key-value pairs, and numpy arrays for numerical computation.
+
+{{< video https://vimeo.com/1194660313/bce18a96e7?fl=ml&fe=ec >}}
+
+```python
+import numpy as np
+
+# A list of strings
+products = ["coffee", "tea", "juice", "sandwich"]
+print(products)
+print(type(products))
+
+# Print number of items with len()
+print(len(products))  
+
+# Add item with append()
+products.append("cookie")
+print(products)
+
+# A dictionary describing one product
+product = {
+    "name": "coffee",
+    "price": 29.90,
+    "in_stock": True
+}
+print(product)
+print(len(product))
+
+# Extract keys and values from a dict
+print(product.keys())
+print(product.values())
+
+# Add new key
+product["on_sale"] = False
+print(product)
+
+# Update existing key
+product["in_stock"] = False
+print(product)
+
+# Create a vector with array() from numpy
+prices_lst = [29.9, 35.0, 12.5, 22.7]
+prices_array = np.array(prices_lst)
+print(prices_array)
+
+# Duplicate all items in list
+print(prices_lst * 2)
+
+# Double  all numbers in array
+print(prices_array * 2)
+
+# Multiply two arrays
+quantities = np.array([3, 5, 0, 2])
+revenue = prices_array * quantities
+print(revenue)
+```
+
+## Exercises
+
+### Exercise 1.8.1
+Add a new comment header for Topic 1.8 in your `exercises_topic1.py` script. Then create
+a list of five country names of your choice. Print the list, its length, and then append
+one more country to it and print the updated list.
+
+<details>
+<summary>Solution</summary>
+
+```python
+# ── 1.8 Lists, dictionaries, and arrays ───────────────────────────────────────
+
+countries = ["Norway", "Germany", "Brazil", "Japan", "Nigeria"]
+
+print(countries)
+print(len(countries))
+
+countries.append("Australia")
+print(countries)
+```
+```
+['Norway', 'Germany', 'Brazil', 'Japan', 'Nigeria']
+5
+['Norway', 'Germany', 'Brazil', 'Japan', 'Nigeria', 'Australia']
+```
+</details>
+
+---
+
+### Exercise 1.8.2
+Create a dictionary that describes a country of your choice. It should contain at least
+four keys: the country name, its continent, its population, and its GDP per capita. Then:
+1. Print the dictionary.
+2. Print only the keys.
+3. Print only the values.
+4. Add a new key `"in_eu"` with an appropriate boolean value and print the updated
+   dictionary.
+
+<details>
+<summary>Solution</summary>
+
+```python
+country = {
+    "name":          "Norway",
+    "continent":     "Europe",
+    "population":    5_400_000,
+    "gdp_per_cap":   82500,
+}
+
+# 1. Print the dictionary
+print(country)
+
+# 2. Keys only
+print(country.keys())
+
+# 3. Values only
+print(country.values())
+
+# 4. Add new key
+country["in_eu"] = False
+print(country)
+```
+```
+{'name': 'Norway', 'continent': 'Europe', 'population': 5400000, 'gdp_per_cap': 82500}
+dict_keys(['name', 'continent', 'population', 'gdp_per_cap'])
+dict_values(['Norway', 'Europe', 5400000, 82500])
+{'name': 'Norway', 'continent': 'Europe', 'population': 5400000, 'gdp_per_cap': 82500, 'in_eu': False}
+```
+</details>
+
+---
+
+### Exercise 1.8.3
+Create a numpy array of six product prices of your choice. Then:
+1. Compute and print the total, mean, and maximum price.
+2. Apply a 10% discount to all prices in a single operation and print the result.
+3. Create a second array of quantities (one per product) and compute the revenue for
+   each product. Print the result.
+
+<details>
+<summary>Solution</summary>
+
+```python
+import numpy as np
+
+prices    = np.array([29.90, 35.00, 12.50, 48.00, 22.75, 9.90])
+quantities = np.array([3, 5, 0, 2, 8, 4])
+
+# 1. Summary statistics
+print(prices.sum())
+print(prices.mean())
+print(prices.max())
+```
+```
+158.05
+26.341666666666665
+48.0
+```
+```python
+# 2. Apply 10% discount
+discounted = prices * 0.90
+print(discounted)
+```
+```
+[26.91 31.5  11.25 43.2  20.475  8.91]
+```
+```python
+# 3. Revenue per product
+revenue = prices * quantities
+print(revenue)
+```
+```
+[ 89.7  175.    0.   96.  182.   39.6]
+```
+</details>
+
+---
+
+### Exercise 1.8.4
+The code below attempts to perform arithmetic on a list. Run it and read the error message.
+Then fix it by converting the list to a numpy array and confirm that the operation works
+as expected.
+
+```python
+temperatures = [12.5, 18.3, 9.7, 22.1, 15.0]
+print(temperatures * 2)
+```
+
+<details>
+<summary>Solution</summary>
+
+Running the code does not produce an error, but it does not do what we want either —
+multiplying a list by 2 repeats the list rather than doubling each value:
+```
+[12.5, 18.3, 9.7, 22.1, 15.0, 12.5, 18.3, 9.7, 22.1, 15.0]
+```
+Converting to a numpy array gives the expected element-wise result:
+```python
+import numpy as np
+
+temperatures = np.array([12.5, 18.3, 9.7, 22.1, 15.0])
+print(temperatures * 2)
+```
+```
+[25.  36.6 19.4 44.2 30. ]
+```
+This is one of the most common sources of confusion when moving between plain Python lists
+and numpy arrays — they look similar but behave very differently under arithmetic
+operations.
+</details>
+
+---
+
+### Exercise 1.8.5
+Create a list and a numpy array that both contain the same five integers. Verify that
+the following operations behave differently depending on whether you use a list or an
+array, and explain the difference in each case:
+1. Adding the collection to itself (i.e. `x + x`).
+2. Checking the sum using `sum()`.
+
+<details>
+<summary>Solution</summary>
+
+```python
+import numpy as np
+
+numbers_list  = [1, 2, 3, 4, 5]
+numbers_array = np.array([1, 2, 3, 4, 5])
+
+# 1. Adding to itself
+print(numbers_list  + numbers_list)
+print(numbers_array + numbers_array)
+```
+```
+[1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
+[ 2  4  6  8 10]
+```
+```python
+# 2. sum()
+print(sum(numbers_list))
+print(sum(numbers_array))
+```
+```
+15
+15
+```
+For operation 1, `+` on two lists concatenates them (appends one after the other), whereas
+`+` on two arrays adds them element-wise, just like vector addition. For operation 2,
+Python's built-in `sum()` works on both and gives the same result — but for arrays it is
+better practice to use `numbers_array.sum()`, which is faster and more readable.
+</details>

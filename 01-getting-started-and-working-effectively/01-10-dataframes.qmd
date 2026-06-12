@@ -1,0 +1,285 @@
+## DataFrames: Your most important object
+
+We introduce the pandas DataFrame as the central structure for tabular data, and cover how to create, inspect, and perform basic operations on one.
+
+{{< video https://vimeo.com/1194660307/c38b4ef550?fl=ml&fe=ec >}}
+
+```python
+import pandas as pd
+
+# Define dictionary with data
+sales = {
+    "product":  ["coffee", "tea", "juice", "sandwich", "cookie"],
+    "price":    [29.90, 35.00, 12.50, 48.00, 22.75],
+    "quantity": [3, 5, 0, 2, 8]
+}
+
+# Create a small DataFrame from a dictionary
+df = pd.DataFrame(sales)
+print(df)
+print(df.head(3))
+print(df.tail(2))
+
+# info() gives a summary of the DataFrame
+df.info()
+
+# describe() gives summary statistics for numeric columns
+print(df.describe())
+
+# Select a single column
+print(df["price"])
+
+# Apply functions on column
+print(df["price"].mean())    # average price
+print(df["price"].sum())     # total
+print(df["price"].max())     # maximum
+
+# Indicate if product is on sale
+df["on_sale"] = [True, True, False, True, False]
+
+# Calculate total revenue for each product
+df["revenue"] = df["price"] * df["quantity"]
+print(df)
+```
+
+## Exercises
+
+### Exercise 1.10.1
+Add a new comment header for Topic 1.10 in your `exercises_topic1.py` script. Then create
+a DataFrame of your choice with at least four columns and five rows. It should contain at
+least one column of each of the following types: string, integer, and float. Print the
+DataFrame and inspect it using `.info()` and `.describe()`.
+
+<details>
+<summary>Solution</summary>
+
+```python
+# ── 1.10 DataFrames ───────────────────────────────────────────────────────────
+
+import pandas as pd
+
+students = {
+    "name":   ["Alice", "Bob", "Clara", "David", "Emma"],
+    "age":    [23, 25, 22, 26, 24],
+    "gpa":    [3.8, 3.2, 3.9, 2.8, 3.5],
+    "passed": [True, True, True, False, True],
+}
+
+df = pd.DataFrame(students)
+print(df)
+```
+```
+    name  age  gpa  passed
+0  Alice   23  3.8    True
+1    Bob   25  3.2    True
+2  Clara   22  3.9    True
+3  David   26  2.8   False
+4   Emma   24  3.5    True
+```
+```python
+df.info()
+```
+```
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 5 entries, 0 to 4
+Data columns (total 4 columns):
+ #   Column  Non-Null Count  Dtype
+---  ------  --------------  -----
+ 0   name    5 non-null      object
+ 1   age     5 non-null      int64
+ 2   gpa     5 non-null      float64
+ 3   passed  5 non-null      bool
+dtypes: bool(1), float64(1), int64(1), object(1)
+memory usage: 293.0+ bytes
+```
+```python
+print(df.describe())
+```
+```
+             age        gpa
+count   5.000000   5.000000
+mean   24.000000   3.440000
+std     1.581139   0.430116
+min    22.000000   2.800000
+25%    23.000000   3.200000
+50%    24.000000   3.500000
+75%    25.000000   3.800000
+max    26.000000   3.900000
+```
+Note that `.describe()` only summarises numeric columns by default — string and boolean
+columns are excluded.
+</details>
+
+---
+
+### Exercise 1.10.2
+Using the DataFrame you created in Exercise 1.10.1, practice the following column
+operations:
+1. Select a single column and print it.
+2. Compute the mean, minimum, and maximum of one of the numeric columns.
+3. Select two columns simultaneously and print the result.
+
+<details>
+<summary>Solution</summary>
+
+```python
+# 1. Select a single column
+print(df["name"])
+```
+```
+0    Alice
+1      Bob
+2    Clara
+3    David
+4     Emma
+Name: name, dtype: object
+```
+```python
+# 2. Summary statistics on a numeric column
+print(df["gpa"].mean())
+print(df["gpa"].min())
+print(df["gpa"].max())
+```
+```
+3.44
+2.8
+3.9
+```
+```python
+# 3. Select two columns
+print(df[["name", "gpa"]])
+```
+```
+    name  gpa
+0  Alice  3.8
+1    Bob  3.2
+2  Clara  3.9
+3  David  2.8
+4   Emma  3.5
+```
+Notice the difference in syntax: a single column name inside single brackets returns a
+Series, while a list of column names inside double brackets returns a DataFrame.
+</details>
+
+---
+
+### Exercise 1.10.3
+Add two new columns to your DataFrame:
+1. A column `"age_months"` that converts the age in years to age in months.
+2. A boolean column `"high_achiever"` that is `True` if the GPA is above 3.5 and `False`
+   otherwise.
+
+Print the updated DataFrame.
+
+<details>
+<summary>Solution</summary>
+
+```python
+# 1. Age in months
+df["age_months"] = df["age"] * 12
+
+# 2. High achiever flag
+df["high_achiever"] = df["gpa"] > 3.5
+
+print(df)
+```
+```
+    name  age  gpa  passed  age_months  high_achiever
+0  Alice   23  3.8    True         276           True
+1    Bob   25  3.2    True         300          False
+2  Clara   22  3.9    True         264           True
+3  David   26  2.8   False         312          False
+4   Emma   24  3.5    True         288          False
+```
+The expression `df["gpa"] > 3.5` evaluates the condition for every row simultaneously and
+returns a boolean Series, which we then store directly as a new column. Notice that a GPA
+of exactly 3.5 returns `False` since the condition is strictly greater than.
+</details>
+
+---
+
+### Exercise 1.10.4
+Use `.head()` and `.tail()` to inspect your DataFrame. Then check how many rows and
+columns it has using a single attribute — without using `len()` or `.info()`.
+
+(_Hint_: all DataFrames have an attribute that returns the number of rows and columns as
+a tuple.)
+
+<details>
+<summary>Solution</summary>
+
+```python
+print(df.head(3))
+print(df.tail(2))
+print(df.shape)
+```
+```
+    name  age  gpa  passed  age_months  high_achiever
+0  Alice   23  3.8    True         276           True
+1    Bob   25  3.2    True         300          False
+2  Clara   22  3.9    True         264           True
+
+    name  age  gpa  passed  age_months  high_achiever
+3  David   26  2.8   False         312          False
+4   Emma   24  3.5    True         288          False
+
+(5, 6)
+```
+`.shape` returns a tuple of `(rows, columns)`. You can access each dimension individually
+with `df.shape[0]` for the number of rows and `df.shape[1]` for the number of columns.
+</details>
+
+---
+
+### Exercise 1.10.5
+Create a new DataFrame from the dictionary below, which contains some messiness typical
+of real data. Inspect it with `.info()` and identify two potential problems you would want
+to fix before doing any analysis.
+
+```python
+data = {
+    "country":     ["Norway", "Germany", "Brazil", "Japan", "Nigeria"],
+    "gdp_per_cap": [82500, 48000, "8600", 42000, 2100],
+    "population":  [5_400_000, 84_000_000, 214_000_000, 125_000_000, None],
+    "continent":   ["Europe", "Europe", "Americas", "Asia", "Africa"],
+}
+```
+
+<details>
+<summary>Solution</summary>
+
+```python
+data = {
+    "country":     ["Norway", "Germany", "Brazil", "Japan", "Nigeria"],
+    "gdp_per_cap": [82500, 48000, "8600", 42000, 2100],
+    "population":  [5_400_000, 84_000_000, 214_000_000, 125_000_000, None],
+    "continent":   ["Europe", "Europe", "Americas", "Asia", "Africa"],
+}
+
+df2 = pd.DataFrame(data)
+df2.info()
+```
+```
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 5 entries, 0 to 4
+Data columns (total 4 columns):
+ #   Column       Non-Null Count  Dtype
+---  ------       --------------  -----
+ 0   country      5 non-null      object
+ 1   gdp_per_cap  5 non-null      object
+ 2   population   4 non-null      float64
+ 3   continent    5 non-null      object
+dtypes: float64(1), object(3)
+memory usage: 292.0+ bytes
+```
+Two problems are visible from `.info()`:
+
+- **`gdp_per_cap` is stored as `object` (string) instead of a number.** This is because
+  one of the values — `"8600"` for Brazil — was entered as a string. When a column mixes
+  types, pandas falls back to storing everything as an object, which means you cannot do
+  arithmetic on it without converting it first.
+- **`population` has a missing value.** Nigeria's population is `None`, which pandas
+  stores as `NaN`. The column only has 4 non-null entries out of 5, and any calculation
+  on this column will either ignore or propagate the missing value depending on the
+  operation. Both issues need to be addressed before the data can be analysed reliably.
+</details>

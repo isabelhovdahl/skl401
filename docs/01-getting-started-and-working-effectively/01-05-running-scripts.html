@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Indexing and subsetting – SKL401 — Introduction to Python</title>
+<title>Writing and running your first script – SKL401 — Introduction to Python</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,8 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../01-getting-started-and-working-effectively/01-09-data-frames.html" rel="next">
-<link href="../01-getting-started-and-working-effectively/01-07-vectors.html" rel="prev">
+<link href="../01-getting-started-and-working-effectively/01-06-packages.html" rel="next">
+<link href="../01-getting-started-and-working-effectively/01-04-files-folders-paths.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -120,7 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-04-writing-scripts.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-08-indexing-and-subsetting.html"><span class="chapter-title">1.8 Indexing and Subsetting</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-02-installing-python.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html"><span class="chapter-title">1.5 Writing and Running Your First Script</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -162,37 +162,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-04-writing-scripts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.4 Writing Scripts</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-02-installing-python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.2 Installing Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-05-packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Packages</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3 Installing and Touring Positron</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-06-variables-and-types.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6 Variables and Types</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-04-files-folders-paths.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.4 Files, Folders and Paths</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-07-vectors.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.7 Vectors</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">1.5 Writing and Running Your First Script</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-08-indexing-and-subsetting.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">1.8 Indexing and Subsetting</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-06-packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6 Installing and Importing Packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-09-data-frames.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.9 Data Frames</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-07-variables-data-types.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.7 Variables and Basic Data Types</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-10-basic-data-frame-manipulation-and-the-pipe.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.10 The pipe and basic operations</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-08-lists-dicts-arrays.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.8 Lists, Dictionaries and Arrays</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-09-indexing-subsetting.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.9 Indexing and Subsetting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-10-dataframes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.10 DataFrames: Your Most Important Object</span></a>
   </div>
 </li>
       </ul>
@@ -273,11 +283,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
-  <li><a href="#exercise-1.8.1" id="toc-exercise-1.8.1" class="nav-link" data-scroll-target="#exercise-1.8.1">Exercise 1.8.1</a></li>
-  <li><a href="#exercise-1.8.2" id="toc-exercise-1.8.2" class="nav-link" data-scroll-target="#exercise-1.8.2">Exercise 1.8.2</a></li>
-  <li><a href="#exercise-1.8.3" id="toc-exercise-1.8.3" class="nav-link" data-scroll-target="#exercise-1.8.3">Exercise 1.8.3</a></li>
-  <li><a href="#exercise-1.8.4" id="toc-exercise-1.8.4" class="nav-link" data-scroll-target="#exercise-1.8.4">Exercise 1.8.4</a></li>
-  <li><a href="#exercise-1.8.5" id="toc-exercise-1.8.5" class="nav-link" data-scroll-target="#exercise-1.8.5">Exercise 1.8.5</a></li>
+  <li><a href="#exercise-1.5.1" id="toc-exercise-1.5.1" class="nav-link" data-scroll-target="#exercise-1.5.1">Exercise 1.5.1</a></li>
+  <li><a href="#exercise-1.5.2" id="toc-exercise-1.5.2" class="nav-link" data-scroll-target="#exercise-1.5.2">Exercise 1.5.2</a></li>
+  <li><a href="#exercise-1.5.3" id="toc-exercise-1.5.3" class="nav-link" data-scroll-target="#exercise-1.5.3">Exercise 1.5.3</a></li>
+  <li><a href="#exercise-1.5.4" id="toc-exercise-1.5.4" class="nav-link" data-scroll-target="#exercise-1.5.4">Exercise 1.5.4</a></li>
+  <li><a href="#exercise-1.5.5" id="toc-exercise-1.5.5" class="nav-link" data-scroll-target="#exercise-1.5.5">Exercise 1.5.5</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -285,9 +295,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-04-writing-scripts.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-08-indexing-and-subsetting.html"><span class="chapter-title">1.8 Indexing and Subsetting</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-02-installing-python.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html"><span class="chapter-title">1.5 Writing and Running Your First Script</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Indexing and subsetting</span></h1>
+<h1 class="title"><span class="chapter-title">Writing and running your first script</span></h1>
 </div>
 
 
@@ -304,133 +314,123 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1198722235?h=140449fd65" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>We learn how to extract specific elements from a vector using integer indices and logical conditions, which is the basis for all subsetting in R.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>prices   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">29.90</span>, <span class="dv">35</span>, <span class="dv">11</span>, <span class="fl">12.5</span>, <span class="dv">48</span>, <span class="fl">22.75</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>product  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"coffee"</span>, <span class="st">"tea"</span>, <span class="st">"juice"</span>, <span class="st">"sandwich"</span>, <span class="st">"cookie"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Indexing a vector</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>prices[<span class="dv">3</span>]                    <span class="co"># By position</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>prices[<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>)]           <span class="co"># By several positions</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>prices[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>]                  <span class="co"># Using a sequence</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>prices[<span class="sc">-</span><span class="dv">1</span>]                   <span class="co"># Excluding elements</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Using logical vectors, and thus conditions</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>prices[<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)]</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>prices[prices <span class="sc">&gt;</span> <span class="dv">30</span>]</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>products[prices <span class="sc">&gt;</span> <span class="dv">30</span>]</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Using indexing to change specific elements</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>prices[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="dv">15</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>prices[prices <span class="sc">&gt;</span> <span class="dv">30</span>] <span class="ot">&lt;-</span> prices[prices <span class="sc">&gt;</span> <span class="dv">30</span>] <span class="sc">*</span> <span class="fl">0.8</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<p>We write our first Python script, learn how to run code line by line and in bulk, and discuss how to read error messages.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1194354317?h=2249c6ea0a" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># My first Python script</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SKL401 - Getting started</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Author: Isabel Hovdahl</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Print basic arithmetic</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">/</span> <span class="dv">5</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">2</span> <span class="op">**</span> <span class="dv">8</span>)    <span class="co"># ** is the power operator in Python</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
-<section id="exercise-1.8.1" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.8.1">Exercise 1.8.1</h3>
-<p>Using the vector:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>months <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Jan"</span>, <span class="st">"Feb"</span>, <span class="st">"Mar"</span>, <span class="st">"Apr"</span>, <span class="st">"May"</span>, <span class="st">"Jun"</span>,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Jul"</span>, <span class="st">"Aug"</span>, <span class="st">"Sep"</span>, <span class="st">"Oct"</span>, <span class="st">"Nov"</span>, <span class="st">"Dec"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Extract the third element. Extract the last three elements.</p>
+<section id="exercise-1.5.1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.5.1">Exercise 1.5.1</h3>
+<p>Create a new script file called <code>exercises_topic1.py</code> in your <code>scripts/</code> folder. At the top, write a comment header with your name, today’s date, and a brief description of what the file contains. Save the file.</p>
 <details>
 <summary>
 Solution
 </summary>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>months <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Jan"</span>, <span class="st">"Feb"</span>, <span class="st">"Mar"</span>, <span class="st">"Apr"</span>, <span class="st">"May"</span>, <span class="st">"Jun"</span>,</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Jul"</span>, <span class="st">"Aug"</span>, <span class="st">"Sep"</span>, <span class="st">"Oct"</span>, <span class="st">"Nov"</span>, <span class="st">"Dec"</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>months[<span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Mar"</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>months[<span class="dv">10</span><span class="sc">:</span><span class="dv">12</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Oct" "Nov" "Dec"</code></pre>
-</div>
-</div>
-<p>Alternatively for the last three: <code>tail(months, 3)</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># exercises_topic1.py</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Author: [Your name]</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Date:   [Today's date]</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Topic 1 exercises for SKL401</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+Save as <code>scripts/exercises_topic1.py</code>.
 </details>
+<hr>
 </section>
-<section id="exercise-1.8.2" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.8.2">Exercise 1.8.2</h3>
-<p>Using the vector <code>sales &lt;- c(120, 85, 200, 340, 95, 180, 420, 60, 275, 150)</code>, extract all values that are between 100 and 300 (inclusive).</p>
+<section id="exercise-1.5.2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.5.2">Exercise 1.5.2</h3>
+<p>In your script, write code that computes and prints the result of: 1. 17 modulo 5 (the remainder when 17 is divided by 5) 2. Integer division of 17 by 5 3. 2 raised to the power of 10</p>
+<p>Run each line individually using <code>Ctrl+Enter</code> (Windows) or <code>Cmd+Enter</code> (Mac).</p>
+<p>(<em>Hint</em>: the modulo operator in Python is <code>%</code>, integer division is <code>//</code>, and the power operator is <code>**</code>.)</p>
 <details>
 <summary>
 Solution
 </summary>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sales <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">120</span>, <span class="dv">85</span>, <span class="dv">200</span>, <span class="dv">340</span>, <span class="dv">95</span>, <span class="dv">180</span>, <span class="dv">420</span>, <span class="dv">60</span>, <span class="dv">275</span>, <span class="dv">150</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We can do this in two steps with what we have learned so far:</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>sales2 <span class="ot">&lt;-</span> sales[sales <span class="sc">&gt;=</span> <span class="dv">100</span>]</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>sales2[sales2 <span class="sc">&lt;=</span> <span class="dv">300</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 120 200 180 275 150</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># But it is easier to use a logical "AND", which we will learn in the next topic:</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sales[sales <span class="sc">&gt;=</span> <span class="dv">100</span> <span class="sc">&amp;</span> sales <span class="sc">&lt;=</span> <span class="dv">300</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 120 200 180 275 150</code></pre>
-</div>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Modulo</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">17</span> <span class="op">%</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>2</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Integer division</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">17</span> <span class="op">//</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>3</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Power</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">2</span> <span class="op">**</span> <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>1024</code></pre>
+Check: 5 × 3 + 2 = 17 ✓ and 2¹⁰ = 1024 ✓
 </details>
+<hr>
 </section>
-<section id="exercise-1.8.3" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.8.3">Exercise 1.8.3</h3>
-<p>Replace all values in <code>sales</code> that are below 100 with 100 (a “floor” operation). Print the result.</p>
+<section id="exercise-1.5.3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.5.3">Exercise 1.5.3</h3>
+<p>Add the following three lines to your script, then run all three lines at once by highlighting them and pressing <code>Ctrl+Enter</code> / <code>Cmd+Enter</code>. Note what appears in the console. Then wrap each expression in <code>print()</code> and run them again. What changes?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="op">+</span> <span class="dv">5</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="op">*</span> <span class="dv">5</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="op">-</span> <span class="dv">5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details>
 <summary>
 Solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sales[sales <span class="sc">&lt;</span> <span class="dv">100</span>] <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sales</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>[1] 120 100 200 340 100 180 420 100 275 150</code></pre>
-<p>Alternatively, you can use <code>pmax(sales, 100)</code> which returns the element-wise maximum of <code>sales</code> and 100.</p>
+<p>Without <code>print()</code>, only the result of the last expression (<code>5</code>) appears in the console. With <code>print()</code>, all three results are shown:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">+</span> <span class="dv">5</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">*</span> <span class="dv">5</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">-</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>15
+50
+5</code></pre>
+In a script, Python only displays the last expression automatically. Use <code>print()</code> whenever you want output to appear explicitly.
 </details>
+<hr>
 </section>
-<section id="exercise-1.8.4" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.8.4">Exercise 1.8.4</h3>
-<p>Given:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">2</span>, <span class="dv">7</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Use <code>sort()</code> and <code>order()</code> on <code>x</code>. What does each return? How are they different?</p>
+<section id="exercise-1.5.4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.5.4">Exercise 1.5.4</h3>
+<p>Introduce a deliberate error into your script by writing the following line and running it. Read the error message carefully: what type of error is it, and what does it tell you? Then fix the line so it runs correctly.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">/</span> )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details>
 <summary>
 Solution
 </summary>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">2</span>, <span class="dv">7</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 3 5 7 8 9</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">order</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4 6 2 1 7 3 5</code></pre>
-</div>
-</div>
-<p><code>sort(x)</code> returns the values in sorted order. <code>order(x)</code> returns the <em>positions</em> that would sort the vector: the 4th element (1) is smallest, the 6th element (2) is next, etc.</p>
-<p>You can use <code>order()</code> to sort one vector by another: <code>x[order(x)]</code> is the same as <code>sort(x)</code>.</p>
+<p>Running the line produces:</p>
+<pre><code>SyntaxError: invalid syntax</code></pre>
+<p>Python cannot parse the expression because it is incomplete — the <code>/</code> operator is missing its right-hand operand. The fix is to complete the expression:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">/</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>5</code></pre>
+<code>SyntaxError</code> means Python could not understand the code at all — it never even tried to run it.
 </details>
+<hr>
 </section>
-<section id="exercise-1.8.5" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.8.5">Exercise 1.8.5</h3>
-<p>What does the following code return? Think carefully before running it.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>x[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>)] <span class="sc">*</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  2  4  8 12 16 18 20</code></pre>
-</div>
-</div>
+<section id="exercise-1.5.5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.5.5">Exercise 1.5.5</h3>
+<p>Run your entire script in one go using the play button or <code>Ctrl+Shift+Enter</code> / <code>Cmd+Shift+Enter</code>. Confirm that all output appears as expected. Then add a comment above each block of code in your script describing what it does.</p>
 <details>
 <summary>
 Solution
 </summary>
-<p>x &lt;- 1:10 x[-c(3, 5, 7)] * 2</p>
-<p><code>x[-c(3, 5, 7)]</code> removes elements at positions 3, 5, and 7, giving <code>c(1, 2, 4, 6, 8, 9, 10)</code>. Multiplying by 2 gives <code>c(2, 4, 8, 12, 16, 18, 20)</code>.</p>
+<p>Your finished script should look something like this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># exercises_topic1.py</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Author: [Your name]</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Date:   [Today's date]</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Topic 1 exercises for SKL401</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Modulo, integer division, and power</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">17</span> <span class="op">%</span> <span class="dv">5</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">17</span> <span class="op">//</span> <span class="dv">5</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">2</span> <span class="op">**</span> <span class="dv">10</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Running multiple lines — print() makes all results visible</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">+</span> <span class="dv">5</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">*</span> <span class="dv">5</span>)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">10</span> <span class="op">-</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Running the full script should produce:</p>
+<pre><code>2
+3
+1024
+15
+50
+5</code></pre>
+Getting into the habit of commenting your code — even simple scripts like this — makes it much easier to understand later.
 </details>
 
 
@@ -840,13 +840,13 @@ Solution
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../01-getting-started-and-working-effectively/01-07-vectors.html" class="pagination-link" aria-label="1.7 Vectors">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1.7 Vectors</span></span>
+      <a href="../01-getting-started-and-working-effectively/01-04-files-folders-paths.html" class="pagination-link" aria-label="1.4 Files, Folders and Paths">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1.4 Files, Folders and Paths</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../01-getting-started-and-working-effectively/01-09-data-frames.html" class="pagination-link" aria-label="1.9 Data Frames">
-        <span class="nav-page-text"><span class="chapter-title">1.9 Data Frames</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../01-getting-started-and-working-effectively/01-06-packages.html" class="pagination-link" aria-label="1.6 Installing and Importing Packages">
+        <span class="nav-page-text"><span class="chapter-title">1.6 Installing and Importing Packages</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1,0 +1,168 @@
+# Writing and running your first script
+
+We write our first Python script, learn how to run code line by line and in bulk, and discuss how to read error messages.
+
+{{< video https://vimeo.com/1194354317/2249c6ea0a?fl=ml&fe=ec >}}
+
+```python
+# My first Python script
+# SKL401 - Getting started
+# Author: Isabel Hovdahl
+
+# Print basic arithmetic
+print(2 + 2)
+print(10 / 5)
+print(2 ** 8)    # ** is the power operator in Python
+```
+
+## Exercises
+
+### Exercise 1.5.1
+Create a new script file called `exercises_topic1.py` in your `scripts/` folder. At the top, write a comment header with your name, today's date, and a brief description of what the file contains. Save the file.
+
+<details>
+<summary>Solution</summary>
+
+```python
+# exercises_topic1.py
+# Author: [Your name]
+# Date:   [Today's date]
+# Topic 1 exercises for SKL401
+```
+Save as `scripts/exercises_topic1.py`.
+</details>
+
+---
+
+### Exercise 1.5.2
+In your script, write code that computes and prints the result of:
+1. 17 modulo 5 (the remainder when 17 is divided by 5)
+2. Integer division of 17 by 5
+3. 2 raised to the power of 10
+
+Run each line individually using `Ctrl+Enter` (Windows) or `Cmd+Enter` (Mac).
+
+(_Hint_: the modulo operator in Python is `%`, integer division is `//`, and the power operator is `**`.)
+
+<details>
+<summary>Solution</summary>
+
+```python
+# 1. Modulo
+print(17 % 5)
+```
+```
+2
+```
+```python
+# 2. Integer division
+print(17 // 5)
+```
+```
+3
+```
+```python
+# 3. Power
+print(2 ** 10)
+```
+```
+1024
+```
+Check: 5 × 3 + 2 = 17 ✓ and 2¹⁰ = 1024 ✓
+</details>
+
+---
+
+### Exercise 1.5.3
+Add the following three lines to your script, then run all three lines at once by highlighting them and pressing `Ctrl+Enter` / `Cmd+Enter`. Note what appears in the
+console. Then wrap each expression in `print()` and run them again. What changes?
+
+```python
+10 + 5
+10 * 5
+10 - 5
+```
+
+<details>
+<summary>Solution</summary>
+
+Without `print()`, only the result of the last expression (`5`) appears in the console. With `print()`, all three results are shown:
+
+```python
+print(10 + 5)
+print(10 * 5)
+print(10 - 5)
+```
+```
+15
+50
+5
+```
+In a script, Python only displays the last expression automatically. Use `print()` whenever you want output to appear explicitly.
+</details>
+
+---
+
+### Exercise 1.5.4
+Introduce a deliberate error into your script by writing the following line and running it. Read the error message carefully: what type of error is it, and what does it tell you? Then fix the line so it runs correctly.
+
+```python
+print(10 / )
+```
+
+<details>
+<summary>Solution</summary>
+
+Running the line produces:
+```
+SyntaxError: invalid syntax
+```
+Python cannot parse the expression because it is incomplete — the `/` operator is missing its right-hand operand. The fix is to complete the expression:
+
+```python
+print(10 / 2)
+```
+```
+5
+```
+`SyntaxError` means Python could not understand the code at all — it never even tried to run it.
+</details>
+
+---
+
+### Exercise 1.5.5
+Run your entire script in one go using the play button or `Ctrl+Shift+Enter` / `Cmd+Shift+Enter`. Confirm that all output appears as expected. Then add a comment above each block of code in your script describing what it does.
+
+<details>
+<summary>Solution</summary>
+
+Your finished script should look something like this:
+
+```python
+# exercises_topic1.py
+# Author: [Your name]
+# Date:   [Today's date]
+# Topic 1 exercises for SKL401
+
+# Modulo, integer division, and power
+print(17 % 5)
+print(17 // 5)
+print(2 ** 10)
+
+# Running multiple lines — print() makes all results visible
+print(10 + 5)
+print(10 * 5)
+print(10 - 5)
+```
+
+Running the full script should produce:
+```
+2
+3
+1024
+15
+50
+5
+```
+Getting into the habit of commenting your code — even simple scripts like this — makes it much easier to understand later.
+</details>

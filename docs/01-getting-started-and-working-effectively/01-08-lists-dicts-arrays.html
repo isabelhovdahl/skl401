@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Packages – SKL401 — Introduction to Python</title>
+<title>Lists, dictionaries and arrays – SKL401 — Introduction to Python</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,8 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../01-getting-started-and-working-effectively/01-06-variables-and-types.html" rel="next">
-<link href="../01-getting-started-and-working-effectively/01-04-writing-scripts.html" rel="prev">
+<link href="../01-getting-started-and-working-effectively/01-09-indexing-subsetting.html" rel="next">
+<link href="../01-getting-started-and-working-effectively/01-07-variables-data-types.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -120,7 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-04-writing-scripts.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-05-packages.html"><span class="chapter-title">1.5 Packages</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-02-installing-python.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-08-lists-dicts-arrays.html"><span class="chapter-title">1.8 Lists, Dictionaries and Arrays</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -162,37 +162,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-04-writing-scripts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.4 Writing Scripts</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-02-installing-python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.2 Installing Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-05-packages.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">1.5 Packages</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3 Installing and Touring Positron</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-06-variables-and-types.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6 Variables and Types</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-04-files-folders-paths.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.4 Files, Folders and Paths</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-07-vectors.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.7 Vectors</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Writing and Running Your First Script</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-08-indexing-and-subsetting.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.8 Indexing and Subsetting</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-06-packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6 Installing and Importing Packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-09-data-frames.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.9 Data Frames</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-07-variables-data-types.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.7 Variables and Basic Data Types</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-10-basic-data-frame-manipulation-and-the-pipe.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.10 The pipe and basic operations</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-08-lists-dicts-arrays.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">1.8 Lists, Dictionaries and Arrays</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-09-indexing-subsetting.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.9 Indexing and Subsetting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-10-dataframes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.10 DataFrames: Your Most Important Object</span></a>
   </div>
 </li>
       </ul>
@@ -273,11 +283,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
-  <li><a href="#exercise-1.5.1" id="toc-exercise-1.5.1" class="nav-link" data-scroll-target="#exercise-1.5.1">Exercise 1.5.1</a></li>
-  <li><a href="#exercise-1.5.2" id="toc-exercise-1.5.2" class="nav-link" data-scroll-target="#exercise-1.5.2">Exercise 1.5.2</a></li>
-  <li><a href="#exercise-1.5.3" id="toc-exercise-1.5.3" class="nav-link" data-scroll-target="#exercise-1.5.3">Exercise 1.5.3</a></li>
-  <li><a href="#exercise-1.5.4" id="toc-exercise-1.5.4" class="nav-link" data-scroll-target="#exercise-1.5.4">Exercise 1.5.4</a></li>
-  <li><a href="#exercise-1.5.5" id="toc-exercise-1.5.5" class="nav-link" data-scroll-target="#exercise-1.5.5">Exercise 1.5.5</a></li>
+  <li><a href="#exercise-1.8.1" id="toc-exercise-1.8.1" class="nav-link" data-scroll-target="#exercise-1.8.1">Exercise 1.8.1</a></li>
+  <li><a href="#exercise-1.8.2" id="toc-exercise-1.8.2" class="nav-link" data-scroll-target="#exercise-1.8.2">Exercise 1.8.2</a></li>
+  <li><a href="#exercise-1.8.3" id="toc-exercise-1.8.3" class="nav-link" data-scroll-target="#exercise-1.8.3">Exercise 1.8.3</a></li>
+  <li><a href="#exercise-1.8.4" id="toc-exercise-1.8.4" class="nav-link" data-scroll-target="#exercise-1.8.4">Exercise 1.8.4</a></li>
+  <li><a href="#exercise-1.8.5" id="toc-exercise-1.8.5" class="nav-link" data-scroll-target="#exercise-1.8.5">Exercise 1.8.5</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -285,9 +295,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-04-writing-scripts.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-05-packages.html"><span class="chapter-title">1.5 Packages</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-02-installing-python.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-08-lists-dicts-arrays.html"><span class="chapter-title">1.8 Lists, Dictionaries and Arrays</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Packages</span></h1>
+<h1 class="title"><span class="chapter-title">Lists, dictionaries and arrays</span></h1>
 </div>
 
 
@@ -304,132 +314,189 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1198721978?h=d3ec236a6b" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>R’s power comes from its ecosystem of packages. This video shows how to install and load packages and introduces the tidyverse collection we will use throughout the course.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading a package that is installed on your machine, put on top of your script.</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Installing other packages, don't put this in your script</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"readxl"</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"gapminder"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"nycflights"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"stargazer"</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"broom"</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"patchwork"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<p>We introduce three ways of storing collections of values in Python: lists for ordered sequences, dictionaries for key-value pairs, and numpy arrays for numerical computation.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1194660313?h=bce18a96e7" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># A list of strings</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>products <span class="op">=</span> [<span class="st">"coffee"</span>, <span class="st">"tea"</span>, <span class="st">"juice"</span>, <span class="st">"sandwich"</span>]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(products))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Print number of items with len()</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(products))  </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add item with append()</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>products.append(<span class="st">"cookie"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># A dictionary describing one product</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>product <span class="op">=</span> {</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>: <span class="st">"coffee"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"price"</span>: <span class="fl">29.90</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"in_stock"</span>: <span class="va">True</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(product)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(product))</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract keys and values from a dict</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(product.keys())</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(product.values())</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Add new key</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>product[<span class="st">"on_sale"</span>] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(product)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Update existing key</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>product[<span class="st">"in_stock"</span>] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(product)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a vector with array() from numpy</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>prices_lst <span class="op">=</span> [<span class="fl">29.9</span>, <span class="fl">35.0</span>, <span class="fl">12.5</span>, <span class="fl">22.7</span>]</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>prices_array <span class="op">=</span> np.array(prices_lst)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prices_array)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Duplicate all items in list</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prices_lst <span class="op">*</span> <span class="dv">2</span>)</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Double  all numbers in array</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prices_array <span class="op">*</span> <span class="dv">2</span>)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiply two arrays</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>quantities <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">2</span>])</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>revenue <span class="op">=</span> prices_array <span class="op">*</span> quantities</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(revenue)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
-<section id="exercise-1.5.1" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.5.1">Exercise 1.5.1</h3>
-<p>Load the tidyverse with <code>library(tidyverse)</code>. What packages are listed as “Attaching core tidyverse packages” in the message?</p>
+<section id="exercise-1.8.1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.8.1">Exercise 1.8.1</h3>
+<p>Add a new comment header for Topic 1.8 in your <code>exercises_topic1.py</code> script. Then create a list of five country names of your choice. Print the list, its length, and then append one more country to it and print the updated list.</p>
 <details>
 <summary>
 Solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>── Attaching core tidyverse packages ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2</code></pre>
-<p>The core packages are: dplyr, forcats, ggplot2, lubridate, purrr, readr, stringr, tibble, and tidyr. (The exact versions will depend on when you installed.)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ── 1.8 Lists, dictionaries, and arrays ───────────────────────────────────────</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [<span class="st">"Norway"</span>, <span class="st">"Germany"</span>, <span class="st">"Brazil"</span>, <span class="st">"Japan"</span>, <span class="st">"Nigeria"</span>]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(countries)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(countries))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>countries.append(<span class="st">"Australia"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(countries)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>['Norway', 'Germany', 'Brazil', 'Japan', 'Nigeria']
+5
+['Norway', 'Germany', 'Brazil', 'Japan', 'Nigeria', 'Australia']</code></pre>
 </details>
+<hr>
 </section>
-<section id="exercise-1.5.2" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.5.2">Exercise 1.5.2</h3>
-<p>What happens if you try to use a function from a package you have not loaded? Run the following <em>without</em> loading <code>readxl</code> first:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">"test.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>What error do you get? Now load the package and explain why the error would go away (you do not need an actual Excel file).</p>
+<section id="exercise-1.8.2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.8.2">Exercise 1.8.2</h3>
+<p>Create a dictionary that describes a country of your choice. It should contain at least four keys: the country name, its continent, its population, and its GDP per capita. Then: 1. Print the dictionary. 2. Print only the keys. 3. Print only the values. 4. Add a new key <code>"in_eu"</code> with an appropriate boolean value and print the updated dictionary.</p>
 <details>
 <summary>
 Solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_excel</span>(<span class="st">"test.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>Error in read_excel("test.xlsx") : could not find function "read_excel"</code></pre>
-<p>The error says R cannot find the function. This is because <code>read_excel</code> lives in the <code>readxl</code> package, which has not been loaded. After running <code>library(readxl)</code>, R knows where to find the function. (You would then get a different error about the file not existing, which is expected since we have no such file.)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>country <span class="op">=</span> {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>:          <span class="st">"Norway"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"continent"</span>:     <span class="st">"Europe"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"population"</span>:    <span class="dv">5_400_000</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gdp_per_cap"</span>:   <span class="dv">82500</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Print the dictionary</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Keys only</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country.keys())</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Values only</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country.values())</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Add new key</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>country[<span class="st">"in_eu"</span>] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>{'name': 'Norway', 'continent': 'Europe', 'population': 5400000, 'gdp_per_cap': 82500}
+dict_keys(['name', 'continent', 'population', 'gdp_per_cap'])
+dict_values(['Norway', 'Europe', 5400000, 82500])
+{'name': 'Norway', 'continent': 'Europe', 'population': 5400000, 'gdp_per_cap': 82500, 'in_eu': False}</code></pre>
 </details>
+<hr>
 </section>
-<section id="exercise-1.5.3" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.5.3">Exercise 1.5.3</h3>
-<p>Run <code>installed.packages()</code> inside of the <code>nrow()</code>-function to count how many packages are installed on your system:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">installed.packages</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="exercise-1.8.3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.8.3">Exercise 1.8.3</h3>
+<p>Create a numpy array of six product prices of your choice. Then: 1. Compute and print the total, mean, and maximum price. 2. Apply a 10% discount to all prices in a single operation and print the result. 3. Create a second array of quantities (one per product) and compute the revenue for each product. Print the result.</p>
 <details>
 <summary>
 Solution
 </summary>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">installed.packages</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 130</code></pre>
-</div>
-</div>
-<p>Your number wil probably be differenty. The tidyverse alone installs many other packages upon which it depends, so even a fresh R installation with tidyverse will have 100+ packages.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>prices    <span class="op">=</span> np.array([<span class="fl">29.90</span>, <span class="fl">35.00</span>, <span class="fl">12.50</span>, <span class="fl">48.00</span>, <span class="fl">22.75</span>, <span class="fl">9.90</span>])</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>quantities <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">8</span>, <span class="dv">4</span>])</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Summary statistics</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prices.<span class="bu">sum</span>())</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prices.mean())</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prices.<span class="bu">max</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>158.05
+26.341666666666665
+48.0</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Apply 10% discount</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>discounted <span class="op">=</span> prices <span class="op">*</span> <span class="fl">0.90</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(discounted)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>[26.91 31.5  11.25 43.2  20.475  8.91]</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Revenue per product</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>revenue <span class="op">=</span> prices <span class="op">*</span> quantities</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(revenue)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>[ 89.7  175.    0.   96.  182.   39.6]</code></pre>
 </details>
+<hr>
 </section>
-<section id="exercise-1.5.4" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.5.4">Exercise 1.5.4</h3>
-<p>The function <code>sessionInfo()</code> prints information about your R session, including which packages are loaded. Run it. Can you identify the “attached” packages (those you loaded explicitly with <code>library()</code>) versus the “loaded via a namespace” packages (dependencies loaded automatically)?</p>
+<section id="exercise-1.8.4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.8.4">Exercise 1.8.4</h3>
+<p>The code below attempts to perform arithmetic on a list. Run it and read the error message. Then fix it by converting the list to a numpy array and confirm that the operation works as expected.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>temperatures <span class="op">=</span> [<span class="fl">12.5</span>, <span class="fl">18.3</span>, <span class="fl">9.7</span>, <span class="fl">22.1</span>, <span class="fl">15.0</span>]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(temperatures <span class="op">*</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details>
 <summary>
 Solution
 </summary>
-<p>The output will contain a section like:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>R version 4.5.1 (2025-06-13 ucrt)
-Platform: x86_64-w64-mingw32/x64
-Running under: Windows 11 x64 (build 26100)
-
-Matrix products: default
-  LAPACK version 3.12.1
-
-locale:
-[1] LC_COLLATE=Norwegian Bokmål_Norway.utf8 
-[2] LC_CTYPE=Norwegian Bokmål_Norway.utf8   
-[3] LC_MONETARY=Norwegian Bokmål_Norway.utf8
-[4] LC_NUMERIC=C                            
-[5] LC_TIME=Norwegian Bokmål_Norway.utf8    
-
-time zone: Europe/Oslo
-tzcode source: internal
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
-
-loaded via a namespace (and not attached):
- [1] compiler_4.5.1  fastmap_1.2.0   cli_3.6.5       tools_4.5.1    
- [5] htmltools_0.5.9 otel_0.2.0      rmarkdown_2.31  knitr_1.51     
- [9] jsonlite_2.0.0  xfun_0.58       digest_0.6.39   rlang_1.1.7    
-[13] evaluate_1.0.5 </code></pre>
-</div>
-</div>
-<p>“Attached” packages are those whose functions are directly available by name. “Loaded via namespace” packages are available internally (other packages can use them) but their functions are not directly on the search path — you would need to use <code>package::function()</code> to call them.</p>
+<p>Running the code does not produce an error, but it does not do what we want either — multiplying a list by 2 repeats the list rather than doubling each value:</p>
+<pre><code>[12.5, 18.3, 9.7, 22.1, 15.0, 12.5, 18.3, 9.7, 22.1, 15.0]</code></pre>
+<p>Converting to a numpy array gives the expected element-wise result:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>temperatures <span class="op">=</span> np.array([<span class="fl">12.5</span>, <span class="fl">18.3</span>, <span class="fl">9.7</span>, <span class="fl">22.1</span>, <span class="fl">15.0</span>])</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(temperatures <span class="op">*</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>[25.  36.6 19.4 44.2 30. ]</code></pre>
+This is one of the most common sources of confusion when moving between plain Python lists and numpy arrays — they look similar but behave very differently under arithmetic operations.
 </details>
+<hr>
 </section>
-<section id="exercise-1.5.5" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.5.5">Exercise 1.5.5</h3>
-<p>Try installing a package that does not exist:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"this_package_does_not_exist_xyz"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>What does the error/warning message say? Understanding installation error messages is useful for diagnosing real problems (typos in package names, network issues, etc.).</p>
+<section id="exercise-1.8.5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.8.5">Exercise 1.8.5</h3>
+<p>Create a list and a numpy array that both contain the same five integers. Verify that the following operations behave differently depending on whether you use a list or an array, and explain the difference in each case: 1. Adding the collection to itself (i.e.&nbsp;<code>x + x</code>). 2. Checking the sum using <code>sum()</code>.</p>
 <details>
 <summary>
 Solution
 </summary>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"this_package_does_not_exist_xyz"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Installing package into 'C:/Users/s14754/AppData/Local/R/win-library/4.5'
-(as 'lib' is unspecified)</code></pre>
-</div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in `contrib.url()`:
-! trying to use CRAN without setting a mirror</code></pre>
-</div>
-</div>
-<p>The message says the package is “not available”. In practice, if you get this message for a real package, the most common causes are: (1) a typo in the name, (2) the package was removed from CRAN, or (3) a network connectivity problem.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>numbers_list  <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>numbers_array <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Adding to itself</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(numbers_list  <span class="op">+</span> numbers_list)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(numbers_array <span class="op">+</span> numbers_array)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>[1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
+[ 2  4  6  8 10]</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. sum()</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sum</span>(numbers_list))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sum</span>(numbers_array))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>15
+15</code></pre>
+For operation 1, <code>+</code> on two lists concatenates them (appends one after the other), whereas <code>+</code> on two arrays adds them element-wise, just like vector addition. For operation 2, Python’s built-in <code>sum()</code> works on both and gives the same result — but for arrays it is better practice to use <code>numbers_array.sum()</code>, which is faster and more readable.
 </details>
 
 
@@ -839,13 +906,13 @@ Solution
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../01-getting-started-and-working-effectively/01-04-writing-scripts.html" class="pagination-link" aria-label="1.4 Writing Scripts">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1.4 Writing Scripts</span></span>
+      <a href="../01-getting-started-and-working-effectively/01-07-variables-data-types.html" class="pagination-link" aria-label="1.7 Variables and Basic Data Types">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1.7 Variables and Basic Data Types</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../01-getting-started-and-working-effectively/01-06-variables-and-types.html" class="pagination-link" aria-label="1.6 Variables and Types">
-        <span class="nav-page-text"><span class="chapter-title">1.6 Variables and Types</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../01-getting-started-and-working-effectively/01-09-indexing-subsetting.html" class="pagination-link" aria-label="1.9 Indexing and Subsetting">
+        <span class="nav-page-text"><span class="chapter-title">1.9 Indexing and Subsetting</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
