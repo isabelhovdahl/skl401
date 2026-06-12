@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "SKL402 — Introduction to R",
+    "title": "SKL401 — Introduction to Python",
     "section": "",
-    "text": "Welcome\nWelcome to SKL402 — Introduction to R. This is a digital seminar designed as a fundamental skills module for the Master in Economics and Business Administration (MØA) at the Norwegian School of Economics. The course will take you from zero to a working knowledge of R programming, covering everything from installation and basic programming to data wrangling, visualisation, and reporting. The content of the course has been selected to serve as a prerequisite for other courses at NHH that use R as their programming language. The aim is not to make you a master of R, but to bring you to a working level — operational enough to quickly find your footing and take on substantial analytical tasks in other courses across the programme.\nR is a free, open-source programming language built specifically for statistical computing and data analysis. First released in 1993 and maintained by a global community, it has become one of the most widely used tools in economics, finance, and the social sciences. Its strength lies in a rich ecosystem of up-to-date packages that can be easily installed on top of the language itself and that extend it to almost any analytical task. Throughout this course we will explore some of the most central and user-friendly third-party packages for working with, analysing, and visualising data. Because R is both powerful and freely available, it is widely used in science, business, the public sector, and beyond. Think of R as the Swiss Army knife of data analysis that can get you out of just about any tight spot, as long as you know how to use it.\nVideo will be embedded here.",
+    "text": "Welcome\nWelcome to SKL401 — Introduction to Python. This is a digital seminar designed as a fundamental skills module for the Master in Economics and Business Administration (MØA) at NHH. The course covers everything from installation and basic programming to data wrangling, visualisation, and reporting. The content has been selected to serve as a prerequisite for other courses at NHH that use Python as their programming language. The goal is that by the end of the course you should feel comfortable enough with Python to use it as an analytical tool for basic data handling and visualization.\nPython is a free, open-source programming language known for its clarity and versatility. First released in 1991, it has grown into one of the most widely used programming languages in the world, with particularly strong adoption in data science, economics, and finance. Its strength lies in a rich ecosystem of packages that extend the language to almost any analytical task. Throughout this course we will explore some of the most central and user-friendly packages for working with, analysing, and visualising data such as pandas, matplotlib, and statsmodels.\nVideo will be embedded here.",
     "crumbs": [
       "Welcome"
     ]
@@ -12,9 +12,9 @@
   {
     "objectID": "index.html#course-overview",
     "href": "index.html#course-overview",
-    "title": "SKL402 — Introduction to R",
+    "title": "SKL401 — Introduction to Python",
     "section": "Course overview",
-    "text": "Course overview\nThe course is organised into five topics:\n\nGetting Started and Working Effectively — Installing R, navigating files, writing scripts, and understanding basic data structures.\nProgramming Fundamentals — Logical operators, control flow, loops, and writing your own functions.\nData Wrangling — Importing, cleaning, and transforming data with dplyr.\nGraphics — Building publication-ready visualisations with ggplot2.\nAnalysis, Reporting, and Wrap-up — Linear regression, exporting results, Quarto reports, debugging, and using AI responsibly.",
+    "text": "Course overview\nThe course is organised into five topics:\n\nGetting Started and Working Effectively — Installing Python, navigating files, writing scripts, and understanding basic data structures.\nProgramming Fundamentals — Logical operators, control flow, loops, and writing your own functions.\nData Wrangling with pandas — Importing, cleaning, and transforming data with pandas.\nGraphics with matplotlib — Building clear and informative visualisations with matplotlib.\nAnalysis, Reporting, and Becoming Self-Sufficient — Linear regression, exporting results, working with Jupyter Notebooks, debugging, and using AI responsibly.",
     "crumbs": [
       "Welcome"
     ]
@@ -22,7 +22,7 @@
   {
     "objectID": "index.html#how-the-course-works",
     "href": "index.html#how-the-course-works",
-    "title": "SKL402 — Introduction to R",
+    "title": "SKL401 — Introduction to Python",
     "section": "How the course works",
     "text": "How the course works\nThe material is presented as short video lessons, each covering a single topic. The videos are followed by a series of programming problems of varying difficulty, and it is crucial that you spend time on these problems in order to develop your own muscle memory and to get a sense of where you are in your own learning process. The course material is self-contained, which means that you can start learning whenever and wherever you want.",
     "crumbs": [
@@ -32,9 +32,9 @@
   {
     "objectID": "index.html#using-artificial-intelligence-while-learning",
     "href": "index.html#using-artificial-intelligence-while-learning",
-    "title": "SKL402 — Introduction to R",
+    "title": "SKL401 — Introduction to Python",
     "section": "Using Artificial Intelligence while learning",
-    "text": "Using Artificial Intelligence while learning\nThere is an important difference between learning to program and programming efficiently as a professional. Once you know a language well, AI tools can be a powerful way to write code faster and handle routine work. But that is not what this course is about. Here, the goal is for you to build real understaning and skills, and that only comes from working through problems yourself, making mistakes, and using your own brain to figure out why something does or does not work.\nFor that reason, you should not lean on AI to write your code for you while you are learning. Used carelessly, it deprives you of the incredibly valuable, but sometimes uncomfortable struggle that builds lasting skill. Used carefully, however, AI can be a valuable learning companion: a patient tutor to help you make sense of a confusing error message, talk through a difficult problem, or explain an unfamiliar concept in a different way. The distinction is whether the AI is doing the thinking for you, or helping you do your own thinking in a better way.\nAll students at NHH have access to a privacy-friendly AI assistant through Sikt KI, which you are welcome to use as a learning companion in this spirit.",
+    "text": "Using Artificial Intelligence while learning\nThere is an important difference between learning to program and programming efficiently as a professional. Once you know a language well, AI tools can be a powerful way to write code faster and handle routine work. But while you are still learning, the picture is more complicated. The struggle of working through a problem yourself — including making mistakes and figuring out why — is precisely what builds lasting skill. Offloading that struggle to AI short-circuits the process.\nThat said, AI can be a genuinely useful learning companion when used with care. During this course, you should follow these rules:\n✅ Use AI to:\n\n💬 Explain an error message you don’t understand\n🔍 Clarify a concept that hasn’t clicked after reading the material\n🤔 Talk through why your approach isn’t working, without just asking for the solution\n✔️ Check your understanding after you’ve already solved a problem yourself\n\n🚫 Avoid using AI to:\n\n💻 Write code on your behalf before you’ve made a serious attempt\n📝 Produce solutions to the practice problems — these exist for your benefit\n📖 Substitute for reading documentation or course material\n\nNote that all students at NHH have access to a privacy-friendly AI assistant through Sikt KI, which you are welcome to use as a learning companion in this spirit.",
     "crumbs": [
       "Welcome"
     ]
@@ -42,7 +42,7 @@
   {
     "objectID": "index.html#where-to-get-up-to-date-information",
     "href": "index.html#where-to-get-up-to-date-information",
-    "title": "SKL402 — Introduction to R",
+    "title": "SKL401 — Introduction to Python",
     "section": "Where to get up-to-date information",
     "text": "Where to get up-to-date information\nThis web-page only contains the contents of the course, in the form of video lessons and accompanying problem sets. For semester-specific information such as announcements, dates and locations for physical learning sessions, you should consult the course’s Canvas page, to which you will gain access once you have completed your semester registration.\nFor exam dates, see the official schedule information from NHH.",
     "crumbs": [
@@ -201,6 +201,50 @@
     "crumbs": [
       "1 - Getting Started and Working Effectively",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>1.10 The pipe and basic operations</span>"
+    ]
+  },
+  {
+    "objectID": "02-programming-fundamentals/02-01-placeholder.html",
+    "href": "02-programming-fundamentals/02-01-placeholder.html",
+    "title": "Programming Fundamentals",
+    "section": "",
+    "text": "Content placeholder.",
+    "crumbs": [
+      "2 - Programming Fundamentals",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>2.1 Placeholder</span>"
+    ]
+  },
+  {
+    "objectID": "03-data-wrangling/03-01-placeholder.html",
+    "href": "03-data-wrangling/03-01-placeholder.html",
+    "title": "Data Wrangling",
+    "section": "",
+    "text": "Content placeholder.",
+    "crumbs": [
+      "3 - Data Wrangling",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>3.1 Placeholder</span>"
+    ]
+  },
+  {
+    "objectID": "04-graphics/04-01-placeholder.html",
+    "href": "04-graphics/04-01-placeholder.html",
+    "title": "Graphics",
+    "section": "",
+    "text": "Content placeholder.",
+    "crumbs": [
+      "4 - Graphics",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>4.1 Placeholder</span>"
+    ]
+  },
+  {
+    "objectID": "05-analysis-reporting-and-wrap-up/05-01-placeholder.html",
+    "href": "05-analysis-reporting-and-wrap-up/05-01-placeholder.html",
+    "title": "Analysis, Reporting, and Wrap-up",
+    "section": "",
+    "text": "Content placeholder.",
+    "crumbs": [
+      "5 - Analysis, Reporting, and Wrap-up",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>5.1 Placeholder</span>"
     ]
   }
 ]

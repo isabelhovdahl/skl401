@@ -3,8 +3,8 @@ project:
   output-dir: docs
 
 book:
-  title: "SKL402 — Introduction to R"
-  author: "Håkon Otneim, Department of Business and Management Science, NHH"
+  title: "SKL401 — Introduction to Python"
+  author: "Isabel Hovdahl, Department of Business and Management Science, NHH"
   chapters:
     - index.qmd
     - part: "1 - Getting Started and Working Effectively"
