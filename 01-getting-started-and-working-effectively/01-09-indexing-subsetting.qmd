@@ -1,6 +1,6 @@
 ## Indexing and subsetting
 
-We cover how to extract individual elements and slices from lists and strings using Python's zero-based indexing system.
+We cover how to extract individual elements and slices from lists and strings using Python's zero-based indexing system, and how to retrieve values from a dictionary using its keys.
 
 {{< video  https://vimeo.com/1194660309/d33b534cee?fl=ml&fe=ec >}}
 
@@ -56,211 +56,202 @@ print(products)
 ## Exercises
 
 ### Exercise 1.9.1
-Add a new comment header for Topic 1.9 in your `exercises_topic1.py` script. Then create
-the list below and retrieve the following elements using indexing:
-1. The first element.
-2. The third element.
-3. The last element using negative indexing.
-4. The second-to-last element using negative indexing.
+Without running the code, predict the output of each `print()` statement. Then run the code to check your answers.
 
 ```python
-cities = ["Oslo", "Bergen", "Trondheim", "Stavanger", "Tromsø", "Kristiansand"]
+countries = ["Norway", "Denmark", "Sweden", "Finland", "Iceland"]
+
+print(countries[0])
+print(countries[2])
+print(countries[-1])
+print(countries[-3])
 ```
 
 <details>
 <summary>Solution</summary>
 
-```python
-# ── 1.9 Indexing and subsetting ───────────────────────────────────────────────
-
-cities = ["Oslo", "Bergen", "Trondheim", "Stavanger", "Tromsø", "Kristiansand"]
-
-# 1. First element
-print(cities[0])
-
-# 2. Third element
-print(cities[2])
-
-# 3. Last element
-print(cities[-1])
-
-# 4. Second-to-last element
-print(cities[-2])
 ```
+Norway
+Sweden
+Iceland
+Sweden
 ```
-Oslo
-Trondheim
-Kristiansand
-Tromsø
-```
+A list of 5 elements has valid positions 0 through 4. Negative indexing counts from the end: `-1` is the last element, `-2` the second to last, and so on. Notice that both `countries[2]` and `countries[-3]` return `"Sweden"` — there is always both a positive and a negative index that point to the same element.
 </details>
 
 ---
 
 ### Exercise 1.9.2
-Using the same `cities` list, extract the following slices and print each result:
-1. The first three cities.
-2. The last three cities.
-3. Everything except the first and last city.
+Using the same `countries` list, extract the following slices and print each result. 
+
+1. The first three countries.
+
+2. The last three countries using negative indexing.
+
+3. Everything except the first and last country.
 
 <details>
 <summary>Solution</summary>
 
 ```python
-# 1. First three cities
-print(cities[:3])
+countries = ["Norway", "Denmark", "Sweden", "Finland", "Iceland"]
 
-# 2. Last three cities
-print(cities[-3:])
+# 1. First three
+print(countries[:3])
+
+# 2. Last three
+print(countries[-3:])
 
 # 3. Everything except first and last
-print(cities[1:-1])
+print(countries[1:-1])
 ```
 ```
-['Oslo', 'Bergen', 'Trondheim']
-['Stavanger', 'Tromsø', 'Kristiansand']
-['Bergen', 'Trondheim', 'Stavanger', 'Tromsø']
+['Norway', 'Denmark', 'Sweden']
+['Sweden', 'Finland', 'Iceland']
+['Denmark', 'Sweden', 'Finland']
 ```
+Remember that the stop index is always excluded in a slice. `countries[:3]` returns elements at positions 0, 1, and 2 — not 3. This is one of the most common sources of off-by-one errors in Python.
 </details>
 
 ---
 
 ### Exercise 1.9.3
-Create the dictionary below and retrieve the following values using their keys. Then add
-a new key `"language"` with the value `"Norwegian"` and print the updated dictionary.
+The code below shows that strings support the same indexing and slicing as lists. Run the first block and verify that it works as expected. Then run the second block and read the error message. Why does this fail when the equivalent operation on a list would work?
 
 ```python
-country = {
-    "name":        "Norway",
-    "capital":     "Oslo",
-    "population":  5_400_000,
-    "in_eu":       False,
-}
+# Block 1: reading from a string
+country = "Norway"
+
+print(country[0])
+print(country[-1])
+print(country[0:3])
 ```
 
-1. The capital city.
-2. The population.
-3. Try retrieving a key that does not exist, e.g. `"gdp_per_cap"`. What error do you get?
+```python
+# Block 2: trying to modify a string
+country[0] = "n"
+```
 
 <details>
 <summary>Solution</summary>
 
 ```python
-country = {
-    "name":        "Norway",
-    "capital":     "Oslo",
-    "population":  5_400_000,
-    "in_eu":       False,
-}
+# Block 1
+country = "Norway"
 
-# 1. Capital city
-print(country["capital"])
-
-# 2. Population
-print(country["population"])
-
-# 3. Non-existent key
-# print(country["gdp_per_cap"])
+print(country[0])
+print(country[-1])
+print(country[0:3])
 ```
 ```
-Oslo
-5400000
-```
-Attempting to access a key that does not exist raises a `KeyError`:
-```
-KeyError: 'gdp_per_cap'
+N
+y
+Nor
 ```
 ```python
-# Add new key
-country["language"] = "Norwegian"
-print(country)
+# Block 2
+country[0] = "n"
 ```
 ```
-{'name': 'Norway', 'capital': 'Oslo', 'population': 5400000, 'in_eu': False, 'language': 'Norwegian'}
+TypeError: 'str' object does not support item assignment
 ```
-Unlike lists, which raise an `IndexError` when you go out of bounds, dictionaries raise a
-`KeyError` when you try to access a key that does not exist. Both are signals that you are
-asking for something that is not there.
+Strings are **immutable** in Python — once created, their contents cannot be changed. You can read from a string using indexing and slicing, but you cannot modify individual characters in place. This is different from lists, where `countries[0] = "Sweden"` would work without any problem. If you need to modify a string, you have to create a new one — for example using `.replace()`: `country.replace("N", "n")` returns `"norway"` as a new string without changing the original.
 </details>
 
 ---
 
 ### Exercise 1.9.4
-Apply slicing to the string below to extract the following substrings and print each
-result:
-1. The first three characters.
-2. The last four characters using negative indexing.
-3. The word `"Python"` (characters 7 through 12).
+Run the code below and then answer the questions that follow.
 
 ```python
-text = "Hello, Python!"
+grades = [
+    ["Alice", 90, 85, 92],
+    ["Bob",   78, 81, 74],
+    ["Clara", 95, 88, 97],
+]
+
+student = {
+    "name":   "David",
+    "grades": [82, 79, 88],
+}
 ```
+
+1. Extract `"Alice"` from `grades`.
+
+2. Extract Clara's third grade (97) from `grades`.
+
+3. Extract David's name from `student`.
+
+4. Extract David's second grade (79) from `student`.
 
 <details>
 <summary>Solution</summary>
 
 ```python
-text = "Hello, Python!"
+# 1. "Alice" — first element of the first inner list
+print(grades[0][0])
 
-# 1. First three characters
-print(text[:3])
+# 2. Clara's third grade — third element of the third inner list
+print(grades[2][3])
 
-# 2. Last four characters
-print(text[-4:])
+# 3. David's name — access by key
+print(student["name"])
 
-# 3. The word "Python"
-print(text[7:13])
+# 4. David's second grade — access the list by key, then index into it
+print(student["grades"][1])
 ```
 ```
-Hel
-hon!
-Python
+Alice
+97
+David
+79
 ```
-Remember that the stop index in a slice is excluded, so to include the character at
-position 12 you must use 13 as the stop index.
+For nested lists, you chain two index operations: the first `[]` selects the inner list, and the second `[]` selects the element within it. The same logic applies to a list stored inside a dictionary — first retrieve the list using its key, then index into it.
 </details>
 
 ---
 
 ### Exercise 1.9.5
-The code below contains three common indexing mistakes. Identify and fix each one, and
-explain what was wrong.
+The code below contains four common indexing mistakes. Run each line, read the error message, and fix it.
 
 ```python
 products = ["coffee", "tea", "juice", "sandwich", "cookie"]
+info = {"name": "coffee", "price": 29.90, "in_stock": True}
 
-# 1. Retrieve the first element
+# 1. Get the first product
 print(products[1])
 
-# 2. Retrieve the last element
+# 2. Get the last product
 print(products[5])
 
-# 3. Retrieve the first three elements
+# 3. Get the first three products
 print(products[0:2])
+
+# 4. Get the price from the dictionary
+print(info["Prize"])
 ```
 
 <details>
 <summary>Solution</summary>
 
 ```python
-products = ["coffee", "tea", "juice", "sandwich", "cookie"]
-
 # 1. First element is at position 0, not 1
 print(products[0])
 
-# 2. The list has 5 elements (positions 0–4); position 5 does not exist
-print(products[-1])   # or products[4]
+# 2. Valid positions are 0–4; position 5 does not exist → IndexError
+print(products[-1])    # or products[4]
 
-# 3. The slice [0:2] only returns positions 0 and 1 — stop index is excluded
+# 3. [0:2] returns only positions 0 and 1 — stop is excluded
 print(products[0:3])
+
+# 4. Key names are case-sensitive; "Prize" does not exist → KeyError
+print(info["price"])
 ```
 ```
 coffee
 cookie
 ['coffee', 'tea', 'juice']
+29.9
 ```
-All three mistakes are variations of the same off-by-one confusion that comes from
-zero-based indexing. A list of 5 elements has valid positions 0 through 4 — there is no
-position 5. And a slice `[0:2]` returns 2 elements (positions 0 and 1), not 3. These
-errors are extremely common and worth recognising early.
+Mistakes 1, 2, and 3 are all variations of the off-by-one confusion that comes from zero-based indexing. Mistake 4 is a `KeyError` caused by a misspelled key — dictionary keys are case-sensitive and must match exactly. A `KeyError` and an `IndexError` are both signals that you are asking for something that does not exist, just in different data structures.
 </details>

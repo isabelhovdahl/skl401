@@ -167,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3 Installing and Touring Positron</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3 Installing Positron</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -177,12 +177,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Writing and Running Your First Script</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Writing Scripts</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-06-packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6 Installing and Importing Packages</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-06-packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6 Packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -202,7 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-10-dataframes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.10 DataFrames: Your Most Important Object</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-10-dataframes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.10 DataFrames</span></a>
   </div>
 </li>
       </ul>
@@ -314,7 +314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>We cover how to extract individual elements and slices from lists and strings using Python’s zero-based indexing system.</p>
+<p>We cover how to extract individual elements and slices from lists and strings using Python’s zero-based indexing system, and how to retrieve values from a dictionary using its keys.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1194660309?h=d33b534cee" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>products <span class="op">=</span> [<span class="st">"coffee"</span>, <span class="st">"tea"</span>, <span class="st">"juice"</span>, <span class="st">"sandwich"</span>, <span class="st">"cookie"</span>]</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -366,156 +366,164 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <section id="exercise-1.9.1" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1.9.1">Exercise 1.9.1</h3>
-<p>Add a new comment header for Topic 1.9 in your <code>exercises_topic1.py</code> script. Then create the list below and retrieve the following elements using indexing: 1. The first element. 2. The third element. 3. The last element using negative indexing. 4. The second-to-last element using negative indexing.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cities <span class="op">=</span> [<span class="st">"Oslo"</span>, <span class="st">"Bergen"</span>, <span class="st">"Trondheim"</span>, <span class="st">"Stavanger"</span>, <span class="st">"Tromsø"</span>, <span class="st">"Kristiansand"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Without running the code, predict the output of each <code>print()</code> statement. Then run the code to check your answers.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [<span class="st">"Norway"</span>, <span class="st">"Denmark"</span>, <span class="st">"Sweden"</span>, <span class="st">"Finland"</span>, <span class="st">"Iceland"</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(countries[<span class="dv">0</span>])</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(countries[<span class="dv">2</span>])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(countries[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(countries[<span class="op">-</span><span class="dv">3</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details>
 <summary>
 Solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ── 1.9 Indexing and subsetting ───────────────────────────────────────────────</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>cities <span class="op">=</span> [<span class="st">"Oslo"</span>, <span class="st">"Bergen"</span>, <span class="st">"Trondheim"</span>, <span class="st">"Stavanger"</span>, <span class="st">"Tromsø"</span>, <span class="st">"Kristiansand"</span>]</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. First element</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities[<span class="dv">0</span>])</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Third element</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities[<span class="dv">2</span>])</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Last element</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities[<span class="op">-</span><span class="dv">1</span>])</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Second-to-last element</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities[<span class="op">-</span><span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>Oslo
-Trondheim
-Kristiansand
-Tromsø</code></pre>
+<pre><code>Norway
+Sweden
+Iceland
+Sweden</code></pre>
+A list of 5 elements has valid positions 0 through 4. Negative indexing counts from the end: <code>-1</code> is the last element, <code>-2</code> the second to last, and so on. Notice that both <code>countries[2]</code> and <code>countries[-3]</code> return <code>"Sweden"</code> — there is always both a positive and a negative index that point to the same element.
 </details>
 <hr>
 </section>
 <section id="exercise-1.9.2" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1.9.2">Exercise 1.9.2</h3>
-<p>Using the same <code>cities</code> list, extract the following slices and print each result: 1. The first three cities. 2. The last three cities. 3. Everything except the first and last city.</p>
-<details>
-<summary>
-Solution
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. First three cities</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities[:<span class="dv">3</span>])</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Last three cities</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities[<span class="op">-</span><span class="dv">3</span>:])</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Everything except first and last</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cities[<span class="dv">1</span>:<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>['Oslo', 'Bergen', 'Trondheim']
-['Stavanger', 'Tromsø', 'Kristiansand']
-['Bergen', 'Trondheim', 'Stavanger', 'Tromsø']</code></pre>
-</details>
-<hr>
-</section>
-<section id="exercise-1.9.3" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.9.3">Exercise 1.9.3</h3>
-<p>Create the dictionary below and retrieve the following values using their keys. Then add a new key <code>"language"</code> with the value <code>"Norwegian"</code> and print the updated dictionary.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>country <span class="op">=</span> {</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>:        <span class="st">"Norway"</span>,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"capital"</span>:     <span class="st">"Oslo"</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"population"</span>:  <span class="dv">5_400_000</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"in_eu"</span>:       <span class="va">False</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Using the same <code>countries</code> list, extract the following slices and print each result.</p>
 <ol type="1">
-<li>The capital city.</li>
-<li>The population.</li>
-<li>Try retrieving a key that does not exist, e.g.&nbsp;<code>"gdp_per_cap"</code>. What error do you get?</li>
+<li><p>The first three countries.</p></li>
+<li><p>The last three countries using negative indexing.</p></li>
+<li><p>Everything except the first and last country.</p></li>
 </ol>
 <details>
 <summary>
 Solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>country <span class="op">=</span> {</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>:        <span class="st">"Norway"</span>,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"capital"</span>:     <span class="st">"Oslo"</span>,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"population"</span>:  <span class="dv">5_400_000</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"in_eu"</span>:       <span class="va">False</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Capital city</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country[<span class="st">"capital"</span>])</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Population</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country[<span class="st">"population"</span>])</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Non-existent key</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># print(country["gdp_per_cap"])</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>Oslo
-5400000</code></pre>
-<p>Attempting to access a key that does not exist raises a <code>KeyError</code>:</p>
-<pre><code>KeyError: 'gdp_per_cap'</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add new key</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>country[<span class="st">"language"</span>] <span class="op">=</span> <span class="st">"Norwegian"</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>{'name': 'Norway', 'capital': 'Oslo', 'population': 5400000, 'in_eu': False, 'language': 'Norwegian'}</code></pre>
-Unlike lists, which raise an <code>IndexError</code> when you go out of bounds, dictionaries raise a <code>KeyError</code> when you try to access a key that does not exist. Both are signals that you are asking for something that is not there.
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [<span class="st">"Norway"</span>, <span class="st">"Denmark"</span>, <span class="st">"Sweden"</span>, <span class="st">"Finland"</span>, <span class="st">"Iceland"</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. First three</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(countries[:<span class="dv">3</span>])</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Last three</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(countries[<span class="op">-</span><span class="dv">3</span>:])</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Everything except first and last</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(countries[<span class="dv">1</span>:<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>['Norway', 'Denmark', 'Sweden']
+['Sweden', 'Finland', 'Iceland']
+['Denmark', 'Sweden', 'Finland']</code></pre>
+Remember that the stop index is always excluded in a slice. <code>countries[:3]</code> returns elements at positions 0, 1, and 2 — not 3. This is one of the most common sources of off-by-one errors in Python.
+</details>
+<hr>
+</section>
+<section id="exercise-1.9.3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.9.3">Exercise 1.9.3</h3>
+<p>The code below shows that strings support the same indexing and slicing as lists. Run the first block and verify that it works as expected. Then run the second block and read the error message. Why does this fail when the equivalent operation on a list would work?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Block 1: reading from a string</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>country <span class="op">=</span> <span class="st">"Norway"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country[<span class="dv">0</span>])</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country[<span class="dv">0</span>:<span class="dv">3</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Block 2: trying to modify a string</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>country[<span class="dv">0</span>] <span class="op">=</span> <span class="st">"n"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details>
+<summary>
+Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Block 1</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>country <span class="op">=</span> <span class="st">"Norway"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country[<span class="dv">0</span>])</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country[<span class="dv">0</span>:<span class="dv">3</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>N
+y
+Nor</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Block 2</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>country[<span class="dv">0</span>] <span class="op">=</span> <span class="st">"n"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>TypeError: 'str' object does not support item assignment</code></pre>
+Strings are <strong>immutable</strong> in Python — once created, their contents cannot be changed. You can read from a string using indexing and slicing, but you cannot modify individual characters in place. This is different from lists, where <code>countries[0] = "Sweden"</code> would work without any problem. If you need to modify a string, you have to create a new one — for example using <code>.replace()</code>: <code>country.replace("N", "n")</code> returns <code>"norway"</code> as a new string without changing the original.
 </details>
 <hr>
 </section>
 <section id="exercise-1.9.4" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1.9.4">Exercise 1.9.4</h3>
-<p>Apply slicing to the string below to extract the following substrings and print each result: 1. The first three characters. 2. The last four characters using negative indexing. 3. The word <code>"Python"</code> (characters 7 through 12).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"Hello, Python!"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Run the code below and then answer the questions that follow.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>grades <span class="op">=</span> [</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Alice"</span>, <span class="dv">90</span>, <span class="dv">85</span>, <span class="dv">92</span>],</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Bob"</span>,   <span class="dv">78</span>, <span class="dv">81</span>, <span class="dv">74</span>],</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Clara"</span>, <span class="dv">95</span>, <span class="dv">88</span>, <span class="dv">97</span>],</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>student <span class="op">=</span> {</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>:   <span class="st">"David"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"grades"</span>: [<span class="dv">82</span>, <span class="dv">79</span>, <span class="dv">88</span>],</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li><p>Extract <code>"Alice"</code> from <code>grades</code>.</p></li>
+<li><p>Extract Clara’s third grade (97) from <code>grades</code>.</p></li>
+<li><p>Extract David’s name from <code>student</code>.</p></li>
+<li><p>Extract David’s second grade (79) from <code>student</code>.</p></li>
+</ol>
 <details>
 <summary>
 Solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"Hello, Python!"</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. First three characters</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text[:<span class="dv">3</span>])</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Last four characters</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text[<span class="op">-</span><span class="dv">4</span>:])</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. The word "Python"</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text[<span class="dv">7</span>:<span class="dv">13</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>Hel
-hon!
-Python</code></pre>
-Remember that the stop index in a slice is excluded, so to include the character at position 12 you must use 13 as the stop index.
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. "Alice" — first element of the first inner list</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grades[<span class="dv">0</span>][<span class="dv">0</span>])</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Clara's third grade — third element of the third inner list</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grades[<span class="dv">2</span>][<span class="dv">3</span>])</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. David's name — access by key</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(student[<span class="st">"name"</span>])</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. David's second grade — access the list by key, then index into it</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(student[<span class="st">"grades"</span>][<span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Alice
+97
+David
+79</code></pre>
+For nested lists, you chain two index operations: the first <code>[]</code> selects the inner list, and the second <code>[]</code> selects the element within it. The same logic applies to a list stored inside a dictionary — first retrieve the list using its key, then index into it.
 </details>
 <hr>
 </section>
 <section id="exercise-1.9.5" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1.9.5">Exercise 1.9.5</h3>
-<p>The code below contains three common indexing mistakes. Identify and fix each one, and explain what was wrong.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>products <span class="op">=</span> [<span class="st">"coffee"</span>, <span class="st">"tea"</span>, <span class="st">"juice"</span>, <span class="st">"sandwich"</span>, <span class="st">"cookie"</span>]</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Retrieve the first element</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">1</span>])</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Retrieve the last element</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">5</span>])</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Retrieve the first three elements</span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">0</span>:<span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The code below contains four common indexing mistakes. Run each line, read the error message, and fix it.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>products <span class="op">=</span> [<span class="st">"coffee"</span>, <span class="st">"tea"</span>, <span class="st">"juice"</span>, <span class="st">"sandwich"</span>, <span class="st">"cookie"</span>]</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>info <span class="op">=</span> {<span class="st">"name"</span>: <span class="st">"coffee"</span>, <span class="st">"price"</span>: <span class="fl">29.90</span>, <span class="st">"in_stock"</span>: <span class="va">True</span>}</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Get the first product</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">1</span>])</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Get the last product</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">5</span>])</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Get the first three products</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">0</span>:<span class="dv">2</span>])</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Get the price from the dictionary</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(info[<span class="st">"Prize"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details>
 <summary>
 Solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>products <span class="op">=</span> [<span class="st">"coffee"</span>, <span class="st">"tea"</span>, <span class="st">"juice"</span>, <span class="st">"sandwich"</span>, <span class="st">"cookie"</span>]</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. First element is at position 0, not 1</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">0</span>])</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. The list has 5 elements (positions 0–4); position 5 does not exist</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="op">-</span><span class="dv">1</span>])   <span class="co"># or products[4]</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. The slice [0:2] only returns positions 0 and 1 — stop index is excluded</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">0</span>:<span class="dv">3</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. First element is at position 0, not 1</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">0</span>])</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Valid positions are 0–4; position 5 does not exist → IndexError</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="op">-</span><span class="dv">1</span>])    <span class="co"># or products[4]</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. [0:2] returns only positions 0 and 1 — stop is excluded</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(products[<span class="dv">0</span>:<span class="dv">3</span>])</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Key names are case-sensitive; "Prize" does not exist → KeyError</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(info[<span class="st">"price"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>coffee
 cookie
-['coffee', 'tea', 'juice']</code></pre>
-All three mistakes are variations of the same off-by-one confusion that comes from zero-based indexing. A list of 5 elements has valid positions 0 through 4 — there is no position 5. And a slice <code>[0:2]</code> returns 2 elements (positions 0 and 1), not 3. These errors are extremely common and worth recognising early.
+['coffee', 'tea', 'juice']
+29.9</code></pre>
+Mistakes 1, 2, and 3 are all variations of the off-by-one confusion that comes from zero-based indexing. Mistake 4 is a <code>KeyError</code> caused by a misspelled key — dictionary keys are case-sensitive and must match exactly. A <code>KeyError</code> and an <code>IndexError</code> are both signals that you are asking for something that does not exist, just in different data structures.
 </details>
 
 
@@ -930,8 +938,8 @@ All three mistakes are variations of the same off-by-one confusion that comes fr
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../01-getting-started-and-working-effectively/01-10-dataframes.html" class="pagination-link" aria-label="1.10 DataFrames: Your Most Important Object">
-        <span class="nav-page-text"><span class="chapter-title">1.10 DataFrames: Your Most Important Object</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../01-getting-started-and-working-effectively/01-10-dataframes.html" class="pagination-link" aria-label="1.10 DataFrames">
+        <span class="nav-page-text"><span class="chapter-title">1.10 DataFrames</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

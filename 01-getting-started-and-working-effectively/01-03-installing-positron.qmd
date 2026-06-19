@@ -1,5 +1,10 @@
-# Installing and touring Positron
+# Installing Positron
 
-We install Positron, take a tour of its main panels — the editor, console, environment, and plots pane — and run our first Python command.
+We install Positron, take a tour of its main panels — the editor, console, environment, and plots pane — and run our first Python command. Download Positron at [positron.posit.co](https://positron.posit.co/).
+
+::: {.callout-note}
+You are welcome to use a different code editor if you already have one you are comfortable with — for example VS Code or PyCharm. The core content of this course
+does not depend on Positron specifically. That said, the videos are recorded in Positron, so following along will be easiest if you use the same editor.
+:::
 
 *Video will be embedded here.*

@@ -167,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3 Installing and Touring Positron</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3 Installing Positron</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -177,12 +177,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Writing and Running Your First Script</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Writing Scripts</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-06-packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6 Installing and Importing Packages</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-06-packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6 Packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -202,7 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-10-dataframes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.10 DataFrames: Your Most Important Object</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-10-dataframes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.10 DataFrames</span></a>
   </div>
 </li>
       </ul>
@@ -370,133 +370,159 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <section id="exercise-1.8.1" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1.8.1">Exercise 1.8.1</h3>
-<p>Add a new comment header for Topic 1.8 in your <code>exercises_topic1.py</code> script. Then create a list of five country names of your choice. Print the list, its length, and then append one more country to it and print the updated list.</p>
+<p>Create a list called <code>mixed</code> that contains one value of each of the four basic data types: an integer, a float, a string, and a boolean. Then:</p>
+<ol type="1">
+<li><p>Print the list and its length.</p></li>
+<li><p>Append the <em>list</em> <code>[1, 2, 3]</code> to the end and print the updated list and its length.</p></li>
+</ol>
+<p>What does this tell you about what a list can contain?</p>
 <details>
 <summary>
 Solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ── 1.8 Lists, dictionaries, and arrays ───────────────────────────────────────</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mixed <span class="op">=</span> [<span class="dv">42</span>, <span class="fl">3.14</span>, <span class="st">"Norway"</span>, <span class="va">True</span>]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [<span class="st">"Norway"</span>, <span class="st">"Germany"</span>, <span class="st">"Brazil"</span>, <span class="st">"Japan"</span>, <span class="st">"Nigeria"</span>]</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(countries)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(countries))</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>countries.append(<span class="st">"Australia"</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(countries)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>['Norway', 'Germany', 'Brazil', 'Japan', 'Nigeria']
-5
-['Norway', 'Germany', 'Brazil', 'Japan', 'Nigeria', 'Australia']</code></pre>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Print and length</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mixed)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(mixed))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>[42, 3.14, 'Norway', True]
+4</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Append and print</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mixed.append([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mixed)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(mixed))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>[42, 3.14, 'Norway', True, [1, 2, 3]]
+5</code></pre>
+A list can contain any mix of data types, including other lists. This flexibility is useful, but it also means Python cannot make any assumptions about what is inside a list — which is one reason why numpy arrays are better suited for numerical work.
 </details>
 <hr>
 </section>
 <section id="exercise-1.8.2" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1.8.2">Exercise 1.8.2</h3>
-<p>Create a dictionary that describes a country of your choice. It should contain at least four keys: the country name, its continent, its population, and its GDP per capita. Then: 1. Print the dictionary. 2. Print only the keys. 3. Print only the values. 4. Add a new key <code>"in_eu"</code> with an appropriate boolean value and print the updated dictionary.</p>
+<p>Use the following list of monthly sales figures:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sales <span class="op">=</span> [<span class="dv">120</span>, <span class="dv">340</span>, <span class="dv">55</span>, <span class="dv">890</span>, <span class="dv">210</span>, <span class="dv">45</span>, <span class="dv">670</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then use Python’s built-in functions to compute and print:</p>
+<ol type="1">
+<li><p>The total sales using <code>sum()</code>.</p></li>
+<li><p>The highest and lowest monthly sales using <code>max()</code> and <code>min()</code>.</p></li>
+<li><p>The average monthly sales — there is no built-in <code>mean()</code> function for lists, so compute it from <code>sum()</code> and <code>len()</code>.</p></li>
+</ol>
 <details>
 <summary>
 Solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>country <span class="op">=</span> {</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>:          <span class="st">"Norway"</span>,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"continent"</span>:     <span class="st">"Europe"</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"population"</span>:    <span class="dv">5_400_000</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gdp_per_cap"</span>:   <span class="dv">82500</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Print the dictionary</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Keys only</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country.keys())</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Values only</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country.values())</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Add new key</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>country[<span class="st">"in_eu"</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sales <span class="op">=</span> [<span class="dv">120</span>, <span class="dv">340</span>, <span class="dv">55</span>, <span class="dv">890</span>, <span class="dv">210</span>, <span class="dv">45</span>, <span class="dv">670</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Total</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sum</span>(sales))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Max and min</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">max</span>(sales))</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">min</span>(sales))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Average</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sum</span>(sales) <span class="op">/</span> <span class="bu">len</span>(sales))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>2330
+890
+45
+332.857142857...</code></pre>
+<code>sum()</code>, <code>max()</code>, <code>min()</code>, and <code>len()</code> are built-in Python functions that work on any list of numbers. Note that there is no built-in <code>mean()</code> function in plain Python — you either compute it manually as above, or use <code>numpy</code>, which has <code>np.mean()</code> built in.
+</details>
+<hr>
+</section>
+<section id="exercise-1.8.3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.8.3">Exercise 1.8.3</h3>
+<p>Numpy provides several useful functions for generating sequences of numbers. Look at the three examples below, run them, and describe what each one does. Then check the type of each result using <code>type()</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.arange(<span class="dv">10</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">10</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details>
+<summary>
+Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.arange(<span class="dv">10</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.arange(<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">10</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">5</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(a))</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(b))</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(c))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>[0 1 2 3 4 5 6 7 8 9]
+[10 20 30 40 50 60 70 80 90]
+[-1. , -0.5,  0. ,  0.5,  1. ]
+&lt;class 'numpy.ndarray'&gt;
+&lt;class 'numpy.ndarray'&gt;
+&lt;class 'numpy.ndarray'&gt;</code></pre>
+<code>np.arange(10)</code> generates integers from 0 up to but not including 10. <code>np.arange(10, 100, 10)</code> generates integers from 10 to 90 in steps of 10. <code>np.linspace(-1, 1, 5)</code> generates 5 evenly spaced values between -1 and 1 inclusive — notice that unlike <code>arange()</code>, the stop value is included. All three return a numpy array (<code>numpy.ndarray</code>).
+</details>
+<hr>
+</section>
+<section id="exercise-1.8.4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.8.4">Exercise 1.8.4</h3>
+<p>Create a dictionary called <code>country</code> that describes a country of your choice. It should contain at least four keys: the country name, its continent, its population, and its GDP per capita. Then:</p>
+<ol type="1">
+<li><p>Print the dictionary and its length.</p></li>
+<li><p>Print only the keys.</p></li>
+<li><p>Print only the values.</p></li>
+<li><p>Add a new key <code>"in_eu"</code> with an appropriate boolean value and print the updated dictionary.</p></li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>country <span class="op">=</span> {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>:          <span class="st">"Norway"</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"continent"</span>:     <span class="st">"Europe"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"population"</span>:    <span class="dv">5_400_000</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gdp_per_cap"</span>:   <span class="dv">82500</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Print the dictionary</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(country))</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Keys only</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country.keys())</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Values only</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country.values())</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Add new key</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>country[<span class="st">"in_eu"</span>] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <pre><code>{'name': 'Norway', 'continent': 'Europe', 'population': 5400000, 'gdp_per_cap': 82500}
+4
 dict_keys(['name', 'continent', 'population', 'gdp_per_cap'])
 dict_values(['Norway', 'Europe', 5400000, 82500])
 {'name': 'Norway', 'continent': 'Europe', 'population': 5400000, 'gdp_per_cap': 82500, 'in_eu': False}</code></pre>
 </details>
 <hr>
 </section>
-<section id="exercise-1.8.3" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.8.3">Exercise 1.8.3</h3>
-<p>Create a numpy array of six product prices of your choice. Then: 1. Compute and print the total, mean, and maximum price. 2. Apply a 10% discount to all prices in a single operation and print the result. 3. Create a second array of quantities (one per product) and compute the revenue for each product. Print the result.</p>
-<details>
-<summary>
-Solution
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>prices    <span class="op">=</span> np.array([<span class="fl">29.90</span>, <span class="fl">35.00</span>, <span class="fl">12.50</span>, <span class="fl">48.00</span>, <span class="fl">22.75</span>, <span class="fl">9.90</span>])</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>quantities <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">8</span>, <span class="dv">4</span>])</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Summary statistics</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prices.<span class="bu">sum</span>())</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prices.mean())</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prices.<span class="bu">max</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>158.05
-26.341666666666665
-48.0</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Apply 10% discount</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>discounted <span class="op">=</span> prices <span class="op">*</span> <span class="fl">0.90</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(discounted)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>[26.91 31.5  11.25 43.2  20.475  8.91]</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Revenue per product</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>revenue <span class="op">=</span> prices <span class="op">*</span> quantities</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(revenue)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>[ 89.7  175.    0.   96.  182.   39.6]</code></pre>
-</details>
-<hr>
-</section>
-<section id="exercise-1.8.4" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.8.4">Exercise 1.8.4</h3>
-<p>The code below attempts to perform arithmetic on a list. Run it and read the error message. Then fix it by converting the list to a numpy array and confirm that the operation works as expected.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>temperatures <span class="op">=</span> [<span class="fl">12.5</span>, <span class="fl">18.3</span>, <span class="fl">9.7</span>, <span class="fl">22.1</span>, <span class="fl">15.0</span>]</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(temperatures <span class="op">*</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<details>
-<summary>
-Solution
-</summary>
-<p>Running the code does not produce an error, but it does not do what we want either — multiplying a list by 2 repeats the list rather than doubling each value:</p>
-<pre><code>[12.5, 18.3, 9.7, 22.1, 15.0, 12.5, 18.3, 9.7, 22.1, 15.0]</code></pre>
-<p>Converting to a numpy array gives the expected element-wise result:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>temperatures <span class="op">=</span> np.array([<span class="fl">12.5</span>, <span class="fl">18.3</span>, <span class="fl">9.7</span>, <span class="fl">22.1</span>, <span class="fl">15.0</span>])</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(temperatures <span class="op">*</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>[25.  36.6 19.4 44.2 30. ]</code></pre>
-This is one of the most common sources of confusion when moving between plain Python lists and numpy arrays — they look similar but behave very differently under arithmetic operations.
-</details>
-<hr>
-</section>
 <section id="exercise-1.8.5" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1.8.5">Exercise 1.8.5</h3>
-<p>Create a list and a numpy array that both contain the same five integers. Verify that the following operations behave differently depending on whether you use a list or an array, and explain the difference in each case: 1. Adding the collection to itself (i.e.&nbsp;<code>x + x</code>). 2. Checking the sum using <code>sum()</code>.</p>
+<p>The code below tries to convert a list of temperatures from Celsius to Fahrenheit using the formula <code>(temp * 9/5) + 32</code>. Run it and observe what happens. Then fix it using a numpy array and verify that the result is correct.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>temperatures_c <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">100</span>]</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(temperatures_c <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">32</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details>
 <summary>
 Solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>numbers_list  <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>numbers_array <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Adding to itself</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(numbers_list  <span class="op">+</span> numbers_list)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(numbers_array <span class="op">+</span> numbers_array)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>[1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
-[ 2  4  6  8 10]</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. sum()</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sum</span>(numbers_list))</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sum</span>(numbers_array))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>15
-15</code></pre>
-For operation 1, <code>+</code> on two lists concatenates them (appends one after the other), whereas <code>+</code> on two arrays adds them element-wise, just like vector addition. For operation 2, Python’s built-in <code>sum()</code> works on both and gives the same result — but for arrays it is better practice to use <code>numbers_array.sum()</code>, which is faster and more readable.
+<p>Running the code raises a <code>TypeError</code>. Python cannot multiply a list by a float or divide a list as lists do not support element-wise arithmetic. Converting to a numpy array solves this because arrays support element-wise operations:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>temperatures_c <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">100</span>])</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>temperatures_f <span class="op">=</span> (temperatures_c <span class="op">*</span> <span class="dv">9</span><span class="op">/</span><span class="dv">5</span>) <span class="op">+</span> <span class="dv">32</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(temperatures_f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>[ 32.  50.  68.  86. 212.]</code></pre>
+We can verify a few values manually: 0°C = 32°F ✓, 100°C = 212°F ✓. Notice that the formula was applied to every element simultaneously. This is the core strength of numpy arrays for numerical work.
 </details>
 
 

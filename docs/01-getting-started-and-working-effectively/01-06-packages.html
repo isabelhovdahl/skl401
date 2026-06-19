@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Installing and importing packages – SKL401 — Introduction to Python</title>
+<title>Packages – SKL401 — Introduction to Python</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -120,7 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-02-installing-python.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-06-packages.html"><span class="chapter-title">1.6 Installing and Importing Packages</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-02-installing-python.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-06-packages.html"><span class="chapter-title">1.6 Packages</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -167,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3 Installing and Touring Positron</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3 Installing Positron</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -177,12 +177,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Writing and Running Your First Script</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Writing Scripts</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-06-packages.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">1.6 Installing and Importing Packages</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-06-packages.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">1.6 Packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -202,7 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-10-dataframes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.10 DataFrames: Your Most Important Object</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-10-dataframes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.10 DataFrames</span></a>
   </div>
 </li>
       </ul>
@@ -295,9 +295,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-02-installing-python.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-06-packages.html"><span class="chapter-title">1.6 Installing and Importing Packages</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-02-installing-python.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-06-packages.html"><span class="chapter-title">1.6 Packages</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Installing and importing packages</span></h1>
+<h1 class="title"><span class="chapter-title">Packages</span></h1>
 </div>
 
 
@@ -348,78 +348,91 @@ You should see output ending with <code>Successfully installed ...</code> or con
 </section>
 <section id="exercise-1.6.2" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1.6.2">Exercise 1.6.2</h3>
-<p>Create a new section in your <code>exercises_topic1.py</code> script with a comment header for Topic 1.6. Write import statements for all six packages using the conventional aliases used in the course, and run them. If any import fails with a <code>ModuleNotFoundError</code>, it means that package was not installed correctly — go back and reinstall it via the Terminal.</p>
+<p>Import all six packages using the conventional aliases used in the course and run the code. No output and no errors means everything is installed and working correctly.</p>
 <details>
 <summary>
 Solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ── 1.6 Installing and importing packages ─────────────────────────────────────</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> openpyxl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-No output and no errors means all imports succeeded. A <code>ModuleNotFoundError</code> on any line means that package needs to be installed first via <code>pip install &lt;package&gt;</code> in the Terminal.
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> openpyxl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+A <code>ModuleNotFoundError</code> on any line means that package was not installed correctly — go back and reinstall it via <code>pip install &lt;package&gt;</code> in the Terminal.
 </details>
 <hr>
 </section>
 <section id="exercise-1.6.3" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1.6.3">Exercise 1.6.3</h3>
-<p>After your import statements, add code that prints the version number of <code>pandas</code> and <code>numpy</code>. Then look up how you would check the version of <code>matplotlib</code> — the pattern is the same across all packages.</p>
+<p><strong>Restart your Python session before attempting this exercise</strong> (use the restart button ↻ on the Console’s action bar) to ensure no packages are currently loaded. Then run the two lines below one at a time and read the error messages. Explain what is wrong with each line and fix them.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.arange(<span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pd.Series([<span class="st">"cat"</span>, <span class="st">"dog"</span>, <span class="st">"fish"</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details>
 <summary>
 Solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"pandas:"</span>, pd.__version__)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"numpy:"</span>, np.__version__)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"matplotlib:"</span>, plt.matplotlib.__version__)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>pandas: 2.2.3
-numpy: 2.2.5
-matplotlib: 3.10.1</code></pre>
-The exact version numbers on your machine may differ. The <code>.__version__</code> attribute follows the same pattern for virtually all Python packages.
+<p><strong>Line 1:</strong></p>
+<pre><code>NameError: name 'np' is not defined</code></pre>
+<p><code>numpy</code> has not been imported in this session. Even though it is installed on your computer, you must import it at the start of every session before you can use it. Fix:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.arange(<span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>[0 1 2 3 4]</code></pre>
+<p><strong>Line 2:</strong></p>
+<pre><code>NameError: name 'pd' is not defined</code></pre>
+<p>The package was imported, but without an alias — so it is available as <code>pandas</code>, not as <code>pd</code>. When you import a package with <code>import pandas as pd</code>, you must refer to it as <code>pd</code> throughout your code. Fix:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pd.Series([<span class="st">"cat"</span>, <span class="st">"dog"</span>, <span class="st">"fish"</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>0     cat
+1     dog
+2    fish
+dtype: str</code></pre>
+<p>Note that package names are also case-sensitive — <code>import NumPy</code> or <code>import Numpy</code> will both fail with a <code>ModuleNotFoundError</code>. Always use the exact lowercase name.</p>
 </details>
 <hr>
 </section>
 <section id="exercise-1.6.4" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1.6.4">Exercise 1.6.4</h3>
-<p>The two statements below will both cause errors. Run each one and read the error message. Explain in your own words what each error means and how to fix it.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> Pandas <span class="im">as</span> pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pd.DataFrame())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><em>(Run the second line in a fresh console session where pandas has not yet been imported.)</em></p>
-<details>
-<summary>
-Solution
-</summary>
-<p><strong>First error:</strong></p>
-<pre><code>ModuleNotFoundError: No module named 'Pandas'</code></pre>
-<p>Python package names are case-sensitive. The correct name is <code>pandas</code> (all lowercase), not <code>Pandas</code>. Fix: <code>import pandas as pd</code>.</p>
-<p><strong>Second error:</strong></p>
-<pre><code>NameError: name 'pd' is not defined</code></pre>
-Even though pandas is installed, it has not been imported in this session. The fix is to add <code>import pandas as pd</code> at the top of the script before using it. This is why import statements always go at the very top of every script — they must run before any code that depends on them.
-</details>
-<hr>
-</section>
-<section id="exercise-1.6.5" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.6.5">Exercise 1.6.5</h3>
-<p>Run the following command in the Terminal and read the error message carefully. What does it tell you? Then list the most common reasons why a <code>pip install</code> command might fail.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pandaas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Run the following command in the Terminal and read the error message carefully. What does it tell you?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pandaaas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details>
 <summary>
 Solution
 </summary>
 <p>Running the command produces an error along the lines of:</p>
-<pre><code>ERROR: Could not find a version that satisfies the requirement pandaas
-ERROR: No matching distribution found for pandaas</code></pre>
+<pre><code>ERROR: Could not find a version that satisfies the requirement pandaaas
+ERROR: No matching distribution found for pandaaas</code></pre>
 <p>pip searched the Python Package Index (PyPI) and found no package with that name.</p>
 <p>The most common reasons a <code>pip install</code> command fails are:</p>
 <ul>
-<li><strong>Typo in the package name</strong> — package names are case-sensitive and must be spelled exactly right. <code>Pandas</code>, <code>PANDAS</code>, and <code>pandaas</code> will all fail; the correct name is <code>pandas</code>.</li>
+<li><strong>Typo in the package name</strong> — package names must be spelled exactly right. <code>Pandas</code>, <code>PANDAS</code>, and <code>pandaaas</code> will all fail; the correct name is <code>pandas</code>.</li>
 <li><strong>Wrong tool</strong> — running <code>pip install</code> in the Python console instead of the Terminal. The console runs Python code; <code>pip</code> is a Terminal command. In Positron, make sure you are in the Terminal tab, not the console.</li>
 <li><strong>No internet connection</strong> — pip downloads packages from PyPI, so installation requires an active internet connection.</li>
-<li><strong>pip not recognised</strong> — on some Mac setups, <code>pip</code> is not on the PATH and you need to use <code>pip3</code> instead. Alternatively, <code>python -m pip install pandas</code> always works because it calls pip through Python directly.</li>
+<li><strong>pip not recognised</strong> — on some Mac setups, <code>pip</code> is not on the PATH and you need to use <code>pip3</code> instead.</li>
 </ul>
+</details>
+</section>
+<section id="exercise-1.6.5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.6.5">Exercise 1.6.5</h3>
+<p>The script below has a structural problem that will cause an error. Run it, read the error message, and fix the script.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.arange(<span class="dv">5</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.linspace(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">11</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details>
+<summary>
+Solution
+</summary>
+<pre><code>NameError: name 'np' is not defined</code></pre>
+<p>Python executes code from top to bottom. When it reaches the first <code>print()</code> statement, <code>numpy</code> has not been imported yet — the <code>import</code> statement comes too late. The fix is to move all imports to the very top of the script, before any code that depends on them:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.arange(<span class="dv">5</span>))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.linspace(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">11</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>[0 1 2 3 4]
+[-10.  -8.  -6.  -4.  -2.   0.   2.   4.   6.   8.  10.]</code></pre>
+<p>As a general rule, all import statements belong at the very top of every script. This makes it immediately clear to anyone reading the script which packages are required, and ensures that everything is available before it is needed.</p>
 </details>
 
 
@@ -829,8 +842,8 @@ ERROR: No matching distribution found for pandaas</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="pagination-link" aria-label="1.5 Writing and Running Your First Script">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1.5 Writing and Running Your First Script</span></span>
+      <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="pagination-link" aria-label="1.5 Writing Scripts">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1.5 Writing Scripts</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

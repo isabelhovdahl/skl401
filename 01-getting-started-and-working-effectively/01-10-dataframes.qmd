@@ -1,4 +1,4 @@
-## DataFrames: Your most important object
+## DataFrames
 
 We introduce the pandas DataFrame as the central structure for tabular data, and cover how to create, inspect, and perform basic operations on one.
 

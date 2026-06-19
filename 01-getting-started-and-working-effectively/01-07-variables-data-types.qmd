@@ -70,193 +70,184 @@ print(int("42"))
 ## Exercises
 
 ### Exercise 1.7.1
-Add a new comment header for Topic 1.7 in your `exercises_topic1.py` script. Then create
-variables to describe a product of your choice. Your variables should include at least one
-of each of the four basic data types: integer, float, string, and boolean. Print the value
-and type of each variable.
+Without running the code, predict the value that will be printed on the last line. Then run the code to check your answer. What does this tell you about how variable assignment works in Python?
+
+```python
+x = 10
+x = x + 5
+x = x * 2
+print(x)
+```
 
 <details>
 <summary>Solution</summary>
 
-```python
-# ── 1.7 Variables and basic data types ────────────────────────────────────────
-
-product_name  = "coffee"       # str
-price         = 29.90          # float
-quantity      = 3              # int
-in_stock      = True           # bool
-
-print(product_name, type(product_name))
-print(price,        type(price))
-print(quantity,     type(quantity))
-print(in_stock,     type(in_stock))
 ```
+30
 ```
-coffee <class 'str'>
-29.9 <class 'float'>
-3 <class 'int'>
-True <class 'bool'>
-```
+Step by step: `x` starts as `10`, then becomes `10 + 5 = 15`, then becomes `15 * 2 = 30`. Each assignment overwrites the previous value without any warning. This means you need to be careful with variable names in longer scripts — if you reuse a name by accident, the old value is gone and Python will not tell you.
 </details>
 
 ---
 
 ### Exercise 1.7.2
-The three variables below contain errors that will either cause an immediate error or
-produce unexpected results. Identify and fix each one.
+Some of the variable names below are invalid or go against Python conventions. Identify which ones are problematic, explain what is wrong with each, and suggest a corrected name.
 
 ```python
-2nd_quarter = 15000
-revenue = "50000"
-is_available = true
+2025_sales = 15000
+monthly revenue = 8000
+FirstName = "Julia"
+int = 42
+gdp_per_capita = 55000
 ```
 
 <details>
 <summary>Solution</summary>
 
 ```python
-# 1. Variable names cannot start with a number
-quarter_2 = 15000
+# Invalid — variable names cannot start with a number
+sales_2025 = 15000
 
-# 2. The number is stored as a string — arithmetic will not work as expected
-revenue = 50000
+# Invalid — variable names cannot contain spaces
+monthly_revenue = 8000
 
-# 3. Boolean values must be capitalised in Python
-is_available = True
+# Valid but not conventional — Python uses snake_case, not CamelCase
+first_name = "Julia"
+
+# Valid but dangerous — this overwrites Python's built-in int() function,
+# meaning int() will no longer work for the rest of the session
+n_int = 42
+
+# No problem — this is a good variable name
+gdp_per_capita = 55000
 ```
-
-- `2nd_quarter` raises a `SyntaxError` because variable names cannot begin with a digit.
-- `"50000"` is valid Python but stores the number as text. Trying to do arithmetic with
-  it later will raise a `TypeError`.
-- `true` (lowercase) raises a `NameError` because Python does not recognise it — the
-  correct boolean value is `True` with a capital T.
+The first two will cause an immediate `SyntaxError`. The third works but goes against Python conventions — use snake_case for variable names. The fourth is the most subtle: it runs without error but silently breaks `int()` for the rest of your session. Always avoid using the names of built-in Python functions as variable names.
 </details>
 
 ---
 
 ### Exercise 1.7.3
-You have a float variable `price = 47.60`. Perform the following conversions and print
-each result:
-1. Convert `price` to an integer using `int()`. What happens to the decimal part?
-2. Round `price` to the nearest whole number using `round()`. Is the result different
-   from the one in step 1?
-3. Convert `price` to a string using `str()`. Verify that the type has changed.
+Create one variable of each of the four basic data types covered in the video: `int`, `float`, `str`, and `bool`. Use a realistic context of your choice — for example a product, a country, or a student. Print each variable together with its type using `type()`.
 
 <details>
 <summary>Solution</summary>
 
 ```python
-price = 47.60
+country       = "Norway"    # str
+population    = 5_400_000   # int
+gdp_per_cap   = 82500.0     # float
+in_eu         = False       # bool
 
-# 1. Convert to integer
-print(int(price))
-print(type(int(price)))
+print(country,     type(country))
+print(population,  type(population))
+print(gdp_per_cap, type(gdp_per_cap))
+print(in_eu,       type(in_eu))
 ```
 ```
-47
-<class 'int'>
+Norway <class 'str'>
+5400000 <class 'int'>
+82500.0 <class 'float'>
+False <class 'bool'>
 ```
-```python
-# 2. Round to nearest whole number
-print(round(price))
-print(type(round(price)))
-```
-```
-48
-<class 'int'>
-```
-```python
-# 3. Convert to string
-price_str = str(price)
-print(price_str)
-print(type(price_str))
-```
-```
-47.6
-<class 'str'>
-```
-`int()` truncates the decimal part entirely (47), whereas `round()` rounds to the nearest
-integer (48). The two give the same result when the decimal is below .5, but differ
-otherwise — make sure you choose the right one for your purpose.
 </details>
 
 ---
 
 ### Exercise 1.7.4
-The variable `tax_rate` has been stored as a string. Without changing the original
-assignment, write code that converts it to a float and uses it to calculate the tax on a
-price of 199.90. Then try converting the variable `city` to a float and explain what
-happens.
+Before running any code, look at each variable below and write down what type you think it is. Then check your answers using `type()`. Were any of them surprising?
 
 ```python
-tax_rate = "0.25"
-city = "Oslo"
+a = 5.0
+b = 4 / 2
+c = "4"
+d = True
+e = int(4.9)
+f = round(4.9)
 ```
+
+Once you have checked the types, answer the following:
+
+1. What is the difference between `e` and `f`? What does this tell you about the difference between `int()` and `round()`?
+
+2. What do you think will happen if you try `float("2")` and `int("2.0")`? Predict the result, then run it and check.
 
 <details>
 <summary>Solution</summary>
 
 ```python
-tax_rate = "0.25"
-city = "Oslo"
+a = 5.0
+b = 4 / 2
+c = "4"
+d = True
+e = int(4.9)
+f = round(4.9)
 
-# Convert tax_rate and calculate tax
-tax = float(tax_rate) * 199.90
-print(round(tax, 2))
+print(type(a))
+print(type(b))
+print(type(c))
+print(type(d))
+print(type(e))
+print(type(f))
 ```
 ```
-49.97
+<class 'float'>
+<class 'float'>
+<class 'str'>
+<class 'bool'>
+<class 'int'>
+<class 'int'>
 ```
-```python
-# Try converting a word to a float
-print(float(city))
+
+A common surprise is `b`: even though `4 / 2` divides evenly and produces a whole number result, the output is always a `float` in Python. Division with `/` always returns a float regardless of the operands. If you need an integer result, use integer division `//` instead: `4 // 2` returns `2` as an `int`.
+
+1. `e = int(4.9)` gives `4` — `int()` simply truncates the decimal part. `f = round(4.9)` gives `5` — `round()` rounds to the nearest integer. They give different results whenever the decimal part is 0.5 or above, so it is important to choose the right one for your purpose.
+
+2. `float("2.0")` works fine and returns `2.0`. But `int("2.0")` raises a `ValueError`:
 ```
+ValueError: invalid literal for int() with base 10: '2.0'
 ```
-ValueError: could not convert string to float: 'Oslo'
-```
-`float()` can convert a string like `"0.25"` because its contents are a valid number.
-It cannot convert `"Oslo"` because there is no sensible numeric interpretation of a word.
-This situation comes up often when importing data — numeric columns are sometimes read in
-as strings and need to be converted before you can do arithmetic with them.
+Even though `"2.0"` looks like a whole number, `int()` cannot convert a string that contains a decimal point — it only accepts strings that look exactly like integers, such as `"2"`. The safe approach when converting a string that may contain decimals is to go via float first: `int(float("2.0"))` works and returns `2`. This situation comes up often when importing data from files where whole numbers have been stored with a trailing decimal point.
 </details>
 
 ---
 
 ### Exercise 1.7.5
-Create two variables, `gdp_2022` and `gdp_2023`, representing a country's GDP in two
-consecutive years. Choose any values you like. Then compute and print:
-1. The absolute change in GDP.
-2. The percentage change in GDP, rounded to two decimal places.
-3. A descriptive sentence using an f-string, for example:
-   _"GDP grew from 450000 to 512000, a change of 13.78%."_
+You are given the following variables, but two of them have been stored as the wrong type and will cause problems. Identify which ones they are, explain why they are problematic, and fix them so that the final calculation runs correctly and prints a sensible result.
+
+```python
+product   = "coffee"
+price     = "12.50"
+quantity  = 3.0
+discount  = 0.10
+
+total = price * quantity * (1 - discount)
+print(f"Total cost for {product}: {total}")
+```
 
 <details>
 <summary>Solution</summary>
 
-```python
-gdp_2022 = 450_000
-gdp_2023 = 512_000
+Running the code as-is raises a `TypeError`:
+```
+TypeError: can't multiply sequence by non-int of type 'float'
+```
 
-# 1. Absolute change
-abs_change = gdp_2023 - gdp_2022
-print(abs_change)
-```
-```
-62000
-```
+Two variables have the wrong type:
+
+- `price = "12.50"` is stored as a string. It should be a float since it represents a numeric value that we need to do arithmetic with.
+- `quantity = 3.0` is stored as a float. This is not strictly wrong — the calculation will work — but a quantity of items is a whole number and should be an integer.
+
 ```python
-# 2. Percentage change
-pct_change = round((gdp_2023 - gdp_2022) / gdp_2022 * 100, 2)
-print(pct_change)
+product   = "coffee"
+price     = float("12.50")   # or simply: price = 12.50
+quantity  = int(3.0)         # or simply: quantity = 3
+discount  = 0.10
+
+total = price * quantity * (1 - discount)
+print(f"Total cost for {product}: {total}")
 ```
 ```
-13.78
+Total cost for coffee: 33.75
 ```
-```python
-# 3. Descriptive f-string
-print(f"GDP grew from {gdp_2022:,} to {gdp_2023:,}, a change of {pct_change}%.")
-```
-```
-GDP grew from 450,000 to 512,000, a change of 13.78%.
-```
+In practice, type mismatches like this occur often when importing data from files — numeric columns are sometimes read in as strings and need to be converted before you can use them in calculations.
 </details>

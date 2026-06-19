@@ -1,6 +1,10 @@
 # Installing Python
 
-We install Python from python.org, walk through the setup on both Windows and Mac, and verify the installation by checking the version in the terminal.
+We install Python from the official website and verify the installation in the terminal. Download Python at [python.org/downloads](https://www.python.org/downloads/).
+
+::: {.callout-note}
+If you already have Python installed on your computer — for example through Anaconda — you do not need to reinstall it. Skip ahead to video 1.3 and make sure Positron can find your existing installation.
+:::
 
 *Video will be embedded here.*
 

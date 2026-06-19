@@ -1,4 +1,4 @@
-# Writing and running your first script
+# Writing scripts
 
 We write our first Python script, learn how to run code line by line and in bulk, and discuss how to read error messages.
 
@@ -36,9 +36,12 @@ Save as `scripts/exercises_topic1.py`.
 
 ### Exercise 1.5.2
 In your script, write code that computes and prints the result of:
+
 1. 17 modulo 5 (the remainder when 17 is divided by 5)
+
 2. Integer division of 17 by 5
-3. 2 raised to the power of 10
+
+3. $\frac{(15+7)^2}{11}$
 
 Run each line individually using `Ctrl+Enter` (Windows) or `Cmd+Enter` (Mac).
 
@@ -63,12 +66,11 @@ print(17 // 5)
 ```
 ```python
 # 3. Power
-print(2 ** 10)
+print((15+7)**2/11)
 ```
 ```
-1024
+44.0
 ```
-Check: 5 × 3 + 2 = 17 ✓ and 2¹⁰ = 1024 ✓
 </details>
 
 ---
@@ -104,33 +106,6 @@ In a script, Python only displays the last expression automatically. Use `print(
 ---
 
 ### Exercise 1.5.4
-Introduce a deliberate error into your script by writing the following line and running it. Read the error message carefully: what type of error is it, and what does it tell you? Then fix the line so it runs correctly.
-
-```python
-print(10 / )
-```
-
-<details>
-<summary>Solution</summary>
-
-Running the line produces:
-```
-SyntaxError: invalid syntax
-```
-Python cannot parse the expression because it is incomplete — the `/` operator is missing its right-hand operand. The fix is to complete the expression:
-
-```python
-print(10 / 2)
-```
-```
-5
-```
-`SyntaxError` means Python could not understand the code at all — it never even tried to run it.
-</details>
-
----
-
-### Exercise 1.5.5
 Run your entire script in one go using the play button or `Ctrl+Shift+Enter` / `Cmd+Shift+Enter`. Confirm that all output appears as expected. Then add a comment above each block of code in your script describing what it does.
 
 <details>
@@ -147,7 +122,7 @@ Your finished script should look something like this:
 # Modulo, integer division, and power
 print(17 % 5)
 print(17 // 5)
-print(2 ** 10)
+print((15+7)**2/11)
 
 # Running multiple lines — print() makes all results visible
 print(10 + 5)
@@ -159,10 +134,50 @@ Running the full script should produce:
 ```
 2
 3
-1024
+44.0
 15
 50
 5
 ```
 Getting into the habit of commenting your code — even simple scripts like this — makes it much easier to understand later.
+</details>
+
+### Exercise 1.5.5
+Run each of the following lines **in the console** and read the error message carefully. For each one, identify what type of error it is and explain what caused it.
+
+```python
+print(2 + )
+```
+```python
+printt(2 + 3)
+```
+```python
+print(2 + "3")
+```
+
+<details>
+<summary>Solution</summary>
+
+**Line 1:**
+```
+SyntaxError: invalid syntax
+```
+The expression is incomplete — the `+` operator is missing its right-hand operand. A `SyntaxError` means Python could not parse the code at all and never attempted to
+run it.
+
+**Line 2:**
+```
+NameError: name 'printt' is not defined
+```
+`printt` is not a recognised function — it is a misspelling of `print`. Python has no way of knowing what you meant, so it reports that the name does not exist. This
+is one of the most common beginner mistakes and is usually easy to spot once you know to look for it.
+
+**Line 3:**
+```
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+```
+Python cannot add an integer and a string (text) together. Unlike some other languages, Python does not automatically convert `"3"` to a number — you have to do it
+explicitly with `int("3")`. A `TypeError` always means that an operation was applied to a value of the wrong type.
+
+
 </details>

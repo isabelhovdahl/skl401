@@ -167,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3 Installing and Touring Positron</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3 Installing Positron</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -177,12 +177,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Writing and Running Your First Script</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Writing Scripts</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-06-packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6 Installing and Importing Packages</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-06-packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6 Packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -202,7 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-10-dataframes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.10 DataFrames: Your Most Important Object</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-10-dataframes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.10 DataFrames</span></a>
   </div>
 </li>
       </ul>
@@ -281,7 +281,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1.4.1" id="toc-exercise-1.4.1" class="nav-link" data-scroll-target="#exercise-1.4.1">Exercise 1.4.1</a></li>
+  <li><a href="#exercise-1.4.2" id="toc-exercise-1.4.2" class="nav-link" data-scroll-target="#exercise-1.4.2">Exercise 1.4.2</a></li>
+  <li><a href="#exercise-1.4.3" id="toc-exercise-1.4.3" class="nav-link" data-scroll-target="#exercise-1.4.3">Exercise 1.4.3</a></li>
+  <li><a href="#exercise-1.4.4" id="toc-exercise-1.4.4" class="nav-link" data-scroll-target="#exercise-1.4.4">Exercise 1.4.4</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -323,8 +329,82 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>os.getcwd()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="exercise-1.4.1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.4.1">Exercise 1.4.1</h3>
+<p>Open File Explorer (Windows) or Finder (Mac) and confirm that you have created the following folder structure. Then open Positron and verify that you can see the same structure in the file browser on the left-hand side.</p>
+<pre><code>skl401/
+├── data/
+├── scripts/
+└── output/</code></pre>
+<p>Can you see how the file browser in Positron is simply a reflection of what exists on your computer’s file system?</p>
+<details>
+<summary>
+Solution
+</summary>
+In Positron, go to <strong>Open → Open Folder</strong> and select your <code>skl401/</code> folder if you have not already done so. The file browser on the left should show the three subfolders <code>data/</code>, <code>scripts/</code>, and <code>output/</code>. If any of them are missing, create them in File Explorer or Finder and they will appear in Positron automatically.
+</details>
+<hr>
+</section>
+<section id="exercise-1.4.2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.4.2">Exercise 1.4.2</h3>
+<p>In the Positron console, run the following code and confirm that the path printed ends with <code>skl401</code>. If it does not, go to <strong>Open → Open Folder</strong> in Positron and open the correct folder.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(os.getcwd())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details>
+<summary>
+Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(os.getcwd())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>/Users/isabel/Documents/skl401</code></pre>
+The exact path will differ depending on your name and operating system, but it should end with <code>skl401</code>. This confirms that Positron is working from the right folder, which means relative paths in your scripts will be resolved from here.
+</details>
+<hr>
+</section>
+<section id="exercise-1.4.3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.4.3">Exercise 1.4.3</h3>
+<p>Using <code>os.listdir()</code>, print the contents of your <code>skl401/</code> folder and then the contents of your <code>data/</code> subfolder. Use a relative path for the subfolder.</p>
+<details>
+<summary>
+Solution
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Contents of the project folder</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(os.listdir())</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Contents of the data subfolder using a relative path</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(os.listdir(<span class="st">"data"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>['data', 'scripts', 'output']
+[]</code></pre>
+The <code>.</code> in <code>os.listdir()</code> refers to the current working directory — it is a shorthand for “the folder I am currently in”. The <code>data/</code> folder is empty for now, which is expected. Once you start saving data files there, they will appear in this list.
+</details>
+<hr>
+</section>
+<section id="exercise-1.4.4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1.4.4">Exercise 1.4.4</h3>
+<p>Consider the two paths below. One is an absolute path and one is a relative path.</p>
+<pre><code>/Users/isabel/Documents/skl401/data/gapminder.csv
+data/gapminder.csv</code></pre>
+<p>Answer the following questions:</p>
+<ol type="1">
+<li><p>Which is the absolute path and which is the relative path?</p></li>
+<li><p>Both paths currently point to the same file. What would happen to each path if you moved your <code>skl401/</code> folder from <code>Documents/</code> to your Desktop?</p></li>
+<li><p>Which path would you use in a script, and why?</p></li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<ol type="1">
+<li><p>The first path is the <strong>absolute path</strong> — it gives the full address of the file starting from the root of the file system. The second is the <strong>relative path</strong> — it gives the address relative to the current working directory (<code>skl401/</code>).</p></li>
+<li><p>If you moved <code>skl401/</code> to the Desktop, the <strong>absolute path would break</strong> — it still points to <code>Documents/skl401/</code>, which no longer exists. The <strong>relative path would continue to work</strong> — it only describes the location of the file relative to the project folder, so as long as <code>gapminder.csv</code> is inside the <code>data/</code> subfolder, the path is still valid regardless of where <code>skl401/</code> lives on your computer.</p></li>
+<li><p>You should use the <strong>relative path</strong> in your scripts. Relative paths make your code portable — if you move the project folder, share it with a colleague, or copy it to a different computer, the paths will still work without any changes.</p></li>
+</ol>
+</details>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -730,13 +810,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" class="pagination-link" aria-label="1.3 Installing and Touring Positron">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1.3 Installing and Touring Positron</span></span>
+      <a href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" class="pagination-link" aria-label="1.3 Installing Positron">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1.3 Installing Positron</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="pagination-link" aria-label="1.5 Writing and Running Your First Script">
-        <span class="nav-page-text"><span class="chapter-title">1.5 Writing and Running Your First Script</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="pagination-link" aria-label="1.5 Writing Scripts">
+        <span class="nav-page-text"><span class="chapter-title">1.5 Writing Scripts</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

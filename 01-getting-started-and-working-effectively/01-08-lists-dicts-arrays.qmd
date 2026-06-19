@@ -60,41 +60,135 @@ print(revenue)
 ## Exercises
 
 ### Exercise 1.8.1
-Add a new comment header for Topic 1.8 in your `exercises_topic1.py` script. Then create
-a list of five country names of your choice. Print the list, its length, and then append
-one more country to it and print the updated list.
+Create a list called `mixed` that contains one value of each of the four basic data types: an integer, a float, a string, and a boolean. Then:
+
+1. Print the list and its length.
+
+2. Append the *list* `[1, 2, 3]` to the end and print the updated list and its length.
+
+What does this tell you about what a list can contain?
 
 <details>
 <summary>Solution</summary>
 
 ```python
-# ── 1.8 Lists, dictionaries, and arrays ───────────────────────────────────────
+mixed = [42, 3.14, "Norway", True]
 
-countries = ["Norway", "Germany", "Brazil", "Japan", "Nigeria"]
-
-print(countries)
-print(len(countries))
-
-countries.append("Australia")
-print(countries)
+# 1. Print and length
+print(mixed)
+print(len(mixed))
 ```
 ```
-['Norway', 'Germany', 'Brazil', 'Japan', 'Nigeria']
+[42, 3.14, 'Norway', True]
+4
+```
+```python
+# 2. Append and print
+mixed.append([1, 2, 3])
+print(mixed)
+print(len(mixed))
+```
+```
+[42, 3.14, 'Norway', True, [1, 2, 3]]
 5
-['Norway', 'Germany', 'Brazil', 'Japan', 'Nigeria', 'Australia']
 ```
+A list can contain any mix of data types, including other lists. This flexibility is useful, but it also means Python cannot make any assumptions about what is inside a list — which is one reason why numpy arrays are better suited for numerical work.
 </details>
 
 ---
 
 ### Exercise 1.8.2
-Create a dictionary that describes a country of your choice. It should contain at least
-four keys: the country name, its continent, its population, and its GDP per capita. Then:
-1. Print the dictionary.
-2. Print only the keys.
-3. Print only the values.
-4. Add a new key `"in_eu"` with an appropriate boolean value and print the updated
-   dictionary.
+Use the following list of monthly sales figures:
+```python
+sales = [120, 340, 55, 890, 210, 45, 670]
+```
+Then use Python's built-in functions to compute and print:
+
+1. The total sales using `sum()`.
+
+2. The highest and lowest monthly sales using `max()` and `min()`.
+
+3. The average monthly sales — there is no built-in `mean()` function for lists, so compute it from `sum()` and `len()`.
+
+<details>
+<summary>Solution</summary>
+
+```python
+sales = [120, 340, 55, 890, 210, 45, 670]
+
+# 1. Total
+print(sum(sales))
+
+# 2. Max and min
+print(max(sales))
+print(min(sales))
+
+# 3. Average
+print(sum(sales) / len(sales))
+```
+```
+2330
+890
+45
+332.857142857...
+```
+`sum()`, `max()`, `min()`, and `len()` are built-in Python functions that work on any list of numbers. Note that there is no built-in `mean()` function in plain Python — you either compute it manually as above, or use `numpy`, which has `np.mean()` built in.
+</details>
+
+---
+
+### Exercise 1.8.3
+Numpy provides several useful functions for generating sequences of numbers. Look at the three examples below, run them, and describe what each one does. Then check the type of each result using `type()`.
+
+```python
+import numpy as np
+
+a = np.arange(10)
+b = np.arange(0, 100, 10)
+c = np.linspace(0, 1, 5)
+```
+
+<details>
+<summary>Solution</summary>
+
+```python
+import numpy as np
+
+a = np.arange(10)
+b = np.arange(10, 100, 10)
+c = np.linspace(-1, 1, 5)
+
+print(a)
+print(b)
+print(c)
+
+print(type(a))
+print(type(b))
+print(type(c))
+```
+```
+[0 1 2 3 4 5 6 7 8 9]
+[10 20 30 40 50 60 70 80 90]
+[-1. , -0.5,  0. ,  0.5,  1. ]
+<class 'numpy.ndarray'>
+<class 'numpy.ndarray'>
+<class 'numpy.ndarray'>
+```
+`np.arange(10)` generates integers from 0 up to but not including 10. `np.arange(10, 100, 10)` generates integers from 10 to 90 in steps of 10. `np.linspace(-1, 1, 5)` generates 5 evenly spaced values between -1 and 1 inclusive — notice that unlike `arange()`, the stop value is included. All three return a numpy array (`numpy.ndarray`).
+</details>
+
+---
+
+### Exercise 1.8.4
+Create a dictionary called `country` that describes a country of your choice. It should contain at least four keys: the country name, its continent, its population, and its GDP per capita. Then: 
+
+1. Print the dictionary and its length.
+
+2. Print only the keys. 
+
+3. Print only the values. 
+
+4. Add a new key `"in_eu"` with an appropriate boolean value and print the updated dictionary.
 
 <details>
 <summary>Solution</summary>
@@ -109,6 +203,7 @@ country = {
 
 # 1. Print the dictionary
 print(country)
+print(len(country))
 
 # 2. Keys only
 print(country.keys())
@@ -122,6 +217,7 @@ print(country)
 ```
 ```
 {'name': 'Norway', 'continent': 'Europe', 'population': 5400000, 'gdp_per_cap': 82500}
+4
 dict_keys(['name', 'continent', 'population', 'gdp_per_cap'])
 dict_values(['Norway', 'Europe', 5400000, 82500])
 {'name': 'Norway', 'continent': 'Europe', 'population': 5400000, 'gdp_per_cap': 82500, 'in_eu': False}
@@ -130,122 +226,29 @@ dict_values(['Norway', 'Europe', 5400000, 82500])
 
 ---
 
-### Exercise 1.8.3
-Create a numpy array of six product prices of your choice. Then:
-1. Compute and print the total, mean, and maximum price.
-2. Apply a 10% discount to all prices in a single operation and print the result.
-3. Create a second array of quantities (one per product) and compute the revenue for
-   each product. Print the result.
-
-<details>
-<summary>Solution</summary>
-
-```python
-import numpy as np
-
-prices    = np.array([29.90, 35.00, 12.50, 48.00, 22.75, 9.90])
-quantities = np.array([3, 5, 0, 2, 8, 4])
-
-# 1. Summary statistics
-print(prices.sum())
-print(prices.mean())
-print(prices.max())
-```
-```
-158.05
-26.341666666666665
-48.0
-```
-```python
-# 2. Apply 10% discount
-discounted = prices * 0.90
-print(discounted)
-```
-```
-[26.91 31.5  11.25 43.2  20.475  8.91]
-```
-```python
-# 3. Revenue per product
-revenue = prices * quantities
-print(revenue)
-```
-```
-[ 89.7  175.    0.   96.  182.   39.6]
-```
-</details>
-
----
-
-### Exercise 1.8.4
-The code below attempts to perform arithmetic on a list. Run it and read the error message.
-Then fix it by converting the list to a numpy array and confirm that the operation works
-as expected.
-
-```python
-temperatures = [12.5, 18.3, 9.7, 22.1, 15.0]
-print(temperatures * 2)
-```
-
-<details>
-<summary>Solution</summary>
-
-Running the code does not produce an error, but it does not do what we want either —
-multiplying a list by 2 repeats the list rather than doubling each value:
-```
-[12.5, 18.3, 9.7, 22.1, 15.0, 12.5, 18.3, 9.7, 22.1, 15.0]
-```
-Converting to a numpy array gives the expected element-wise result:
-```python
-import numpy as np
-
-temperatures = np.array([12.5, 18.3, 9.7, 22.1, 15.0])
-print(temperatures * 2)
-```
-```
-[25.  36.6 19.4 44.2 30. ]
-```
-This is one of the most common sources of confusion when moving between plain Python lists
-and numpy arrays — they look similar but behave very differently under arithmetic
-operations.
-</details>
-
----
-
 ### Exercise 1.8.5
-Create a list and a numpy array that both contain the same five integers. Verify that
-the following operations behave differently depending on whether you use a list or an
-array, and explain the difference in each case:
-1. Adding the collection to itself (i.e. `x + x`).
-2. Checking the sum using `sum()`.
+The code below tries to convert a list of temperatures from Celsius to Fahrenheit using the formula `(temp * 9/5) + 32`. Run it and observe what happens. Then fix it using a numpy array and verify that the result is correct.
+
+```python
+temperatures_c = [0, 10, 20, 30, 100]
+print(temperatures_c * 9/5 + 32)
+```
 
 <details>
 <summary>Solution</summary>
 
+Running the code raises a `TypeError`. Python cannot multiply a list by a float or divide a list as lists do not support element-wise arithmetic. Converting to a numpy array solves this because arrays support element-wise operations:
+
 ```python
 import numpy as np
 
-numbers_list  = [1, 2, 3, 4, 5]
-numbers_array = np.array([1, 2, 3, 4, 5])
-
-# 1. Adding to itself
-print(numbers_list  + numbers_list)
-print(numbers_array + numbers_array)
+temperatures_c = np.array([0, 10, 20, 30, 100])
+temperatures_f = (temperatures_c * 9/5) + 32
+print(temperatures_f)
 ```
 ```
-[1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
-[ 2  4  6  8 10]
+[ 32.  50.  68.  86. 212.]
 ```
-```python
-# 2. sum()
-print(sum(numbers_list))
-print(sum(numbers_array))
-```
-```
-15
-15
-```
-For operation 1, `+` on two lists concatenates them (appends one after the other), whereas
-`+` on two arrays adds them element-wise, just like vector addition. For operation 2,
-Python's built-in `sum()` works on both and gives the same result — but for arrays it is
-better practice to use `numbers_array.sum()`, which is faster and more readable.
+We can verify a few values manually: 0°C = 32°F ✓, 100°C = 212°F ✓. Notice that the formula was applied to every element simultaneously. This is the core
+strength of numpy arrays for numerical work.
 </details>

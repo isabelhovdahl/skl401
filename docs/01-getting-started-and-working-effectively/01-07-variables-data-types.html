@@ -167,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3 Installing and Touring Positron</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3 Installing Positron</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -177,12 +177,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Writing and Running Your First Script</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Writing Scripts</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-06-packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6 Installing and Importing Packages</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-06-packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6 Packages</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -202,7 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-10-dataframes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.10 DataFrames: Your Most Important Object</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-10-dataframes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.10 DataFrames</span></a>
   </div>
 </li>
       </ul>
@@ -380,128 +380,151 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <section id="exercise-1.7.1" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1.7.1">Exercise 1.7.1</h3>
-<p>Add a new comment header for Topic 1.7 in your <code>exercises_topic1.py</code> script. Then create variables to describe a product of your choice. Your variables should include at least one of each of the four basic data types: integer, float, string, and boolean. Print the value and type of each variable.</p>
+<p>Without running the code, predict the value that will be printed on the last line. Then run the code to check your answer. What does this tell you about how variable assignment works in Python?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> x <span class="op">+</span> <span class="dv">5</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> x <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details>
 <summary>
 Solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ── 1.7 Variables and basic data types ────────────────────────────────────────</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>product_name  <span class="op">=</span> <span class="st">"coffee"</span>       <span class="co"># str</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>price         <span class="op">=</span> <span class="fl">29.90</span>          <span class="co"># float</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>quantity      <span class="op">=</span> <span class="dv">3</span>              <span class="co"># int</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>in_stock      <span class="op">=</span> <span class="va">True</span>           <span class="co"># bool</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(product_name, <span class="bu">type</span>(product_name))</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(price,        <span class="bu">type</span>(price))</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(quantity,     <span class="bu">type</span>(quantity))</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(in_stock,     <span class="bu">type</span>(in_stock))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>coffee &lt;class 'str'&gt;
-29.9 &lt;class 'float'&gt;
-3 &lt;class 'int'&gt;
-True &lt;class 'bool'&gt;</code></pre>
+<pre><code>30</code></pre>
+Step by step: <code>x</code> starts as <code>10</code>, then becomes <code>10 + 5 = 15</code>, then becomes <code>15 * 2 = 30</code>. Each assignment overwrites the previous value without any warning. This means you need to be careful with variable names in longer scripts — if you reuse a name by accident, the old value is gone and Python will not tell you.
 </details>
 <hr>
 </section>
 <section id="exercise-1.7.2" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1.7.2">Exercise 1.7.2</h3>
-<p>The three variables below contain errors that will either cause an immediate error or produce unexpected results. Identify and fix each one.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="er">nd_quarter</span> <span class="op">=</span> <span class="dv">15000</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>revenue <span class="op">=</span> <span class="st">"50000"</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>is_available <span class="op">=</span> true</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Some of the variable names below are invalid or go against Python conventions. Identify which ones are problematic, explain what is wrong with each, and suggest a corrected name.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2025</span><span class="er">_sales</span> <span class="op">=</span> <span class="dv">15000</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>monthly revenue <span class="op">=</span> <span class="dv">8000</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>FirstName <span class="op">=</span> <span class="st">"Julia"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">int</span> <span class="op">=</span> <span class="dv">42</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>gdp_per_capita <span class="op">=</span> <span class="dv">55000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details>
 <summary>
 Solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Variable names cannot start with a number</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>quarter_2 <span class="op">=</span> <span class="dv">15000</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Invalid — variable names cannot start with a number</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sales_2025 <span class="op">=</span> <span class="dv">15000</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. The number is stored as a string — arithmetic will not work as expected</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>revenue <span class="op">=</span> <span class="dv">50000</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Invalid — variable names cannot contain spaces</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>monthly_revenue <span class="op">=</span> <span class="dv">8000</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Boolean values must be capitalised in Python</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>is_available <span class="op">=</span> <span class="va">True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li><code>2nd_quarter</code> raises a <code>SyntaxError</code> because variable names cannot begin with a digit.</li>
-<li><code>"50000"</code> is valid Python but stores the number as text. Trying to do arithmetic with it later will raise a <code>TypeError</code>.</li>
-<li><code>true</code> (lowercase) raises a <code>NameError</code> because Python does not recognise it — the correct boolean value is <code>True</code> with a capital T.</li>
-</ul>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Valid but not conventional — Python uses snake_case, not CamelCase</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>first_name <span class="op">=</span> <span class="st">"Julia"</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Valid but dangerous — this overwrites Python's built-in int() function,</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># meaning int() will no longer work for the rest of the session</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>n_int <span class="op">=</span> <span class="dv">42</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># No problem — this is a good variable name</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>gdp_per_capita <span class="op">=</span> <span class="dv">55000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+The first two will cause an immediate <code>SyntaxError</code>. The third works but goes against Python conventions — use snake_case for variable names. The fourth is the most subtle: it runs without error but silently breaks <code>int()</code> for the rest of your session. Always avoid using the names of built-in Python functions as variable names.
 </details>
 <hr>
 </section>
 <section id="exercise-1.7.3" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1.7.3">Exercise 1.7.3</h3>
-<p>You have a float variable <code>price = 47.60</code>. Perform the following conversions and print each result: 1. Convert <code>price</code> to an integer using <code>int()</code>. What happens to the decimal part? 2. Round <code>price</code> to the nearest whole number using <code>round()</code>. Is the result different from the one in step 1? 3. Convert <code>price</code> to a string using <code>str()</code>. Verify that the type has changed.</p>
+<p>Create one variable of each of the four basic data types covered in the video: <code>int</code>, <code>float</code>, <code>str</code>, and <code>bool</code>. Use a realistic context of your choice — for example a product, a country, or a student. Print each variable together with its type using <code>type()</code>.</p>
 <details>
 <summary>
 Solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>price <span class="op">=</span> <span class="fl">47.60</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Convert to integer</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">int</span>(price))</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(<span class="bu">int</span>(price)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>47
-&lt;class 'int'&gt;</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Round to nearest whole number</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(price))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(<span class="bu">round</span>(price)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>48
-&lt;class 'int'&gt;</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Convert to string</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>price_str <span class="op">=</span> <span class="bu">str</span>(price)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(price_str)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(price_str))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>47.6
-&lt;class 'str'&gt;</code></pre>
-<code>int()</code> truncates the decimal part entirely (47), whereas <code>round()</code> rounds to the nearest integer (48). The two give the same result when the decimal is below .5, but differ otherwise — make sure you choose the right one for your purpose.
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>country       <span class="op">=</span> <span class="st">"Norway"</span>    <span class="co"># str</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>population    <span class="op">=</span> <span class="dv">5_400_000</span>   <span class="co"># int</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>gdp_per_cap   <span class="op">=</span> <span class="fl">82500.0</span>     <span class="co"># float</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>in_eu         <span class="op">=</span> <span class="va">False</span>       <span class="co"># bool</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(country,     <span class="bu">type</span>(country))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(population,  <span class="bu">type</span>(population))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gdp_per_cap, <span class="bu">type</span>(gdp_per_cap))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(in_eu,       <span class="bu">type</span>(in_eu))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Norway &lt;class 'str'&gt;
+5400000 &lt;class 'int'&gt;
+82500.0 &lt;class 'float'&gt;
+False &lt;class 'bool'&gt;</code></pre>
 </details>
 <hr>
 </section>
 <section id="exercise-1.7.4" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1.7.4">Exercise 1.7.4</h3>
-<p>The variable <code>tax_rate</code> has been stored as a string. Without changing the original assignment, write code that converts it to a float and uses it to calculate the tax on a price of 199.90. Then try converting the variable <code>city</code> to a float and explain what happens.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tax_rate <span class="op">=</span> <span class="st">"0.25"</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>city <span class="op">=</span> <span class="st">"Oslo"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Before running any code, look at each variable below and write down what type you think it is. Then check your answers using <code>type()</code>. Were any of them surprising?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="fl">5.0</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">4</span> <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="st">"4"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> <span class="bu">int</span>(<span class="fl">4.9</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="bu">round</span>(<span class="fl">4.9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Once you have checked the types, answer the following:</p>
+<ol type="1">
+<li><p>What is the difference between <code>e</code> and <code>f</code>? What does this tell you about the difference between <code>int()</code> and <code>round()</code>?</p></li>
+<li><p>What do you think will happen if you try <code>float("2")</code> and <code>int("2.0")</code>? Predict the result, then run it and check.</p></li>
+</ol>
 <details>
 <summary>
 Solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>tax_rate <span class="op">=</span> <span class="st">"0.25"</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>city <span class="op">=</span> <span class="st">"Oslo"</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert tax_rate and calculate tax</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>tax <span class="op">=</span> <span class="bu">float</span>(tax_rate) <span class="op">*</span> <span class="fl">199.90</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">round</span>(tax, <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>49.97</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Try converting a word to a float</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">float</span>(city))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>ValueError: could not convert string to float: 'Oslo'</code></pre>
-<code>float()</code> can convert a string like <code>"0.25"</code> because its contents are a valid number. It cannot convert <code>"Oslo"</code> because there is no sensible numeric interpretation of a word. This situation comes up often when importing data — numeric columns are sometimes read in as strings and need to be converted before you can do arithmetic with them.
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="fl">5.0</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">4</span> <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="st">"4"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> <span class="bu">int</span>(<span class="fl">4.9</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="bu">round</span>(<span class="fl">4.9</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(a))</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(b))</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(c))</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(d))</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(e))</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(f))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>&lt;class 'float'&gt;
+&lt;class 'float'&gt;
+&lt;class 'str'&gt;
+&lt;class 'bool'&gt;
+&lt;class 'int'&gt;
+&lt;class 'int'&gt;</code></pre>
+<p>A common surprise is <code>b</code>: even though <code>4 / 2</code> divides evenly and produces a whole number result, the output is always a <code>float</code> in Python. Division with <code>/</code> always returns a float regardless of the operands. If you need an integer result, use integer division <code>//</code> instead: <code>4 // 2</code> returns <code>2</code> as an <code>int</code>.</p>
+<ol type="1">
+<li><p><code>e = int(4.9)</code> gives <code>4</code> — <code>int()</code> simply truncates the decimal part. <code>f = round(4.9)</code> gives <code>5</code> — <code>round()</code> rounds to the nearest integer. They give different results whenever the decimal part is 0.5 or above, so it is important to choose the right one for your purpose.</p></li>
+<li><p><code>float("2.0")</code> works fine and returns <code>2.0</code>. But <code>int("2.0")</code> raises a <code>ValueError</code>:</p></li>
+</ol>
+<pre><code>ValueError: invalid literal for int() with base 10: '2.0'</code></pre>
+Even though <code>"2.0"</code> looks like a whole number, <code>int()</code> cannot convert a string that contains a decimal point — it only accepts strings that look exactly like integers, such as <code>"2"</code>. The safe approach when converting a string that may contain decimals is to go via float first: <code>int(float("2.0"))</code> works and returns <code>2</code>. This situation comes up often when importing data from files where whole numbers have been stored with a trailing decimal point.
 </details>
 <hr>
 </section>
 <section id="exercise-1.7.5" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1.7.5">Exercise 1.7.5</h3>
-<p>Create two variables, <code>gdp_2022</code> and <code>gdp_2023</code>, representing a country’s GDP in two consecutive years. Choose any values you like. Then compute and print: 1. The absolute change in GDP. 2. The percentage change in GDP, rounded to two decimal places. 3. A descriptive sentence using an f-string, for example: <em>“GDP grew from 450000 to 512000, a change of 13.78%.”</em></p>
+<p>You are given the following variables, but two of them have been stored as the wrong type and will cause problems. Identify which ones they are, explain why they are problematic, and fix them so that the final calculation runs correctly and prints a sensible result.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>product   <span class="op">=</span> <span class="st">"coffee"</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>price     <span class="op">=</span> <span class="st">"12.50"</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>quantity  <span class="op">=</span> <span class="fl">3.0</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>discount  <span class="op">=</span> <span class="fl">0.10</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> price <span class="op">*</span> quantity <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> discount)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total cost for </span><span class="sc">{</span>product<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>total<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <details>
 <summary>
 Solution
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>gdp_2022 <span class="op">=</span> <span class="dv">450_000</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>gdp_2023 <span class="op">=</span> <span class="dv">512_000</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Absolute change</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>abs_change <span class="op">=</span> gdp_2023 <span class="op">-</span> gdp_2022</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(abs_change)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>62000</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Percentage change</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>pct_change <span class="op">=</span> <span class="bu">round</span>((gdp_2023 <span class="op">-</span> gdp_2022) <span class="op">/</span> gdp_2022 <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pct_change)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>13.78</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Descriptive f-string</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"GDP grew from </span><span class="sc">{</span>gdp_2022<span class="sc">:,}</span><span class="ss"> to </span><span class="sc">{</span>gdp_2023<span class="sc">:,}</span><span class="ss">, a change of </span><span class="sc">{</span>pct_change<span class="sc">}</span><span class="ss">%."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>GDP grew from 450,000 to 512,000, a change of 13.78%.</code></pre>
+<p>Running the code as-is raises a <code>TypeError</code>:</p>
+<pre><code>TypeError: can't multiply sequence by non-int of type 'float'</code></pre>
+<p>Two variables have the wrong type:</p>
+<ul>
+<li><code>price = "12.50"</code> is stored as a string. It should be a float since it represents a numeric value that we need to do arithmetic with.</li>
+<li><code>quantity = 3.0</code> is stored as a float. This is not strictly wrong — the calculation will work — but a quantity of items is a whole number and should be an integer.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>product   <span class="op">=</span> <span class="st">"coffee"</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>price     <span class="op">=</span> <span class="bu">float</span>(<span class="st">"12.50"</span>)   <span class="co"># or simply: price = 12.50</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>quantity  <span class="op">=</span> <span class="bu">int</span>(<span class="fl">3.0</span>)         <span class="co"># or simply: quantity = 3</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>discount  <span class="op">=</span> <span class="fl">0.10</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> price <span class="op">*</span> quantity <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> discount)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total cost for </span><span class="sc">{</span>product<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>total<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Total cost for coffee: 33.75</code></pre>
+In practice, type mismatches like this occur often when importing data from files — numeric columns are sometimes read in as strings and need to be converted before you can use them in calculations.
 </details>
 
 
@@ -911,8 +934,8 @@ Solution
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../01-getting-started-and-working-effectively/01-06-packages.html" class="pagination-link" aria-label="1.6 Installing and Importing Packages">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1.6 Installing and Importing Packages</span></span>
+      <a href="../01-getting-started-and-working-effectively/01-06-packages.html" class="pagination-link" aria-label="1.6 Packages">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1.6 Packages</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

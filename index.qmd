@@ -5,7 +5,8 @@ Welcome to SKL401 — Introduction to Python. This is a digital seminar designed
 Python is a free, open-source programming language known for its clarity and versatility. First released in 1991, it has grown into one of the most widely used programming languages in the world, with particularly strong adoption in data science, economics, and finance. Its strength lies in a rich ecosystem of packages that extend the language to almost any analytical task. Throughout this course we will explore some of the most central and user-friendly packages for working with, analysing, and visualising data such as pandas, matplotlib, and statsmodels.
 
 <!-- Video 1.1: Welcome -->
-{{< video https://vimeo.com/reviews/712c8faa-8950-4d95-9117-5a2e1479bfc8/videos/1200434180 >}}
+*Video will be embedded here.*
+
 
 ## Course overview
 
@@ -19,7 +20,7 @@ The course is organized into five topics:
 
 ## How the course works
 
-The material is presented as short video lessons, each covering a single topic. The videos are followed by a series of programming problems of varying difficulty, and it is *crucial* that you spend time on these problems in order to develop your own muscle memory and to get a sense of where you are in your own learning process. The course material is self-contained, which means that you can start learning **whenever and wherever you want.**
+The material is presented as short video lessons, each covering a single topic. The videos are followed by a series of programming problems of varying difficulty, and it is *crucial* that you spend time on these problems in order to develop muscle memory and to get a sense of where you are in your own learning process. The course material is self-contained, which means that you can start learning **whenever and wherever you want.**
 
 ## Using Artificial Intelligence while learning
 
@@ -47,3 +48,10 @@ Note that all students at NHH have access to a privacy-friendly AI assistant thr
 This web-page only contains the contents of the course, in the form of video lessons and accompanying problem sets. For semester-specific information such as announcements, dates and locations for physical learning sessions, you should consult the course's Canvas page, to which you will gain access once you have completed your semester registration.
 
 For exam dates, see the [official schedule information from NHH](https://www.nhh.no/en/for-students/schedule/).
+
+::: {.callout-tip}
+## Found a mistake?
+If you spot any errors or bugs on this page — in the text, the code, or the exercises —
+please let me know at [isabel.hovdahl@nhh.no](mailto:isabel.hovdahl@nhh.no). Your
+feedback helps make the course better for everyone.
+:::

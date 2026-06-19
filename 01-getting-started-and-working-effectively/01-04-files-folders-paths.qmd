@@ -21,3 +21,97 @@ os.getcwd()
 
 ## Exercises
 
+### Exercise 1.4.1
+Open File Explorer (Windows) or Finder (Mac) and confirm that you have created the following folder structure. Then open Positron and verify that you can see the same
+structure in the file browser on the left-hand side.
+
+```
+skl401/
+├── data/
+├── scripts/
+└── output/
+```
+
+Can you see how the file browser in Positron is simply a reflection of what exists on your computer's file system?
+
+<details>
+<summary>Solution</summary>
+
+In Positron, go to **Open → Open Folder** and select your `skl401/` folder if you have not already done so. The file browser on the left should show the three subfolders `data/`, `scripts/`, and `output/`. If any of them are missing, create them in File Explorer or Finder and they will appear in Positron automatically.
+</details>
+
+---
+
+### Exercise 1.4.2
+In the Positron console, run the following code and confirm that the path printed ends with `skl401`. If it does not, go to **Open → Open Folder** in Positron and open the correct folder.
+
+```python
+import os
+print(os.getcwd())
+```
+
+<details>
+<summary>Solution</summary>
+
+```python
+import os
+print(os.getcwd())
+```
+```
+/Users/isabel/Documents/skl401
+```
+The exact path will differ depending on your name and operating system, but it should end with `skl401`. This confirms that Positron is working from the right folder, which means relative paths in your scripts will be resolved from here.
+</details>
+
+---
+
+### Exercise 1.4.3
+Using `os.listdir()`, print the contents of your `skl401/` folder and then the contents of your `data/` subfolder. Use a relative path for the subfolder.
+
+<details>
+<summary>Solution</summary>
+
+```python
+import os
+
+# Contents of the project folder
+print(os.listdir())
+
+# Contents of the data subfolder using a relative path
+print(os.listdir("data"))
+```
+```
+['data', 'scripts', 'output']
+[]
+```
+The `.` in `os.listdir()` refers to the current working directory — it is a shorthand for "the folder I am currently in". The `data/` folder is empty for now, which is expected. Once you start saving data files there, they will appear in this list.
+</details>
+
+---
+
+### Exercise 1.4.4
+Consider the two paths below. One is an absolute path and one is a relative path.
+
+```
+/Users/isabel/Documents/skl401/data/gapminder.csv
+data/gapminder.csv
+```
+
+Answer the following questions:
+
+1. Which is the absolute path and which is the relative path?
+
+2. Both paths currently point to the same file. What would happen to each path if you moved your `skl401/` folder from `Documents/` to your Desktop?
+
+3. Which path would you use in a script, and why?
+
+<details>
+<summary>Solution</summary>
+
+1. The first path is the **absolute path** — it gives the full address of the file starting from the root of the file system. The second is the **relative path** — it
+   gives the address relative to the current working directory (`skl401/`).
+
+2. If you moved `skl401/` to the Desktop, the **absolute path would break** — it still points to `Documents/skl401/`, which no longer exists. The **relative path would continue to work** — it only describes the location of the file relative to the project folder, so as long as `gapminder.csv` is inside the `data/` subfolder, the path is still valid regardless of where `skl401/` lives on your computer.
+
+3. You should use the **relative path** in your scripts. Relative paths make your code portable — if you move the project folder, share it with a colleague, or copy it to a different computer, the paths will still work without any changes.
+</details>
