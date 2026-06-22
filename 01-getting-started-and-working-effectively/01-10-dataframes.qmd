@@ -45,36 +45,85 @@ print(df)
 ## Exercises
 
 ### Exercise 1.10.1
-Add a new comment header for Topic 1.10 in your `exercises_topic1.py` script. Then create
-a DataFrame of your choice with at least four columns and five rows. It should contain at
-least one column of each of the following types: string, integer, and float. Print the
-DataFrame and inspect it using `.info()` and `.describe()`.
+Create a DataFrame representing a class of five students. The DataFrame must contain the
+following four columns:
+
+- `name` — the name of the student (string)
+- `age` — the age of the student (integer)
+- `grade` — the final grade on a scale from 0 to 100 (float)
+- `passed` — whether the student passed the course (boolean)
+
+Use made-up names and values of your choice. Print the DataFrame when you are done.
 
 <details>
 <summary>Solution</summary>
 
 ```python
-# ── 1.10 DataFrames ───────────────────────────────────────────────────────────
-
 import pandas as pd
 
-students = {
+data = {
     "name":   ["Alice", "Bob", "Clara", "David", "Emma"],
     "age":    [23, 25, 22, 26, 24],
-    "gpa":    [3.8, 3.2, 3.9, 2.8, 3.5],
+    "grade":  [88.5, 63.0, 91.5, 45.0, 76.5],
     "passed": [True, True, True, False, True],
 }
 
-df = pd.DataFrame(students)
+df = pd.DataFrame(data)
 print(df)
 ```
 ```
-    name  age  gpa  passed
-0  Alice   23  3.8    True
-1    Bob   25  3.2    True
-2  Clara   22  3.9    True
-3  David   26  2.8   False
-4   Emma   24  3.5    True
+    name  age  grade  passed
+0  Alice   23   88.5    True
+1    Bob   25   63.0    True
+2  Clara   22   91.5    True
+3  David   26   45.0   False
+4   Emma   24   76.5    True
+```
+</details>
+
+---
+
+### Exercise 1.10.2
+Using the DataFrame you created in Exercise 1.10.1, run each of the inspection tools
+below and answer the questions that follow.
+
+```python
+print(df.shape)
+print(df.head(3))
+print(df.tail(2))
+df.info()
+print(df.describe())
+```
+
+1. How many rows and columns does the DataFrame have?
+2. What data type has pandas assigned to each column? Are they what you would expect?
+3. `.describe()` only summarises some of the columns. Which ones does it skip and why?
+
+<details>
+<summary>Solution</summary>
+
+```python
+print(df.shape)
+```
+```
+(5, 4)
+```
+```python
+print(df.head(3))
+```
+```
+    name  age  grade  passed
+0  Alice   23   88.5    True
+1    Bob   25   63.0    True
+2  Clara   22   91.5    True
+```
+```python
+print(df.tail(2))
+```
+```
+    name  age  grade  passed
+3  David   26   45.0   False
+4   Emma   24   76.5    True
 ```
 ```python
 df.info()
@@ -87,7 +136,7 @@ Data columns (total 4 columns):
 ---  ------  --------------  -----
  0   name    5 non-null      object
  1   age     5 non-null      int64
- 2   gpa     5 non-null      float64
+ 2   grade   5 non-null      float64
  3   passed  5 non-null      bool
 dtypes: bool(1), float64(1), int64(1), object(1)
 memory usage: 293.0+ bytes
@@ -96,190 +145,197 @@ memory usage: 293.0+ bytes
 print(df.describe())
 ```
 ```
-             age        gpa
+             age      grade
 count   5.000000   5.000000
-mean   24.000000   3.440000
-std     1.581139   0.430116
-min    22.000000   2.800000
-25%    23.000000   3.200000
-50%    24.000000   3.500000
-75%    25.000000   3.800000
-max    26.000000   3.900000
+mean   24.000000  72.900000
+std     1.581139  18.836379
+min    22.000000  45.000000
+25%    23.000000  63.000000
+50%    24.000000  76.500000
+75%    25.000000  88.500000
+max    26.000000  91.500000
 ```
-Note that `.describe()` only summarises numeric columns by default — string and boolean
-columns are excluded.
-</details>
 
----
-
-### Exercise 1.10.2
-Using the DataFrame you created in Exercise 1.10.1, practice the following column
-operations:
-1. Select a single column and print it.
-2. Compute the mean, minimum, and maximum of one of the numeric columns.
-3. Select two columns simultaneously and print the result.
-
-<details>
-<summary>Solution</summary>
-
-```python
-# 1. Select a single column
-print(df["name"])
-```
-```
-0    Alice
-1      Bob
-2    Clara
-3    David
-4     Emma
-Name: name, dtype: object
-```
-```python
-# 2. Summary statistics on a numeric column
-print(df["gpa"].mean())
-print(df["gpa"].min())
-print(df["gpa"].max())
-```
-```
-3.44
-2.8
-3.9
-```
-```python
-# 3. Select two columns
-print(df[["name", "gpa"]])
-```
-```
-    name  gpa
-0  Alice  3.8
-1    Bob  3.2
-2  Clara  3.9
-3  David  2.8
-4   Emma  3.5
-```
-Notice the difference in syntax: a single column name inside single brackets returns a
-Series, while a list of column names inside double brackets returns a DataFrame.
+1. The DataFrame has 5 rows and 4 columns, as shown by `.shape`.
+2. `name` is `object` (pandas' label for strings), `age` is `int64`, `grade` is
+   `float64`, and `passed` is `bool` — all as expected.
+3. `.describe()` only summarises `age` and `grade`. It skips `name` because it is a
+   string, and `passed` because it is boolean. By default, `.describe()` only includes
+   numeric columns.
 </details>
 
 ---
 
 ### Exercise 1.10.3
-Add two new columns to your DataFrame:
-1. A column `"age_months"` that converts the age in years to age in months.
-2. A boolean column `"high_achiever"` that is `True` if the GPA is above 3.5 and `False`
-   otherwise.
+Run the two lines below and look carefully at the output and the type of each result.
+What is the difference between them?
 
-Print the updated DataFrame.
+```python
+print(df["grade"])
+print(type(df["grade"]))
+
+print(df[["grade"]])
+print(type(df[["grade"]]))
+```
+
+Now select the `name` and `grade` columns together using double brackets. What type
+does this return?
 
 <details>
 <summary>Solution</summary>
 
 ```python
-# 1. Age in months
-df["age_months"] = df["age"] * 12
-
-# 2. High achiever flag
-df["high_achiever"] = df["gpa"] > 3.5
-
-print(df)
+print(df["grade"])
+print(type(df["grade"]))
 ```
 ```
-    name  age  gpa  passed  age_months  high_achiever
-0  Alice   23  3.8    True         276           True
-1    Bob   25  3.2    True         300          False
-2  Clara   22  3.9    True         264           True
-3  David   26  2.8   False         312          False
-4   Emma   24  3.5    True         288          False
+0    88.5
+1    63.0
+2    91.5
+3    45.0
+4    76.5
+Name: grade, dtype: float64
+<class 'pandas.core.series.Series'>
 ```
-The expression `df["gpa"] > 3.5` evaluates the condition for every row simultaneously and
-returns a boolean Series, which we then store directly as a new column. Notice that a GPA
-of exactly 3.5 returns `False` since the condition is strictly greater than.
+```python
+print(df[["grade"]])
+print(type(df[["grade"]]))
+```
+```
+   grade
+0   88.5
+1   63.0
+2   91.5
+3   45.0
+4   76.5
+<class 'pandas.core.frame.DataFrame'>
+```
+```python
+print(df[["name", "grade"]])
+print(type(df[["name", "grade"]]))
+```
+```
+    name  grade
+0  Alice   88.5
+1    Bob   63.0
+2  Clara   91.5
+3  David   45.0
+4   Emma   76.5
+<class 'pandas.core.frame.DataFrame'>
+```
+Single brackets return a **Series** — a single column with its index on the left and no
+column header. Double brackets return a **DataFrame** — notice the column header and the
+slightly different layout. A Series is to a DataFrame what a single column is to a
+spreadsheet. You can only select multiple columns with double brackets since you need to
+pass a list of names. Trying `df["name", "grade"]` will raise a `KeyError`.
 </details>
 
 ---
 
 ### Exercise 1.10.4
-Use `.head()` and `.tail()` to inspect your DataFrame. Then check how many rows and
-columns it has using a single attribute — without using `len()` or `.info()`.
+Using your student DataFrame, compute and print the following:
 
-(_Hint_: all DataFrames have an attribute that returns the number of rows and columns as
-a tuple.)
+1. The average grade across all students.
+
+2. The highest and lowest grade.
+
+3. The total sum of all ages.
+
+4. The deviation from the average grade: compute the mean grade, then compute how far each
+   student's grade is from the mean by subtracting the mean from the `grade` column.
+   Print the result.
 
 <details>
 <summary>Solution</summary>
 
 ```python
-print(df.head(3))
-print(df.tail(2))
-print(df.shape)
-```
-```
-    name  age  gpa  passed  age_months  high_achiever
-0  Alice   23  3.8    True         276           True
-1    Bob   25  3.2    True         300          False
-2  Clara   22  3.9    True         264           True
+# 1. Average grade
+print(df["grade"].mean())
 
-    name  age  gpa  passed  age_months  high_achiever
-3  David   26  2.8   False         312          False
-4   Emma   24  3.5    True         288          False
+# 2. Highest and lowest grade
+print(df["grade"].max())
+print(df["grade"].min())
 
-(5, 6)
+# 3. Total sum of ages
+print(df["age"].sum())
+
+# 4. Deviation from mean grade
+mean_grade = df["grade"].mean()
+deviation  = df["grade"] - mean_grade
+print(deviation)
 ```
-`.shape` returns a tuple of `(rows, columns)`. You can access each dimension individually
-with `df.shape[0]` for the number of rows and `df.shape[1]` for the number of columns.
+```
+72.9
+91.5
+45.0
+120
+0    15.6
+1   -9.9
+2    18.6
+3   -27.9
+4     3.6
+Name: grade, dtype: float64
+```
+For operation 4, subtracting a single value from a column applies the subtraction to
+every row simultaneously — no loop needed. A positive value means the student scored
+above the class average; a negative value means below.
 </details>
 
 ---
 
 ### Exercise 1.10.5
-Create a new DataFrame from the dictionary below, which contains some messiness typical
-of real data. Inspect it with `.info()` and identify two potential problems you would want
-to fix before doing any analysis.
+Create a DataFrame from the weather observations table below.
 
-```python
-data = {
-    "country":     ["Norway", "Germany", "Brazil", "Japan", "Nigeria"],
-    "gdp_per_cap": [82500, 48000, "8600", 42000, 2100],
-    "population":  [5_400_000, 84_000_000, 214_000_000, 125_000_000, None],
-    "continent":   ["Europe", "Europe", "Americas", "Asia", "Africa"],
-}
-```
+| city | temp_celsius | humidity | cloudy |
+|------|-------------|----------|--------|
+| Oslo | 12.3 | 72 | True |
+| Bergen | 8.7 | 85 | True |
+| Trondheim | 15.1 | 60 | False |
+| Stavanger | 10.5 | 78 | True |
+| Tromsø | 3.2 | 65 | False |
+
+Then add the following three new columns and print the final result:
+
+1. `temp_fahrenheit` — the temperature converted from Celsius to Fahrenheit using the
+   formula: `(temp_celsius * 9/5) + 32`. Round to one decimal place.
+2. `humidity_fraction` — the humidity converted from a percentage to a fraction by
+   dividing by 100.
+3. `heat_index` — a simplified heat index computed as:
+   `temp_celsius + 0.33 * humidity - 4`. Round to one decimal place.
 
 <details>
 <summary>Solution</summary>
 
 ```python
-data = {
-    "country":     ["Norway", "Germany", "Brazil", "Japan", "Nigeria"],
-    "gdp_per_cap": [82500, 48000, "8600", 42000, 2100],
-    "population":  [5_400_000, 84_000_000, 214_000_000, 125_000_000, None],
-    "continent":   ["Europe", "Europe", "Americas", "Asia", "Africa"],
+weather = {
+    "city":         ["Oslo", "Bergen", "Trondheim", "Stavanger", "Tromsø"],
+    "temp_celsius": [12.3, 8.7, 15.1, 10.5, 3.2],
+    "humidity":     [72, 85, 60, 78, 65],
+    "cloudy":       [True, True, False, True, False],
 }
 
-df2 = pd.DataFrame(data)
-df2.info()
-```
-```
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 5 entries, 0 to 4
-Data columns (total 4 columns):
- #   Column       Non-Null Count  Dtype
----  ------       --------------  -----
- 0   country      5 non-null      object
- 1   gdp_per_cap  5 non-null      object
- 2   population   4 non-null      float64
- 3   continent    5 non-null      object
-dtypes: float64(1), object(3)
-memory usage: 292.0+ bytes
-```
-Two problems are visible from `.info()`:
+df_weather = pd.DataFrame(weather)
 
-- **`gdp_per_cap` is stored as `object` (string) instead of a number.** This is because
-  one of the values — `"8600"` for Brazil — was entered as a string. When a column mixes
-  types, pandas falls back to storing everything as an object, which means you cannot do
-  arithmetic on it without converting it first.
-- **`population` has a missing value.** Nigeria's population is `None`, which pandas
-  stores as `NaN`. The column only has 4 non-null entries out of 5, and any calculation
-  on this column will either ignore or propagate the missing value depending on the
-  operation. Both issues need to be addressed before the data can be analysed reliably.
+# 1. Temperature in Fahrenheit
+df_weather["temp_fahrenheit"] = ((df_weather["temp_celsius"] * 9/5) + 32).round(1)
+
+# 2. Humidity as a fraction
+df_weather["humidity_fraction"] = df_weather["humidity"] / 100
+
+# 3. Simplified heat index
+df_weather["heat_index"] = (df_weather["temp_celsius"] + 0.33 * df_weather["humidity"] - 4).round(1)
+
+print(df_weather)
+```
+```
+        city  temp_celsius  humidity  cloudy  temp_fahrenheit  humidity_fraction  heat_index
+0       Oslo          12.3        72    True             54.1               0.72        31.9
+1     Bergen           8.7        85    True             47.7               0.85        32.8
+2  Trondheim          15.1        60   False             59.2               0.60        30.9
+3  Stavanger          10.5        78    True             50.9               0.78        32.2
+4     Tromsø           3.2        65   False             37.8               0.65        20.6
+```
+Each new column is computed from one or more existing columns using element-wise
+operations. Notice that `heat_index` combines two columns — `temp_celsius` and
+`humidity` — in a single formula, which is applied to every row simultaneously.
 </details>

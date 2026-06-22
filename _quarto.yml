@@ -27,6 +27,8 @@ book:
           text: "1.9 Indexing and Subsetting"
         - file: 01-getting-started-and-working-effectively/01-10-dataframes.qmd
           text: "1.10 DataFrames"
+        - file: 01-getting-started-and-working-effectively/01-11-exercises.qmd
+          text: "1.11 Further Exercises"
     - part: "2 - Programming Fundamentals"
       chapters:
         - file: 02-programming-fundamentals/02-01-placeholder.qmd

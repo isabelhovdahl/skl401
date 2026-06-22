@@ -1,0 +1,608 @@
+# Topic 1 — Further Exercises {.unnumbered}
+
+These exercises give you an opportunity to consolidate everything covered in Topic 1 before moving on. Unlike the exercises after each video, many of these combine skills from several videos into a single task.
+
+The exercises are organised into three levels:
+
+- 🟢 **Warm-up** — single-skill exercises to check your understanding of the basics.
+- 🟡 **Practice** — exercises that combine two or more topics.
+- 🔴 **Challenge** — multi-step tasks that may require you to combine ideas in
+ways you have not seen before. Some may require looking things up or experimenting.
+
+---
+
+## 🟢 Warm-up
+
+### Exercise 1.11.1
+You are given the following values, but they have all been stored as the wrong type. Fix each one by converting it to the appropriate type, then use them to compute and print the total cost.
+
+```python
+quantity  = "5"
+price     = "19.90"
+discount  = 0.15
+```
+
+The total cost is defined as: `quantity × price × (1 - discount)`.
+
+<details>
+<summary>Hint</summary>
+
+Use `int()` and `float()` to convert the strings to numbers before doing arithmetic.
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```python
+quantity  = int("5")
+price     = float("19.90")
+discount  = 0.15
+
+total = quantity * price * (1 - discount)
+print(round(total, 2))
+```
+```
+84.58
+```
+`"5"` must become an integer and `"19.90"` must become a float before Python can multiply them. This kind of situation is very common when importing data from files where numeric columns have been read in as strings.
+</details>
+
+---
+
+### Exercise 1.11.2
+Create a list of six cities of your choice. Then:
+
+1. Print the total number of cities.
+2. Append two more cities and print the updated length.
+3. Print the first and last city using positive and negative indexing respectively.
+4. Print a slice containing only the middle four cities.
+
+<details>
+<summary>Solution</summary>
+
+```python
+cities = ["Oslo", "Bergen", "Trondheim", "Stavanger", "Tromsø", "Kristiansand"]
+
+# 1. Length
+print(len(cities))
+
+# 2. Append two more
+cities.append("Drammen")
+cities.append("Fredrikstad")
+print(len(cities))
+
+# 3. First and last
+print(cities[0])
+print(cities[-1])
+
+# 4. Middle four (positions 2 through 5)
+print(cities[2:6])
+```
+```
+6
+8
+Oslo
+Fredrikstad
+['Trondheim', 'Stavanger', 'Tromsø', 'Kristiansand']
+```
+</details>
+
+---
+
+### Exercise 1.11.3
+Create a dictionary describing a country of your choice with the following keys: `name`, `capital`, `population`, `gdp_per_cap`, and `in_eu`. Then:
+
+1. Print all keys and all values.
+2. Update the population to a new value.
+3. Add a new key `"language"` with an appropriate value.
+4. Print the final dictionary and its length.
+
+<details>
+<summary>Solution</summary>
+
+```python
+country = {
+    "name":       "Norway",
+    "capital":    "Oslo",
+    "population": 5_400_000,
+    "gdp_per_cap": 82500,
+    "in_eu":      False,
+}
+
+# 1. Keys and values
+print(country.keys())
+print(country.values())
+
+# 2. Update population
+country["population"] = 5_500_000
+
+# 3. Add language
+country["language"] = "Norwegian"
+
+# 4. Final dict and length
+print(country)
+print(len(country))
+```
+```
+dict_keys(['name', 'capital', 'population', 'gdp_per_cap', 'in_eu'])
+dict_values(['Norway', 'Oslo', 5400000, 82500, False])
+{'name': 'Norway', 'capital': 'Oslo', 'population': 5500000, 'gdp_per_cap': 82500, 'in_eu': False, 'language': 'Norwegian'}
+6
+```
+</details>
+
+---
+
+### Exercise 1.11.4
+Create a small DataFrame representing three students with the columns `name`, `age`, and `grade`. Inspect it using `.info()` and `.shape`, then select only the `name` and `grade` columns and print the result. Make sure you understand the difference between using single and double brackets.
+
+<details>
+<summary>Solution</summary>
+
+```python
+import pandas as pd
+
+data = {
+    "name":  ["Alice", "Bob", "Clara"],
+    "age":   [23, 25, 22],
+    "grade": [88.5, 63.0, 91.5],
+}
+
+df = pd.DataFrame(data)
+
+df.info()
+print(df.shape)
+
+# Single column — returns a Series
+print(df["grade"])
+
+# Multiple columns — returns a DataFrame
+print(df[["name", "grade"]])
+```
+```
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 3 entries, 0 to 2
+...
+(3, 3)
+0    88.5
+1    63.0
+2    91.5
+Name: grade, dtype: float64
+    name  grade
+0  Alice   88.5
+1    Bob   63.0
+2  Clara   91.5
+```
+</details>
+
+---
+
+## 🟡 Practice
+
+### Exercise 1.11.5
+Create a numpy array and a plain Python list with the same five values representing temperatures in Celsius: `[0, 10, 20, 30, 40]`. Then:
+
+1. Try adding `273.15` to each observation (the Celsius to Kelvin formula).
+2. Explain what happens with the list and why the array behaves differently.
+3. Compute and print the mean, max, and min of the array using numpy functions `np.mean()`, `np.max()`, and `np.min()`.
+
+<details>
+<summary>Solution</summary>
+
+```python
+import numpy as np
+
+temps_list  = [0, 10, 20, 30, 40]
+temps_array = np.array(temps_list)
+
+# 1. Arithmetic
+# print(temps_list + 273.15)   # TypeError — cannot perform arithmetics on lists
+print(temps_array + 273.15)
+
+# 3. Numpy summary functions
+print(np.mean(temps_array))
+print(np.max(temps_array))
+print(np.min(temps_array))
+```
+```
+[273.15 283.15 293.15 303.15 313.15]
+20.0
+40
+0
+```
+Multiplying a list by a float raises a `TypeError` because lists do not support element-wise arithmetic. A numpy array does, because it is designed for numerical computation. Note that `np.mean()`, `np.max()`, and `np.min()` are numpy's own versions of these functions and work directly on arrays, though Python's built-in `sum()`, `max()`, and `min()` also work on arrays.
+</details>
+
+---
+
+### Exercise 1.11.6
+Create a DataFrame from the dictionary below, which contains a deliberate type problem. Use `.info()` to identify the problem column, fix it, and then compute the total and average GDP across all countries.
+
+```python
+data = {
+    "country":     ["Norway", "Germany", "Brazil", "Japan", "Nigeria"],
+    "continent":   ["Europe", "Europe", "Americas", "Asia", "Africa"],
+    "gdp_per_cap": [82500, 48000, "8600", 42000, 2100],
+}
+```
+
+<details>
+<summary>Solution</summary>
+
+```python
+import pandas as pd
+
+data = {
+    "country":     ["Norway", "Germany", "Brazil", "Japan", "Nigeria"],
+    "continent":   ["Europe", "Europe", "Americas", "Asia", "Africa"],
+    "gdp_per_cap": [82500, 48000, "8600", 42000, 2100],
+}
+
+df = pd.DataFrame(data)
+df.info()
+```
+```
+ #   Column       Non-Null Count  Dtype
+---  ------       --------------  -----
+ 0   country      5 non-null      object
+ 1   continent    5 non-null      object
+ 2   gdp_per_cap  5 non-null      object   ← should be int or float
+```
+`gdp_per_cap` is stored as `object` because `"8600"` for Brazil was entered as a string.
+Fix by converting the column:
+
+```python
+df["gdp_per_cap"] = df["gdp_per_cap"].astype(float)
+
+print(df["gdp_per_cap"].sum())
+print(df["gdp_per_cap"].mean())
+```
+```
+183200.0
+36640.0
+```
+`.astype(float)` converts the entire column at once. After fixing, the arithmetic
+methods work correctly.
+</details>
+
+---
+
+### Exercise 1.11.7
+Create a DataFrame from the weather data below. Then add three new columns:
+
+1. `temp_kelvin` — temperature in Kelvin, computed as `temp_celsius + 273.15`.
+2. `temp_fahrenheit` — temperature in Fahrenheit, computed as `(temp_celsius * 9/5) + 32`, rounded to one decimal place.
+3. `feels_like` — a simplified feels-like temperature computed as `temp_celsius - 0.4 * (100 - humidity) / 10 * wind_speed`, rounded to one decimal place.
+
+| city | temp_celsius | humidity | wind_speed |
+|------|-------------|----------|------------|
+| Oslo | 5.2 | 80 | 3.5 |
+| Bergen | 3.8 | 90 | 5.2 |
+| Trondheim | 7.1 | 70 | 2.1 |
+| Stavanger | 6.5 | 85 | 4.8 |
+| Tromsø | -2.3 | 75 | 6.0 |
+
+<details>
+<summary>Solution</summary>
+
+```python
+import pandas as pd
+
+weather = {
+    "city":         ["Oslo", "Bergen", "Trondheim", "Stavanger", "Tromsø"],
+    "temp_celsius": [5.2, 3.8, 7.1, 6.5, -2.3],
+    "humidity":     [80, 90, 70, 85, 75],
+    "wind_speed":   [3.5, 5.2, 2.1, 4.8, 6.0],
+}
+
+df = pd.DataFrame(weather)
+
+# 1. Kelvin
+df["temp_kelvin"] = df["temp_celsius"] + 273.15
+
+# 2. Fahrenheit
+df["temp_fahrenheit"] = ((df["temp_celsius"] * 9/5) + 32).round(1)
+
+# 3. Feels like
+df["feels_like"] = (df["temp_celsius"] - 0.4 * (100 - df["humidity"]) / 10 * df["wind_speed"]).round(1)
+
+print(df)
+```
+```
+        city  temp_celsius  humidity  wind_speed  temp_kelvin  temp_fahrenheit  feels_like
+0       Oslo           5.2        80         3.5       278.35             41.4         2.4
+1     Bergen           3.8        90         5.2       276.95             38.8         1.7
+2  Trondheim           7.1        70         2.1       280.25             44.8         4.6
+3  Stavanger           6.5        85         4.8       279.65             43.7         3.6
+4     Tromsø          -2.3        75         6.0       270.85             27.9        -8.3
+```
+`feels_like` combines three columns — `temp_celsius`, `humidity`, and `wind_speed` — in a single formula applied element-wise across all rows simultaneously.
+</details>
+
+---
+
+### Exercise 1.11.8
+A list of dictionaries is another natural way to represent tabular data — each dictionary is one row, and the keys are the column names. Create the list of dictionaries below and pass it directly to `pd.DataFrame()`. Inspect the result with `.info()` and print the `gdp_per_cap` column.
+
+```python
+records = [
+    {"country": "Norway",  "gdp_per_cap": 82500, "population": 5_400_000},
+    {"country": "Germany", "gdp_per_cap": 48000, "population": 84_000_000},
+    {"country": "Brazil",  "gdp_per_cap":  8600, "population": 214_000_000},
+    {"country": "Japan",   "gdp_per_cap": 42000, "population": 125_000_000},
+    {"country": "Nigeria", "gdp_per_cap":  2100, "population": 200_000_000},
+]
+```
+
+<details>
+<summary>Solution</summary>
+
+```python
+import pandas as pd
+
+records = [
+    {"country": "Norway",  "gdp_per_cap": 82500, "population": 5_400_000},
+    {"country": "Germany", "gdp_per_cap": 48000, "population": 84_000_000},
+    {"country": "Brazil",  "gdp_per_cap":  8600, "population": 214_000_000},
+    {"country": "Japan",   "gdp_per_cap": 42000, "population": 125_000_000},
+    {"country": "Nigeria", "gdp_per_cap":  2100, "population": 200_000_000},
+]
+
+df = pd.DataFrame(records)
+df.info()
+print(df["gdp_per_cap"])
+```
+```
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 5 entries, 0 to 4
+Data columns (total 3 columns):
+ #   Column       Non-Null Count  Dtype
+---  ------       --------------  -----
+ 0   country      5 non-null      str
+ 1   gdp_per_cap  5 non-null      int64
+ 2   population   5 non-null      int64
+...
+0    82500
+1    48000
+2     8600
+3    42000
+4     2100
+Name: gdp_per_cap, dtype: int64
+```
+`pd.DataFrame()` accepts either a dictionary of lists (each key is a column) or a list of dictionaries (each dictionary is a row). Both produce the same result. The list-of-dictionaries format is common when data is collected record by record, for example from an API or a loop.
+</details>
+
+---
+
+### Exercise 1.11.9
+Using the `records` list from Exercise 1.11.8, access the following values using indexing. Do not convert to a DataFrame for this exercise — work directly with the list and dictionaries.
+
+1. The GDP per capita of Brazil (the third record).
+2. The country name of the last record using negative indexing.
+3. The population of Japan.
+
+<details>
+<summary>Solution</summary>
+
+```python
+# 1. GDP per capita of Brazil — third record (index 2), key "gdp_per_cap"
+print(records[2]["gdp_per_cap"])
+
+# 2. Country name of the last record
+print(records[-1]["country"])
+
+# 3. Population of Japan — fourth record (index 3)
+print(records[3]["population"])
+```
+```
+8600
+Nigeria
+125000000
+```
+This chains two indexing operations: `records[2]` retrieves the dictionary for Brazil, and `["gdp_per_cap"]` retrieves the value from that dictionary. The same pattern applies to any nested structure.
+</details>
+
+---
+
+## 🔴 Challenge
+
+### Exercise 1.11.10
+Generate an array of 20 evenly spaced temperatures in Celsius between -10 and 40 using
+`np.linspace()`. Then:
+
+1. Convert the entire array to Fahrenheit in a single operation.
+2. Build a DataFrame with two columns: `temp_celsius` and `temp_fahrenheit`.
+3. Add a third column `temp_kelvin`.
+4. Print the mean, min, and max of all three columns using `.describe()`.
+
+<details>
+<summary>Hint</summary>
+
+`np.linspace(start, stop, n)` generates `n` evenly spaced values between `start` and `stop` inclusive. You can pass a numpy array directly as a column value when creating a DataFrame.
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```python
+import numpy as np
+import pandas as pd
+
+# 1. Generate temperatures and convert
+temps_c = np.linspace(-10, 40, 20)
+temps_f = (temps_c * 9/5) + 32
+
+# 2. Build DataFrame
+df = pd.DataFrame({
+    "temp_celsius":    temps_c,
+    "temp_fahrenheit": temps_f,
+})
+
+# 3. Add Kelvin column
+df["temp_kelvin"] = df["temp_celsius"] + 273.15
+
+# 4. Summary statistics
+print(df.describe().round(2))
+```
+```
+       temp_celsius  temp_fahrenheit  temp_kelvin
+count         20.00            20.00        20.00
+mean          15.00            59.00       288.15
+std           15.57            28.02        15.57
+min          -10.00            14.00       263.15
+25%            2.50            36.50       275.65
+50%           15.00            59.00       288.15
+75%           27.50            81.50       300.65
+max           40.00           104.00       313.15
+```
+Notice that the mean of the Celsius column is exactly 15, which is the midpoint between -10 and 40. The mean of the Fahrenheit column is 59, which is exactly `15 * 9/5 + 32` — a useful sanity check that the conversion was applied correctly.
+</details>
+
+---
+
+### Exercise 1.11.11
+The code below builds a list of country dictionaries by combining two separate lists. Without running it first, trace through the code step by step and predict what the final `countries` list will look like. Then run it to check, convert it to a DataFrame, and add a new column `gdp_category` that labels each country as `"high"` if GDP per capita is above 20000 and `"low"` otherwise.
+
+```python
+names  = ["Norway", "Brazil", "Nigeria", "Germany", "Japan"]
+gdps   = [82500, 8600, 2100, 48000, 42000]
+
+countries = []
+for i in range(len(names)):
+    countries.append({"country": names[i], "gdp_per_cap": gdps[i]})
+```
+
+<details>
+<summary>Hint</summary>
+
+For the `gdp_category` column: you can create a new column using a condition on an existing column. The expression `df["gdp_per_cap"] > 20000` returns a Series of `True` and `False` values. To turn this into `"high"` and `"low"` labels, look up `numpy.where()` — it takes a condition, a value for `True`, and a value for `False`.
+</details>
+
+<details>
+<summary>Solution</summary>
+
+Tracing through the loop: on each iteration `i` takes a value from 0 to 4, and we build a dictionary from `names[i]` and `gdps[i]`. The final list is:
+
+```python
+[
+    {"country": "Norway",  "gdp_per_cap": 82500},
+    {"country": "Brazil",  "gdp_per_cap":  8600},
+    {"country": "Nigeria", "gdp_per_cap":  2100},
+    {"country": "Germany", "gdp_per_cap": 48000},
+    {"country": "Japan",   "gdp_per_cap": 42000},
+]
+```
+
+```python
+import pandas as pd
+import numpy as np
+
+names  = ["Norway", "Brazil", "Nigeria", "Germany", "Japan"]
+gdps   = [82500, 8600, 2100, 48000, 42000]
+
+countries = []
+for i in range(len(names)):
+    countries.append({"country": names[i], "gdp_per_cap": gdps[i]})
+
+df = pd.DataFrame(countries)
+
+df["gdp_category"] = np.where(df["gdp_per_cap"] > 20000, "high", "low")
+
+print(df)
+```
+```
+   country  gdp_per_cap gdp_category
+0   Norway        82500         high
+1   Brazil         8600          low
+2  Nigeria         2100          low
+3  Germany        48000         high
+4    Japan        42000         high
+```
+`np.where(condition, value_if_true, value_if_false)` is a vectorized if/else — it evaluates the condition for every row simultaneously and returns the appropriate label. This is a preview of the kind of conditional column creation you will do extensively in Topic 3.
+</details>
+
+---
+
+### Exercise 1.11.12
+The dictionary below represents a small dataset with several data quality problems.
+Your task is to:
+
+1. Create a DataFrame from it.
+2. Use `.info()` and `.describe()` to identify all the problems.
+3. Fix each problem.
+4. Add a column `revenue` defined as `price * quantity`.
+5. Print the final clean DataFrame.
+
+```python
+raw = {
+    "product":  ["coffee", "tea", "juice", "sandwich", "cookie"],
+    "price":    [29.90, "35.00", 12.50, 48.00, 22.75],
+    "quantity": [50, 30, -5, 20, 80],
+    "in_stock": [True, True, False, True, True],
+}
+```
+
+<details>
+<summary>Hint</summary>
+
+Use `.info()` to spot columns stored as the wrong type. Use `.describe()` to spot values that are numerically implausible (e.g. a negative quantity). To fix a single value at a specific position you can use `.iloc[]` — for example `df.iloc[2, 2] = 0` sets the value in row 2, column 2 to 0.
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```python
+import pandas as pd
+
+raw = {
+    "product":  ["coffee", "tea", "juice", "sandwich", "cookie"],
+    "price":    [29.90, "35.00", 12.50, 48.00, 22.75],
+    "quantity": [50, 30, -5, 20, 80],
+    "in_stock": [True, True, False, True, True],
+}
+
+df = pd.DataFrame(raw)
+
+# Step 2: identify problems
+df.info()
+print(df.describe())
+```
+```
+ #   Column    Non-Null Count  Dtype
+---  ------    --------------  -----
+ 0   product   5 non-null      str
+ 1   price     5 non-null      str   ← should be float
+ 2   quantity  5 non-null      int64
+ 3   in_stock  5 non-null      bool
+
+       quantity
+count      5.00
+min       -5.00   ← negative quantity is implausible
+```
+
+Two problems:
+
+- `price` is `str` because `"35.00"` for tea was entered as a string.
+- `quantity` for juice is `-5`, which is not a valid stock quantity.
+
+```python
+# Step 3: fix problems
+df["price"] = df["price"].astype(float)
+df.iloc[2, 2] = 0    # set juice quantity to 0
+
+# Step 4: add revenue column
+df["revenue"] = df["price"] * df["quantity"]
+
+# Step 5: print final result
+print(df)
+```
+```
+    product  price  quantity  in_stock  revenue
+0    coffee  29.90        50      True   1495.0
+1       tea  35.00        30      True   1050.0
+2     juice  12.50         0     False      0.0
+3  sandwich  48.00        20      True    960.0
+4    cookie  22.75        80      True   1820.0
+```
+This workflow — create, inspect, fix, enrich — is exactly what you will do at much larger scale in Topic 3. Getting comfortable with it on small data first makes the jump to real datasets much smoother.
+</details>
