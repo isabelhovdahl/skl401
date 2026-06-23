@@ -1,0 +1,261 @@
+# For loops
+
+We introduce the `for` loop as a tool for repeating a block of code for each item in a sequence, such as a lists, dictionaries and strings.
+
+{{< video https://vimeo.com/1194686231/7c42a44e39?fl=ml&fe=ec >}}
+
+```python
+# ── The basic for loop ───────────────────────────────────────
+
+# Looping over a string
+for letter in "Python":
+    print(letter)
+
+# Looping over a list
+for country in ["Norway", "Denmark", "Sweden"]:
+    print(f"{country} is in Scandinavia")
+
+# Looping over a dictionary gives keys
+gdp_data = {"Norway": 82500, "Brazil": 8600, "Nigeria": 2014}
+
+for country in gdp_data:
+    print(country)
+
+# Access the value via the key
+for country in gdp_data:
+    print(gdp_data[country])
+
+# ── Accumulating results ─────────────────────────────────────
+
+revenues = [120, 340, 55, 890, 210, 45, 670]
+
+# Calculate cumulative revenue step by step
+cumulative = []
+total = 0
+
+for val in revenues:
+    total = total + val
+    cumulative.append(total)
+
+print(cumulative)
+
+# ── Loop styles: index vs element ────────────────────────────
+
+for i in range(1, 10, 2): # 0, 1, 2, 3, 4
+    print(i)
+
+countries = ["Norway", "Denmark", "Sweden", "Finland"]
+
+# Style A: loop over elements (preferred when you just need values)
+for country in countries:
+    print(country)
+
+# Style B: loop over indices (useful when you need the position)
+for i in range(len(countries)):
+    print(i, countries[i])
+
+# ── A practical example: classifying a list of values ────────
+
+gdp_values = [850, 5400, 1200, 38000, 700, 22000]
+categories = []
+
+for gdp in gdp_values:
+    if gdp < 2000:
+        categories.append("low income")
+    elif gdp < 12000:
+        categories.append("middle income")
+    else:
+        categories.append("high income")
+
+print(categories)
+```
+
+## Exercises
+
+### Exercise 2.3.1
+Use a `for` loop to iterate over the list of monthly rainfall measurements below and compute the following using the accumulator pattern:
+
+1. The total rainfall across all months.
+2. The number of months with rainfall above 50mm.
+
+Print both results when the loop is finished.
+
+```python
+rainfall = [23, 45, 67, 12, 89, 54, 33, 78, 91, 44, 56, 38]
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+rainfall = [23, 45, 67, 12, 89, 54, 33, 78, 91, 44, 56, 38]
+
+total        = 0
+months_above = 0
+
+for mm in rainfall:
+    total += mm    # Shorthand for total = total + mm
+    if mm > 50:
+        months_above += 1
+
+print(f"Total rainfall: {total}mm")
+print(f"Months above 50mm: {months_above}")
+```
+
+The accumulator pattern works by initialising a variable to a neutral starting value (`0` for a sum or counter) before the loop, then updating it on each iteration. Notice that the conditional inside the loop only increments `months_above` when the condition is met — the two accumulators are updated independently on each pass.
+</details>
+
+---
+
+### Exercise 2.3.2
+You are given a list of temperatures in Celsius. Use a `for` loop combined with conditionals to separate them into two lists: one for temperatures below 0 (freezing) and one for temperatures of 0 or above (non-freezing). Print both lists and their lengths when the loop is finished.
+
+```python
+temperatures = [4.2, -3.1, 0.0, -8.5, 12.3, -0.5, 7.8, -2.2, 15.1, 3.4]
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+temperatures = [4.2, -3.1, 0.0, -8.5, 12.3, -0.5, 7.8, -2.2, 15.1, 3.4]
+
+freezing     = []
+non_freezing = []
+
+for temp in temperatures:
+    if temp < 0:
+        freezing.append(temp)
+    else:
+        non_freezing.append(temp)
+
+print(f"Freezing: {freezing} ({len(freezing)} values)")
+print(f"Non-freezing: {non_freezing} ({len(non_freezing)} values)")
+```
+
+Starting with two empty lists and appending to them inside a loop is a very common pattern for splitting or filtering data. Notice that `0.0` goes into the non-freezing list because the condition is strictly `< 0`.
+</details>
+
+---
+
+### Exercise 2.3.3
+Use a `for` loop to iterate over the string below character by character. Build two new strings: one containing only the vowels and one containing only the consonants. Print both strings when the loop is finished.
+
+```python
+word = "programming"
+```
+
+_Hint: you can check whether a character is a vowel by testing `char in "aeiou"`._
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+word       = "programming"
+vowels     = ""
+consonants = ""
+
+for char in word:
+    if char in "aeiou":
+        vowels += char
+    else:
+        consonants += char
+
+print(f"Vowels: {vowels}")
+print(f"Consonants: {consonants}")
+```
+
+Building a string with a loop works the same way as building a list — start with an empty string and concatenate one character at a time using `+=`. This is the string equivalent of the accumulator pattern you used with lists in Exercise 2.3.2.
+</details>
+
+---
+
+### Exercise 2.3.4
+Use a `for` loop to iterate over the dictionary below. For each country, print a formatted line like `"Norway has a population of 5,400,000."`. Then compute and print the total and average population across all countries when the loop is finished.
+
+```python
+populations = {
+    "Norway":      5_400_000,
+    "Sweden":     10_400_000,
+    "Denmark":     5_900_000,
+    "Finland":     5_500_000,
+    "Iceland":       370_000,
+}
+```
+
+_Hint: iterating over a dictionary with a plain `for` loop gives you the keys one by one. You can then use each key to look up the corresponding value. Alternatively, `.items()` lets you unpack both the key and value directly in the loop header: `for country, pop in populations.items()`._
+
+<details>
+<summary>Solution</summary>
+
+**Solution 1 — using the key to look up the value:**
+
+```{python}
+populations = {
+    "Norway":      5_400_000,
+    "Sweden":     10_400_000,
+    "Denmark":     5_900_000,
+    "Finland":     5_500_000,
+    "Iceland":       370_000,
+}
+
+total = 0
+
+for country in populations:
+    pop = populations[country]
+    print(f"{country} has a population of {pop:,}.")
+    total += pop
+
+average = total / len(populations)
+print(f"\nTotal population:   {total:,}")
+print(f"Average population: {average:,.0f}")
+```
+
+**Solution 2 — using `.items()` to unpack key and value directly:**
+
+```{python}
+total = 0
+
+for country, pop in populations.items():
+    print(f"{country} has a population of {pop:,}.")
+    total += pop
+
+average = total / len(populations)
+print(f"\nTotal population:   {total:,}")
+print(f"Average population: {average:,.0f}")
+```
+
+Both solutions produce the same result. Solution 1 is closer to what you have seen so far — iterating over a dictionary gives you the keys, which you can use to retrieve the values just like in Topic 1. Solution 2 is more concise and is the conventional way to iterate over a dictionary when you need both the key and the value.
+</details>
+
+---
+
+### Exercise 2.3.5
+Use `range()` and a `for` loop to iterate over the list of city names below by index. For each city, print a numbered line in the format `"1. Oslo"`, `"2. Odense"` etc. 
+
+Then, in a second loop, use `range()` to compare each city name to the next one and print a message whenever two adjacent cities start with the same letter, e.g., `Bergen and Bratislava both start with 'B'.`
+
+```python
+cities = ["Oslo", "Odense", "Bergen", "Bratislava", "Cairo", "Copenhagen", "Dublin"]
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+cities = ["Oslo", "Odense", "Bergen", "Bratislava", "Cairo", "Copenhagen", "Dublin"]
+
+# Numbered list
+for i in range(len(cities)):
+    print(f"{i + 1}. {cities[i]}")
+```
+
+```{python}
+# Compare adjacent cities
+for i in range(len(cities) - 1):
+    if cities[i][0] == cities[i + 1][0]:
+        print(f"{cities[i]} and {cities[i + 1]} both start with '{cities[i][0]}'.")
+```
+
+Using `range(len(cities))` gives access to both the index `i` and the value `cities[i]` at the same time, which is necessary whenever an operation depends on position rather than just value. The second loop uses `range(len(cities) - 1)` to stop one step early — without this, `cities[i + 1]` would go out of bounds on the last iteration. Note that `cities[i][0]` chains two index operations: the first selects the city by position, and the second selects its first character. Note also the use of single quotes around `{cities[i][0]}` in the f-string — since the f-string itself is delimited by double quotes, any quoted text inside it must use single quotes to avoid ending the string prematurely.
+</details>

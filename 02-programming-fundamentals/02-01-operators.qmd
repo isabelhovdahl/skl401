@@ -1,0 +1,241 @@
+# Comparison and logical operators
+
+We introduce the comparison and logical operators that allow Python to evaluate conditions, producing `True` or `False` values that form the foundation of all decision-making in code.
+
+{{< video https://vimeo.com/1194679775/224fd64c04?fl=ml&fe=ec >}}
+
+```python
+# ── Comparison operators ─────────────────────────────────────
+
+x = 10
+
+print(x == 10)   # equal to          
+print(x != 5)    # not equal to      
+print(x > 7)     # greater than      
+print(x < 20)    # less than        
+print(x >= 10)   # greater than or equal to 
+print(x <= 9)    # less than or equal to   
+
+# ── Combining conditions with logical operators ──────────────
+
+age = 25
+income = 45_000
+
+# and: both conditions must be True
+print(age > 18 and income > 30_000)   
+
+# or: at least one condition must be True
+print(age > 30 or income > 30_000)    
+
+# not: flips True to False and vice versa
+print(not age > 30)    # (age is not > 30)
+
+# ── Membership testing with in ───────────────────────────────
+
+# Lists
+continents = ["Africa", "Americas", "Asia", "Europe", "Oceania"]
+
+print("Asia" in continents)      
+print("Antarctica" in continents) 
+
+# Dictionaries — "in" checks keys, not values
+gdp_data = {"Norway": 82500, "Brazil": 8600, "Nigeria": 2014}
+
+print("Norway" in gdp_data)      
+print(82500 in gdp_data)    # ("in" does not search values)
+
+# Strings
+country = "United Kingdom"
+
+print("King" in country)        
+print("king" in country)    # (lowercase k does not match uppercase K)
+
+# ── Preview: pandas filtering uses the same logic ────────────
+
+# Preview — do not worry about the syntax yet
+# df[df["gdp_per_cap"] > 5000]
+```
+
+## Exercises
+
+### Exercise 2.1.1
+Create two numeric variables of your choice and use each of the six comparison operators (e.g., `==` and `!=`) to compare them. Print each result and make sure you understand what each operator does before moving on.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+x = 15
+y = 20.0
+
+print(x == y)   # equal to
+print(x != y)   # not equal to
+print(x > y)    # greater than
+print(x < y)    # less than
+print(x >= y)   # greater than or equal to
+print(x <= y)   # less than or equal to
+```
+
+</details>
+
+---
+
+### Exercise 2.1.2
+Without running the code, predict the result of each expression below. Then run them to check your answers. Were any of them surprising?
+
+```python
+print(True and False)
+print(True or False)
+print(not True)
+print(not False)
+print(True and True)
+print(False or False)
+print(not (True and False))
+print(True and not False)
+```
+
+<details>
+<summary>Solution</summary>
+
+```
+False
+True
+False
+True
+True
+False
+True
+True
+```
+
+The last two are the most commonly misread. `not (True and False)` first evaluates the parentheses — `True and False` is `False` — and then flips it to `True`. `True and not False` first evaluates `not False` to `True`, and then `True and True` to `True`. When in doubt, use parentheses to make the order of evaluation explicit.
+</details>
+
+---
+
+### Exercise 2.1.3
+The code below compares two strings using comparison operators. Run each line and look carefully at the results. Then answer the questions that follow.
+
+```{python}
+city1 = "Bergen"
+city2 = "bergen"
+city3 = "Oslo"
+```
+
+1. Are `city1` and `city2` equal? Why or why not?
+2. Try `city1 > city3`. Although this is valid Python, why does it not make much sense to compare strings this way?
+3. Instead, compare the *length* of `city1` and `city3`. Which is longer?
+4. Using slicing and a comparison operator, check whether the first three characters of `city1` and `city3` are the same.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+# 1. Equality check
+print(city1 == city2)
+```
+
+String comparison is case-sensitive — `"Bergen"` and `"bergen"` are not equal because the uppercase `B` and lowercase `b` are treated as different characters.
+
+```{python}
+# 2. Greater than
+print(city1 > city3)
+```
+
+Although this runs without error, comparing strings with `>` or `<` compares them character by character based on their underlying Unicode values, which effectively means alphabetical order. This is rarely meaningful in data work — it tells you nothing useful about the cities themselves.
+
+```{python}
+# 3. Compare lengths
+print(len(city1) > len(city3))
+print(len(city1))
+print(len(city3))
+```
+
+Comparing lengths with `len()` is a much more meaningful use of comparison operators on strings.
+
+```{python}
+# 4. First three characters
+print(city1[:3] == city3[:3])
+```
+
+`city1[:3]` gives `"Ber"` and `city3[:3]` gives `"Osl"` — they are not the same.
+</details>
+
+---
+
+### Exercise 2.1.4
+Use the `in` operator and logical operators to answer the questions below.
+
+```{python}
+eu_countries  = ["Germany", "France", "Italy", "Spain", "Netherlands"]
+population    = {"Germany": 84_000_000, "France": 68_000_000, "Italy": 59_000_000}
+
+country = "Germany"
+```
+
+1. Is `country` in the `eu_countries` list?
+2. Is `country` in the `population` dictionary?
+3. Is `84_000_000` in the `population` dictionary? What does this tell you about how `in` works on dictionaries?
+4. Is `country` both in the EU list and in the population dictionary?
+5. Is `"Portugal"` in the EU list or is `country` in the population dictionary?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+# 1. In the list
+print(country in eu_countries)
+
+# 2. In the dictionary
+print(country in population)
+
+# 3. Value in the dictionary
+print(84_000_000 in population)
+
+# 4. Both conditions
+print(country in eu_countries and country in population)
+
+# 5. Either condition
+print("Portugal" in eu_countries or country in population)
+```
+
+Operation 3 returns `False` because `in` on a dictionary tests whether the value is among the *keys*, not the values. `84_000_000` is a value in the dictionary, not a key. To test whether a value exists among the dictionary values, you would need `84_000_000 in population.values()`.
+</details>
+
+---
+
+### Exercise 2.1.5
+The code below contains three common mistakes involving comparison and logical operators. Identify and fix each one, and explain what was wrong.
+
+```python
+x = 10
+
+# 1. Check if x is equal to 10
+print(x = 10)
+
+# 2. Check if x is between 5 and 15
+print(5 < x and < 15)
+
+# 3. Check if x is not equal to 10
+print(x not 10)
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+x = 10
+
+# 1. = is assignment, not comparison — use == to test equality
+print(x == 10)
+
+# 2. The second condition is incomplete — must repeat the variable name
+print(5 < x and x < 15)
+
+# 3. "not" alone does not test inequality — use != 
+print(x != 10)
+```
+
+All three mistakes are very common. The first — using `=` instead of `==` — raises an immediately. The second also raises an error because `< 15` is not a valid expression on its own; Python cannot infer that `x` is the left-hand operand of the second comparison. The third raises a `SyntaxError` too — `not` is a logical operator that flips a boolean value, not a comparison operator. To test
+inequality, always use `!=`.
+</details>

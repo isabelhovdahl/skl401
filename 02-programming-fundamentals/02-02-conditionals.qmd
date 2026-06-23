@@ -1,0 +1,346 @@
+# Conditionals
+
+We introduce conditionals — code that does different things depending on whether a condition is `True` or `False` — using the `if`, `elif`, and `else` keywords.
+
+{{< video https://vimeo.com/1194686232/cbd55409ed?fl=ml&fe=ec >}}
+
+```python
+# ── The basic if statement ───────────────────────────────────
+
+temperature = 18
+
+if temperature < 10:
+    print("It is cold today.")
+
+# ── if/else ──────────────────────────────────────────────────
+
+temperature = 18
+
+if temperature < 10:
+    print("It is cold today.")
+else:
+    print("It is not too cold.")
+
+# ── elif for multiple branches ───────────────────────────────
+
+temperature = 15
+
+if temperature < 10:
+    print("Cold")
+elif temperature < 20:
+    print("Mild")
+elif temperature < 30:
+    print("Warm")
+else:
+    print("Hot!")
+
+# ── A practical example: classifying GDP ─────────────────────
+
+gdp_per_cap = 12_000
+
+if gdp_per_cap < 2_000:
+    category = "low income"
+elif gdp_per_cap < 12_000:
+    category = "middle income"
+else:
+    category = "high income"
+
+print(category)
+
+# ── if statement with lists ──────────────────────────────────
+
+nordic_countries = ["Norway", "Sweden", "Denmark", "Finland", "Iceland"]
+country = "Germany"
+
+if country in nordic_countries:
+    print(f"{country} is a Nordic country")
+else:
+    print(f"{country} is not a Nordic country")
+
+```
+
+## Exercises
+
+### Exercise 2.2.1
+Without running the code, predict what will be printed for each value of `temperature` below. Then run the code to check your answers.
+
+```python
+temperature = 23
+
+if temperature < 0:
+    print("Below freezing")
+elif temperature < 10:
+    print("Cold")
+elif temperature < 20:
+    print("Mild")
+else:
+    print("Warm")
+```
+
+What would be printed if `temperature = -5`? What about `temperature = 10`?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+temperature = 23
+
+if temperature < 0:
+    print("Below freezing")
+elif temperature < 10:
+    print("Cold")
+elif temperature < 20:
+    print("Mild")
+else:
+    print("Warm")
+```
+
+```{python}
+temperature = -5
+
+if temperature < 0:
+    print("Below freezing")
+elif temperature < 10:
+    print("Cold")
+elif temperature < 20:
+    print("Mild")
+else:
+    print("Warm")
+```
+
+```{python}
+temperature = 10
+
+if temperature < 0:
+    print("Below freezing")
+elif temperature < 10:
+    print("Cold")
+elif temperature < 20:
+    print("Mild")
+else:
+    print("Warm")
+```
+
+Notice that `temperature = 10` prints `"Mild"` and not `"Cold"` — the condition `temperature < 10` is `False` for exactly 10, so Python moves on to the next branch.
+</details>
+
+---
+
+### Exercise 2.2.2
+Write a conditional that classifies a country's GDP per capita into one of four income groups and assigns the result to a variable `income_group`. Print the result using an f-string. Test your code with at least three different values to make sure all branches
+work correctly.
+
+Use the following thresholds:
+
+- Below 1 000: `"low income"`
+- Between 1 000 and 9 999: `"lower-middle income"`
+- Between 10 000 and 49 999: `"upper-middle income"`
+- 50 000 or above: `"high income"`
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+gdp_per_cap = 82500
+
+if gdp_per_cap < 1_000:
+    income_group = "low income"
+elif gdp_per_cap < 10_000:
+    income_group = "lower-middle income"
+elif gdp_per_cap < 50_000:
+    income_group = "upper-middle income"
+else:
+    income_group = "high income"
+
+print(f"A GDP per capita of {gdp_per_cap:,} is classified as {income_group}.")
+```
+
+```{python}
+gdp_per_cap = 8_600
+
+if gdp_per_cap < 1_000:
+    income_group = "low income"
+elif gdp_per_cap < 10_000:
+    income_group = "lower-middle income"
+elif gdp_per_cap < 50_000:
+    income_group = "upper-middle income"
+else:
+    income_group = "high income"
+
+print(f"A GDP per capita of {gdp_per_cap:,} is classified as {income_group}.")
+```
+
+```{python}
+gdp_per_cap = 500
+
+if gdp_per_cap < 1_000:
+    income_group = "low income"
+elif gdp_per_cap < 10_000:
+    income_group = "lower-middle income"
+elif gdp_per_cap < 50_000:
+    income_group = "upper-middle income"
+else:
+    income_group = "high income"
+
+print(f"A GDP per capita of {gdp_per_cap:,} is classified as {income_group}.")
+```
+
+Notice that the variable `income_group` is assigned inside the conditional and used outside of it. This is a cleaner pattern than printing inside each branch — it separates the logic from the output and makes the code easier to extend later.
+</details>
+
+---
+
+### Exercise 2.2.3
+The two code blocks below look similar but can produce different results. Without running the code, predict the output of each block when `score = 95`. Then run them and explain why the results differ.
+
+```python
+# Block A
+if score >= 90:
+    print("A")
+elif score >= 80:
+    print("B")
+elif score >= 70:
+    print("C")
+else:
+    print("F")
+```
+
+```python
+# Block B
+if score >= 90:
+    print("A")
+if score >= 80:
+    print("B")
+if score >= 70:
+    print("C")
+else:
+    print("F")
+```
+
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+# Block A
+score = 95
+
+if score >= 90:
+    print("A")
+elif score >= 80:
+    print("B")
+elif score >= 70:
+    print("C")
+else:
+    print("F")
+```
+
+```{python}
+# Block B
+score = 95
+
+if score >= 90:
+    print("A")
+if score >= 80:
+    print("B")
+if score >= 70:
+    print("C")
+else:
+    print("F")
+```
+
+Block A correctly prints `"A"`. But block B also prints `"B"` and `"C"` — the wrong answer. In Block B, all three `if` statements are evaluated independently. For `score = 95`, all three conditions are `True`, so the print statement is executed three times: first `"A"`, then `"B"`, then `"C"`. The final `else` belongs only to the last `if`, so it does not affect the other branches. In Block A, `elif` stops evaluation as soon as the first `True` condition is found. Use `elif` whenever your branches are mutually exclusive.
+</details>
+
+---
+
+### Exercise 2.2.4
+Write a conditional that checks a student's grade and assigns both a letter grade and a short feedback message to two separate variables called `letter` and `feedback`. Print the result as a single f-string. Use the thresholds below and test with at least two different grades.
+
+- 90 or above: `"A"` — `"Excellent work."`
+- 80–89: `"B"` — `"Good work."`
+- 70–79: `"C"` — `"Satisfactory."`
+- Below 70: `"F"` — `"Did not pass."`
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+grade_score = 92
+
+if grade_score >= 90:
+    letter   = "A"
+    feedback = "Excellent work."
+elif grade_score >= 80:
+    letter   = "B"
+    feedback = "Good work."
+elif grade_score >= 70:
+    letter   = "C"
+    feedback = "Satisfactory."
+else:
+    letter   = "F"
+    feedback = "Did not pass."
+
+print(f"Score: {grade_score} — Grade: {letter}. {feedback}")
+```
+
+```{python}
+grade_score = 65
+
+if grade_score >= 90:
+    letter   = "A"
+    feedback = "Excellent work."
+elif grade_score >= 80:
+    letter   = "B"
+    feedback = "Good work."
+elif grade_score >= 70:
+    letter   = "C"
+    feedback = "Satisfactory."
+else:
+    letter   = "F"
+    feedback = "Did not pass."
+
+print(f"Score: {grade_score} — Grade: {letter}. {feedback}")
+```
+
+Assigning multiple variables inside the same conditional branch is a clean and common pattern. Notice that both `letter` and `feedback` are always assigned regardless of which branch is taken, so they are safely available outside the conditional.
+</details>
+
+---
+
+### Exercise 2.2.5
+You are given the dictionary below representing a student record. Write a conditional that first checks whether the key `"grade"` exists in the dictionary. If it does, print a message reporting the grade. If it does not, print a message saying the grade has not been recorded yet.
+
+Test your code with both dictionaries.
+
+```python
+student_a = {"name": "Alice", "age": 23, "grade": 88.5}
+student_b = {"name": "Bob",   "age": 25}
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+student_a = {"name": "Alice", "age": 23, "grade": 88.5}
+student_b = {"name": "Bob",   "age": 25}
+
+student = student_a
+
+if "grade" in student:
+    print(f"{student['name']}'s grade is {student['grade']}.")
+else:
+    print(f"No grade has been recorded for {student['name']} yet.")
+```
+
+```{python}
+student = student_b
+
+if "grade" in student:
+    print(f"{student['name']}'s grade is {student['grade']}.")
+else:
+    print(f"No grade has been recorded for {student['name']} yet.")
+```
+
+Using `"grade" in student` checks whether the key exists in the dictionary before trying to access it. This is a safe and common pattern — attempting to access a key that does not exist would raise a `KeyError`. Notice the use of single quotes inside the f-string to avoid confusion with the outer double quotes.
+</details>

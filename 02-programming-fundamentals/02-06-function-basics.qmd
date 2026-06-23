@@ -1,0 +1,205 @@
+# Writing functions
+
+We introduce functions as reusable, named blocks of code that take input, do something with it, and return a result — and cover the `def` and `return` keywords for defining
+your own.
+
+{{< video https://vimeo.com/1195554580/f7b0fa4f0a?fl=ml&fe=ec >}}
+
+```python
+# ── The anatomy of a function ────────────────────────────────
+
+def celsius_to_fahrenheit(temp_c):
+    temp_f = temp_c * 9 / 5 + 32
+    return temp_f
+
+f_temp = celsius_to_fahrenheit(0)
+print(f_temp)
+
+# ── Multiple parameters ──────────────────────────────────────
+
+def pct_change(old_value, new_value):
+    change = (new_value - old_value) / old_value * 100
+    return round(change, 2)
+
+change = pct_change(100, 115)
+print(change)
+
+# ── Functions can call other functions ───────────────────────
+
+def describe_change(old_value, new_value):
+    change = pct_change(old_value, new_value)    # calling our other function
+
+    if change > 0:
+        print(f"Increased by {change}%")
+    elif change < 0:
+        print(f"Decreased by {abs(change)}%")
+    else:
+        print("No change")
+
+describe_change(100, 115)
+
+# ── Docstrings ───────────────────────────────────────────────
+
+# Improved version with docstring
+def pct_change(old_value, new_value):
+    """
+    Calculate the percentage change from old_value to new_value.
+    Returns the result rounded to 2 decimal places.
+    """
+    change = (new_value - old_value) / old_value * 100
+    return round(change, 2)
+```
+
+## Exercises
+
+### Exercise 2.6.1
+Write a function called `celsius_to_fahrenheit` that takes a temperature in Celsius as input and returns the equivalent temperature in Fahrenheit using the formula `F = (C * 9/5) + 32`. Test it on at least three values and print the results.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+def celsius_to_fahrenheit(temp_c):
+    return (temp_c * 9/5) + 32
+
+print(celsius_to_fahrenheit(0))
+print(celsius_to_fahrenheit(100))
+print(celsius_to_fahrenheit(-40))
+```
+
+Notice that `-40` is the temperature at which Celsius and Fahrenheit are equal — a useful sanity check that the function is working correctly.
+</details>
+
+---
+
+### Exercise 2.6.2
+Rewrite your `celsius_to_fahrenheit` function from Exercise 2.6.1 so that it prints a nicely formatted result instead of returning a value. Test it on the same three values as before.
+
+Then reflect on the following: which version is more useful if you want to use the result in a further calculation, such as finding the average of several converted temperatures?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+def celsius_to_fahrenheit_print(temp_c):
+    fahrenheit = (temp_c * 9/5) + 32
+    print(f"{temp_c}°C is equal to {fahrenheit:.1f}°F.")
+
+celsius_to_fahrenheit_print(0)
+celsius_to_fahrenheit_print(100)
+celsius_to_fahrenheit_print(-40)
+```
+
+The printing version is convenient for displaying results, but it cannot be used in further calculations — the value is shown but not passed on. For example, if you wanted to find the average of several converted temperatures, you would need the returned value to store or accumulate it. As a general rule, functions should return their result rather than print it, and printing should be handled separately by the code that calls the
+function.
+</details>
+
+---
+
+### Exercise 2.6.3
+Write a function called `classify_gdp` that takes a GDP per capita value as input and returns the corresponding income group as a string. Use the same thresholds as in Exercise 2.2.2:
+
+- Below 1 000: `"low income"`
+- Between 1 000 and 9 999: `"lower-middle income"`
+- Between 10 000 and 49 999: `"upper-middle income"`
+- 50 000 or above: `"high income"`
+
+Test your function on at least four values — one from each category — and print the results using an f-string.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+def classify_gdp(gdp_per_cap):
+    if gdp_per_cap < 1_000:
+        return "low income"
+    elif gdp_per_cap < 10_000:
+        return "lower-middle income"
+    elif gdp_per_cap < 50_000:
+        return "upper-middle income"
+    else:
+        return "high income"
+
+print(f"GDP per capita 500: {classify_gdp(500)}")
+print(f"GDP per capita 8,600: {classify_gdp(8_600)}")
+print(f"GDP per capita 42,000: {classify_gdp(42_000)}")
+print(f"GDP per capita 82,500: {classify_gdp(82_500)}")
+```
+
+Notice that each branch uses `return` directly rather than assigning to a variable first. As soon as a `return` statement is reached, the function exits immediately — the remaining branches are never evaluated. This makes the `elif` chain both correct and efficient.
+</details>
+
+---
+
+### Exercise 2.6.4
+Write a function called `summarize_country` that takes two inputs — a country name and its GDP per capita — and prints a formatted string that reports both the country name and its income group. Use your `classify_gdp` function from Exercise 2.6.3 inside the new function. Test it on three countries of your choice.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+def summarize_country(country, gdp_per_cap):
+    group = classify_gdp(gdp_per_cap)
+    print(f"{country} has a GDP per capita of {gdp_per_cap:,} and is classified as {group}.")
+
+summarize_country("Norway", 82_500)
+summarize_country("Brazil", 8_600)
+summarize_country("Nigeria", 2_100)
+```
+
+Functions can call other functions — `summarize_country` delegates the classification logic to `classify_gdp` rather than reimplementing it. This is a fundamental principle of good programming: write each piece of logic once and reuse it wherever it is needed.
+</details>
+
+---
+
+### Exercise 2.6.5
+Each of the three functions below contains a mistake that will either cause an error or produce an incorrect result. Identify and fix each one, and explain what was wrong.
+
+```python
+# Function 1
+def square(x)
+    return x ** 2
+
+# Function 2
+def add_vat(price):
+    price_with_vat = price * 1.25
+
+def format_temperature(temp_c):
+    fahrenheit = (temp_c * 9/5) + 32
+        return f"{temp_c}°C is {fahrenheit:.1f}°F"
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+# Function 1 — missing colon at the end of the def line
+def square(x):
+    return x ** 2
+
+print(square(5))
+```
+
+```{python}
+# Function 2 — missing return statement
+def add_vat(price):
+    price_with_vat = price * 1.25
+    return price_with_vat
+
+print(add_vat(100))
+```
+
+```{python}
+# Function 3 — return statement is over-indented
+def format_temperature(temp_c):
+    fahrenheit = (temp_c * 9/5) + 32
+    return f"{temp_c}°C is {fahrenheit:.1f}°F"
+
+print(format_temperature(100))
+```
+
+- **Function 1** raises a `SyntaxError` because the `def` line is missing its colon. Every `def` statement must end with a colon.
+- **Function 2** runs without error but always returns `None` because there is no `return` statement. The result is computed and stored in `price_with_vat` but never returned to the caller.
+- **Function 3** raises an `IndentationError` because the `return` statement is indented one level too far. In Python, indentation defines the structure of the code — an extra level of indentation signals the start of a new block, which is not valid
+  here.
+</details>

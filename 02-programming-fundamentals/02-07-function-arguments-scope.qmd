@@ -1,0 +1,307 @@
+# Default arguments and scope
+
+We extend our understanding of functions by introducing default argument values, named arguments, multiple return values, and the concept of scope — where variables are accessible in your code.
+
+{{< video https://vimeo.com/1195554579/7883ed9278?fl=ml&fe=ec >}}
+
+```python
+# ── Default argument values ──────────────────────────────────
+
+def pct_change(old_value, new_value, digits=2):
+    """
+    Calculate percentage change, rounded to `digits` decimal places.
+    Default is 2 decimal places.
+    """
+    change = (new_value - old_value) / old_value * 100
+    return round(change, digits)
+
+# Uses the default: 2 decimal places
+print(pct_change(100, 113.456))
+
+# Override the default
+print(pct_change(100, 113.456, digits=0))
+print(pct_change(100, 113.456, digits=4))
+
+# ── Passing arguments by name ────────────────────────────────
+
+# By position — arguments matched in order
+print(pct_change(100, 115))
+print(pct_change(115, 100))    # different result
+
+# By name — order does not matter
+print(pct_change(old_value=100, new_value=115))
+print(pct_change(new_value=115, old_value=100))    # same result
+
+# ── Multiple return values ───────────────────────────────────
+
+def summarise(values):
+    """Return the sum and mean of a list of numbers."""
+    total = sum(values)
+    mean  = total / len(values)
+    return total, mean
+
+tot, avg = summarise([120, 340, 55, 890, 210, 45, 670])
+
+print(f"Total:   {tot}")
+print(f"Average: {round(avg, 1)}")
+
+# ── Scope ────────────────────────────────────────────────────
+
+def my_function(x):
+    secret = x * 2    # 'secret' only exists inside this function
+    return secret
+
+result = my_function(5)
+print(result)
+
+# This will cause a NameError:
+# print(secret)
+
+# Good vs bad scope practice
+multiplier = 3    # global variable
+
+def bad_function(x):
+    return x * multiplier    # uses 'multiplier' from outside — fragile
+
+def good_function(x, multiplier):
+    return x * multiplier    # everything it needs is passed as an argument
+
+print(bad_function(10))
+print(good_function(10, 3))
+```
+
+## Exercises
+
+### Exercise 2.7.1
+Extend your `celsius_to_fahrenheit` function from Exercise 2.6.1 to also convert to Kelvin. The function should take a temperature in Celsius and a `unit` parameter that specifies the output unit. Set `"fahrenheit"` as the default. The function should return the converted value. Test it by calling it both with and without the `unit` argument.
+
+Conversion formulas:
+
+- Fahrenheit: `(temp_c * 9/5) + 32`
+- Kelvin: `temp_c + 273.15`
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+def convert_temperature(temp_c, unit="fahrenheit"):
+    if unit == "fahrenheit":
+        return (temp_c * 9/5) + 32
+    elif unit == "kelvin":
+        return temp_c + 273.15
+    else:
+        return f"Unknown unit: {unit}"
+
+# Using default argument
+print(convert_temperature(100))
+
+# Specifying unit explicitly
+print(convert_temperature(100, unit="kelvin"))
+print(convert_temperature(0, unit="fahrenheit"))
+print(convert_temperature(0, unit="kelvin"))
+```
+
+When called without a `unit` argument, the function uses the default `"fahrenheit"`. The `else` branch handles invalid unit names gracefully rather than raising an error, which is a good habit when writing functions that accept string arguments.
+</details>
+
+---
+
+### Exercise 2.7.2
+The function below computes a weighted average grade. Without running the code, predict the output of each function call. Then run them to check your answers. Which calls produce an error and why?
+
+```python
+def weighted_grade(exam, assignment, exam_weight=0.7):
+    assignment_weight = 1 - exam_weight
+    return exam * exam_weight + assignment * assignment_weight
+
+# Call 1
+print(weighted_grade(80, 90))
+
+# Call 2
+print(weighted_grade(80, 90, 0.6))
+
+# Call 3
+print(weighted_grade(assignment=90, exam=80))
+
+# Call 4
+print(weighted_grade(exam_weight=0.6, exam=80, assignment=90))
+
+# Call 5
+print(weighted_grade(80))
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+def weighted_grade(exam, assignment, exam_weight=0.7):
+    assignment_weight = 1 - exam_weight
+    return exam * exam_weight + assignment * assignment_weight
+
+# Call 1 — uses default exam_weight of 0.7
+print(weighted_grade(80, 90))
+
+# Call 2 — overrides default with 0.6
+print(weighted_grade(80, 90, 0.6))
+
+# Call 3 — keyword arguments, order does not matter
+print(weighted_grade(assignment=90, exam=80))
+
+# Call 4 — all keyword arguments, any order
+print(weighted_grade(exam_weight=0.6, exam=80, assignment=90))
+```
+
+Call 5 raises a `TypeError` because `assignment` has no default value and is not provided:
+```
+TypeError: weighted_grade() missing 1 required positional argument: 'assignment'
+```
+Calls 1 and 3 produce the same result because keyword arguments allow you to pass arguments in any order — Python matches them by name rather than position. Parameters without default values are required and must always be provided.
+</details>
+
+---
+
+### Exercise 2.7.3
+Extend your `convert_temperature` function from Exercise 2.7.1 so that it returns both the Fahrenheit and Kelvin values as two separate return values, regardless of the `unit` argument (remove the `unit` parameter since it is no longer needed). Unpack the result into two variables when calling the function and print both values using an f-string.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+def convert_temperature(temp_c):
+    fahrenheit = (temp_c * 9/5) + 32
+    kelvin     = temp_c + 273.15
+    return fahrenheit, kelvin
+
+# Unpack both return values
+temp_f, temp_k = convert_temperature(100)
+print(f"100°C = {temp_f:.1f}°F = {temp_k:.2f}K")
+
+temp_f, temp_k = convert_temperature(0)
+print(f"0°C = {temp_f:.1f}°F = {temp_k:.2f}K")
+```
+
+Returning multiple values in Python is as simple as separating them with a comma — Python packs them into a tuple automatically. Unpacking works by assigning the result to the same number of variables as there are return values. You can also store the result as a single tuple if you prefer: `result = convert_temperature(100)` gives `result[0]` for Fahrenheit and `result[1]` for Kelvin.
+</details>
+
+---
+
+### Exercise 2.7.4
+For each statement below, decide whether it is **True** or **False**. Then verify your
+answer by running a small piece of code where applicable.
+
+1. A function can have multiple `return` statements.
+2. A function always returns a value.
+3. A variable defined inside a function is accessible outside of it.
+4. If you pass a numeric variable to a function and the function changes it, the original variable outside the function is also changed.
+5. A function can call another function.
+6. Default argument values are used when the argument is not provided by the caller.
+7. Keyword arguments must always be provided before positional arguments.
+
+<details>
+<summary>Solution</summary>
+
+1. **True** — a function can have multiple `return` statements, for example one in each branch of a conditional. The function exits as soon as any `return` is reached.
+
+2. **False** — a function that has no `return` statement, or a `return` with no value, returns `None` automatically.
+
+3. **False** — variables defined inside a function exist only within that function's scope. Trying to access them outside raises a `NameError`:
+```{python}
+#| error: true
+def my_function():
+    x = 10
+
+my_function()
+print(x)
+```
+
+4. **False** — for basic data types like integers, floats, and strings, Python passes a copy of the value. Changing it inside the function does not affect the original:
+```{python}
+def add_one(x):
+    x = x + 1
+    return x
+
+n = 5
+add_one(n)
+print(n)
+```
+
+5. **True** — functions can call other functions freely. You saw this in Exercise 2.6.4 where `summarize_country` called `classify_gdp`.
+
+6. **True** — default values are used as a fallback when the caller does not provide that argument, as you saw in Exercises 2.7.1 and 2.7.2.
+
+7. **False** — it is the other way around: positional arguments must come before keyword arguments. `weighted_grade(exam=80, 90)` raises a `SyntaxError`, but `weighted_grade(80, assignment=90)` is valid.
+</details>
+
+---
+
+### Exercise 2.7.5
+The program below works but has poor function scope practices and no documentation. Identify all the scope-related issues, fix them, and add a docstring to each function.
+
+```python
+exchange_rate = 8.85
+
+def nok_to_eur(amount):
+    return amount / exchange_rate
+
+def summarize_conversion(amount):
+    eur = nok_to_eur(amount)
+    print(f"{amount} NOK = {eur:.2f} EUR (rate: {exchange_rate})")
+
+summarize_conversion(1000)
+summarize_conversion(5000)
+```
+
+<details>
+<summary>Solution</summary>
+
+The program produces correct output, but it relies on `exchange_rate` being a global variable that both functions access directly from outside their own scope. This is problematic because:
+
+- If `exchange_rate` is changed or deleted elsewhere in the program, both functions break silently.
+- The functions are not self-contained — they cannot be reused in another program without also bringing along the global variable.
+- It is not clear from the function signatures alone what inputs they depend on.
+
+The fix is to pass `exchange_rate` as an explicit argument to both functions, using a
+default value so existing calls still work without modification:
+
+```{python}
+def nok_to_eur(amount, exchange_rate=8.85):
+    """
+    Convert an amount from Norwegian kroner (NOK) to euros (EUR).
+
+    Parameters
+    ----------
+    amount : float
+        The amount in NOK to convert.
+    exchange_rate : float, optional
+        The NOK/EUR exchange rate. Default is 8.85.
+
+    Returns
+    -------
+    float
+        The equivalent amount in EUR.
+    """
+    return amount / exchange_rate
+
+def summarize_conversion(amount, exchange_rate=8.85):
+    """
+    Print a formatted summary of a NOK to EUR conversion.
+
+    Parameters
+    ----------
+    amount : float
+        The amount in NOK to convert.
+    exchange_rate : float, optional
+        The NOK/EUR exchange rate. Default is 8.85.
+    """
+    eur = nok_to_eur(amount, exchange_rate)
+    print(f"{amount} NOK = {eur:.2f} EUR (rate: {exchange_rate})")
+
+summarize_conversion(1000)
+summarize_conversion(5000)
+
+# The exchange rate can now be changed without touching the functions
+summarize_conversion(1000, exchange_rate=9.10)
+```
+
+Adding the exchange rate as a parameter with a default value makes both functions self-contained and easy to reuse. The docstrings document what each function does, what its parameters are, and what it returns — following the NumPy docstring convention which is standard in data science. 
+</details>

@@ -1,0 +1,232 @@
+# While loops
+
+We introduce the `while` loop as a way to repeat a block of code for as long as a condition remains `True`, and cover the `break` and `continue` keywords for controlling loop execution.
+
+{{< video https://vimeo.com/1194694499/a19f73d32c?fl=ml&fe=ec >}}
+
+```python
+# ── The basic while loop ─────────────────────────────────────
+
+count = 1
+
+while count <= 5:
+    print(count)
+    count = count + 1
+
+# ── The infinite loop hazard ─────────────────────────────────
+
+# WARNING: do not run this — it will loop forever
+#count = 0
+#while count <= 5:
+#    print(count)
+
+# ── A practical while loop example ───────────────────────────
+
+# Keep adding random numbers until total exceeds 1000
+import random
+random.seed(42)
+
+total = 0
+iterations = 0
+
+while total < 1000:
+    number = random.randint(50, 200)
+    total += number    # shorthand for total = total + number
+    iterations += 1
+
+print(f"Reached {total} after {iterations} iteration")
+
+# ── break and continue ───────────────────────────────────────
+
+# break: exit the loop immediately
+revenues = [120, 340, 55, 890, 210, 950, 670]
+
+for r in revenues:
+    if r > 900:
+        print(f"First value above 900: {r}")
+        break
+
+# continue: skip the rest of the current iteration
+values = [10, -3, 0, 7, -1, 4, 0, 9]
+
+for v in values:
+    if v <= 0:
+        continue
+    print(v)
+
+# ── When to use for vs while ────────────────────────────────
+
+word = "Python"
+i = 0
+
+while i < len(word):
+    print(word[i])
+    i += 1
+```
+
+## Exercises
+
+### Exercise 2.4.1
+The while loop below is broken and will run forever if you execute it. **Do not run it.** Instead, read the code carefully, identify the problem, and fix it. Then predict how many times the loop will print before it stops, and run the fixed version to check.
+
+```python
+countdown = 10
+
+while countdown > 0:
+    print(f"T-minus {countdown}...")
+    
+print("Liftoff!")
+```
+
+<details>
+<summary>Solution</summary>
+
+The loop never updates `countdown`, so the condition `countdown > 0` is always `True` and the loop runs forever. The fix is to decrement `countdown` inside the loop:
+
+```{python}
+countdown = 10
+
+while countdown > 0:
+    print(f"T-minus {countdown}...")
+    countdown -= 1
+
+print("Liftoff!")
+```
+
+The loop prints 10 times — once for each value from 10 down to 1. When `countdown` reaches 0 the condition `countdown > 0` becomes `False` and the loop stops. Forgetting to update the condition variable is the most common while loop mistake — always check that something inside the loop will eventually make the condition `False`.
+</details>
+
+---
+
+### Exercise 2.4.2
+Use a `for` loop with `continue` to iterate over the sentence below character by character. Build two new strings: one containing only the vowels and one containing only the consonants. Use `continue` to skip spaces. Print both strings when the loop is finished.
+
+```python
+sentence = "python is great"
+```
+
+How does using `continue` here differ from how you handled the word in Exercise 2.3.3?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+sentence   = "python is great"
+vowels     = ""
+consonants = ""
+
+for char in sentence:
+    if char == " ":
+        continue
+    elif char in "aeiou":
+        vowels += char
+    else:
+        consonants += char
+
+print(f"Vowels: {vowels}")
+print(f"Consonants: {consonants}")
+```
+
+In Exercise 2.3.3 the input was a single word with no spaces, so every character could be handled with a simple `if/else`. Here, the sentence contains spaces that belong to neither category. `continue` skips them cleanly — as soon as a space is encountered the loop moves immediately to the next character without executing the `elif` or `else` branches. This keeps the logic for vowels and consonants simple and uncluttered.
+</details>
+
+---
+
+### Exercise 2.4.3
+Use a `for` loop with `break` to search the list of country names below for the first country that starts with the letter `"S"`. Print the name of the country and its position in the list when it is found. If no country starting with `"S"` is found,
+print a message saying so.
+
+```python
+countries = ["Norway", "Germany", "Sweden", "Brazil", "Spain", "Japan", "Portugal"]
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+countries = ["Norway", "Germany", "Sweden", "Brazil", "Spain", "Japan", "Portugal"]
+found     = False
+
+for i in range(len(countries)):
+    if countries[i][0] == "S":
+        print(f"Found '{countries[i]}' at position {i}.")
+        found = True
+        break
+
+if not found:
+    print("No country starting with 'S' was found.")
+```
+
+`break` stops the loop as soon as the first match is found — without it, the loop would continue through the remaining countries unnecessarily. The `found` variable is a common pattern when using `break`: it records whether the loop ended early or ran to completion, which lets you handle the "not found" case cleanly after the loop.
+</details>
+
+---
+
+### Exercise 2.4.4
+The task below can be solved with either a `for` loop or a `while` loop. Implement it both ways and verify that you get the same result. Then reflect on which version feels more natural and why.
+
+**Task:** given the list of temperatures below, compute the running total and stop accumulating as soon as the total exceeds 100. Print the final total and how many values were added.
+
+```python
+temperatures = [12.5, 18.3, 9.7, 22.1, 15.0, 8.4, 19.6, 11.2]
+```
+
+<details>
+<summary>Solution</summary>
+
+**Using a `for` loop with `break`:**
+
+```{python}
+temperatures = [12.5, 18.3, 9.7, 22.1, 15.0, 8.4, 19.6, 11.2]
+
+total = 0
+count = 0
+
+for temp in temperatures:
+    total += temp
+    count += 1
+    if total > 100:
+        break
+
+print(f"Total: {total:.1f} after {count} values.")
+```
+
+**Using a `while` loop:**
+
+```{python}
+total = 0
+count = 0
+
+while total <= 100 and count < len(temperatures):
+    total += temperatures[count]
+    count += 1
+
+print(f"Total: {total:.1f} after {count} values.")
+```
+
+Both produce the same result. The `for` loop version is arguably more readable here — iterating over a list of known length is exactly what `for` loops are designed for, and `break` handles the early stopping cleanly. The `while` loop requires manual index
+management with `count` to access each element by position, which adds complexity. As a rule of thumb: use `for` when you know the sequence you are iterating over in advance, and `while` when the stopping condition depends on something that changes during execution.
+</details>
+
+---
+
+### Exercise 2.4.5
+A scientist is studying how a population of bacteria is affected by a new antibiotic. The population starts at 1 000 000 and is halved every hour. Use a `while` loop to compute how many hours it takes for the population to fall below 1 000. Print the population after each hour and a final message reporting the number of hours it took.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+population = 1_000_000
+hours      = 0
+
+while population >= 1_000:
+    population = population / 2
+    hours += 1
+    print(f"Hour {hours}: {population:,.0f}")
+
+print(f"\nThe population fell below 1,000 after {hours} hours.")
+```
+
+This is a natural fit for a `while` loop because the number of iterations is not known in advance — it depends entirely on the starting population, the halving rate, and the threshold, all of which could change. There is no list to iterate over and no fixed number of steps. This is the key distinction from the `for` loop: use `while` when the stopping condition emerges from the computation itself.
+</details>

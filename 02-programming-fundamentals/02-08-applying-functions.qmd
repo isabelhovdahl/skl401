@@ -1,0 +1,338 @@
+# Applying functions
+
+We explore how to apply functions to collections of values, covering the differencebetween applying a function to a list, a numpy array, and a pandas DataFrame column, and when to use each approach.
+
+{{< video https://vimeo.com/1195554581/e7f010d271?fl=ml&fe=ec >}}
+
+```python
+# ── Applying a function to a list with a loop ────────────────
+
+def celsius_to_fahrenheit(temp_c):
+    """Convert a temperature from Celsius to Fahrenheit."""
+    return temp_c * 9 / 5 + 32
+
+temperatures_c = [0, 10, 20, 30, 100]
+
+# This does not work — the function expects a single number, not a list
+# print(celsius_to_fahrenheit(temperatures_c))
+
+# Apply the function to each element using a list comprehension
+temperatures_f = [celsius_to_fahrenheit(t) for t in temperatures_c]
+print(temperatures_f)
+
+# ── With numpy arrays: no loop needed ────────────────────────
+
+import numpy as np
+
+temps_array = np.array([12, 15, 8, 20, 17])
+
+# No loop needed — the function works on the whole array at once
+print(celsius_to_fahrenheit(temps_array))
+
+# ── Applying functions to DataFrame columns ──────────────────
+
+import pandas as pd
+
+weather = pd.DataFrame({
+    "city":      ["Oslo", "Lagos", "Madrid", "Lima", "Athens"],
+    "temp_c":    [8, 31, 26, 22, 30],
+})
+print(weather)
+
+weather["temp_f"] = celsius_to_fahrenheit(weather["temp_c"])
+print(weather)
+
+# ── .apply() for functions with conditionals ─────────────────
+
+def classify_gdp(gdp_per_cap):
+    """Classify a country by GDP per capita into income groups."""
+    if gdp_per_cap < 2000:
+        return "low income"
+    elif gdp_per_cap < 12000:
+        return "middle income"
+    else:
+        return "high income"
+
+weather["gdp_per_cap"] = [82500, 1700, 30000, 6700, 18000]
+print(weather)
+
+# This does not work — "if" statements cannot evaluate a series of values
+# print(classify_gdp(weather["gdp_per_cap"]))
+
+weather["income_group"] = weather["gdp_per_cap"].apply(classify_gdp)
+print(weather)
+```
+
+## Exercises
+
+### Exercise 2.8.1
+The function below computes the compound interest on an initial investment after one year.
+
+```python
+def compound_interest(principal, rate, n_compounds):
+    return principal * (1 + rate / n_compounds) ** n_compounds - principal
+```
+
+1. Call the function on a single investment of 10 000 at a 5% annual rate compounded monthly (12 times per year) and print the result.
+2. You have a list of different initial investments below. Apply the function to each value using a list comprehension, keeping the rate and number of compoundings fixed. Print the results.
+3. Rewrite the function so that it accepts a list of principal values directly and returns a list of interest amounts. Call it on the same list and verify the results are identical.
+
+```python
+principals = [5_000, 10_000, 25_000, 50_000, 100_000]
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+def compound_interest(principal, rate, n_compounds):
+    return principal * (1 + rate / n_compounds) ** n_compounds - principal
+
+# 1. Single value
+print(compound_interest(10_000, 0.05, 12))
+```
+
+```{python}
+principals = [5_000, 10_000, 25_000, 50_000, 100_000]
+
+# 2. List comprehension
+results_comp = [compound_interest(p, 0.05, 12) for p in principals]
+print(results_comp)
+```
+
+```{python}
+# 3. Rewrite to accept a list
+def compound_interest_list(principals, rate, n_compounds):
+    return [p * (1 + rate / n_compounds) ** n_compounds - p for p in principals]
+
+results_list = compound_interest_list(principals, 0.05, 12)
+print(results_list)
+print(results_comp == results_list)
+```
+
+Both approaches produce the same result. The list comprehension approach reuses the original single-value function without modification — this is generally preferable since it keeps the function simple and flexible. The list-accepting version is more convenient when you always work with collections, but it can only be called with a list, not a single value.
+</details>
+
+---
+
+### Exercise 2.8.2
+The function below computes the distance of a single value from a reference point. Apply it to the list below using a list comprehension. Then convert the list to a numpy array and apply the function on the array. Verify that both approaches give the same result.
+
+```python
+import numpy as np
+
+def distance_from_ref(value, ref):
+    return abs(value - ref)
+
+measurements = [3.2, 7.8, 1.5, 9.1, 4.4, 6.3, 2.7, 8.0]
+reference    = 5.0
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import numpy as np
+
+def distance_from_ref(value, ref):
+    return abs(value - ref)
+
+measurements = [3.2, 7.8, 1.5, 9.1, 4.4, 6.3, 2.7, 8.0]
+reference    = 5.0
+
+# List comprehension
+distances_list = [distance_from_ref(v, reference) for v in measurements]
+print(distances_list)
+
+# Convert to array and apply directly
+measurements_array = np.array(measurements)
+distances_array    = distance_from_ref(measurements_array, reference)
+print(distances_array)
+
+print(np.allclose(distances_list, distances_array))
+```
+
+When the data is stored as a numpy array, the function can be applied directly to the entire array at once — no loop or comprehension needed. This works because both `-` and `abs()` support element-wise operations on numpy arrays. This is the key advantage of storing numerical data as an array rather than a list: functions written for a single value often work on the whole array automatically, making the code simpler and faster.
+</details>
+
+---
+
+### Exercise 2.8.3
+The two functions below expect different input types. Run each call and explain what happens in each case — does it produce an error, an unexpected result, or the correct result?
+
+```python
+import numpy as np
+
+def double_list(values):
+    result = []
+    for v in values:
+        result.append(v * 2)
+    return result
+
+def double_array(values):
+    return values * 2
+
+numbers_list  = [1, 2, 3, 4, 5]
+numbers_array = np.array([1, 2, 3, 4, 5])
+
+# Call 1
+print(double_list(numbers_list))
+
+# Call 2
+print(double_list(numbers_array))
+
+# Call 3
+print(double_array(numbers_array))
+
+# Call 4
+print(double_array(numbers_list))
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import numpy as np
+
+def double_list(values):
+    result = []
+    for v in values:
+        result.append(v * 2)
+    return result
+
+def double_array(values):
+    return values * 2
+
+numbers_list  = [1, 2, 3, 4, 5]
+numbers_array = np.array([1, 2, 3, 4, 5])
+
+# Call 1 — correct: list function with a list
+print(double_list(numbers_list))
+
+# Call 2 — also works: numpy arrays are iterable, so the for loop works
+print(double_list(numbers_array))
+
+# Call 3 — correct: array function with an array
+print(double_array(numbers_array))
+```
+
+```{python}
+# Call 4 — unexpected result: * on a list does not raise an error but is wrong
+print(double_array(numbers_list))
+```
+
+Calls 1, 2, and 3 all produce the correct result. Call 4 is the most important one: passing a list to `double_array` does not raise an error because Python's `*` operator on a list actually works — but it repeats the list rather than doubling each element. This is a silent bug: the function returns a wrong result without any warning. This is why it is important to be explicit about what type your function expects — either by documenting it in a docstring or by converting the input at the start of the function with `np.array(values)`.
+</details>
+
+---
+
+### Exercise 2.8.4
+Unlike integers and floats, mutable data types such as lists, dictionaries, and DataFrames are not copied when passed to a function — meaning a function can modify the original object without you realizing it. 
+
+The two functions below both modify their input inside the function body. Run the code and observe what happens to the original variables after each function call. Explain why the two functions behave differently, and fix each one so that the original variables are not modified.
+
+```python
+def double_first_element(lst):
+    lst[0] = lst[0] * 2
+    return lst
+
+def double_value(x):
+    x = x * 2
+    return x
+
+my_list   = [10, 20, 30]
+my_number = 10
+
+print(double_first_element(my_list))
+print(my_list)
+
+print(double_value(my_number))
+print(my_number)
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+def double_first_element(lst):
+    lst[0] = lst[0] * 2
+    return lst
+
+def double_value(x):
+    x = x * 2
+    return x
+
+my_list   = [10, 20, 30]
+my_number = 10
+
+print(double_first_element(my_list))
+print(my_list)
+
+print(double_value(my_number))
+print(my_number)
+```
+
+`my_list` is modified even though we only passed it to a function — the original list is now `[20, 20, 30]`. `my_number` is unchanged. The difference is that lists are **mutable**: when you pass a list to a function, Python does not make a copy — it passes a reference to the same object in memory. Modifying it inside the function modifies the original. Integers are **immutable**: reassigning `x` inside the function creates a new object and does not affect the original.
+
+The fix for the list function is to work on a copy using `.copy()`:
+
+```{python}
+def double_first_element(lst):
+    lst = lst.copy()
+    lst[0] = lst[0] * 2
+    return lst
+
+my_list = [10, 20, 30]
+print(double_first_element(my_list))
+print(my_list)
+```
+
+This applies equally to dictionaries and DataFrames — any mutable object passed to a function should be copied inside the function if you do not want the original to be modified. This is one of the most common sources of subtle bugs in Python programs.
+</details>
+
+---
+
+### Exercise 2.8.5
+The DataFrame below contains a list of students and their numeric grades. Write a function called `letter_grade` that takes a single numeric grade and returns a letter grade as a string using the thresholds below. Then use the function to add a new column called `"letter"` to the DataFrame and print the final result.
+
+- 90 or above: `"A"`
+- 80–89: `"B"`
+- 70–79: `"C"`
+- Below 70: `"F"`
+
+```python
+import pandas as pd
+
+df = pd.DataFrame({
+    "student": ["Alice", "Bob", "Clara", "David", "Emma", "Frank"],
+    "grade":   [92.0, 85.0, 73.0, 61.0, 95.0, 78.0],
+})
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+df = pd.DataFrame({
+    "student": ["Alice", "Bob", "Clara", "David", "Emma", "Frank"],
+    "grade":   [92.0, 85.0, 73.0, 61.0, 95.0, 78.0],
+})
+
+def letter_grade(grade):
+    if grade >= 90:
+        return "A"
+    elif grade >= 80:
+        return "B"
+    elif grade >= 70:
+        return "C"
+    else:
+        return "F"
+
+df["letter"] = df["grade"].apply(letter_grade)
+print(df)
+```
+
+Since `letter_grade` is written for a single value, trying to assign it directly with `df["letter"] = letter_grade(df["grade"])` raises a `ValueError` — the function does not know how to handle an entire Series at once. `.apply()` solves this by calling the function once for each value in the column and collecting the results into a new Series, which is then stored as the `"letter"` column.
+</details>

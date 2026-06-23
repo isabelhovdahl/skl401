@@ -1,0 +1,61 @@
+# Topic 2 capstone
+
+We bring together everything covered in Topic 2 — loops, conditionals, functions, and string operations — in a single worked example that cleans and classifies a messy list of country records from start to finish.
+
+{{< video https://vimeo.com/1195554999/9f8356b8c3?fl=ml&fe=ec >}}
+
+```python
+# Topic 2 capstone: cleaning and classifying country data
+# Combines: loops, conditionals, functions, strings
+
+# ── Data ──────────────────────────────────────────────────────
+
+records = [
+    {"country": "  norway",   "gdp_per_cap": 82500, "population": 5_400_000},
+    {"country": "BRAZIL  ",   "gdp_per_cap":  8600, "population": 214_000_000},
+    {"country": "burundi",    "gdp_per_cap":   270, "population": 12_600_000},
+    {"country": "  Germany",  "gdp_per_cap": 48000, "population": 84_000_000},
+    {"country": "BOLIVIA ",   "gdp_per_cap":  3300, "population": 12_100_000},
+    {"country": "switzerland","gdp_per_cap": 85000, "population":  8_700_000},
+]
+
+# ── Functions ─────────────────────────────────────────────────
+
+def clean_name(name):
+    """Strip whitespace and apply title case."""
+    return name.strip().title()
+
+def classify_gdp(gdp_per_cap):
+    """Classify a country by GDP per capita into income groups."""
+    if gdp_per_cap < 2000:
+        return "low income"
+    elif gdp_per_cap < 12000:
+        return "middle income"
+    else:
+        return "high income"
+
+# ── Processing ────────────────────────────────────────────────
+
+results = []
+
+for record in records:
+    country       = clean_name(record["country"])
+    gdp_per_cap   = record["gdp_per_cap"]
+    population    = record["population"]
+    income_group  = classify_gdp(gdp_per_cap)
+
+    results.append({
+        "country":      country,
+        "gdp_per_cap":  gdp_per_cap,
+        "population":   population,
+        "income_group": income_group,
+    })
+
+# ── Output ────────────────────────────────────────────────────
+
+print(f"{'Country':<15} {'GDP/cap':>10} {'Population':>15} {'Income group':<15}")
+print("-" * 55)
+
+for r in results:
+    print(f"{r['country']:<15} {r['gdp_per_cap']:>10,} {r['population']:>15,} {r['income_group']:<15}")
+```

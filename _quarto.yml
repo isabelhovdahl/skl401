@@ -31,8 +31,26 @@ book:
           text: "1.11 Further Exercises"
     - part: "2 - Programming Fundamentals"
       chapters:
-        - file: 02-programming-fundamentals/02-01-placeholder.qmd
-          text: "2.1 Placeholder"
+        - file: 02-programming-fundamentals/02-01-operators.qmd
+          text: "2.1 Comparison and Logical Operators"
+        - file: 02-programming-fundamentals/02-02-conditionals.qmd
+          text: "2.2 Conditionals"
+        - file: 02-programming-fundamentals/02-03-for-loops.qmd
+          text: "2.3 For Loops"
+        - file: 02-programming-fundamentals/02-04-while-loops.qmd
+          text: "2.4 While Loops"
+        - file: 02-programming-fundamentals/02-05-list-comprehension.qmd
+          text: "2.5 List Comprehension"
+        - file: 02-programming-fundamentals/02-06-function-basics.qmd
+          text: "2.6 Writing Functions"
+        - file: 02-programming-fundamentals/02-07-function-arguments-scope.qmd
+          text: "2.7 Default Arguments and Scope"
+        - file: 02-programming-fundamentals/02-08-applying-functions.qmd
+          text: "2.8 Applying Functions"
+        - file: 02-programming-fundamentals/02-09-string-operations.qmd
+          text: "2.9 String Operations"
+        - file: 02-programming-fundamentals/02-10-topic2-capstone.qmd
+          text: "2.10 Topic 2 Capstone"
     - part: "3 - Data Wrangling"
       chapters:
         - file: 03-data-wrangling/03-01-placeholder.qmd

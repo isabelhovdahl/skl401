@@ -1,0 +1,216 @@
+# List comprehension
+
+We introduce list comprehensions as a compact way to build a new list from an existing one in a single line of code, as an alternative to a multi-line `for` loop.
+
+{{< video https://vimeo.com/1194694500/97d88af9d4?fl=ml&fe=ec >}}
+
+```python
+# ── From loop to list comprehension ──────────────────────────
+
+revenues = [120, 340, 55, 890, 210, 45, 670]
+
+# Standard loop
+doubled = []
+for r in revenues:
+    doubled.append(r * 2)
+
+print(doubled)
+
+# Same operation as a list comprehension
+doubled = [r * 2 for r in revenues]
+print(doubled)
+
+# ── Adding a condition ───────────────────────────────────────
+
+# Only keep revenues above 200
+high = [r for r in revenues if r > 200]
+print(high)
+
+# ── With strings ─────────────────────────────────────────────
+
+weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+sliced = [day[:3] for day in weekdays]
+print(sliced)
+```
+
+## Exercises
+
+### Exercise 2.5.1
+The `for` loop below converts a list of temperatures from Celsius to Fahrenheit. Rewrite it as a list comprehension that produces the same result. Print both outputs and verify that they are identical.
+
+```python
+temperatures_c = [0, 10, 20, 30, 40, 100]
+
+temps_f = []
+for temp in temperatures_c:
+    temps_f.append((temp * 9/5) + 32)
+
+print(temps_f)
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+temperatures_c = [0, 10, 20, 30, 40, 100]
+
+# Original for loop
+temps_f_loop = []
+for temp in temperatures_c:
+    temps_f_loop.append((temp * 9/5) + 32)
+
+# List comprehension
+temps_f_comp = [(temp * 9/5) + 32 for temp in temperatures_c]
+
+print(temps_f_loop)
+print(temps_f_comp)
+print(temps_f_loop == temps_f_comp)
+```
+
+A list comprehension is a compact way to write the pattern: create an empty list, loop over a sequence, and append a transformed value on each iteration. The structure `[expression for item in iterable]` maps directly onto the three parts of that pattern.
+</details>
+
+---
+
+### Exercise 2.5.2
+The `for` loop below filters a list of country names, keeping only those with more than five characters. First write the for loop version yourself, then rewrite it as a list comprehension. Print both outputs and verify they are identical.
+
+```python
+countries = ["Norway", "UK", "Germany", "Chad", "Brazil", "Peru", "Netherlands"]
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+countries = ["Norway", "UK", "Germany", "Chad", "Brazil", "Peru", "Netherlands"]
+
+# For loop version
+long_countries_loop = []
+for country in countries:
+    if len(country) > 5:
+        long_countries_loop.append(country)
+
+# List comprehension
+long_countries_comp = [country for country in countries if len(country) > 5]
+
+print(long_countries_loop)
+print(long_countries_comp)
+print(long_countries_loop == long_countries_comp)
+```
+
+Adding an `if` clause to a list comprehension filters the iterable — only items for which the condition is `True` are included in the result. The condition comes at the end: `[expression for item in iterable if condition]`.
+</details>
+
+---
+
+### Exercise 2.5.3
+Use a list comprehension with an `if/else` expression to label each temperature in the list below as `"warm"` if it is above 15 degrees and `"cold"` otherwise. Print the result alongside the original temperatures.
+
+```python
+temperatures = [4.2, 18.5, 11.0, 22.3, 8.7, 16.1, 3.5, 19.8]
+```
+
+_Hint: the syntax for an if/else expression inside a list comprehension is: `[a if condition else b for item in iterable]`. Note that the if/else comes before the `for` keyword, not after it. To print the temperatures and labels side by side, you can either use `range(len(...))` to index into both lists, or use `zip(list1, list2)` which lets you iterate over two lists simultaneously — try both._
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+temperatures = [4.2, 18.5, 11.0, 22.3, 8.7, 16.1, 3.5, 19.8]
+
+labels = ["warm" if temp > 15 else "cold" for temp in temperatures]
+
+# Using range
+for i in range(len(temperatures)):
+    print(f"{temperatures[i]}°C — {labels[i]}")
+```
+
+```{python}
+# Using zip
+for temp, label in zip(temperatures, labels):
+    print(f"{temp}°C — {label}")
+```
+
+Both approaches produce the same result. `range(len(...))` accesses both lists by index, which is familiar from earlier exercises. `zip()` is a more elegant alternative that iterates over two lists simultaneously, giving you one element from each on every iteration — without needing to manage an index. The position of the `if/else` matters: when placed *before* the `for` keyword it acts as a conditional expression that chooses between two values for every item. When placed *after* the `for` keyword (as in Exercise 2.5.2) it acts as a filter that excludes items entirely.
+</details>
+
+---
+
+### Exercise 2.5.4
+
+Just as list comprehensions provide a compact way to build lists, the same logic can be applied to dictionaries using a dictionary comprehension: `{key: value for item in iterable}`.
+
+You are given two lists — one of country names and one of their GDP per capita values. First use a `for` loop to combine them into a dictionary where country names are keys and GDP values are values. Then rewrite it as a dictionary comprehension and verify that both produce the same result.
+
+```python
+countries = ["Norway", "Brazil", "Germany", "Nigeria", "Japan"]
+gdp       = [82500, 8600, 48000, 2100, 42000]
+```
+
+_Hint: `zip(list1, list2)` lets you iterate over two lists simultaneously, giving you one item from each list on every iteration._
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+countries = ["Norway", "Brazil", "Germany", "Nigeria", "Japan"]
+gdp       = [82500, 8600, 48000, 2100, 42000]
+
+# For loop version
+gdp_dict_loop = {}
+for country, value in zip(countries, gdp):
+    gdp_dict_loop[country] = value
+
+print(gdp_dict_loop)
+
+# Dictionary comprehension
+gdp_dict_comp = {country: value for country, value in zip(countries, gdp)}
+print(gdp_dict_comp)
+
+print(gdp_dict_loop == gdp_dict_comp)
+```
+
+Dictionary comprehensions follow the same logic as list comprehensions but use curly braces and require both a key and a value expression: `{key: value for item in iterable}`. Just like with list comprehensions, writing the `for` loop version first makes it easier to see what the comprehension is doing — the structure maps directly onto the loop.
+</details>
+
+---
+
+### Exercise 2.5.5
+You are given a list of GDP per capita values. Use a list comprehension to compute the natural logarithm of each value using `math.log()`. Then convert the list to a numpy array using `np.array()` and apply the same operation using `np.log()`. Can you simplify your code for the array case? Print both results and verify they are equal.
+
+Once you have both solutions working, reflect on the following: given that the goal is to perform a numerical operation on a collection of numbers, which data structure is more appropriate here — a list or a numpy array? Why?
+
+```python
+import numpy as np
+import math
+
+gdp_per_cap = [82500, 8600, 48000, 2100, 42000, 1200, 65000, 3400]
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import numpy as np
+import math
+
+gdp_per_cap = [82500, 8600, 48000, 2100, 42000, 1200, 65000, 3400]
+
+# List comprehension using math.log()
+log_gdp_comp = [math.log(x) for x in gdp_per_cap]
+print(log_gdp_comp)
+
+# Convert to numpy array — no loop or comprehension needed
+gdp_array     = np.array(gdp_per_cap)
+log_gdp_numpy = np.log(gdp_array)
+print(log_gdp_numpy)
+
+# Verify they are equal
+print(np.allclose(log_gdp_comp, log_gdp_numpy))
+```
+
+Once the list is converted to a numpy array, `np.log()` can be applied directly to the entire array without any loop or comprehension — numpy handles the iteration internally. This is called a vectorized operation.
+
+A numpy array is the more appropriate data structure here. The values are all numeric and the goal is to perform a mathematical operation on all of them. Lists are flexible and can hold mixed types, but that flexibility comes at a cost — they do not support vectorized operations. When you know your data is numeric and you need to do arithmetic on it, storing it as a numpy array from the start avoids the need for loops or comprehensions altogether.
+</details>
