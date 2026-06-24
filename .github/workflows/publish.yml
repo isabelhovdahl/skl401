@@ -11,6 +11,9 @@ jobs:
       contents: read
       pages: write
       id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -29,9 +32,11 @@ jobs:
       - name: Render
         run: quarto render
 
-      - name: Deploy to GitHub Pages
-        uses: quarto-dev/quarto-actions/publish@v2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          target: gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          path: docs
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
