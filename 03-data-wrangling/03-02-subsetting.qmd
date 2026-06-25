@@ -1,0 +1,53 @@
+# Selecting columns and rows
+
+We cover how to select columns and rows from a DataFrame — using square brackets for columns, and `.loc[]` and `.iloc[]` for row selection based on labels and positions respectively.
+
+{{< video https://vimeo.com/1195888058/b6ac8e241f?fl=ml&fe=ec >}}
+
+```python
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# ── Selecting a single column ────────────────────────────────
+
+fares = titanic["fare"]
+type(fares)
+fares.head()
+
+fares.mean()
+fares.max()
+
+titanic["survived"].sum()    # total number of survivors
+
+titanic["pclass"].nunique()
+titanic["pclass"].unique()
+titanic["pclass"].value_counts()
+
+# ── Selecting multiple columns ───────────────────────────────
+
+subset = titanic[["survived", "pclass", "sex", "age", "fare"]]
+subset.head()
+
+# ── Selecting rows with .loc[] — label-based ─────────────────
+
+# Single row
+titanic.loc[0]
+
+# A range of rows — .loc[] is inclusive on both ends
+titanic.loc[0:4]
+
+# A range of rows and specific columns
+titanic.loc[0:4, ["survived", "pclass", "sex", "age"]]
+
+# ── Selecting rows with .iloc[] — position-based ────────────
+
+# Rows at positions 0, 1, 2 (stop=3 excluded), first 4 columns
+titanic.iloc[0:3, 0:4]
+
+# Two last rows using negative indexing
+titanic.iloc[-2]
+
+```
+
+## Exercises

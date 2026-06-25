@@ -55,8 +55,26 @@ book:
           text: "2.11 Further Exercises"
     - part: "3 - Data Wrangling"
       chapters:
-        - file: 03-data-wrangling/03-01-placeholder.qmd
-          text: "3.1 Placeholder"
+        - file: 03-data-wrangling/03-01-importing-data.qmd
+          text: "3.1 Importing Data"
+        - file: 03-data-wrangling/03-02-subsetting.qmd
+          text: "3.2 Subsetting"
+        - file: 03-data-wrangling/03-03-filtering.qmd
+          text: "3.3 Filtering"
+        - file: 03-data-wrangling/03-04-transforming-cols.qmd
+          text: "3.4 Transforming Columns"
+        - file: 03-data-wrangling/03-05-sorting-copying.qmd
+          text: "3.5 Sorting and Copying"
+        - file: 03-data-wrangling/03-06-missing-values.qmd
+          text: "3.6 Missing Values"
+        - file: 03-data-wrangling/03-07-grouping-aggregation.qmd
+          text: "3.7 Grouping and Aggregation"
+        - file: 03-data-wrangling/03-08-joining.qmd
+          text: "3.8 Joining Data"
+        - file: 03-data-wrangling/03-09-dates.qmd
+          text: "3.9 Working With Dates"
+        - file: 03-data-wrangling/03-10-capstone.qmd
+          text: "3.10 Topic 3 Capstone"
     - part: "4 - Graphics"
       chapters:
         - file: 04-graphics/04-01-placeholder.qmd

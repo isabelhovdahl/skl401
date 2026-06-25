@@ -1,0 +1,56 @@
+# Handling missing values
+
+We cover how to detect missing values, how to remove rows or columns with missing values, and how to replace missing
+values in DataFrames.
+
+{{< video https://vimeo.com/1195887666/4465f653de?fl=ml&fe=ec >}}
+
+```python
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# ── Detecting missing values ─────────────────────────────────
+
+# Count missing values per column
+titanic.isna().sum()
+
+# Share of missing values per column
+titanic.isna().mean().round(3)
+
+# Rows with missing age
+titanic[titanic["age"].isna()]
+
+# Rows with value for age
+titanic[titanic["age"].notna()]
+
+# ── Dropping missing values ──────────────────────────────────
+
+print("Before:", len(titanic))
+titanic_clean = titanic.dropna()
+print("After dropping all NaN:", len(titanic_clean))
+
+# Only drop rows where age is missing
+titanic_no_missing_age = titanic.dropna(subset=["age"])
+print("After dropping missing age:", len(titanic_no_missing_age))
+
+# ── Filling missing values ───────────────────────────────────
+
+# Fill missing age with the median age
+median_age = titanic["age"].median()
+print("Median age:", median_age)
+
+titanic["age"] = titanic["age"].fillna(median_age)
+print("Missing age after fill:", titanic["age"].isna().sum())
+
+# ── Missing values and data types ────────────────────────────
+
+print(titanic["age"].dtype)
+
+titanic["age"] = titanic["age"].astype(int)
+print(titanic["age"].dtype)
+titanic.head()
+
+```
+
+## Exercises

@@ -1,0 +1,82 @@
+# Topic 3 capstone
+
+We bring together everything covered in Topic 3 in a single end-to-end data wrangling workflow — from loading and inspecting raw data, cleaning column names, fixing value inconsistencies, merging with an external dataset, creating new variables, and
+producing a final summary table ready for export.
+
+{{< video https://vimeo.com/1195939735/319efb9226?fl=ml&fe=ec >}}
+
+```python
+# Research question: Which countries get the most life expectancy
+# per dollar of health spending?
+
+import pandas as pd
+
+# ── Step 1: Load and inspect ─────────────────────────────────
+
+healthexp = pd.read_csv("data/healthexp.csv")
+
+healthexp.shape
+healthexp.head()
+healthexp.info()
+healthexp.isna().sum()
+
+# ── Step 2: Standardise column names ─────────────────────────
+
+healthexp.columns = [col.lower().replace(" ", "_") for col in healthexp.columns]
+healthexp.columns
+
+# ── Step 3: Fix country names ────────────────────────────────
+
+healthexp["country"] = healthexp["country"].replace({
+    "Great Britain": "United Kingdom",
+    "USA":           "United States",
+})
+
+healthexp["country"].unique()
+
+# ── Step 4: Merge with continent data ────────────────────────
+
+url = "https://raw.githubusercontent.com/owid/owid-datasets/refs/heads/master/datasets/Countries%20Continents/Countries%20Continents.csv"
+
+continents = pd.read_csv(url)
+continents = continents.drop(columns=["Year"])
+continents = continents.rename(columns={"Entity": "country", "Countries Continents": "continent"})
+continents.head()
+
+healthexp = healthexp.merge(continents, on="country", how="left")
+healthexp.head()
+healthexp.shape
+healthexp.isna().sum()
+
+# ── Step 5: Create new variables ─────────────────────────────
+
+healthexp["life_per_1000usd"] = (healthexp["life_expectancy"] / healthexp["spending_usd"] * 1000).round(2)
+healthexp.head()
+
+# ── Step 6: Summarise by country ─────────────────────────────
+
+summary = (
+    healthexp
+    .groupby(["continent", "country"])
+    .agg(
+        mean_spending   = ("spending_usd",     "mean"),
+        mean_life_exp   = ("life_expectancy",  "mean"),
+        mean_efficiency = ("life_per_1000usd", "mean"),
+    )
+    .round(1)
+    .sort_values("mean_efficiency", ascending=False)
+    .reset_index()
+)
+
+summary
+
+# ── Step 7: Export ────────────────────────────────────────────
+
+healthexp.to_csv("data/healthexp_clean.csv",    index=False)
+summary.to_excel("data/healthexp_summary.xlsx", index=False)
+
+print("Exported healthexp_clean.csv and healthexp_summary.csv to data/")
+
+```
+
+## Exercises

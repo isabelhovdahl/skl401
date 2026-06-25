@@ -1,0 +1,48 @@
+# Grouping and aggregation
+
+We introduce grouping as a way to split a DataFrame into subgroups and compute summary statistics for each group using `.groupby()`, `.agg()`, and `.transform()`.
+
+{{< video https://vimeo.com/1195888031/24f453a449?fl=ml&fe=ec >}}
+
+```python
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# ── The basic groupby ────────────────────────────────────────
+
+# Create grouped object
+group_by_sex = titanic.groupby("sex")
+
+# Survival rate by sex
+group_by_sex["survived"].mean()
+
+# Count 1st, 2nd, 3rd class by sex
+group_by_sex["pclass"].value_counts()
+
+# ── Grouping by multiple columns ─────────────────────────────
+
+# Survival rate by class AND sex
+titanic.groupby(["sex", "pclass"])["survived"].mean()
+
+# ── Multiple aggregations with .agg() ────────────────────────
+
+titanic.groupby("pclass").agg(
+    survival_rate = ("survived",  "mean"),
+    mean_age      = ("age",       "mean"),
+    max_fare      = ("fare",      "max")
+    )
+
+# ── transform() — group statistics without collapsing rows ──
+
+# Add a column showing the mean fare for each passenger's class
+titanic["class_mean_fare"] = titanic.groupby("pclass")["fare"].transform("mean")
+titanic[["pclass", "fare", "class_mean_fare"]].head(10)
+
+# How much more or less did each passenger pay compared to their class average?
+titanic["fare_vs_class_avg"] = (titanic["fare"] - titanic["class_mean_fare"]).round(2)
+titanic[["pclass", "fare", "class_mean_fare", "fare_vs_class_avg"]].head()
+
+```
+
+## Exercises

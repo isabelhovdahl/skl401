@@ -1,0 +1,58 @@
+# Filtering rows
+
+We introduce boolean masks as a way to filter rows in a DataFrame based on conditions, and show how to combine multiple conditions to create more refined filters.
+
+{{< video https://vimeo.com/1195887665/dce7c220ea?fl=ml&fe=ec >}}
+
+```python
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# ── Boolean masks ────────────────────────────────────────────
+
+# First class passengers only
+mask = titanic["pclass"] == 1
+mask.head()
+
+# Apply mask to DataFrame
+first_class = titanic[mask]
+first_class.head()
+first_class.shape
+
+# ── Multiple conditions ──────────────────────────────────────
+
+# First class female passengers
+first_class_women = titanic[
+    (titanic["pclass"] == 1) &
+    (titanic["sex"] == "female")
+]
+first_class_women.shape
+
+# Passengers who were either in first class OR survived
+comfortable = titanic[
+    (titanic["pclass"] == 1) |
+    (titanic["survived"] == 1)
+]
+comfortable.shape
+
+# ── Filtering with .isin() ──────────────────────────────────
+
+# Passengers in first or second class
+first_second = titanic[titanic["pclass"].isin([1, 2])]
+first_second["pclass"].value_counts()
+
+# ── Filtering with .query() ─────────────────────────────────
+
+survivors_first = titanic.query("survived == 1 and pclass == 1")
+survivors_first.shape
+
+# ── Negating a filter with ~ ────────────────────────────────
+
+# Everyone except third class
+not_third = titanic[~(titanic["pclass"] == 3)]
+not_third["pclass"].value_counts()
+
+```
+
+## Exercises

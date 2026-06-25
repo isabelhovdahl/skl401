@@ -1,0 +1,49 @@
+# Sorting and copying
+
+We cover how to sort a DataFrame by one or more columns, how to
+reset the row index after sorting or filtering, and an important
+distinction between views and copies — and why it matters when modifying a DataFrame.
+
+{{< video https://vimeo.com/1195887669/1f9146b4a2?fl=ml&fe=ec >}}
+
+```python
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# ── Sorting with .sort_values() ──────────────────────────────
+
+titanic.sort_values("fare", ascending=False)
+
+# The original is unchanged
+titanic.head(5)
+
+# Assign back to store the sorted version
+titanic = titanic.sort_values("fare", ascending=False)
+titanic.head()
+
+# ── Sorting by multiple columns ──────────────────────────────
+
+titanic = titanic.sort_values(["pclass", "fare"], ascending=True)
+titanic[["pclass", "fare", "survived"]].head(10)
+
+# ── Resetting the index after sorting ────────────────────────
+
+titanic.reset_index()
+
+titanic = titanic.reset_index(drop=True)
+titanic.head()
+
+# ── The view vs copy distinction and copy() ──────────────────
+
+# Filter out first-class passengers — may be a view in older pandas versions
+first_class = titanic[titanic["pclass"] == 1]
+first_class["fare_rounded"] = first_class["fare"].round(0)
+
+# Best practice: use .copy() to create an independent DataFrame
+first_class = titanic[titanic["pclass"] == 1].copy()
+first_class["fare_rounded"] = first_class["fare"].round(0)
+
+```
+
+## Exercises

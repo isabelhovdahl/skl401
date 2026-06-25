@@ -1,0 +1,62 @@
+# Importing data
+
+We introduce the most common ways to get data into Python — loading built-in datasets via seaborn, and importing CSV and Excel files — and cover how to save DataFrames back to files.
+
+{{< video https://vimeo.com/1195888052/adbbfb2ebb?fl=ml&fe=ec >}}
+
+```python
+import pandas as pd
+import seaborn as sns
+
+# ── Loading a built-in dataset with seaborn ──────────────────
+
+titanic = sns.load_dataset("titanic")
+titanic.shape
+titanic.head()
+
+# Important checks
+# titanic.info()
+# titanic.describe()
+
+# ── Saving data to a file ────────────────────────────────────
+
+# Save to CSV
+titanic.to_csv("data/titanic.csv", index=False)
+print("Saved to data/titanic.csv")
+
+# Save to Excel
+titanic.to_excel("data/titanic.xlsx", index=False, sheet_name="titanic")
+print("Saved to data/titanic.xlsx")
+
+# ── Loading from a file ──────────────────────────────────────
+
+titanic_from_csv = pd.read_csv("data/titanic.csv")
+titanic_from_csv.head()
+
+titanic_from_excel = pd.read_excel("data/titanic.xlsx", sheet_name="titanic")
+titanic_from_excel.head()
+
+# ── The sep parameter for European CSV files ─────────────────
+
+# Save a semicolon-separated version to demonstrate
+titanic.to_csv("data/titanic_semicolon.csv", index=False, sep=";")
+
+# Load it back — must specify sep=";"
+titanic_semi = pd.read_csv("data/titanic_semicolon.csv", sep =";")
+titanic_semi.head()
+
+# ── Saving and loading the other datasets ────────────────────
+
+healthexp = sns.load_dataset("healthexp")
+flights   = sns.load_dataset("flights")
+
+healthexp.to_csv("data/healthexp.csv", index=False)
+flights.to_csv("data/flights.csv", index=False)
+
+print("healthexp saved:", healthexp.shape)
+print("flights saved:",   flights.shape)
+
+```
+
+## Exercises
+

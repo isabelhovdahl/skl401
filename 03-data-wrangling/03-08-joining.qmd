@@ -1,0 +1,67 @@
+# Joining data
+
+We cover how to combine DataFrames horizontally by matching rows on a shared key using `.merge()` — including the difference between inner and left joins — and how to stack DataFrames vertically using `pd.concat()`.
+
+{{< video https://vimeo.com/1195921351/acdd0ad4f7?fl=ml&fe=ec >}}
+
+```python
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+healthexp.shape
+healthexp.head()
+healthexp["Country"].unique()
+healthexp["Year"].nunique()
+
+# Filter to a single year so each country appears only once
+healthexp_2020 = healthexp[healthexp["Year"] == 2020].copy()
+healthexp_2020
+
+# ── Loading a CSV from a URL ─────────────────────────────────
+
+# Repo: https://github.com/owid/owid-datasets/blob/master/datasets/Countries%20Continents/Countries%20Continents.csv
+url = "https://raw.githubusercontent.com/owid/owid-datasets/refs/heads/master/datasets/Countries%20Continents/Countries%20Continents.csv"
+
+continents = pd.read_csv(url)
+continents.head()
+continents["Entity"].nunique()
+
+# ── Preparing the data for merging ───────────────────────────
+
+continents = continents.drop(columns=["Year"])
+continents = continents.rename(columns={"Entity": "Country"})
+continents.head()
+
+# ── Inner join ───────────────────────────────────────────────
+
+merged_inner = healthexp_2020.merge(continents, on="Country", how="inner")
+merged_inner
+
+# ── Left join ────────────────────────────────────────────────
+
+merged_left = healthexp_2020.merge(continents, on="Country", how="left")
+merged_left
+
+# ── Combining DataFrames vertically with concat() ────────────
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# Split into two subsets
+men   = titanic[titanic["sex"] == "male"].copy()
+women = titanic[titanic["sex"] == "female"].copy()
+
+print("Men:  ", len(men))
+print("Women:", len(women))
+
+# Stack them back into one DataFrame
+combined = pd.concat([men, women])
+print("Combined:", len(combined))
+combined.head()
+
+# Reset the index
+combined = pd.concat([men, women]).reset_index(drop=True)
+combined.head()
+
+```
+
+## Exercises

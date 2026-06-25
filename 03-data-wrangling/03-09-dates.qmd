@@ -1,0 +1,75 @@
+# Working with dates
+
+We cover how to convert string columns to proper datetime objects using, how to extract date components such as year, month, and quarter using the `.dt` accessor, and how to filter and group data by date.
+
+{{< video https://vimeo.com/1195939736/b8f4d80cfa?fl=ml&fe=ec >}}
+
+```python
+import pandas as pd
+
+# ── Converting strings to datetime ───────────────────────────
+
+# A small DataFrame with dates stored as strings
+df = pd.DataFrame({
+    "date":    ["2020-01-15", "2019-06-30", "2021-11-03", "2018-03-22"],
+    "country": ["Norway", "Germany", "France", "Japan"],
+    "value":   [100, 200, 150, 180],
+})
+df
+df.dtypes
+
+# Convert to datetime
+df["date"] = pd.to_datetime(df["date"])
+df
+df.dtypes
+
+# Specifying the format explicitly
+# (%Y is four-digit year, %m is month (01-12), %d is day of the month (01-31))
+df["date"] = pd.to_datetime(df["date"], format="%Y-%m-%d")
+df
+
+# ── Applying this to the flights dataset ─────────────────────
+
+flights = pd.read_csv("data/flights.csv")
+flights.head()
+flights.dtypes
+
+# Build a date column from year and month
+flights["date"] = flights["year"].astype(str) + "-" + flights["month"]
+
+# %Y is four-digit year, %b is an abbreviated month name like "Jan"
+flights["date"] = pd.to_datetime(flights["date"], format="%Y-%b")
+
+flights.head()
+
+# ── Extracting date components with .dt ──────────────────────
+
+flights["year_dt"]   = flights["date"].dt.year
+flights["month_num"] = flights["date"].dt.month
+flights["quarter"]   = flights["date"].dt.quarter
+
+flights.head()
+
+# ── Filtering by date range ──────────────────────────────────
+
+# Flights in 1955 and 1956
+mid_50s = flights[
+    (flights["date"] >= "1955-01-01") &
+    (flights["date"] <= "1956-12-31")
+]
+mid_50s.shape
+mid_50s
+
+# ── Grouping by date components ──────────────────────────────
+
+# Total annual passengers
+annual = flights.groupby(flights["date"].dt.year)["passengers"].sum().reset_index()
+annual
+
+# Rename columns
+annual = annual.rename(columns={"date": "year", "passengers": "total_passengers"})
+annual.head()
+
+```
+
+## Exercises

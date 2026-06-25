@@ -1,0 +1,65 @@
+# Creating and transforming columns
+
+We cover how to create new columns in a DataFrame from existing ones, transform columns using arithmetic operations and string methods, and creating columns from conditions.
+
+{{< video https://vimeo.com/1195945674/105e47d43e?fl=ml&fe=ec >}}
+
+```python
+import pandas as pd
+import numpy as np
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# ── Creating a new column with arithmetic ────────────────────
+
+# Fare per family member (1 + siblings/spouses + parents/children)
+titanic["family_size"] = titanic["sibsp"] + titanic["parch"] + 1
+titanic[["sibsp", "parch", "family_size"]].head()
+
+# ── Creating a column from a condition ───────────────────────
+
+def age_group(age):
+    """Classify a passenger as child or adult."""
+    if age < 18:
+        return "child"
+    else:
+        return "adult"
+
+titanic["age_group"] = titanic["age"].apply(age_group)
+titanic[["age", "age_group"]].head()
+
+# Using np.where() for vectorised two-way conditions
+titanic["is_child"] = np.where(titanic["age"] < 18, "child", "adult")
+titanic[["age", "is_child"]].head()
+
+# ── String methods with .str ─────────────────────────────────
+
+# Capitalise the sex column
+titanic["sex"].str.title().head()
+
+# Slice the sex column
+titanic["sex"].str[:2].head()
+
+# ── Converting column types with astype() ────────────────────
+
+# Check current type of pclass
+print(titanic["pclass"].dtype)
+
+# Convert to string
+titanic["pclass"] = titanic["pclass"].astype(str)
+print(titanic["pclass"].dtype)
+
+# Convert back to integer
+titanic["pclass"] = titanic["pclass"].astype(int)
+print(titanic["pclass"].dtype)
+
+# The age column is stored as float due to missing values
+print(titanic["age"].dtype)
+titanic["age"].head()
+
+# This raises an error because the column contains missing values (NaN)
+# titanic["age"] = titanic["age"].astype(int)
+
+```
+
+## Exercises
