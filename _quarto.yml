@@ -51,6 +51,8 @@ book:
           text: "2.9 String Operations"
         - file: 02-programming-fundamentals/02-10-topic2-capstone.qmd
           text: "2.10 Topic 2 Capstone"
+        - file: 02-programming-fundamentals/02-11-exercises.qmd
+          text: "2.11 Further Exercises"
     - part: "3 - Data Wrangling"
       chapters:
         - file: 03-data-wrangling/03-01-placeholder.qmd

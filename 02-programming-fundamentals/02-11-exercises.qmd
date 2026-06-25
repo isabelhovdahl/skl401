@@ -1,0 +1,753 @@
+# Topic 2 — Further Exercises {.unnumbered}
+
+These exercises give you an opportunity to consolidate everything covered in Topic 2 before moving on. Unlike the exercises after each video, many of these combine skills from several videos into a single task. Some exercises also introduce new concepts that extend what you have learned.
+
+The exercises are organised into three levels:
+
+- 🟢 **Warm-up** — single-skill exercises to check your understanding of the basics.
+- 🟡 **Practice** — exercises that combine two or more topics.
+- 🔴 **Challenge** — multi-step tasks that may require you to combine ideas in
+ways you have not seen before. Some may require looking things up or experimenting.
+
+---
+
+## 🟢 Warm-up
+
+### Exercise 2.11.1
+A cinema charges different ticket prices based on the age of the customer:
+
+- Under 12: 50 NOK
+- 12–25: 80 NOK
+- 26–66: 120 NOK
+- 67 or above: 70 NOK
+
+The code below produces the correct result but is unnecessarily verbose — each condition explicitly checks both the lower and upper bound of the age range. Rewrite it using `if/elif/else` to simplify the conditions. Notice that once you use `elif`, you no longer need to check the upper bound of each range — why is that?
+
+```python
+age = 15
+
+if age >= 0 and age < 12:
+    price = 50
+if age >= 12 and age < 26:
+    price = 80
+if age >= 26 and age < 67:
+    price = 120
+if age >= 67:
+    price = 70
+
+print(f"Age {age}: {price} NOK")
+```
+
+Test your improved version on the following ages: `8`, `15`, `45`, `70`.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+ages = [8, 15, 45, 70]
+
+for age in ages:
+    if age < 12:
+        price = 50
+    elif age < 26:
+        price = 80
+    elif age < 67:
+        price = 120
+    else:
+        price = 70
+
+    print(f"Age {age}: {price} NOK")
+```
+
+With `elif`, Python stops evaluating as soon as the first `True` condition is found. This means that by the time we reach `elif age < 26`, we already know the age is 12 or above — the previous `if age < 12` was `False`. The upper bound of each range is therefore implicitly guaranteed by the earlier conditions having failed, and there is no need to check it explicitly.
+</details>
+
+---
+
+### Exercise 2.11.2
+Use a `for` loop to iterate over the nested list of country records below. For each country, print its name and continent, and use a conditional to classify it according to its GDP using the following thresholds:
+
+- Below 10 000: `"low income"`
+- Between 10 000 and 49 999: `"middle income"`
+- 50 000 or above: `"high income"`
+
+Print each result in the format: `"Norway (Europe): high income"`.
+
+```python
+countries = [
+    ["Norway",  "Europe",   82500],
+    ["Brazil",  "Americas",  8600],
+    ["Nigeria", "Africa",    2100],
+    ["Japan",   "Asia",     42000],
+    ["Germany", "Europe",   48000],
+]
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+countries = [
+    ["Norway",  "Europe",   82500],
+    ["Brazil",  "Americas",  8600],
+    ["Nigeria", "Africa",    2100],
+    ["Japan",   "Asia",     42000],
+    ["Germany", "Europe",   48000],
+]
+
+# Alternative 1: use range() to index list
+# for i in range(len(countries)):
+#     country = countries[i][0]
+#     continent = countries[i][1]
+#     gdp = countries[i][2]
+#     ...
+
+# Alternative 2: Unpack list directly in the loop header
+for country, continent, gdp in countries:
+    if gdp >= 50_000:
+        income = "high income"
+    elif gdp >= 10_000:
+        income = "middle income"
+    else:
+        income = "low income"
+
+    print(f"{country} ({continent}): {income}")
+```
+
+Unpacking the list directly in the loop header — `for country, continent, gdp in countries` — is a clean alternative to accessing elements by index. The conditional inside the loop classifies each country independently on every iteration, which is the natural pattern for applying the same logic to every item in a collection.
+</details>
+
+---
+
+### Exercise 2.11.3
+The loop below uses `enumerate()` to print a numbered list of cities. `enumerate(lst)` returns pairs of `(index, value)` that you can unpack directly in the loop header. 
+
+Run the code and then rewrite it using `range(len())` instead and verify that the output is identical. Then reflect on the pros and cons of each approach — when would you prefer one over the other?
+
+```python
+cities = ["Oslo", "Bergen", "Trondheim", "Stavanger", "Tromsø"]
+
+for i, city in enumerate(cities, start=1):
+    print(f"{i}. {city}")
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+cities = ["Oslo", "Bergen", "Trondheim", "Stavanger", "Tromsø"]
+
+# Using enumerate
+for i, city in enumerate(cities, start=1):
+    print(f"{i}. {city}")
+```
+
+```{python}
+# Using range(len())
+for i in range(len(cities)):
+    print(f"{i + 1}. {cities[i]}")
+```
+
+Both produce identical output. The key differences are:
+
+- **Readability** — `enumerate()` is more readable because you get the index and value together without having to index into the list manually. The loop header clearly communicates that you need both the position and the value.
+- **Error-proneness** — `range(len())` requires you to remember to add 1 to the index when printing (`i + 1`) and to index into the list manually (`cities[i]`), which introduces more opportunities for off-by-one errors.
+- **When to prefer `range(len())`** — when you need to access multiple lists by index simultaneously, or when you need to modify elements in the list by position. `enumerate()` only gives you the index of one list at a time.
+
+As a general rule, prefer `enumerate()` when you need both the index and the value of a single list, and `range(len())` when you need to work with positions directly.
+</details>
+
+---
+
+### Exercise 2.11.4
+Recall that `zip()` lets you iterate over two or more sequences simultaneously. Use it to iterate over the three lists below and print a formatted summary for each country, e.g., `Norway: GDP per capita 82,500, population 5,400,000`. Then compute and print the country with the highest GDP per capita.
+
+```python
+countries   = ["Norway", "Germany", "Brazil", "Japan", "Nigeria"]
+gdp         = [82500, 48000, 8600, 42000, 2100]
+populations = [5_400_000, 84_000_000, 214_000_000, 125_000_000, 200_000_000]
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+countries   = ["Norway", "Germany", "Brazil", "Japan", "Nigeria"]
+gdp         = [82500, 48000, 8600, 42000, 2100]
+populations = [5_400_000, 84_000_000, 214_000_000, 125_000_000, 200_000_000]
+
+max_gdp     = 0
+max_country = ""
+
+for country, g, pop in zip(countries, gdp, populations):
+    print(f"{country}: GDP per capita {g:,}, population {pop:,}")
+    if g > max_gdp:
+        max_gdp     = g
+        max_country = country
+
+print(f"\nHighest GDP per capita: {max_country} ({max_gdp:,})") # "\n" (newline character) inserts line break
+```
+
+Notice that `zip()` stops as soon as the shortest list is exhausted, so it is important that all three lists have the same length. The accumulator pattern inside the loop tracks the maximum GDP and the corresponding country name simultaneously.
+</details>
+
+---
+
+## 🟡 Practice
+
+### Exercise 2.11.5
+Just as lists can be nested inside other lists, loops can be nested inside other loops. The inner loop runs completely for every single iteration of the outer loop. The basic syntax looks like this:
+
+```python
+for x in outer_sequence:
+    for y in inner_sequence:
+        # this block runs for every combination of x and y
+```
+
+Use a nested `for` loop to print a multiplication table for the numbers 1 through 5 in the format `"1 x 1 = 1"`, `"1 x 2 = 2"`, etc.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+for i in range(1, 6):
+    for j in range(1, 6):
+        print(f"{i} x {j} = {i * j}")
+```
+
+The outer loop iterates over `i` from 1 to 5. For each value of `i`, the inner loop runs completely through all values of `j` from 1 to 5, printing one line per combination. With two loops each running 5 times, the inner block executes 5 × 5 = 25 times in total. Notice that the inner loop is indented one level further than the outer loop — Python uses indentation to determine which code belongs to which loop.
+</details>
+
+### Exercise 2.11.6
+In data work it is common to have observations of the same entities measured over multiple time periods. A natural way to represent this is as a list of records, where each record contains the entity name, the time period, and the measured value. When all combinations of entities and time periods are present, the data is said to be a
+**balanced panel**.
+
+Use a nested `for` loop to generate a balanced panel of all country-year combinations from the lists below. Each record should be a dictionary with keys `"country"`, `"year"`, and `"gdp"` — set `"gdp"` to `None` as a placeholder since we do not have the actual values yet. Convert the final list of records to a pandas DataFrame and print it.
+
+```python
+countries = ["Norway", "Germany", "Brazil", "Japan"]
+years     = [2019, 2020, 2021, 2022, 2023]
+```
+
+The first few records should look like this:
+
+| country | year | gdp  |
+|---------|------|------|
+| Norway  | 2019 | None |
+| Norway  | 2020 | None |
+| Norway  | 2021 | None |
+| ...     | ...  | ...  |
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+countries = ["Norway", "Germany", "Brazil", "Japan"]
+years     = [2019, 2020, 2021, 2022, 2023]
+
+records = []
+
+for country in countries:
+    for year in years:
+        records.append({"country": country, "year": year, "gdp": None})
+
+df = pd.DataFrame(records)
+print(df)
+print(f"\nTotal records: {len(df)}")
+```
+
+The inner loop runs completely for every iteration of the outer loop — for each country, we generate one record for every year. With 4 countries and 5 years this produces 4 × 5 = 20 records in total. Notice that the records are ordered by country first and then by year within each country, which is exactly how panel data is typically structured. The `None` placeholders make it clear where GDP values still need to be filled in — in a real project these would be replaced with actual data during a later cleaning or merging step.
+</details>
+
+---
+
+### Exercise 2.11.7
+You are given a list of daily sales figures and a batch size. The task is to process the sales figures in groups of `batch_size` consecutive values, compute the total for each group, and print a summary. For example, with `batch_size = 3` the first batch covers days 1–3, the second covers days 4–6, and so on. Stop when there are fewer remaining values than the batch size.
+
+```python
+sales      = [120, 340, 55, 890, 210, 45, 670, 430, 310, 290, 150, 780]
+batch_size = 3
+```
+
+With `batch_size = 3` the output should look like this:
+```
+Batch 1: [120, 340, 55]  — total: 515
+Batch 2: [890, 210, 45]  — total: 1145
+Batch 3: [670, 430, 310] — total: 1410
+Batch 4: [290, 150, 780] — total: 1220
+```
+
+_Hint: Use a `while` loop to control which batch you are currently processing, and an inner `for` loop to sum the values within each batch._
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+sales      = [120, 340, 55, 890, 210, 45, 670, 430, 310, 290, 150, 780]
+batch_size = 3
+index      = 0
+batch_num  = 1
+
+while index + batch_size <= len(sales):
+    batch_total = 0
+    for i in range(index, index + batch_size):
+        batch_total += sales[i]
+    batch = sales[index:index + batch_size]
+    print(f"Batch {batch_num}: {batch} — total: {batch_total}")
+    index     += batch_size
+    batch_num += 1
+```
+
+The `while` loop controls which batch we are on by tracking `index` — the position of the first value in the current batch. The inner `for` loop iterates over exactly `batch_size` values starting from `index` and accumulates their total. After each batch, `index` is advanced by `batch_size` to move to the next group. The `while` condition `index + batch_size <= len(sales)` ensures we stop as soon as there are fewer remaining values than a full batch. This combination of `while` and `for` is natural here: the outer iteration is open-ended (we do not know how many full batches there will be) while the inner iteration always processes exactly `batch_size` values.
+</details>
+
+---
+
+### Exercise 2.11.8
+Before converting a string to a number it is good practice to validate it first. Write code that checks whether the string `value` can be interpreted as a number by performing the following checks in order:
+
+1. Strip any leading and trailing whitespace.
+2. Remove a single leading `+` or `-` sign if present.
+3. Check that the remaining string contains at most one decimal point.
+4. Check that all remaining characters are digits.
+
+If all checks pass, print `"{value} is a valid number."` Otherwise print `"{value} is not a valid number."`.
+
+Test your code on the following three cases:
+
+```python
+value = "  -3.14  "   # should pass
+value = "12.5.3"      # should fail
+value = "+42"         # should pass
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+value = "  -3.14  "
+
+cleaned = value.strip()
+cleaned = cleaned.lstrip("+-")
+cleaned = cleaned.replace(".", "", 1)
+
+if cleaned.isdigit():
+    print(f'"{value.strip()}" is a valid number.')
+else:
+    print(f'"{value.strip()}" is not a valid number.')
+```
+
+```{python}
+value = "12.5.3"
+
+cleaned = value.strip()
+cleaned = cleaned.lstrip("+-")
+cleaned = cleaned.replace(".", "", 1)
+
+if cleaned.isdigit():
+    print(f'"{value.strip()}" is a valid number.')
+else:
+    print(f'"{value.strip()}" is not a valid number.')
+```
+
+```{python}
+value = "+42"
+
+cleaned = value.strip()
+cleaned = cleaned.lstrip("+-")
+cleaned = cleaned.replace(".", "", 1)
+
+if cleaned.isdigit():
+    print(f'"{value.strip()}" is a valid number.')
+else:
+    print(f'"{value.strip()}" is not a valid number.')
+```
+
+The key steps are: `.strip()` removes surrounding whitespace, `.lstrip("+-")` removes a leading sign, and `.replace(".", "", 1)` removes at most one decimal point — the second argument `""` replaces it with nothing, and the third argument `1` ensures only the first occurrence is removed. After these transformations, `.isdigit()` can reliably
+check whether what remains consists entirely of digits. While this works for most common cases, it requires careful thinking about every edge case.
+
+**Alternative approach — using try-except:**
+
+A simpler and more robust approach is to attempt the conversion directly and catch the error if it fails:
+
+```{python}
+value = "  -3.14  "
+
+try:
+    float(value)
+    print(f'"{value.strip()}" is a valid number.')
+except ValueError:
+    print(f'"{value.strip()}" is not a valid number.')
+```
+
+`float()` already knows all the rules for what constitutes a valid number — including leading signs, decimal points, scientific notation, and surrounding whitespace. The try-except approach handles all the same cases and more in just two lines, with no manual string manipulation required.
+</details>
+
+---
+
+### Exercise 2.11.9
+Convert both approaches from the previous exercise into functions. Write:
+
+1. `is_numeric_strmethod(s)` — uses the string method approach to check whether `s` is a valid number. Returns `True` or `False`.
+2. `is_numeric_tryexcept(s)` — uses a try-except block to check whether `s` is a valid number. Returns `True` or `False`.
+
+Apply both functions to the list of strings below using a for loop and print the results side by side. Do both functions agree on every case?
+
+```python
+values = ["42", "3.14", "-7", "+5.5", "oslo", "12.0", "1e5", "-4", "3.14.15", "  -3.14  ", ""]
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+def is_numeric_strmethod(s):
+    cleaned = s.strip()
+    if not cleaned:
+        return False
+    cleaned = cleaned.lstrip("+-")
+    cleaned = cleaned.replace(".", "", 1)
+    return cleaned.isdigit()
+
+
+def is_numeric_tryexcept(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
+
+values = ["42", "3.14", "-7", "+5.5", "oslo", "12.0", "1e5", "-4", "3.14.15", "  -3.14  ", ""]
+
+for v in values:
+    str_result = is_numeric_strmethod(v)
+    try_result = is_numeric_tryexcept(v)
+    match      = "✓" if str_result == try_result else "✗"
+    print(f"{v!r:15} → strmethod: {str_result!s:5}  tryexcept: {try_result!s:5}  {match}")
+```
+
+The two functions disagree on `"1e5"` — scientific notation is a valid number that `float()` handles correctly, but the string method approach returns `False` because `"e"` is not a digit. This highlights the fundamental limitation of the string method approach: no matter how carefully you handle edge cases, `float()` will always be more complete and reliable because it implements the full rules for numeric strings. The try-except approach is not just more concise — it is more correct.
+</details>
+
+---
+
+## 🔴 Challenge
+
+### Exercise 2.11.10
+The Collatz sequence starts from any positive integer and applies the following rule repeatedly until the value reaches 1: if the number is even, divide it by 2; if it is odd, multiply it by 3 and add 1. For example, starting from 6 the sequence is: 6 → 3 → 10 → 5 → 16 → 8 → 4 → 2 → 1.
+
+Write a function `collatz_sequence(n)` with a docstring that takes a starting integer and returns the full sequence as a list, including both the starting value and the final 1. Then use a `for` loop to find which starting number between 1 and 100 produces the longest Collatz sequence and print the starting number, the sequence length, and the full sequence.
+
+<details>
+<summary>Hint</summary>
+
+Use a `while` loop inside `collatz_sequence()` with the stopping condition `n != 1`. To check whether a number is even or odd, use the modulo operator `%` — `n % 2 == 0` is `True` when `n` is even and `False` when it is odd. For the division step, use integer division `//` to keep the result as an integer rather than a float.
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+def collatz_sequence(n):
+    """
+    Generate the full Collatz sequence starting from n.
+
+    Parameters
+    ----------
+    n : int
+        The starting positive integer.
+
+    Returns
+    -------
+    list
+        The full sequence from n down to 1, inclusive.
+    """
+    sequence = [n]
+    while n != 1:
+        if n % 2 == 0:
+            n = n // 2
+        else:
+            n = n * 3 + 1
+        sequence.append(n)
+    return sequence
+
+
+# Find the starting number with the longest sequence between 1 and 100
+max_length = 0
+max_start  = 0
+
+for i in range(1, 101):
+    length = len(collatz_sequence(i))
+    if length > max_length:
+        max_length = length
+        max_start  = i
+
+print(f"Starting number: {max_start}")
+print(f"Sequence length: {max_length}")
+print(f"Sequence: {collatz_sequence(max_start)}")
+```
+
+`n % 2 == 0` checks whether `n` is even by testing whether the remainder after dividing by 2 is zero. Using `//` for the division step ensures the result stays an integer — `10 / 2` gives `5.0` in Python, while `10 // 2` gives `5`. The outer `for` loop iterates over all starting numbers from 1 to 100, calling `collatz_sequence()` on each one and using `len()` to get the sequence length. The accumulator pattern tracks the longest sequence and its starting number across all iterations.
+</details>
+
+---
+
+### Exercise 2.11.11
+Write a data cleaning pipeline as a set of functions that process a list of raw records. Each record is a string in the format `"country,gdp_per_cap,population"` but the data is messy — some records have extra spaces, inconsistent capitalisation, and non-numeric values in the numeric fields.
+
+Write the following functions, each with a docstring:
+
+1. `parse_record(record)` — takes a raw string, splits it on `","`, strips whitespace from each field, and returns a tuple of `(country, gdp_str, pop_str)`. Note that a tuple is just like a list (but with parentheses instead of square brackets) that cannot be altered once created.
+2. `convert_numeric(value)` — takes a string and returns it converted to an integer using try-except. Returns `None` if the conversion fails.
+3. `clean_record(record)` — calls `parse_record()` and `convert_numeric()` and returns a dictionary with keys `"country"`, `"gdp_per_cap"`, and `"population"`. Capitalizes the country name.
+4. `clean_dataset(records)` — calls `clean_record()` on each record in the list and returns a list of cleaned dictionaries, skipping any record where either numeric field is `None`.
+
+Test your pipeline on the raw data below and print the cleaned records.
+
+```python
+raw_data = [
+    "norway, 82500, 5400000",
+    "GERMANY ,48000,  84000000",
+    "brazil, 8600, 214000000",
+    "japan, fortytwo, 125000000",
+    "  nigeria , 2100, 200000000  ",
+    "france, 48000, abc",
+]
+```
+
+<details>
+<summary>Hint</summary>
+
+Build and test one function at a time before combining them. Start with `parse_record()` on a single string, then test `convert_numeric()` on a few values, then combine them in `clean_record()`, and finally wrap everything in `clean_dataset()`.
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+def parse_record(record):
+    """
+    Split a raw CSV string into its constituent fields.
+
+    Parameters
+    ----------
+    record : str
+        A raw string in the format "country,gdp_per_cap,population".
+
+    Returns
+    -------
+    tuple
+        A tuple of (country, gdp_str, pop_str) with whitespace stripped.
+    """
+    parts = record.split(",")
+    return (parts[0].strip(), parts[1].strip(), parts[2].strip())
+
+
+def convert_numeric(value):
+    """
+    Convert a string to an integer, returning None if conversion fails.
+
+    Parameters
+    ----------
+    value : str
+        The string to convert.
+
+    Returns
+    -------
+    int or None
+        The converted integer, or None if the conversion fails.
+    """
+    try:
+        return int(value)
+    except ValueError:
+        return None
+
+
+def clean_record(record):
+    """
+    Parse and clean a single raw record string.
+
+    Parameters
+    ----------
+    record : str
+        A raw string in the format "country,gdp_per_cap,population".
+
+    Returns
+    -------
+    dict
+        A dictionary with keys "country", "gdp_per_cap", and "population",
+        or None if either numeric field cannot be converted.
+    """
+    country, gdp_str, pop_str = parse_record(record)
+    gdp = convert_numeric(gdp_str)
+    pop = convert_numeric(pop_str)
+    return {
+        "country":    country.capitalize(),
+        "gdp_per_cap": gdp,
+        "population": pop,
+    }
+
+
+def clean_dataset(records):
+    """
+    Clean a list of raw record strings, skipping invalid records.
+
+    Parameters
+    ----------
+    records : list
+        A list of raw strings in the format "country,gdp_per_cap,population".
+
+    Returns
+    -------
+    list
+        A list of cleaned dictionaries with invalid records removed.
+    """
+    cleaned = []
+    for record in records:
+        result = clean_record(record)
+        if result["gdp_per_cap"] is not None and result["population"] is not None:
+            cleaned.append(result)
+    return cleaned
+
+
+raw_data = [
+    "norway, 82500, 5400000",
+    "GERMANY ,48000,  84000000",
+    "brazil, 8600, 214000000",
+    "japan, fortytwo, 125000000",
+    "  nigeria , 2100, 200000000  ",
+    "france, 48000, abc",
+]
+
+cleaned = clean_dataset(raw_data)
+for record in cleaned:
+    print(record)
+```
+
+The pipeline is built from four focused functions, each doing one thing: parsing, converting, cleaning a single record, and cleaning the whole dataset. `clean_record()` calls both `parse_record()` and `convert_numeric()`, and `clean_dataset()` calls `clean_record()` for each record. Breaking the logic across multiple functions makes each step easy to test independently and easy to modify without affecting the others — for example you could swap out `convert_numeric()` for a float version without touching any of the other functions.
+</details>
+
+---
+
+### Exercise 2.11.12
+Write a text analysis pipeline as a set of functions that analyses a piece of text. The pipeline should break the problem into focused functions that call each other, and each function should have a docstring.
+
+Write the following functions:
+
+1. `tokenize(text)` — takes a string, converts it to lowercase, removes punctuation by replacing `","`, `"."`, `"!"`, `"?"`, and `";"` with spaces, and returns a list of individual words by splitting on whitespace.
+2. `count_words(words)` — takes a list of words and returns a dictionary where each key is a unique word and each value is the number of times it appears.
+3. `top_n_words(word_counts, n)` — takes the word count dictionary and an integer `n` and returns a list of the `n` most common words as `(word, count)` tuples, sorted from most to least frequent. (_Hint: look up `sorted()` with a `key` argument and `dict.items()`._)
+4. `summarize_text(text, n=5)` — calls all three functions in sequence and prints a formatted summary: the total number of words, the number of unique words, and the top `n` most frequent words with their counts.
+
+Test your pipeline on the text below.
+
+```python
+text = """Python is a versatile programming language. Python is widely used in data science, web development, and automation. Learning Python is a great investment for any aspiring data scientist or developer. Python makes data analysis easier and more
+enjoyable."""
+```
+
+<details>
+<summary>Hint</summary>
+
+For `top_n_words()`, `sorted(word_counts.items(), key=lambda x: x[1], reverse=True)` sorts the dictionary items by value in descending order. `[:n]` then takes the first `n` items.
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+def tokenize(text):
+    """
+    Convert text to a list of lowercase words with punctuation removed.
+
+    Parameters
+    ----------
+    text : str
+        The input text to tokenize.
+
+    Returns
+    -------
+    list
+        A list of lowercase words with punctuation removed.
+    """
+    for char in [",", ".", "!", "?", ";"]:
+        text = text.replace(char, " ")
+    return text.lower().split()
+
+
+def count_words(words):
+    """
+    Count the frequency of each word in a list.
+
+    Parameters
+    ----------
+    words : list
+        A list of words to count.
+
+    Returns
+    -------
+    dict
+        A dictionary mapping each unique word to its frequency.
+    """
+    counts = {}
+    for word in words:
+        if word in counts:
+            counts[word] += 1
+        else:
+            counts[word] = 1
+    return counts
+
+
+def top_n_words(word_counts, n):
+    """
+    Return the n most frequent words and their counts.
+
+    Parameters
+    ----------
+    word_counts : dict
+        A dictionary mapping words to their frequencies.
+    n : int
+        The number of top words to return.
+
+    Returns
+    -------
+    list
+        A list of (word, count) tuples sorted by frequency descending.
+    """
+    sorted_words = sorted(word_counts.items(), key=lambda x: x[1], reverse=True)
+    return sorted_words[:n]
+
+
+def summarize_text(text, n=5):
+    """
+    Print a summary of word frequencies in a text.
+
+    Parameters
+    ----------
+    text : str
+        The input text to analyse.
+    n : int, optional
+        The number of top words to display. Default is 5.
+    """
+    words       = tokenize(text)
+    word_counts = count_words(words)
+    top_words   = top_n_words(word_counts, n)
+
+    print(f"Total words:  {len(words)}")
+    print(f"Unique words: {len(word_counts)}")
+    print(f"\nTop {n} words:")
+    for i, (word, count) in enumerate(top_words, start=1):
+        print(f"  {i}. '{word}': {count}")
+
+
+text = """Python is a versatile programming language. Python is widely used in data science, web development, and automation. Learning Python is a great investment for any aspiring data scientist or developer. Python makes data analysis easier and more
+enjoyable."""
+
+summarize_text(text)
+```
+
+The pipeline is built from four functions that call each other in sequence: `summarize_text()` calls `tokenize()`, `count_words()`, and `top_n_words()` in order, each passing its output to the next. This is a clean example of function composition — breaking a complex task into simple, focused steps that are easy to understand, test, and reuse independently. Notice the use of `enumerate()` with `start=1` for the numbered output, and `lambda` in the sort key — a compact way to specify that items should be sorted by their second element (the count).
+</details>
