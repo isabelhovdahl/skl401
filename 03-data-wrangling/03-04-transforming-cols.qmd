@@ -1,6 +1,6 @@
 # Creating and transforming columns
 
-We cover how to create new columns in a DataFrame from existing ones, transform columns using arithmetic operations and string methods, and creating columns from conditions.
+We cover how to create new columns in a DataFrame from existing ones, transform columns using arithmetic operations and string methods, converting the data type of columns and creating columns from conditions.
 
 {{< video https://vimeo.com/1195945674/105e47d43e?fl=ml&fe=ec >}}
 
@@ -63,3 +63,229 @@ titanic["age"].head()
 ```
 
 ## Exercises
+
+### Exercise 3.4.1
+
+The `healthexp` dataset contains health spending and life expectancy data for several countries over time. Use it to practice creating new columns with arithmetic.
+
+```python
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+healthexp.head()
+```
+
+1. Create a new column `spending_per_life_year` that divides `Spending_USD` by `Life_Expectancy`. This gives a rough measure of how much each country spends per year of life expectancy.
+2. Round the new column to two decimal places using `.round()` and assign the result back to the same column.
+3. Filter the dataset to the most recent year available. Which country spends the most per year of life expectancy?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+
+# 1. Create new column
+healthexp["spending_per_life_year"] = healthexp["Spending_USD"] / healthexp["Life_Expectancy"]
+
+# 2. Round to two decimal places
+healthexp["spending_per_life_year"] = healthexp["spending_per_life_year"].round(2)
+
+# 3. Filter to most recent year and sort
+latest_year = healthexp["Year"].max()
+latest = healthexp[healthexp["Year"] == latest_year]
+print(latest[["Country", "Spending_USD", "Life_Expectancy", "spending_per_life_year"]])
+```
+
+The USA spends the most per year of life expectancy by a considerable margin — a result that reflects its unusually high health expenditure relative to the life expectancy it achieves. Notice that the arithmetic in step 1 is applied to the entire column at once without any loop or `.apply()` — this is what vectorised operations means in practice.
+
+</details>
+
+---
+
+### Exercise 3.4.2
+
+Use the `healthexp` dataset and `.apply()` to create a new column `spending_group` that classifies each row into one of three categories based on spending:
+
+- Below 1 500 USD: `"low"`
+- Between 1 500 and 5 000 USD: `"medium"`
+- Above 5 000 USD: `"high"`
+
+Then print the number of rows in each group using `.value_counts()`.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+
+def classify_spending(amount):
+    if amount < 1_500:
+        return "low"
+    elif amount < 5_000:
+        return "medium"
+    else:
+        return "high"
+
+healthexp["spending_group"] = healthexp["Spending_USD"].apply(classify_spending)
+print(healthexp["spending_group"].value_counts())
+```
+
+This is a good use case for `.apply()` because the classification logic involves a multi-branch conditional that cannot be expressed as a simple arithmetic operation on the column. Notice that the function is defined separately and its name is passed to `.apply()` without parentheses — `apply(classify_spending)`, not `apply(classify_spending())`. Writing the function separately rather than inline makes it easier to read, test, and reuse.
+
+</details>
+
+---
+
+### Exercise 3.4.3
+
+In the previous exercise you used `.apply()` to create a three-outcome classification. Now compare it with `np.where()` for a simpler version of the same task.
+
+```python
+import pandas as pd
+import numpy as np
+
+healthexp = pd.read_csv("data/healthexp.csv")
+```
+
+1. Use `np.where()` to create a column `high_spend` that contains `"high"` if `Spending_USD` is above 3 000 and `"low"` otherwise.
+2. Now write the equivalent using `.apply()` with a custom function.
+3. Both approaches produce the same result. Based on the video, which should you prefer here and why?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import numpy as np
+
+healthexp = pd.read_csv("data/healthexp.csv")
+
+# 1. Using np.where()
+healthexp["high_spend"] = np.where(
+    healthexp["Spending_USD"] > 3_000, "high", "low"
+)
+
+# 2. Using .apply()
+def classify_high(amount):
+    if amount > 3_000:
+        return "high"
+    else:
+        return "low"
+
+healthexp["high_spend_apply"] = healthexp["Spending_USD"].apply(classify_high)
+
+# Verify they are identical
+print((healthexp["high_spend"] == healthexp["high_spend_apply"]).all())
+print(healthexp["high_spend"].value_counts())
+```
+
+3. `np.where()` is the better choice here. It is more concise and faster because it operates on the entire column at once rather than calling a function once per row. As a rule of thumb: use `np.where()` for simple two-way conditions, and `.apply()` only when the logic requires multiple branches or depends on more than one column simultaneously.
+
+</details>
+
+---
+
+### Exercise 3.4.4
+
+The dataset below contains messy country and continent names collected from different sources. Use the `.str` accessor to clean them up.
+
+```python
+import pandas as pd
+
+data = pd.DataFrame({
+    "country":   ["  norway", "GERMANY ", "brazil  ", " Japan", "nigeria"],
+    "continent": ["europe", "EUROPE", "Americas", "asia", "AFRICA"],
+    "gdp":       [82500, 48000, 8600, 42000, 2100]
+})
+```
+
+1. Clean the `country` column by stripping leading and trailing whitespace and applying title case. Assign the result back to the `country` column.
+2. Clean the `continent` column in the same way.
+3. Create a new column `label` that combines country and continent into a single string in the format `"Norway (Europe)"` using the `.str` accessor and string concatenation.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+data = pd.DataFrame({
+    "country":   ["  norway", "GERMANY ", "brazil  ", " Japan", "nigeria"],
+    "continent": ["europe", "EUROPE", "Americas", "asia", "AFRICA"],
+    "gdp":       [82500, 48000, 8600, 42000, 2100]
+})
+
+# 1-2. Clean country and continent
+for col in ["country", "continent"]:
+    data[col] = data[col].str.strip().str.title()
+
+# 3. Create label column
+data["label"] = data["country"] + " (" + data["continent"] + ")"
+
+print(data)
+```
+
+Notice that `.str.strip()` and `.str.title()` are chained together — each `.str` call is applied to the result of the previous one. This is the same method chaining pattern you saw in Topic 2 for plain Python strings, but applied to an entire column at once. The `label` column is built by concatenating three strings using `+` directly on the Series — no loop or `.apply()` needed.
+
+</details>
+
+---
+
+### Exercise 3.4.5
+
+This exercise explores type conversion with `.astype()` and the limitation that arises when a column contains missing values.
+
+```python
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+print(titanic[["pclass", "age", "fare"]].dtypes)
+```
+
+1. Convert the `pclass` column from integer to string. Verify the conversion worked by printing the dtype before and after. Then check that `.value_counts()` still works on the converted column.
+2. The `fare` column is currently stored as a float. Convert it to an integer and verify the result. Does anything look different about the fare values after conversion?
+3. Now try to convert the `age` column from float to integer. What error do you get, and why does it occur?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# 1. Convert pclass to string
+print(titanic["pclass"].dtype)
+titanic["pclass"] = titanic["pclass"].astype(str)
+print(titanic["pclass"].dtype)
+print(titanic["pclass"].value_counts())
+```
+
+```{python}
+# 2. Convert fare to integer
+print(titanic["fare"].head())
+titanic["fare"] = titanic["fare"].astype(int)
+print(titanic["fare"].head())
+```
+
+```{python}
+# 3. Try to convert age to integer
+try:
+    titanic["age"] = titanic["age"].astype(int)
+    print("Conversion successful.")
+except:
+    print("Conversion failed — column contains values that cannot be converted to integer.")
+```
+
+1. After conversion, `pclass` has dtype `str`. `.value_counts()` still works — it counts string values just as it counts integers.
+
+2. The conversion works because `fare` has no missing values. Notice that the decimal part is simply dropped — `7.25` becomes `7`. This is truncation, not rounding, so use `.astype(int)` only when you are sure the decimal part is not meaningful.
+
+3. The conversion fails with an `IntCastingNaNError`. The `age` column has 177 missing values stored as `NaN`. Python's integer type cannot represent missing values — only floats can store `NaN` — which is why pandas keeps columns with missing values as floats even when all the non-missing values are whole numbers. We will deal with missing values properly in a later video.
+
+</details>

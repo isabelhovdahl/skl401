@@ -1,6 +1,7 @@
 # Selecting columns and rows
 
-We cover how to select columns and rows from a DataFrame — using square brackets for columns, and `.loc[]` and `.iloc[]` for row selection based on labels and positions respectively.
+We cover the core tools for subsetting a DataFrame: selecting single and multiple
+columns, and selecting rows by label with `.loc[]` or by position with `.iloc[]`.
 
 {{< video https://vimeo.com/1195888058/b6ac8e241f?fl=ml&fe=ec >}}
 
@@ -51,3 +52,221 @@ titanic.iloc[-2]
 ```
 
 ## Exercises
+
+### Exercise 3.2.1
+
+There are two ways to select a single column from a DataFrame, and they return different types of object. Run the code below and compare the output of each line.
+
+```python
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+result_a = titanic["age"]
+result_b = titanic[["age"]]
+
+print(type(result_a))
+print(type(result_b))
+```
+
+1. What type does each expression return?
+2. What is the practical difference between a Series and a single-column DataFrame?
+3. When selecting multiple columns, which of the two forms must you use, and why?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+result_a = titanic["age"]
+result_b = titanic[["age"]]
+
+print(type(result_a))
+print(type(result_b))
+```
+
+1. `titanic["age"]` returns a **Series** — a single column with its index on the left. `titanic[["age"]]` returns a **DataFrame** — a table with one column.
+
+2. A Series is a one-dimensional object. A DataFrame is two-dimensional — it has both rows and named columns. Most summary methods (`.mean()`, `.sum()`) work on both, but some operations — such as saving to CSV or merging — expect a DataFrame.
+
+3. When selecting multiple columns you must pass a list of column names inside the square brackets, for example `titanic[["age", "fare", "pclass"]]`. The outer brackets are the selection operator; the inner brackets create the Python list. This always returns a DataFrame regardless of how many columns you select.
+
+</details>
+
+---
+
+### Exercise 3.2.2
+
+Use the Titanic dataset to answer the following questions. Each question requires one of the column methods covered in the video: `.sum()`, `.value_counts()`, `.unique()`, or `.nunique()`.
+
+1. What share of passengers survived? 
+2. How many unique ports of embarkation are in the dataset, and what are they?
+3. How many male and female passengers were there?
+4. Select only the `survived`, `pclass`, `sex`, and `fare` columns and display
+the first five rows.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# 1. Share of survivors (two alternatives)
+print(titanic["survived"].sum() / len(titanic))
+print(titanic["survived"].mean())
+```
+
+```{python}
+# 2. Unique ports of embarkation
+print(titanic["embarked"].nunique())
+print(titanic["embarked"].unique())
+```
+
+```{python}
+# 3. Male and female passengers 
+print(titanic["sex"].value_counts())
+```
+
+```{python}
+# 4. Subset of columns
+subset = titanic[["survived", "pclass", "sex", "fare"]]
+print(subset.head())
+```
+
+1. Approximately 38% of the passengers survived. Because `survived` is a binary variable coded as 0 and 1, `.sum()` adds up all the 1s, which equals the total number of survivors. You can then either divide this by the total number of passengers, or simply take the average value of the `survived` column.
+
+2. There are 3 unique ports (plus some missing values): `S` (Southampton),
+`C` (Cherbourg), and `Q` (Queenstown).
+
+3. `.value_counts()` shows that there are 577 male passengers and 314 passengers passengers in our data.
+
+</details>
+
+---
+
+### Exercise 3.2.3
+
+`.loc[]` and `.iloc[]` look similar but follow different slicing rules, and mixing them up is one of the most common sources of off-by-one errors in pandas.
+
+Run both selections below and compare the results.
+
+```python
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+selection_a = titanic.loc[0:4]
+selection_b = titanic.iloc[0:4]
+```
+
+1. How many rows does each selection return? Why do they differ?
+2. Use `.iloc[]` to select the last 3 rows of the dataset without hardcoding the
+total number of rows.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+selection_a = titanic.loc[0:4]
+selection_b = titanic.iloc[0:4]
+
+print(len(selection_a))
+print(len(selection_b))
+```
+
+```{python}
+# Last 3 rows using negative indexing
+print(titanic.iloc[-3:])
+```
+
+1. `titanic.loc[0:4]` returns **5 rows** (rows 0, 1, 2, 3, and 4). `.loc[]` is **inclusive on both ends**, so the stop label 4 is included. `titanic.iloc[0:4]` returns **4 rows** (positions 0, 1, 2, 3). `.iloc[]` follows standard Python slicing rules where the stop is excluded. When the index is the default integer index, the label and the position are the same number — which makes the difference easy to miss. Always double-check which one you are using.
+
+2. `titanic.iloc[-3:]` uses negative indexing to count from the end. Omitting the stop returns everything from position `-3` to the end of the DataFrame.
+
+</details>
+
+---
+
+### Exercise 3.2.4
+
+Use `.loc[]` to extract a focused subset of the Titanic data: rows 10 through 20 (inclusive), keeping only the columns `survived`, `pclass`, `sex`, `age`, and `fare`. Assign the result to a variable called `sample`.
+
+Then answer the following questions using `sample`:
+
+1. What is the mean age of passengers in this sample?
+2. How many of the passengers in this sample survived?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+sample = titanic.loc[10:20, ["survived", "pclass", "sex", "age", "fare"]]
+print(sample)
+```
+
+```{python}
+print(sample["age"].mean())
+print(sample["survived"].sum())
+```
+
+`.loc[]` accepts a row slice as the first argument and a list of column names as the second. Because `.loc[]` is inclusive on both ends, `10:20` returns 11 rows — labels 10 through 20. Note that `.mean()` on the `age` column automatically ignores missing values, so the result is based only on rows where age is recorded.
+
+</details>
+
+---
+
+### Exercise 3.2.5
+
+For each of the four tasks below, decide whether `.loc[]` or `.iloc[]` is the more appropriate tool, then write the code.
+
+1. Select the row with index label `5`.
+2. Select the first row of the dataset.
+3. Select rows with index labels 100 through 105, keeping only `name`, `age`,
+and `fare`.
+4. Select the last row of the dataset without knowing how many rows it has.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# 1. Row with index label 5 — use .loc[] because you know the label
+print(titanic.loc[5])
+```
+
+```{python}
+# 2. First row — either works here, but .iloc[] is more explicit about position
+print(titanic.iloc[0])
+```
+
+```{python}
+# 3. Labels 100–105 with specific columns — use .loc[]
+print(titanic.loc[100:105, ["sex", "age", "fare"]])
+```
+
+```{python}
+# 4. Last row without knowing the length — use .iloc[] with negative indexing
+print(titanic.iloc[-1])
+```
+
+Tasks 1 and 3 are naturally label-based — you know the index values you want, so `.loc[]` is the right choice. Task 2 could use either, but `.iloc[0]` makes the intent clear: you want the first position. Task 4 requires `.iloc[]` because negative indexing is not supported by `.loc[]` — there is no label `-1` in a default integer index.
+
+As a rule of thumb: use `.loc[]` when you know the label, and `.iloc[]` when you need a specific position or want to count from the end.
+
+</details>

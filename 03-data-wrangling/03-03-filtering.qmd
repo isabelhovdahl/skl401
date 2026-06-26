@@ -1,6 +1,7 @@
 # Filtering rows
 
-We introduce boolean masks as a way to filter rows in a DataFrame based on conditions, and show how to combine multiple conditions to create more refined filters.
+We introduce boolean masks — Series of `True` and `False` values — to filter
+rows in a DataFrame based on a condition, and show how to combine multiple conditions to create more refined filters.
 
 {{< video https://vimeo.com/1195887665/dce7c220ea?fl=ml&fe=ec >}}
 
@@ -56,3 +57,255 @@ not_third["pclass"].value_counts()
 ```
 
 ## Exercises
+
+### Exercise 3.3.1
+
+A boolean mask is a Series of `True` and `False` values — one per row — that you can inspect before applying it. Run the code below and look at the output of each step.
+
+```python
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+mask = titanic["age"] < 18
+print(mask.head(10))
+print(mask.sum())
+```
+
+1. What does each row in the mask represent?
+2. What does `mask.sum()` tell you, and why does summing a boolean Series give a meaningful result?
+3. Apply the mask to the DataFrame, assign the result to `children`, and print its shape. Then calculate the survival rate among children as a share between 0 and 1.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+mask = titanic["age"] < 18
+print(mask.head(10))
+print(mask.sum())
+```
+
+```{python}
+children = titanic[mask]
+print(children.shape)
+print(children["survived"].mean())
+```
+
+1. Each row in the mask corresponds to one passenger. The value is `True` if that passenger was under 18 and `False` otherwise.
+
+2. `mask.sum()` gives the total number of passengers under 18. Python treats `True` as 1 and `False` as 0, so summing a boolean Series counts the number of `True` values — the same trick as using `.sum()` on the `survived` column in the previous video.
+
+3. There are 113 passengers under 18 in the dataset. Their survival rate is approximately 0.54, meaning about 54% of children survived — noticeably higher than the overall survival rate of around 38%.
+
+</details>
+
+---
+
+### Exercise 3.3.2
+
+Filter the `healthexp` dataset to rows for a single country of your choice and answer the following questions about that country.
+
+```python
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+healthexp.head()
+```
+
+1. How many years of data are available for your chosen country?
+2. What is the minimum and maximum health spending recorded for that country?
+3. What is the mean life expectancy for that country across all available years?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+
+france = healthexp[healthexp["Country"] == "France"]
+
+print(france.shape[0])
+print(france["Spending_USD"].min())
+print(france["Spending_USD"].max())
+print(france["Life_Expectancy"].mean())
+```
+
+The results will differ depending on the country you choose. For France: 35 years of data are available, spending ranges from approximately 192 to 5468 USD, and mean life expectancy across all years is about 79.6 years. Notice that filtering to a single country returns a regular DataFrame — you can apply exactly the same summary methods as on the full dataset.
+
+</details>
+
+---
+
+### Exercise 3.3.3
+
+The code below is intended to filter the Titanic dataset to adult male passengers who paid a fare above 50, but it contains an error. 
+
+```python
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+expensive_men = titanic[
+    titanic["sex"] == "male" &
+    titanic["age"] >= 18 &
+    titanic["fare"] > 50
+]
+```
+
+1. Run the code. What error do you get, and why does it occur?
+2. Fix the code so it runs correctly and print the shape of the result.
+3. Extend the filter to also include female passengers who paid a fare above 50, regardless of age. Use `|` to combine this with the existing condition.
+
+<details>
+<summary>Hint</summary>
+
+Every individual condition must be wrapped in its own parentheses when combining
+with `&` or `|`. Without them, Python applies `&` before the comparison operators,
+which produces a `TypeError`.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# 2. Fixed version
+expensive_men = titanic[
+    (titanic["sex"] == "male") &
+    (titanic["age"] >= 18) &
+    (titanic["fare"] > 50)
+]
+print(expensive_men.shape)
+```
+
+```{python}
+# 3. Extended with | to include high-paying women
+high_fare = titanic[
+    ((titanic["sex"] == "male") & (titanic["age"] >= 18) & (titanic["fare"] > 50)) |
+    ((titanic["sex"] == "female") & (titanic["fare"] > 50))
+]
+print(high_fare.shape)
+print(high_fare["sex"].value_counts())
+```
+
+1. The error is a `TypeError`. Without parentheses around each condition, Python evaluates `&` before the comparison operators. This means it tries to apply `&` directly to the string `"male"` and the Series `titanic["age"]`, which is not a valid operation.
+
+2. After wrapping each condition in parentheses, the filter works correctly and returns 59 passengers.
+
+3. When combining `&` and `|` in the same expression, group each `&` block in its own outer parentheses before joining them with `|`. This makes the logic explicit and avoids ambiguity about the order of evaluation.
+
+</details>
+
+---
+
+### Exercise 3.3.4
+
+The `flights` dataset records monthly passenger numbers for US airlines from 1949 to 1960. Use it to practice alternative filtering approaches.
+
+```python
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+flights.head()
+```
+
+1. Filter the data to the three summer months (June, July and August) using `|` to combine three separate conditions. Assign the result to `summer` and print its shape.
+2. Rewrite the same filter using `.isin()`. How does this compare to the approach in question 1?
+3. Rewrite the filter once more using `.query()`.
+4. Which approach do you find most readable? Is there a case where `.isin()` would be clearly preferable over `.query()`?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+
+# 1. Using | to combine three conditions
+summer = flights[
+    (flights["month"] == "Jun") |
+    (flights["month"] == "Jul") |
+    (flights["month"] == "Aug")
+]
+print(summer.shape)
+```
+
+```{python}
+# 2. Using .isin()
+summer = flights[flights["month"].isin(["Jun", "Jul", "Aug"])]
+print(summer.shape)
+```
+
+```{python}
+# 3. Using .query()
+summer_q = flights.query("month in ['Jun', 'Jul', 'Aug']")
+print(summer_q.shape)
+```
+
+All three approaches return the same 36 rows — 3 months × 12 years.
+
+2. `.isin()` is considerably more concise than chaining conditions with `|`. The difference becomes even more pronounced if you needed to filter for five or six months — chaining that many `|` conditions would be tedious to write and hard to read.
+
+4. `.query()` is often more readable for simple conditions because the expression reads like a plain English sentence. `.isin()` tends to be preferable when the list of values is long, stored in a variable, or constructed dynamically — for example `flights[flights["month"].isin(summer_months)]` where `summer_months` is a list defined elsewhere in your script. Embedding a long list directly inside a `.query()` string becomes harder to read and maintain.
+
+</details>
+
+---
+
+### Exercise 3.3.5
+
+Use the `healthexp` dataset to practice negation with `~`.
+
+```python
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+print(healthexp["Country"].unique())
+```
+
+1. Use `~` combined with `.isin()` to exclude the following countries from the dataset: `"USA"`, `"Germany"`, and `"France"`. Assign the result to `reduced` and verify the exclusion worked by printing the unique countries that remain.
+2. Extend the filter to also require that life expectancy is above 75. Use `&` to combine this with the negation condition.
+3. How many rows does the final filtered dataset contain?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+
+# 1. Exclude three countries
+exclude = ["USA", "Germany", "France"]
+reduced = healthexp[~healthexp["Country"].isin(exclude)]
+print(reduced["Country"].unique())
+```
+
+```{python}
+# 2. Also require life expectancy above 75
+reduced_high_life = healthexp[
+    ~healthexp["Country"].isin(exclude) &
+    (healthexp["Life_Expectancy"] > 75)
+]
+print(reduced_high_life.shape)
+```
+
+1. After excluding the three countries, the remaining unique countries are Great
+Britain, Japan and Canada.
+
+2. Combining `~` with `.isin()` and a numeric condition with `&` works exactly like combining any two conditions — the tilde simply negates the `.isin()` result before the `&` is applied.
+
+3. The final filtered dataset contains 120 rows.
+
+</details>

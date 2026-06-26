@@ -1,0 +1,138 @@
+
+### Exercise 3.4.1
+
+Use the `flights` dataset to practice creating new columns with arithmetic.
+
+```python
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+flights.head()
+```
+
+**Part 1.** Write a function `pct_change_manual(current, previous)` that computes
+the percentage change from a previous value to a current value using the formula:
+
+$$\text{percentage change} = \frac{\text{current} - \text{previous}}{\text{previous}} \times 100$$
+
+Then create a new column `pct_change_manual` that applies this function to compute the percentage change in passengers from the previous row. Use `.apply()` or any approach you like.
+
+**Part 2.** pandas has a built-in method that computes percentage change directly on a Series. Look up the documentation for `pd.Series.pct_change()` and use it to create a second column called `pct_change_pandas`. Multiply by 100 so the result is on the same scale as Part 1.
+
+Compare the two columns — are the results identical? Then reflect: given that pandas already has this functionality built in, when would you actually need to write your own function and use `.apply()`?
+
+<details>
+<summary>Hint</summary>
+
+For Part 1, you can use `.shift(1)` to access the value from the previous row. For example, `flights["passengers"].shift(1)` returns a Series where each value is the passengers count from the row above.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+
+# Part 1
+def pct_change_manual(current, previous):
+    return (current - previous) / previous * 100
+
+flights["pct_change_manual"] = pct_change_manual(
+    flights["passengers"],
+    flights["passengers"].shift(1)
+)
+
+# Part 2
+flights["pct_change_pandas"] = flights["passengers"].pct_change() * 100
+
+flights[["passengers", "pct_change_manual", "pct_change_pandas"]].head(10)
+```
+
+The two columns are identical. The first row has `NaN` in both cases because there is no previous value to compare against.
+
+The broader lesson is that pandas has built-in methods for a large number of common operations: percentage change, cumulative sums, rolling averages, rank, and many more. Before writing a function and reaching for `.apply()`, it is always worth asking whether pandas already does what you need. `.apply()` is the right tool when your logic is genuinely custom — for example a multi-branch conditional that depends on several columns at once — not for arithmetic that pandas can handle directly on the whole column at once.
+
+</details>
+
+
+### Exercise 3.4.3
+
+In the previous exercise you used `.apply()` with a three-way conditional to
+create the `spending_group` column. This exercise shows you two vectorised
+alternatives that are faster and more concise.
+
+```python
+import pandas as pd
+import numpy as np
+
+healthexp = pd.read_csv("data/healthexp.csv")
+```
+
+**Part 1.** For simple two-way conditions, `np.where()` is the right tool. Use
+it to create a column `high_spend` that contains `"high"` if `Spending_USD` is
+above 3 000 and `"low"` otherwise.
+
+**Part 2.** For conditions with more than two outcomes, `np.select()` is the
+vectorised alternative to `.apply()`. It takes two arguments: a list of
+conditions evaluated in order, and a list of corresponding return values. A
+`default` argument covers any rows that do not match any condition.
+
+Use `np.select()` to recreate the three-way `spending_group` column from
+Exercise 3.4.2 without using `.apply()`.
+
+**Part 3.** Verify that the `spending_group` columns produced by `.apply()` and
+`np.select()` are identical, then reflect: given these alternatives, when would
+you actually need `.apply()`?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import numpy as np
+
+healthexp = pd.read_csv("data/healthexp.csv")
+
+# Part 1: np.where() for two outcomes
+healthexp["high_spend"] = np.where(
+    healthexp["Spending_USD"] > 3_000, "high", "low"
+)
+
+# Part 2: np.select() for three outcomes
+conditions = [
+    healthexp["Spending_USD"] < 1_500,
+    healthexp["Spending_USD"] < 5_000
+]
+choices = ["low", "medium"]
+
+healthexp["spending_group"] = np.select(conditions, choices, default="high")
+
+# Part 3: verify against .apply() result
+def classify_spending(amount):
+    if amount < 1_500:
+        return "low"
+    elif amount < 5_000:
+        return "medium"
+    else:
+        return "high"
+
+healthexp["spending_group_apply"] = healthexp["Spending_USD"].apply(classify_spending)
+
+print((healthexp["spending_group"] == healthexp["spending_group_apply"]).all())
+print(healthexp["spending_group"].value_counts())
+```
+
+The two columns are identical. `np.select()` evaluates the conditions in order
+and returns the corresponding value for the first condition that is `True` —
+exactly like an `if/elif/else` chain, but applied to the entire column at once.
+
+As a rule of thumb: use `np.where()` for two outcomes, `np.select()` for
+multiple outcomes, and reserve `.apply()` for logic that genuinely cannot be
+expressed as conditions on a single column — for example when the result depends
+on values from two or more columns simultaneously, or when the logic is complex
+enough that `np.select()` would become hard to read.
+
+</details>
