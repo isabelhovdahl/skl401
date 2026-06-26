@@ -10,7 +10,7 @@
 /*_files/
 /*_cache/
 docs/
-data/
+/data/
 
 # Python
 __pycache__/
