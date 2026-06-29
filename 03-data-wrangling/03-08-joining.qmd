@@ -1,6 +1,6 @@
 # Joining data
 
-We cover how to combine DataFrames horizontally by matching rows on a shared key using `.merge()` — including the difference between inner and left joins — and how to stack DataFrames vertically using `pd.concat()`.
+We cover the two main ways to combine separate tables into one: horizontal joining — bringing in new columns by matching rows on a shared key — and vertical stacking for combining tables that share the same columns.
 
 {{< video https://vimeo.com/1195921351/acdd0ad4f7?fl=ml&fe=ec >}}
 
@@ -65,3 +65,371 @@ combined.head()
 ```
 
 ## Exercises
+
+### Exercise 3.8.1
+
+The two DataFrames below contain exam scores for a group of students. Not all students took both exams.
+
+```python
+import pandas as pd
+
+exam1 = pd.DataFrame({
+    "student_id": [1, 2, 3, 4, 5],
+    "name":       ["Alice", "Bob", "Carol", "David", "Eva"],
+    "score_q1":   [85, 92, 78, 90, 88]
+})
+
+exam2 = pd.DataFrame({
+    "student_id": [1, 2, 3, 6, 7],
+    "name":       ["Alice", "Bob", "Carol", "Frank", "Grace"],
+    "score_q2":   [90, 88, 95, 72, 85]
+})
+```
+
+Merge the two DataFrames using all four join types — `inner`, `left`, `right`, and `outer` — and answer the following questions for each:
+
+1. How many rows does the result have?
+2. Which students appear in the result, and which are excluded?
+3. Where do `NaN` values appear, and why?
+
+Summarize in your own words when you would choose each join type.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+exam1 = pd.DataFrame({
+    "student_id": [1, 2, 3, 4, 5],
+    "name":       ["Alice", "Bob", "Carol", "David", "Eva"],
+    "score_q1":   [85, 92, 78, 90, 88]
+})
+
+exam2 = pd.DataFrame({
+    "student_id": [1, 2, 3, 6, 7],
+    "name":       ["Alice", "Bob", "Carol", "Frank", "Grace"],
+    "score_q2":   [90, 88, 95, 72, 85]
+})
+
+# Inner join
+print("Inner:")
+print(exam1.merge(exam2, on="student_id", how="inner"))
+```
+
+```{python}
+# Left join
+print("Left:")
+print(exam1.merge(exam2, on="student_id", how="left"))
+```
+
+```{python}
+# Right join
+print("Right:")
+print(exam1.merge(exam2, on="student_id", how="right"))
+```
+
+```{python}
+# Outer join
+print("Outer:")
+print(exam1.merge(exam2, on="student_id", how="outer"))
+```
+
+Notice that merging on `student_id` produces duplicate `name` columns — `name_x` from the left table and `name_y` from the right. pandas adds suffixes automatically when both tables have a column with the same name that is not used as the merge key. You can avoid this by dropping the `name` column from one table before merging, or by merging on both `student_id` and `name` by passing a list of key columns to `on`.
+
+- **Inner**: 3 rows — only students 1, 2, 3 who appear in both tables. Students 4, 5, 6, 7 are silently dropped. Use when you only want observations present in both tables.
+- **Left**: 5 rows — all students from `exam1`. Students 6 and 7 are excluded; students 4 and 5 have `NaN` for `score_q2`. Use when your left table is the main dataset and you want to keep all of it.
+- **Right**: 5 rows — all students from `exam2`. Students 4 and 5 are excluded; students 6 and 7 have `NaN` for `score_q1`. Use when the right table is the one you want to preserve completely.
+- **Outer**: 7 rows — all students from both tables. `NaN` appears wherever a student is missing from one of the tables. Use when you want to keep everything and investigate what is missing on either side.
+
+</details>
+
+---
+
+### Exercise 3.8.2
+
+In the previous exercise, merging on `student_id` alone produced duplicate `name` columns because both tables contained a `name` column that was not used as the key. One clean solution is to merge on multiple keys.
+
+A colleague provides a second version of the exam data where the student names
+are stored differently:
+
+```python
+import pandas as pd
+
+exam1 = pd.DataFrame({
+    "student_id": [1, 2, 3, 4, 5],
+    "first_name": ["Alice", "Bob", "Carol", "David", "Eva"],
+    "last_name":  ["Smith", "Jones", "White", "Brown", "Davis"],
+    "score_q1":   [85, 92, 78, 90, 88]
+})
+
+exam2 = pd.DataFrame({
+    "student_id": [1, 2, 3, 6, 7],
+    "name":       ["alice smith", "bob jones", "carol white",
+                   "frank miller", "grace wilson"],
+    "score_q2":   [90, 88, 95, 72, 85]
+})
+```
+
+The names in `exam2` are in lowercase and stored as a single `name` column, while `exam1` splits them across `first_name` and `last_name`.
+
+1. Add a `name` column to `exam1` by combining `first_name` and `last_name` into a single lowercase string in the format `"alice smith"`. Use the `.str` accessor.
+2. Merge the two DataFrames on both `student_id` and `name` using a left join. How does the result differ from merging on `student_id` alone?
+3. Drop the `first_name` and `last_name` columns from the result and print the final DataFrame.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+exam1 = pd.DataFrame({
+    "student_id": [1, 2, 3, 4, 5],
+    "first_name": ["Alice", "Bob", "Carol", "David", "Eva"],
+    "last_name":  ["Smith", "Jones", "White", "Brown", "Davis"],
+    "score_q1":   [85, 92, 78, 90, 88]
+})
+
+exam2 = pd.DataFrame({
+    "student_id": [1, 2, 3, 6, 7],
+    "name":       ["alice smith", "bob jones", "carol white",
+                   "frank miller", "grace wilson"],
+    "score_q2":   [90, 88, 95, 72, 85]
+})
+
+# 1. Combine first and last name into a single lowercase column
+exam1["name"] = (exam1["first_name"] + " " + exam1["last_name"]).str.lower()
+print(exam1)
+```
+
+```{python}
+# 2. Merge on both student_id and name
+merged = exam1.merge(exam2, on=["student_id", "name"], how="left")
+print(merged)
+```
+
+```{python}
+# 3. Drop first_name and last_name
+merged = merged.drop(columns=["first_name", "last_name"])
+print(merged)
+```
+
+2. Merging on both keys avoids the duplicate name column problem from exercise 3.8.1. When two tables share a column that you want to use as a key rather than a data column, include it in the `on=` list. This is also safer: merging on multiple keys reduces the risk of false matches where two different people happen to share the same student ID or the same name.
+
+</details>
+
+---
+
+### Exercise 3.8.3
+
+The code below merges two DataFrames that track product sales. Run it and inspect the result carefully.
+
+```python
+import pandas as pd
+
+products = pd.DataFrame({
+    "product_id":   [1, 2, 3],
+    "product_name": ["Coffee", "Tea", "Juice"]
+})
+
+sales = pd.DataFrame({
+    "product_id": [1, 1, 2, 2, 3],
+    "month":      ["Jan", "Feb", "Jan", "Feb", "Jan"],
+    "units_sold": [120, 135, 80, 90, 60]
+})
+
+merged = products.merge(sales, on="product_id", how="left")
+print("Products rows:", len(products))
+print("Merged rows:  ", len(merged))
+print(merged)
+```
+
+1. How many rows does `merged` have compared to `products`? Why?
+2. Is this the result you would expect from a left join? What has happened?
+3. How would you check for duplicate keys in `sales` before performing the merge? Write the code to detect them.
+4. In this case, the extra rows are not a mistake — `sales` intentionally has multiple rows per product. How would you restructure the merge to get one row per product that includes both the product name and total units sold across all months?
+
+<details>
+<summary>Hint</summary>
+
+For question 4, consider aggregating `sales` before merging rather than merging first and aggregating after.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+products = pd.DataFrame({
+    "product_id":   [1, 2, 3],
+    "product_name": ["Coffee", "Tea", "Juice"]
+})
+
+sales = pd.DataFrame({
+    "product_id": [1, 1, 2, 2, 3],
+    "month":      ["Jan", "Feb", "Jan", "Feb", "Jan"],
+    "units_sold": [120, 135, 80, 90, 60]
+})
+
+merged = products.merge(sales, on="product_id", how="left")
+print("Products rows:", len(products))
+print("Merged rows:  ", len(merged))
+print(merged)
+```
+
+```{python}
+# 3. Check for duplicate keys in sales
+print(sales["product_id"].value_counts())
+```
+
+```{python}
+# 4. Aggregate sales first, then merge
+sales_total = sales.groupby("product_id")["units_sold"].sum().reset_index()
+merged_clean = products.merge(sales_total, on="product_id", how="left")
+print(merged_clean)
+```
+
+1. `merged` has 5 rows — more than the 3 rows in `products`. Each product in `products` has been duplicated once for each matching row in `sales`.
+
+2. This is technically correct behaviour for a left join — every matching row in the right table generates a new row in the result. But it is often not what you want, and if you were not expecting it, the inflated row count is a sign that something needs attention.
+
+3. `.value_counts()` on the key column quickly shows whether any values appear more than once. In real data with thousands of rows, you can also check `sales["product_id"].duplicated().sum()` for a quick count of duplicate keys.
+
+4. Aggregating before merging is cleaner: first collapse `sales` to one row per product, then merge. This is a general principle — if the right table has multiple rows per key and you want a one-to-one merge, aggregate first.
+
+</details>
+
+---
+
+### Exercise 3.8.4
+
+Split the `flights` dataset by month using a for loop, then reassemble it using `pd.concat()`.
+
+```python
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+print(flights["month"].unique())
+```
+
+1. Use a for loop to split `flights` into 12 subsets — one for each calendar month (e.g., `Jan`) — and store them in a list called `month_dfs`. Print the shape of each DataFrame in the list.
+2. Use `pd.concat()` to reassemble the list into a single DataFrame called `flights_combined`. Reset the index with `drop=True`.
+3. Verify the reassembled DataFrame matches the original by checking that the shapes are identical and that the total passenger count is the same.
+
+<details>
+<summary>Hint</summary>
+
+To split by month using a for loop, define a list of calendar months and loop over them. For each month, filter the DataFrame to rows where `month` is equal to that month and append the result the list. Recall that you can use the `append` function to add items to a list inside the loop.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+
+# 1. Split by month using a for loop
+month_dfs = []
+
+for month in flights["month"].unique():
+    subset = flights[flights["month"] == month].copy()
+    month_dfs.append(subset)
+    print(subset.shape)
+```
+
+```{python}
+# 2. Reassemble with pd.concat()
+flights_combined = pd.concat(month_dfs).reset_index(drop=True)
+print(flights_combined.shape)
+```
+
+```{python}
+# 3. Verify against original
+print(flights.shape == flights_combined.shape)
+print(flights["passengers"].sum() == flights_combined["passengers"].sum())
+```
+
+The key pattern here is storing DataFrames in a list inside a loop and then passing the list to `pd.concat()`. This is a common pattern in real data work — for example when reading multiple CSV files from a folder, each containing data for a different time period, and assembling them into a single DataFrame. Always reset the index after `pd.concat()` to avoid duplicate index labels from
+the original DataFrames.
+
+</details>
+
+---
+
+### Exercise 3.8.5
+
+In this exercise you will merge two real datasets hosted on [GitHub](https://github.com/isabelhovdahl/skl401/tree/master/03-data-wrangling/data): one containing core passenger information from `titanic` and one containing passenger names and ticket details. Both datasets originate from the same source and share `passenger_id` as the primary key, but they also share two other columns — `Pclass` and `Sex` — with different casing.
+
+```python
+import pandas as pd
+
+url_core  = "https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/titanic_core.csv"
+url_names = "https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/titanic_names.csv"
+
+core  = pd.read_csv(url_core)
+names = pd.read_csv(url_names)
+
+print(core.shape)
+print(core.head())
+print(names.shape)
+print(names.head())
+```
+
+1. Inspect both DataFrames. Which columns appear in both? How does the casing differ, and why does this matter for merging?
+2. Rename `PassengerId`, `Pclass`, and `Sex` in `names` to `passenger_id`, `pclass`, and `sex` so the column names match `core`.
+3. Merge the two DataFrames using a left join on `passenger_id`. Then drop the duplicate `pclass` and `sex` columns that result from the merge. Check the row count after merging to verify no rows were lost.
+4. Using the merged DataFrame, compute the survival rate by passenger class for male and female passengers separately. Which group had the highest survival rate?
+
+<details>
+<summary>Hint</summary>
+
+After merging on `passenger_id` alone, pandas will suffix the duplicate `pclass` and `sex` columns as `pclass_x`, `pclass_y`, `sex_x`, and `sex_y`. You can drop the `_y` versions and rename the `_x` versions back, or alternatively merge on all three shared keys — `passenger_id`, `pclass`, and `sex` — to avoid the duplicates entirely.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+url_core  = "https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/titanic_core.csv"
+url_names = "https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/titanic_names.csv"
+
+core  = pd.read_csv(url_core)
+names = pd.read_csv(url_names)
+
+# 2. Rename columns in names to match core
+names = names.rename(columns={
+    "PassengerId": "passenger_id",
+    "Pclass":      "pclass",
+    "Sex":         "sex"
+})
+```
+
+```{python}
+# 3. Merge on all three shared keys to avoid duplicate columns
+merged = core.merge(names, on=["passenger_id", "pclass", "sex"], how="left")
+print("Core rows:  ", len(core))
+print("Merged rows:", len(merged))
+print(merged.head())
+```
+
+```{python}
+# 4. Survival rate by class and sex
+summary = merged.groupby(["pclass", "sex"])["survived"].mean().round(3)
+print(summary)
+```
+
+1. Both DataFrames contain `passenger_id`/`PassengerId`, `pclass`/`Pclass`, and `sex`/`Sex`. The casing difference matters because pandas treats column names as case-sensitive — `pclass` and `Pclass` are different column names and will not be recognised as the same key unless you standardise them first.
+
+3. Merging on all three shared keys is the cleanest approach — it avoids duplicate columns entirely and provides an additional check that the rows match correctly across all three variables. The row count should be 891 in both `core` and `merged`, confirming no rows were lost.
+
+4. First class female passengers had by far the highest survival rate at around 97%. In general, female passengers survived at much higher rates than male passengers across all classes, and higher passenger classes survived at higher rates than lower classes — with the exception that second class female passengers also survived at very high rates.
+
+</details>

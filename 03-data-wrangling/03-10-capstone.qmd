@@ -1,7 +1,6 @@
 # Topic 3 capstone
 
-We bring together everything covered in Topic 3 in a single end-to-end data wrangling workflow — from loading and inspecting raw data, cleaning column names, fixing value inconsistencies, merging with an external dataset, creating new variables, and
-producing a final summary table ready for export.
+We bring together everything covered in Topic 3 in a single end-to-end data wrangling workflow — from loading and cleaning raw data to producing a final summary table ready for export.
 
 {{< video https://vimeo.com/1195939735/319efb9226?fl=ml&fe=ec >}}
 
@@ -79,4 +78,3 @@ print("Exported healthexp_clean.csv and healthexp_summary.csv to data/")
 
 ```
 
-## Exercises

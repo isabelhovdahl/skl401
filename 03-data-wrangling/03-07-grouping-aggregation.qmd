@@ -1,6 +1,6 @@
 # Grouping and aggregation
 
-We introduce grouping as a way to split a DataFrame into subgroups and compute summary statistics for each group using `.groupby()`, `.agg()`, and `.transform()`.
+We introduce grouping as a way to split a DataFrame into subgroups and compute summary statistics for each group. We also cover how to compute multiple aggregations in a single step, and using group statistics to create new columns without collapsing the original data.
 
 {{< video https://vimeo.com/1195888031/24f453a449?fl=ml&fe=ec >}}
 
@@ -46,3 +46,260 @@ titanic[["pclass", "fare", "class_mean_fare", "fare_vs_class_avg"]].head()
 ```
 
 ## Exercises
+
+### Exercise 3.7.1
+
+Use the `healthexp` dataset to practice the basic groupby workflow.
+
+```python
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+healthexp.head()
+```
+
+1. Create a grouped object by grouping on `Country` and assign it to a variable called `grouped`. Print the grouped object. What type of object does it return?
+2. Use the grouped object to compute the mean health spending and mean life expectancy for each country. Which country has the highest mean spending? Which has the highest mean life expectancy?
+3. Extend the groupby to group by both `Country` and `Year` and compute the mean spending for each combination. How many rows does the result have, and why? You may notice the result has a multi-level index. Use `reset_index()` to convert it back to a regular DataFrame.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+
+# 1. Create grouped object
+grouped = healthexp.groupby("Country")
+print(type(grouped))
+```
+
+```{python}
+# 2. Mean spending and life expectancy per country
+print(grouped["Spending_USD"].mean().round(2))
+print(grouped["Life_Expectancy"].mean().round(2))
+```
+
+```{python}
+# 3. Group by country and year
+result = healthexp.groupby(["Country", "Year"])["Spending_USD"].mean()
+print(result.shape)
+print(result.head(10))
+
+# Reset index to get a DataFrame
+result = result.reset_index()
+print(result.head())
+
+```
+
+1. The grouped object is a `DataFrameGroupBy` — an intermediate object that holds the grouping information but has not yet computed anything. The actual computation only happens when you apply an operation to it.
+
+2. The USA has the highest mean spending by a considerable margin. Japan has among the highest mean life expectancy despite relatively moderate spending.
+
+3. The result has one row per unique country-year combination. Since each country appears once per year in `healthexp`, grouping by both columns gives the same values as the original data — but the exercise illustrates that you can group on any combination of columns. Notice that the operation returns a pandas Series, but you can easily convert this back to a DataFrame by simply resetting the index. 
+
+</details>
+
+---
+
+### Exercise 3.7.2
+
+The `flights` dataset records monthly passenger numbers for US airlines from 1949 to 1960. This exercise shows why groupby is more convenient than a for loop for computing group summaries.
+
+```python
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+flights.head()
+```
+
+1. Use a for loop to print the total number of passengers for each year. Your output should show one line per year in the format `1949: 360`.
+2. Compute the exact same result using `.groupby()`. How does the code compare to the for loop version?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+
+# 1. For loop
+for year in sorted(flights["year"].unique()):
+    total = flights[flights["year"] == year]["passengers"].sum()
+    print(f"{year}: {total}")
+```
+
+```{python}
+# 2. groupby + sum
+print(flights.groupby("year")["passengers"].sum())
+```
+
+The groupby version achieves the same result in a single line. The for loop requires filtering the DataFrame manually for each year, computing the sum, and formatting the output — three steps that groupby handles automatically. As the number of groups grows, the difference becomes even more pronounced. This is the core motivation for groupby: anything you can do with a for loop over groups, you can do more concisely and efficiently with groupby.
+
+</details>
+
+---
+
+### Exercise 3.7.3
+
+Use the `healthexp` dataset to produce a clean country-level summary table in asingle step.
+
+```python
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+```
+
+1. Group by `Country` and compute the following named statistics in a single aggregation:
+    - `mean_spending`: mean of `Spending_USD`
+    - `max_spending`: maximum of `Spending_USD`
+    - `mean_life_exp`: mean of `Life_Expectancy`
+    - `n_years`: count of `Year`
+
+2. Round all numeric columns in the result to one decimal place and sort by `mean_spending` in descending order.
+3. Which country has the most years of data? Which has the fewest? 
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+
+# 1 & 2. Aggregation with named statistics
+summary = healthexp.groupby("Country").agg(
+    mean_spending  = ("Spending_USD",    "mean"),
+    max_spending   = ("Spending_USD",    "max"),
+    mean_life_exp  = ("Life_Expectancy", "mean"),
+    n_years        = ("Year",            "count")
+).round(1).sort_values("mean_spending", ascending=False)
+
+print(summary)
+```
+
+```{python}
+# 3. Most and fewest years
+print(summary["n_years"].idxmax(), summary["n_years"].max())
+print(summary["n_years"].idxmin(), summary["n_years"].min())
+```
+
+The named aggregation syntax — `output_name = ("column", "operation")` — lets you compute multiple statistics across different columns in one step and gives each output column a meaningful name directly. The result is a clean summary DataFrame that is easy to read and ready to use in further analysis. France has the fewest number of observations with only 35 years, whereas USA and Japan are observed for 51 years. 
+
+</details>
+
+---
+
+### Exercise 3.7.4
+
+This exercise contrasts `.agg()` and `.transform()` using the `healthexp` dataset.
+
+```python
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+```
+
+1. Use `.agg()` to compute the mean life expectancy for each country. How many rows does the result have? What happened to the original rows?
+2. Now use `.transform()` to add the country mean life expectancy as a new column called `country_mean_life_exp` in the original DataFrame. How many rows does the result have? What is the key difference from `.agg()`?
+3. Use the new column to create a second column called `life_exp_vs_mean` that shows how much each year's life expectancy deviates from that country's long-run average. Round to two decimal places.
+4. Filter to rows where `life_exp_vs_mean` is negative. Which country-year combinations had a life expectancy below their own long-run average, and what might explain this?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+
+# 1. agg() - collapses to one row per group
+agg_result = healthexp.groupby("Country")["Life_Expectancy"].agg("mean").round(2)
+print(agg_result.shape)
+print(agg_result)
+```
+
+```{python}
+# 2. transform() - adds group statistic as a new column
+healthexp["country_mean_life_exp"] = (
+    healthexp.groupby("Country")["Life_Expectancy"].transform("mean").round(2)
+)
+print(healthexp.shape)
+print(healthexp[["Country", "Year", "Life_Expectancy", "country_mean_life_exp"]].head(10))
+```
+
+```{python}
+# 3. Deviation from country mean
+healthexp["life_exp_vs_mean"] = (
+    healthexp["Life_Expectancy"] - healthexp["country_mean_life_exp"]
+).round(2)
+```
+
+```{python}
+# 4. Years below long-run average
+below_avg = healthexp[healthexp["life_exp_vs_mean"] < 0]
+print(below_avg[["Country", "Year", "Life_Expectancy", "life_exp_vs_mean"]])
+```
+
+2. `.transform()` returns a Series with the same number of rows as the original DataFrame — each row receives the mean life expectancy for its country. This is the key difference: `.agg()` collapses the data to one row per group, while `.transform()` broadcasts the group statistic back to every row in the group, keeping the original shape intact.
+
+4. The rows below the long-run average tend to cluster in the earlier years of the dataset for each country — reflecting the fact that life expectancy has generally increased over time, so earlier years naturally fall below the long-run mean. Any sharp dips in specific years may reflect historical events such as disease outbreaks or periods of economic hardship.
+
+</details>
+
+---
+
+### Exercise 3.7.5
+
+In exercise 3.6.5 you decided to fill missing `age` values in the Titanic dataset with the overall median age. A better approach is to fill with the median age within each passenger class — since first, second, and third class passengers likely had different age profiles.
+
+```python
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+print(titanic.groupby("pclass")["age"].median())
+```
+
+1. How different are the median ages across the three passenger classes? Does it seem worth using class-specific medians rather than the overall median?
+2. Use `.transform()` to create a column `age_median_by_class` containing the median age for each passenger's class.
+3. Use this column to fill the missing values in the `age` column. Assign the result back to `titanic["age"]` and verify that no missing values remain.
+4. Compare the class-specific medians used here against the overall median from exercise 3.6.5. For which passenger class would the overall median have been the most misleading imputation?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# 1. Median age by class
+print(titanic.groupby("pclass")["age"].median())
+```
+
+```{python}
+# 2. Add median age by class as a new column
+titanic["age_median_by_class"] = titanic.groupby("pclass")["age"].transform("median")
+```
+
+```{python}
+# 3. Fill missing age with class-specific median
+titanic["age"] = titanic["age"].fillna(titanic["age_median_by_class"])
+print(titanic["age"].isna().sum())
+```
+
+```{python}
+# 4. Compare overall vs class-specific medians
+print("Overall median:", titanic["age"].median().round(1))
+print(titanic.groupby("pclass")["age"].median())
+```
+
+1. The median ages differ noticeably across classes — first class passengers tend to be older than third class passengers. This makes intuitive sense: older, more established individuals were more likely to afford a first class ticket. Using class-specific medians is clearly preferable to a single overall median.
+
+3. After filling, there are zero missing values in `age`.
+
+4. The overall median would have been most misleading for first class passengers, whose median age is notably higher than the overall median. Imputing a younger age for older first class passengers would introduce a systematic bias into any analysis involving age.
+
+</details>

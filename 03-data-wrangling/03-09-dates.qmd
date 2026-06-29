@@ -1,6 +1,6 @@
 # Working with dates
 
-We cover how to convert string columns to proper datetime objects using, how to extract date components such as year, month, and quarter using the `.dt` accessor, and how to filter and group data by date.
+We cover how to convert string columns to proper datetime objects, how to extract date components such as year or month using the `.dt` accessor, and how to filter and group data by date.
 
 {{< video https://vimeo.com/1195939736/b8f4d80cfa?fl=ml&fe=ec >}}
 
@@ -73,3 +73,342 @@ annual.head()
 ```
 
 ## Exercises
+
+### Exercise 3.9.1
+
+The DataFrame below contains sales records with dates stored as strings.
+
+```python
+import pandas as pd
+
+sales = pd.DataFrame({
+    "date":    ["2020-03-15", "2019-11-02", "2021-07-28", "2018-05-10",
+                "2020-01-22", "2019-08-14", "2021-03-05", "2018-12-30"],
+    "product": ["Coffee", "Tea", "Juice", "Coffee", "Tea", "Juice",
+                "Coffee", "Tea"],
+    "revenue": [1200, 850, 640, 1100, 920, 710, 1350, 780]
+})
+```
+
+1. Sort the DataFrame by `date` and print the result. Does the sort order look correct? What is happening, and why?
+2. Filter the DataFrame to sales from 2020 onwards using `sales["date"] >= "2020-01-01"`. Does the result look correct?
+3. Convert the `date` column to datetime using `pd.to_datetime()` and check the dtype before and after. Then repeat the sort and filter from steps 1 and 2. How do the results differ?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+sales = pd.DataFrame({
+    "date":    ["2020-03-15", "2019-11-02", "2021-07-28", "2018-05-10",
+                "2020-01-22", "2019-08-14", "2021-03-05", "2018-12-30"],
+    "product": ["Coffee", "Tea", "Juice", "Coffee", "Tea", "Juice",
+                "Coffee", "Tea"],
+    "revenue": [1200, 850, 640, 1100, 920, 710, 1350, 780]
+})
+
+# 1. Sort by date as string
+print(sales.sort_values("date"))
+```
+
+```{python}
+# 2. Filter as string
+print(sales[sales["date"] >= "2020-01-01"])
+```
+
+```{python}
+# 3. Convert and repeat
+print("Before:", sales["date"].dtype)
+sales["date"] = pd.to_datetime(sales["date"])
+print("After: ", sales["date"].dtype)
+
+print(sales.sort_values("date"))
+print(sales[sales["date"] >= "2020-01-01"])
+```
+
+1. The sort order looks correct in this case because the dates are in `YYYY-MM-DD` format, which happens to sort correctly as a string because the most significant component (year) comes first. This is a lucky coincidence — a format like `DD/MM/YYYY` would sort completely incorrectly as a string. Never rely on this: always convert to datetime before sorting.
+
+2. The filter also appears to work here for the same reason. However, string comparisons are character-by-character and have nothing to do with time — they only produce correct results by accident when the format is ISO (`YYYY-MM-DD`).
+
+3. After converting to datetime, both the sort and the filter work correctly and for the right reasons. The dtype changes from `str` to `datetime64[ns]`, confirming that pandas now treats the column as a proper point in time rather than a sequence of characters.
+
+</details>
+
+---
+
+### Exercise 3.9.2
+
+The DataFrame below contains patient visit records with dates in `DD/MM/YYYY` format — common in European data exports.
+
+```python
+import pandas as pd
+
+visits = pd.DataFrame({
+    "date":       ["02/01/2021", "06/05/2020", "11/03/2019",
+                   "04/08/2022", "01/09/2021", "09/07/2020"],
+    "patient_id": [101, 102, 103, 104, 105, 106],
+    "diagnosis":  ["flu", "checkup", "injury", "flu", "checkup", "injury"]
+})
+```
+
+1. Convert the `date` column to datetime without specifying a `format=` argument and print the result. The conversion succeeds without any error — but do the dates look correct? Compare the converted dates against the original strings and
+explain what pandas has done wrong.
+2. Fix the conversion by specifying the correct `format=` argument for `DD/MM/YYYY` dates. Print the result and verify it now matches the original strings.
+3. Add two new columns to `visits`: `year` and `month_num`, extracted from the correctly converted date column using the `.dt` accessor.
+
+<details>
+<summary>Hint</summary>
+
+The format codes you need is `"%d/%m/%Y"` — `%d` for day, `%m` for month number, and `%Y` for four-digit year. Always verify the converted dates look sensible after conversion — ambiguous formats can silently produce wrong results with no error or warning.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+visits = pd.DataFrame({
+    "date":       ["02/01/2021", "06/05/2020", "11/03/2019",
+                   "04/08/2022", "01/09/2021", "09/07/2020"],
+    "patient_id": [101, 102, 103, 104, 105, 106],
+    "diagnosis":  ["flu", "checkup", "injury", "flu", "checkup", "injury"]
+})
+
+# 1. Convert without format
+visits["date_wrong"] = pd.to_datetime(visits["date"])
+print(visits[["date", "date_wrong", "patient_id"]])
+```
+
+```{python}
+# 2. Convert with correct format
+visits["date"] = pd.to_datetime(visits["date"], format="%d/%m/%Y")
+print(visits[["date", "date_wrong", "patient_id"]])
+```
+
+```{python}
+# 3. Extract year and month
+visits["year"]      = visits["date"].dt.year
+visits["month_num"] = visits["date"].dt.month
+print(visits.head())
+```
+
+1. The conversion succeeds but the dates are wrong. pandas assumes the American `MM/DD/YYYY` format by default and interprets the first number as the month and the second as the day — so `"02/01/2021"` becomes February 1st instead of
+January 2nd. Because all day values in this dataset happen to be 12 or below, every date is a valid calendar date in both interpretations, so pandas raises no error. This is one of the most dangerous silent bugs when working with dates: the
+code runs cleanly and the output looks plausible, but every date is wrong. Always cross-check a few converted values against the original strings to catch this.
+
+2. With `format="%d/%m/%Y"`, pandas correctly reads the first number as day and the second as month, producing the intended dates.
+
+</details>
+
+---
+
+### Exercise 3.9.3
+
+The DataFrame below records daily weather observations with the date split across three separate columns.
+
+```python
+import pandas as pd
+
+weather = pd.DataFrame({
+    "year":      [2021, 2021, 2021, 2022, 2022, 2022],
+    "month":     [3, 6, 12, 1, 7, 11],
+    "day":       [15, 22, 1, 8, 30, 14],
+    "city":      ["Oslo", "Oslo", "Oslo", "Oslo", "Oslo", "Oslo"],
+    "temp_c":    [2.1, 18.4, -3.2, -5.1, 22.8, 4.6],
+    "rainfall":  [5.2, 0.0, 8.1, 2.3, 12.4, 6.7]
+})
+```
+
+1. Construct a `date` column by combining `year`, `month`, and `day` into a single string in `YYYY-MM-DD` format. Remember that `month` and `day` are integers and will need to be converted to strings first.
+2. Convert the `date` column to datetime using the appropriate `format=` argument and verify the dtype.
+3. Add a `days_since_start` column that computes the number of days between each observation and the earliest date in the dataset. Print the result.
+
+<details>
+<summary>Hint</summary>
+
+The difference between two datetime values produces a **timedelta** — an object representing a duration rather than a point in time. You can extract the number of days from a timedelta using `.dt.days`.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+weather = pd.DataFrame({
+    "year":      [2021, 2021, 2021, 2022, 2022, 2022],
+    "month":     [3, 6, 12, 1, 7, 11],
+    "day":       [15, 22, 1, 8, 30, 14],
+    "city":      ["Oslo", "Oslo", "Oslo", "Oslo", "Oslo", "Oslo"],
+    "temp_c":    [2.1, 18.4, -3.2, -5.1, 22.8, 4.6],
+    "rainfall":  [5.2, 0.0, 8.1, 2.3, 12.4, 6.7]
+})
+
+# 1. Build date string
+weather["date"] = (
+    weather["year"].astype(str) + "-" +
+    weather["month"].astype(str) + "-" +
+    weather["day"].astype(str)
+)
+print(weather["date"].head())
+```
+
+```{python}
+# 2. Convert to datetime
+weather["date"] = pd.to_datetime(weather["date"], format="%Y-%m-%d")
+print(weather["date"].dtype)
+```
+
+```{python}
+# 3. Days since earliest date
+weather["days_since_start"] = (
+    weather["date"] - weather["date"].min()
+).dt.days
+print(weather[["date", "temp_c", "days_since_start"]])
+```
+
+Subtracting two datetime columns produces a timedelta — a duration. Calling `.dt.days` extracts the integer number of days from that duration. This pattern is useful whenever you need to compute elapsed time: days since first purchase,
+days between diagnosis and treatment, days until a deadline, and so on.
+
+</details>
+
+---
+
+### Exercise 3.9.4
+
+Use the `flights` dataset with its date column constructed in the video to practice extracting date components and grouping by them.
+
+```python
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+flights["date"] = pd.to_datetime(
+    flights["year"].astype(str) + "-" + flights["month"],
+    format="%Y-%b"
+)
+```
+
+1. Use the `.dt` accessor to add a `quarter` column to `flights`. Print the first 15 rows to verify it looks correct.
+2. Compute the total passengers per quarter, summed across all years. Which quarter consistently has the most air traffic?
+3. Compute the total passengers per year and quarter combination — that is, one row per year-quarter pair. Sort by year and quarter and print the first 12 rows. Use `reset_index()` to convert the result back to a regular DataFrame and rename
+the columns to `year`, `quarter`, and `total_passengers`.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+flights["date"] = pd.to_datetime(
+    flights["year"].astype(str) + "-" + flights["month"],
+    format="%Y-%b"
+)
+
+# 1. Add quarter column
+flights["quarter"] = flights["date"].dt.quarter
+print(flights.head(15))
+```
+
+```{python}
+# 2. Total passengers per quarter across all years
+quarterly = flights.groupby("quarter")["passengers"].sum()
+print(quarterly)
+```
+
+```{python}
+# 3. Total passengers per year-quarter combination
+annual_quarterly = (
+    flights.groupby([flights["date"].dt.year, "quarter"])["passengers"]
+    .sum()
+    .reset_index()
+    .rename(columns={"date": "year", "passengers": "total_passengers"})
+    .sort_values(["year", "quarter"])
+)
+print(annual_quarterly.head(12))
+```
+
+2. Quarter 3 (July–September) consistently has the most passengers — reflecting the summer holiday travel season. Quarter 1 (January–March) has the fewest, consistent with the post-holiday dip in travel demand.
+
+3. Grouping by `flights["date"].dt.year` directly rather than by the `year` column gives the same result here, but using the datetime accessor is the more general approach — it works even when no separate year column exists in the data.
+
+</details>
+
+---
+
+### Exercise 3.9.5
+
+Use the `flights` dataset with its date column to practice filtering by date range and comparing periods.
+
+```python
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+flights["date"] = pd.to_datetime(
+    flights["year"].astype(str) + "-" + flights["month"],
+    format="%Y-%b"
+)
+```
+
+1. Filter `flights` to the period from January 1949 to December 1951 inclusive. Assign the result to `early` and print its shape.
+2. Filter `flights` to the period from January 1958 to December 1960 inclusive. Assign the result to `late` and print its shape.
+3. Compute the mean monthly passengers for each period and the percentage increase from the early to the late period. What does this tell you about the growth of air travel over this decade?
+4. Within the `late` period, filter further to summer months only (July, August, September) and compute the mean monthly passengers. How does this compare to the overall mean for the late period?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+flights["date"] = pd.to_datetime(
+    flights["year"].astype(str) + "-" + flights["month"],
+    format="%Y-%b"
+)
+
+# 1. Early period
+early = flights[
+    (flights["date"] >= "1949-01-01") &
+    (flights["date"] <= "1951-12-31")
+]
+print(early.shape)
+```
+
+```{python}
+# 2. Late period
+late = flights[
+    (flights["date"] >= "1958-01-01") &
+    (flights["date"] <= "1960-12-31")
+]
+print(late.shape)
+```
+
+```{python}
+# 3. Mean monthly passengers and percentage increase
+early_mean = early["passengers"].mean()
+late_mean  = late["passengers"].mean()
+pct_change = (late_mean - early_mean) / early_mean * 100
+
+print(f"Early mean: {early_mean:.1f}")
+print(f"Late mean:  {late_mean:.1f}")
+print(f"Increase:   {pct_change:.1f}%")
+```
+
+```{python}
+# 4. Summer months in the late period
+summer_late = late[late["date"].dt.month.isin([7, 8, 9])]
+print(f"Summer mean: {summer_late['passengers'].mean():.1f}")
+print(f"Overall mean: {late['passengers'].mean():.1f}")
+```
+
+3. Mean monthly passengers more than doubled from the early to the late period — reflecting the rapid expansion of commercial aviation in the 1950s driven by the introduction of jet aircraft and rising incomes.
+
+4. Summer passengers in the late period are considerably higher than the overall late-period mean, confirming that the seasonal peak in Q3 identified in exercise 3.9.4 holds throughout the decade and becomes more pronounced as overall travel
+volumes grow.
+
+</details>
