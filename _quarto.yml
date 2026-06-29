@@ -5,6 +5,8 @@ project:
 book:
   title: "SKL401 — Introduction to Python"
   author: "Isabel Hovdahl, Department of Business and Management Science, NHH"
+  sidebar:
+    collapse-level: 1
   chapters:
     - index.qmd
     - part: "1 - Getting Started and Working Effectively"
