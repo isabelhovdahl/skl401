@@ -47,3 +47,264 @@ first_class["fare_rounded"] = first_class["fare"].round(0)
 ```
 
 ## Exercises
+
+### Exercise 3.5.1
+
+The code below attempts to sort the Titanic dataset by fare.
+
+```python
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+titanic.sort_values("fare", ascending=False)
+print(titanic.head())
+```
+
+1. Run the code. Is the output of `titanic.head()` sorted by fare? Why or why not?
+2. Fix the code so that `titanic` is permanently sorted by fare in descending order.
+3. After sorting, print the index of the first five rows using `titanic.index`. What do you notice, and why might this cause problems later?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# 1. Original - not sorted
+print(titanic.head())
+```
+
+```{python}
+# 2. Fixed - assign back
+titanic = titanic.sort_values("fare", ascending=False)
+print(titanic.head())
+```
+
+```{python}
+# 3. Index after sorting
+print(titanic.index[:5].tolist())
+```
+
+1. No — `titanic.head()` is not sorted. `.sort_values()` returns a new sorted DataFrame but does not modify `titanic` in place. The result is discarded because it is never assigned to anything.
+
+2. Assigning the result back to `titanic` with `titanic = titanic.sort_values(...)` updates the variable. This assign-back pattern is standard in pandas — most methods work this way.
+
+3. The index is no longer sequential (e.g. `[258, 737, 341, ...]`). After sorting, the row labels reflect the original positions in the unsorted DataFrame. This can cause confusing behavior when using `.loc[]`, since label 0 no longer refers to the first row in the sorted data.
+
+</details>
+
+---
+
+### Exercise 3.5.2
+
+Continue with the sorted `titanic` DataFrame from Exercise 3.5.1. The index is currently out of order after sorting.
+
+1. Reset the index without using `drop=True` and print the first three rows. What extra column appears, and where did it come from?
+2. Reset the index again with `drop=True` and assign the result back to `titanic`. Verify that the index now runs sequentially from 0.
+3. pandas also allows you to set an existing column as the index using `.set_index()`. Try setting the `embark_town` column as the index and print the first five rows. Then reflect on the following: what would make a column a good choice for an index? Is `embark_town` a good index for the Titanic dataset? Can you think of a column in any of the datasets we have used that would make a better index?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+titanic = titanic.sort_values("fare", ascending=False)
+
+# 1. Reset without drop=True
+print(titanic.reset_index().head(3))
+```
+
+```{python}
+# 2. Reset with drop=True and assign back
+titanic = titanic.reset_index(drop=True)
+print(titanic.index[:5].tolist())
+```
+
+```{python}
+# 3. Set embarkation town as index
+titanic_port = titanic.set_index("embark_town")
+print(titanic_port.head())
+```
+
+1. An extra column called `index` appears as the first column. It contains the old index labels — the original row positions before sorting. pandas preserves the old index as a column in case you need it, but in most cases it is just clutter.
+
+2. After `reset_index(drop=True)`, the index runs `[0, 1, 2, 3, 4, ...]` as expected.
+
+3. A good index column should uniquely identify each row, be stable (unlikely to change), and be something you will frequently use to look up rows. `embark_town` is a poor choice for the Titanic dataset for two reasons: long strings are cumbersome to type when using `.loc[]`, and town of embarkation is not unique — there are many passengers who departed from the same town. In fact, none of the Titanic columns are ideal as an index. In general, integer row numbers are a perfectly reasonable default index for most datasets.
+
+</details>
+
+---
+
+### Exercise 3.5.3
+
+Sort the `healthexp` dataset first by `Country` alphabetically and then by `Year` within each country, but with the most recent year first.
+
+```python
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+```
+
+1. Sort the data as described above and assign the result back to `healthexp`. Print the first 10 rows to verify the result looks correct.
+2. Now look up the `na_position=` parameter in the documentation for `pd.DataFrame.sort_values()`. What does it control?
+3. The Titanic dataset has missing values in the `age` column. Sort `titanic` by `age` in ascending order and use `na_position=` to place passengers with missing ages at the top of the result. Print the first five rows to confirm.
+
+<details>
+<summary>Hint</summary>
+
+You can look up the documentation by running `help(pd.DataFrame.sort_values)` in the console or simply search online for "pandas sort_values". For question 1, recall that you can pass a list of column names to sort by multiple columns, and a matching list to `ascending=` to control the
+direction of each column independently.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+
+# 1. Sort by Country ascending, Year descending
+healthexp = healthexp.sort_values(
+    ["Country", "Year"],
+    ascending=[True, False]
+)
+print(healthexp.head(10))
+```
+
+```{python}
+# 3. Sort titanic by age with NaN at the top
+titanic = pd.read_csv("data/titanic.csv")
+titanic_sorted = titanic.sort_values("age", ascending=True, na_position="first")
+print(titanic_sorted[["survived", "pclass", "sex", "age"]].head())
+```
+
+1. Passing a list to `ascending=` lets you control each column independently — `True` for `Country` (A to Z) and `False` for `Year` (most recent first).
+
+2. `na_position=` controls where missing values end up after sorting. The default is `"last"`, which places `NaN` values at the bottom. Setting it to `"first"` moves them to the top. This is useful when you want to quickly identify rows with missing data.
+
+</details>
+
+---
+
+### Exercise 3.5.4
+
+This exercise is about understanding what `.copy()` does and why it matters depending on which version of pandas you are running.
+
+**Step 1.** Check your pandas version by running:
+
+```python
+import pandas as pd
+print(pd.__version__)
+```
+
+**Step 2.** Read the following explanation, then answer the questions below.
+
+When you filter a DataFrame, pandas may return either a **view** — a window into the original DataFrame's memory — or a **copy** — an independent object. In pandas versions below 3.0, modifying a view could silently modify the original DataFrame, and pandas would raise a `SettingWithCopyWarning` to alert you. From pandas 3.0 onwards, filtering always returns a copy, so this warning no longer appears. However, calling `.copy()` explicitly is still good practice because it makes your intent clear to anyone reading your code.
+
+**Step 3.** Run the code below and answer the questions.
+
+```python
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# Without .copy()
+first_class = titanic[titanic["pclass"] == 1]
+first_class["fare_rounded"] = first_class["fare"].round(0)
+
+# With .copy()
+first_class_copy = titanic[titanic["pclass"] == 1].copy()
+first_class_copy["fare_rounded"] = first_class_copy["fare"].round(0)
+```
+
+1. Does your pandas version raise a `SettingWithCopyWarning` when running the first block? What does this tell you about your version?
+2. Check whether `titanic` has a `fare_rounded` column after running both blocks. What does this tell you about whether `first_class` and `first_class_copy` are independent of the original?
+3. Even if your version of pandas does not require `.copy()`, why may it still be a good habit to use it?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# Without .copy()
+first_class = titanic[titanic["pclass"] == 1]
+first_class["fare_rounded"] = first_class["fare"].round(0)
+
+# With .copy()
+first_class_copy = titanic[titanic["pclass"] == 1].copy()
+first_class_copy["fare_rounded"] = first_class_copy["fare"].round(0)
+
+print("fare_rounded" in titanic.columns)
+```
+
+1. If your pandas version is 3.0 or above, no warning appears. If you see a `SettingWithCopyWarning`, your version is below 3.0 and you should update pandas — run `pip install --upgrade pandas` in your terminal.
+
+2. `titanic` does not have a `fare_rounded` column in either case, meaning both `first_class` and `first_class_copy` are independent of the original on pandas 3.0+. On older versions, the first block without `.copy()` could have modified `titanic` directly.
+
+3. Even when not strictly required, `.copy()` can be good practice because it makes your intent explicit — anyone reading the code immediately knows this subset is meant to be independent. It also ensures your code behaves consistently if it is ever run on an older version of pandas.
+
+</details>
+
+---
+
+### Exercise 3.5.5
+
+This exercise brings together sorting, resetting the index, filtering with `.copy()`, and modifying a subset — the full workflow from this video.
+
+```python
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+```
+
+1. Sort `titanic` by `pclass` ascending and `fare` descending. Assign the result back and reset the index with `drop=True`.
+2. Filter to passengers in first class. Use `.copy()` to create an independent subset called `first_class`.
+3. Add a column `fare_category` to `first_class` using `np.where()` with the
+following rules:
+    - `"standard"` if fare is 150 or below
+    - `"premium"` if fare is above 150
+4. Verify that `titanic` does not have a `fare_category` column, confirming that your modifications to `first_class` did not affect the original.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import numpy as np
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# 1. Sort and reset index
+titanic = titanic.sort_values(["pclass", "fare"], ascending=[True, False])
+titanic = titanic.reset_index(drop=True)
+print(titanic.head())
+```
+
+```{python}
+# 2. Filter with .copy()
+first_class = titanic[titanic["pclass"] == 1].copy()
+
+# 3. Add fare_category
+first_class["fare_category"] = np.where(first_class["fare"] > 150, "premium", "standard")
+print(first_class[["fare", "fare_category"]].head(10))
+```
+
+```{python}
+# 4. Verify original is unchanged
+print("fare_category" in titanic.columns)
+```
+
+This workflow — sort, reset index, filter with `.copy()`, modify — is one you will repeat constantly in data analysis. Each step serves a purpose: sorting makes the data easier to inspect, resetting the index avoids confusing label behavior with `.loc[]`, and `.copy()` ensures modifications to the subset never silently affect the original DataFrame.
+
+</details>
