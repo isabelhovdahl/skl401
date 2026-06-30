@@ -1,30 +1,298 @@
+# Topic 3 — Further Exercises {.unnumbered}
 
-### Exercise 3.4.1
+These exercises give you an opportunity to consolidate everything covered in Topic 3 before moving on. Unlike the exercises after each video, many of these combine skills from several videos into a single task. Some exercises also introduce new concepts that extend what you have learned.
 
-Use the `flights` dataset to practice creating new columns with arithmetic.
+The exercises are organised into three levels:
+
+- 🟢 **Warm-up** — single-skill exercises to check your understanding of the basics.
+- 🟡 **Practice** — exercises that combine two or more topics.
+- 🔴 **Challenge** — multi-step tasks that may require you to combine ideas in
+ways you have not seen before. Some may require looking things up or experimenting.
+
+---
+
+## 🟢 Warm-up
+
+### Exercise 3.11.1
+
+Use the `titanic` dataset to answer the following questions using groupby and aggregation. Each question requires a single groupby operation.
+
+```python
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+```
+
+1. Compute the mean and median fare paid by passengers in each embarkation port (`embarked`). Which port has the highest mean fare? Is the mean or median more representative here, and why?
+2. For each combination of passenger class and sex, compute the survival rate and the number of passengers. Sort the result by survival rate in descending order.
+3. Compute the mean age and mean fare for each passenger class. 
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# 1. Mean and median fare by embarkation port
+print(
+    titanic.groupby("embarked")["fare"]
+    .agg(mean_fare="mean", median_fare="median")
+    .round(2)
+)
+```
+
+```{python}
+# 2. Survival rate and count by class and sex
+print(
+    titanic.groupby(["pclass", "sex"])
+    .agg(survival_rate=("survived", "mean"), n=("survived", "count"))
+    .round(3)
+    .sort_values("survival_rate", ascending=False)
+)
+```
+
+```{python}
+# 3. Mean age and fare by passenger class
+print(titanic.groupby("pclass")[["fare", "age"]].mean().round(1))
+```
+
+**Task 1** Port C (Cherbourg) has the highest mean fare by a considerable margin. The mean is likely less representative than the median here because fare distributions tend to be right-skewed — a small number of first-class passengers paying very high fares pulls the mean upward.
+
+**Task 2** First-class female passengers have the highest survival rate. The pattern is consistent: within each class, female passengers survived at much higher rates than male passengers, and within each sex, higher classes survived at higher rates.
+
+**Task 3** Both the average age and fare are increasing with class. Note that because the same aggregation (mean) is computed on the two columns, it is not necessary to use `agg()`.
+
+</details>
+
+---
+
+### Exercise 3.11.2
+
+Use the `healthexp` dataset to practice filtering and sorting. Each task below requires a single filter or sort operation.
+
+```python
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+```
+
+1. Filter to observations where life expectancy is above 80 and health spending is below 5 000 USD. Which country-year combinations meet both criteria?
+2. Sort the dataset by life expectancy in descending order and print the top 10 rows. Which country and year holds the record for highest life expectancy in the dataset?
+3. Filter to the most recent year available and sort by spending in ascending order. Which country spends the least on health in the most recent year?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+
+# 1. Life expectancy above 80 and spending below 5000
+efficient = healthexp[
+    (healthexp["Life_Expectancy"] > 80) &
+    (healthexp["Spending_USD"] < 5_000)
+]
+print(efficient[["Country", "Year", "Life_Expectancy", "Spending_USD"]])
+```
+
+```{python}
+# 2. Sort by life expectancy descending, top 10
+print(
+    healthexp.sort_values("Life_Expectancy", ascending=False)
+    .head(10)[["Country", "Year", "Life_Expectancy"]]
+)
+```
+
+```{python}
+# 3. Most recent year, sorted by spending ascending
+latest = healthexp[healthexp["Year"] == healthexp["Year"].max()]
+print(
+    latest.sort_values("Spending_USD")
+    [["Country", "Year", "Spending_USD", "Life_Expectancy"]]
+)
+```
+
+Japan appears frequently in all groups — achieving high life expectancy with relatively modest spending compared to other high-income countries. This is the same efficiency pattern explored in the capstone video.
+
+</details>
+
+---
+
+### Exercise 3.11.3
+
+Use the `flights` dataset to practice working with dates. Start by building the date column as shown in the video.
 
 ```python
 import pandas as pd
 
 flights = pd.read_csv("data/flights.csv")
-flights.head()
+flights["date"] = pd.to_datetime(
+    flights["year"].astype(str) + "-" + flights["month"],
+    format="%Y-%b"
+)
 ```
 
-**Part 1.** Write a function `pct_change_manual(current, previous)` that computes
-the percentage change from a previous value to a current value using the formula:
+1. Extract the month number from the `date` column as a new column `month_num`. Then compute the mean number of passengers for each month number across all years. Which month number has the highest average passenger count?
+2. Filter the dataset to all observations from the second half of the year (July through December) and compute the total passengers in this period. Compare this to the total for the first half of the year.
+3. Use `.dt.day_name()` to add a column `day_name` showing the name of the day of the week each date falls on. Which day of the week do the most flight dates in the dataset fall on, and why does this make sense given the resolution of the data?
 
-$$\text{percentage change} = \frac{\text{current} - \text{previous}}{\text{previous}} \times 100$$
+<details>
+<summary>Solution</summary>
 
-Then create a new column `pct_change_manual` that applies this function to compute the percentage change in passengers from the previous row. Use `.apply()` or any approach you like.
+```{python}
+import pandas as pd
 
-**Part 2.** pandas has a built-in method that computes percentage change directly on a Series. Look up the documentation for `pd.Series.pct_change()` and use it to create a second column called `pct_change_pandas`. Multiply by 100 so the result is on the same scale as Part 1.
+flights = pd.read_csv("data/flights.csv")
+flights["date"] = pd.to_datetime(
+    flights["year"].astype(str) + "-" + flights["month"],
+    format="%Y-%b"
+)
 
-Compare the two columns — are the results identical? Then reflect: given that pandas already has this functionality built in, when would you actually need to write your own function and use `.apply()`?
+# 1. Mean passengers by month number
+flights["month_num"] = flights["date"].dt.month
+print(flights.groupby("month_num")["passengers"].mean().round(1))
+```
+
+```{python}
+# 2. First vs second half of the year
+first_half  = flights[flights["month_num"] <= 6]["passengers"].sum()
+second_half = flights[flights["month_num"] > 6]["passengers"].sum()
+print(f"First half:  {first_half:,}")
+print(f"Second half: {second_half:,}")
+```
+
+```{python}
+# 3. Day of the week
+flights["day_name"] = flights["date"].dt.day_name()
+print(flights["day_name"].value_counts())
+```
+
+**Task 1** Month 7 (July) has the highest average passenger count, consistent with summer being the peak travel season.
+
+**Task 2** The second half of the year has more total passengers than the first half, driven by the summer peak in July through September.
+
+**Task 3** All dates fall on the first day of the month. Because `pd.to_datetime()` with a `%Y-%b` format string sets the day to 1 by default, every date in the dataset is the first of a month. The day of the week on which the first of the month falls depends on the year and month, so the distribution across weekdays is roughly even — but all values represent the same type of date (first of month), not randomly distributed days.
+
+</details>
+
+---
+
+## 🟡 Practice
+
+### Exercise 3.11.4
+
+This exercise combines filtering, missing value handling, column creation, and groupby to produce a summary of Titanic survival patterns.
+
+```python
+import pandas as pd
+
+titanic = pd.read_csv("data/titanic.csv")
+```
+
+1. Drop rows where `embarked` is missing. Then fill missing values in `age` with the median age within each passenger class using `groupby` and `transform`. Verify that no missing values remain in either column.
+2. Create a column `age_group` with the following categories:
+    - `"child"` if age is below 18
+    - `"adult"` if age is between 18 and 59
+    - `"senior"` if age is 60 or above
+3. Compute the survival rate for each combination of `age_group` and `pclass`. Sort by survival rate in descending order. Which group had the highest survival rate?
+4. Compute the share of each `age_group` within each passenger class. Does the age distribution differ meaningfully across classes?
 
 <details>
 <summary>Hint</summary>
 
-For Part 1, you can use `.shift(1)` to access the value from the previous row. For example, `flights["passengers"].shift(1)` returns a Series where each value is the passengers count from the row above.
+For step 2, you could write a function with an `if/elif/else` chain and use `.apply()`. But pandas also has a vectorised function called `np.select()` that handles exactly this kind of multi-branch classification without needing a custom function. It takes a list of conditions and a matching list of values:
+
+```python
+conditions = [condition1, condition2]
+choices    = [value1, value2]
+np.select(conditions, choices, default=default_value)
+```
+
+You can look up the documentation for `np.select()` by running `help(np.select)` in the console or searching online. 
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import numpy as np
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# 1. Drop missing embarked, fill missing age by class
+titanic = titanic.dropna(subset=["embarked"])
+titanic["age"] = titanic["age"].fillna(
+    titanic.groupby("pclass")["age"].transform("median")
+)
+print(titanic[["age", "embarked"]].isna().sum())
+```
+
+```{python}
+# 2. Create age_group
+conditions = [titanic["age"] < 18, titanic["age"] < 60]
+choices    = ["child", "adult"]
+titanic["age_group"] = np.select(conditions, choices, default="senior")
+print(titanic["age_group"].value_counts())
+```
+
+```{python}
+# 3. Survival rate by age group and class
+print(
+    titanic.groupby(["age_group", "pclass"])["survived"]
+    .mean()
+    .round(3)
+    .sort_values(ascending=False)
+)
+```
+
+```{python}
+# 4. Share of each age group within each class
+age_class = titanic.groupby(["pclass", "age_group"]).size()
+age_class_share = (age_class / titanic.groupby("pclass")["age_group"].count()).round(3)
+print(age_class_share)
+```
+
+**Task 3** First-class children had the highest survival rate. In general, children and first-class passengers survived at higher rates. The "women and children first" evacuation policy is clearly visible in the data.
+
+**Task 4** Third-class passengers tend to be younger on average than first-class passengers, with a higher share of children and young adults — consistent with the historical pattern of younger emigrants travelling in lower classes. Note the difference between `.size()` and `.count()` used above. `.size()` is applied directly to the grouped object and counts the number of rows in each group, including rows with missing values. `.count()` is applied to a specific column and counts only the non-missing values in that column. This also means `.size()` can be used to count rows even when you have not selected a column. Since `age_group` has no missing values here, the two approaches give the same result — but with a column that does have missing values, `.count()` would return a smaller number than `.size()`.
+
+</details>
+
+---
+
+### Exercise 3.11.5
+
+This exercise asks you to implement the percentage change calculation two ways: first with a manual loop, and then with a pandas built-in function. The goal is to make a habit of checking whether pandas already has a function for what you want to do, before writing your own.
+
+```python
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+flights["date"] = pd.to_datetime(
+    flights["year"].astype(str) + "-" + flights["month"],
+    format="%Y-%b"
+)
+flights = flights.sort_values("date").reset_index(drop=True)
+```
+
+**Part 1.** Without using any pandas function designed for this purpose, compute the month-on-month percentage change in `passengers` using a `for` loop. For each row (starting from the second row), use `.iloc[]` to access the current and previous row's passenger count, compute the percentage change using the formula below, and store the result in a new column `pct_change_manual`. The first row should be `NaN` since there is no previous value to compare against.
+
+$$\text{percentage change} = \frac{\text{current} - \text{previous}}{\text{previous}} \times 100$$
+
+**Part 2.** pandas has a built-in method that computes percentage change directly on a Series in a single line. Look up the documentation for `pd.Series.pct_change()` and use it to create a second column `pct_change_pandas`. Multiply by 100 to match the scale of Part 1.
+
+**Part 3.** Drop rows where the percentage change is missing, and verify that the two columns are identical. Then filter to rows where the month-on-month change exceeds 20% and print those rows. In which years and months does passenger growth spike most strongly?
+
+<details>
+<summary>Hint</summary>
+
+For Part 1, initialize the new column with `NaN` for every row, for example using `flights["pct_change_manual"] = None`. Then loop over the row positions with `for i in range(1, len(flights))`, and use `.iloc[]` to access the current row (`flights.iloc[i]`) and the previous row (`flights.iloc[i - 1]`). Assign the computed value back into the column at position `i` using
+`flights.loc[i, "pct_change_manual"] = ...`.
 
 </details>
 
@@ -35,57 +303,175 @@ For Part 1, you can use `.shift(1)` to access the value from the previous row. F
 import pandas as pd
 
 flights = pd.read_csv("data/flights.csv")
-
-# Part 1
-def pct_change_manual(current, previous):
-    return (current - previous) / previous * 100
-
-flights["pct_change_manual"] = pct_change_manual(
-    flights["passengers"],
-    flights["passengers"].shift(1)
+flights["date"] = pd.to_datetime(
+    flights["year"].astype(str) + "-" + flights["month"],
+    format="%Y-%b"
 )
+flights = flights.sort_values("date").reset_index(drop=True)
 
-# Part 2
+# Part 1: manual loop
+flights["pct_change_manual"] = None
+
+for i in range(1, len(flights)):
+    current  = flights.iloc[i]["passengers"]
+    previous = flights.iloc[i - 1]["passengers"]
+    flights.loc[i, "pct_change_manual"] = (current - previous) / previous * 100
+
+flights["pct_change_manual"] = flights["pct_change_manual"].astype(float)
+
+# Part 2: pandas built-in
 flights["pct_change_pandas"] = flights["passengers"].pct_change() * 100
 
-flights[["passengers", "pct_change_manual", "pct_change_pandas"]].head(10)
+flights[["date", "passengers", "pct_change_manual", "pct_change_pandas"]].head(10)
 ```
 
-The two columns are identical. The first row has `NaN` in both cases because there is no previous value to compare against.
+```{python}
+# Part 3: verify and filter to spikes above 20%
+flights = flights.dropna()
+print((flights["pct_change_manual"].round(6) == flights["pct_change_pandas"].round(6)).all())
 
-The broader lesson is that pandas has built-in methods for a large number of common operations: percentage change, cumulative sums, rolling averages, rank, and many more. Before writing a function and reaching for `.apply()`, it is always worth asking whether pandas already does what you need. `.apply()` is the right tool when your logic is genuinely custom — for example a multi-branch conditional that depends on several columns at once — not for arithmetic that pandas can handle directly on the whole column at once.
+spikes = flights[flights["pct_change_pandas"] > 20]
+print(spikes[["date", "passengers", "pct_change_pandas"]])
+```
+
+The two columns are identical. A short note on the loop mechanics: initializing the column with `flights["pct_change_manual"] = None` creates an `object`-dtype column, since `None` is not numeric. Assigning floats into individual cells with `.loc[]` does not automatically upgrade the column's dtype, so `.astype(float)` is needed afterward to convert it to a proper numeric column — this also turns the remaining `None` in the first row into a genuine `NaN`. Even after this conversion, comparing the two columns with `==` will mark the first row as unequal, because `NaN == NaN` always evaluates to `False` in pandas, regardless of how the missing value was created. Alternatively you can use `.equals()` rather than `==` as this treats matching `NaN` positions as equals:
+```
+flights["pct_change_manual"].round(6).equals(flights["pct_change_pandas"].round(6))
+```
+
+The broader lesson: a `for` loop with `.iloc[]` works, but it is slow, verbose, and easy to get wrong — for example by forgetting to handle the first row, or making an off-by-one error in the row indices. Before reaching for a loop, it is always worth checking whether pandas already has a built-in vectorised function for the operation. `.pct_change()`, `.cumsum()`, `.diff()`, and `.shift()` cover many common row-wise operations without needing a loop or a custom function at all.
 
 </details>
 
+---
 
-### Exercise 3.4.3
+### Exercise 3.11.6
 
-In the previous exercise you used `.apply()` with a three-way conditional to
-create the `spending_group` column. This exercise shows you two vectorised
-alternatives that are faster and more concise.
+This exercise combines merging, groupby, and column creation to extend the analysis from the capstone video.
+
+Load the cleaned healthexp data and the continents table, merge them, and answer the questions below.
+
+```python
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+healthexp.columns = [col.lower().replace(" ", "_") for col in healthexp.columns]
+healthexp["country"] = healthexp["country"].replace({
+    "Great Britain": "United Kingdom",
+    "USA":           "United States",
+})
+
+url = "https://raw.githubusercontent.com/owid/owid-datasets/refs/heads/master/datasets/Countries%20Continents/Countries%20Continents.csv"
+continents = pd.read_csv(url)
+continents = continents.drop(columns=["Year"])
+continents = continents.rename(columns={
+    "Entity":               "country",
+    "Countries Continents": "continent"
+})
+
+healthexp = healthexp.merge(continents, on="country", how="left").sort_values(["year", "country"])
+```
+
+1. Compute the mean life expectancy and mean spending per continent across all years. Sort by mean life expectancy in descending order.
+2. For each country, compute the total growth in life expectancy from the earliest to the most recent year available. Which country improved the most?
+3. Create a column `spending_vs_continent_mean` that shows how much each country-year observation's spending deviates from the mean spending of its continent in that year. Use `groupby` and `transform`. Which country-year observations have the largest positive deviation?
+
+<details>
+<summary>Hint</summary>
+
+To compute the growth from the earliest to the most recent year for each country, you need the first and last observed value within each group. Two useful groupby methods for this are `.first()` and `.last()`, which return the first and last row's value in each group respectively — for example `healthexp.groupby("country")["life_expectancy"].first()` gives each country's earliest recorded life expectancy. This assumes the data is sorted by year within each country, which it already is here.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+healthexp = pd.read_csv("data/healthexp.csv")
+healthexp.columns = [col.lower().replace(" ", "_") for col in healthexp.columns]
+healthexp["country"] = healthexp["country"].replace({
+    "Great Britain": "United Kingdom",
+    "USA":           "United States",
+})
+
+url = "https://raw.githubusercontent.com/owid/owid-datasets/refs/heads/master/datasets/Countries%20Continents/Countries%20Continents.csv"
+continents = pd.read_csv(url)
+continents = continents.drop(columns=["Year"])
+continents = continents.rename(columns={
+    "Entity":               "country",
+    "Countries Continents": "continent"
+})
+healthexp = healthexp.merge(continents, on="country", how="left").sort_values(["year", "country"])
+
+# 1. Mean life expectancy and spending by continent
+print(
+    healthexp.groupby("continent")
+    .agg(mean_life_exp=("life_expectancy", "mean"),
+         mean_spending=("spending_usd", "mean"))
+    .round(1)
+    .sort_values("mean_life_exp", ascending=False)
+)
+```
+
+```{python}
+# 2. Life expectancy growth per country
+earliest = healthexp.groupby("country")["life_expectancy"].first()
+latest   = healthexp.groupby("country")["life_expectancy"].last()
+growth   = (latest - earliest).sort_values(ascending=False)
+print(growth.round(2))
+```
+
+```{python}
+# 3. Deviation from continent mean spending by year
+healthexp["continent_mean_spending"] = (
+    healthexp.groupby(["continent", "year"])["spending_usd"]
+    .transform("mean")
+)
+healthexp["spending_vs_continent_mean"] = (
+    healthexp["spending_usd"] - healthexp["continent_mean_spending"]
+).round(2)
+
+print(
+    healthexp.sort_values("spending_vs_continent_mean", ascending=False)
+    [["country", "year", "spending_usd", "spending_vs_continent_mean"]]
+    .head(10)
+)
+```
+
+Japan shows among the strongest improvements in life expectancy over the period covered. The USA consistently shows the largest positive deviation from its continent's mean spending, reflecting its outlier status in health expenditure among comparable countries.
+
+</details>
+
+---
+
+### Exercise 3.11.7
+
+This exercise combines `np.where()` and `np.select()` with groupby to classify and compare countries in the `healthexp` dataset.
 
 ```python
 import pandas as pd
 import numpy as np
 
 healthexp = pd.read_csv("data/healthexp.csv")
+healthexp.columns = [col.lower().replace(" ", "_") for col in healthexp.columns]
 ```
 
-**Part 1.** For simple two-way conditions, `np.where()` is the right tool. Use
-it to create a column `high_spend` that contains `"high"` if `Spending_USD` is
-above 3 000 and `"low"` otherwise.
+1. Use `np.where()` to create a column `high_life_exp` that is `1` if life expectancy is above the overall median and `0` otherwise.
+2. Use `np.select()` to create a column `spending_tier` with three categories:
+    - `"low"` if spending is below the 33rd percentile
+    - `"medium"` if spending is between the 33rd and 66th percentile
+    - `"high"` if spending is above the 66th percentile
+3. Compute the mean life expectancy for each `spending_tier`. Does higher spending reliably predict higher life expectancy across all tiers?
+4. Compute the share of observations in the `high_life_exp` group for each country. Which countries are above the median life expectancy for the largest share of their observed years?
 
-**Part 2.** For conditions with more than two outcomes, `np.select()` is the
-vectorised alternative to `.apply()`. It takes two arguments: a list of
-conditions evaluated in order, and a list of corresponding return values. A
-`default` argument covers any rows that do not match any condition.
+<details>
+<summary>Hint</summary>
 
-Use `np.select()` to recreate the three-way `spending_group` column from
-Exercise 3.4.2 without using `.apply()`.
+To compute the 33rd and 66th percentiles of the spending column, use `healthexp["spending_usd"].quantile(0.33)` and `healthexp["spending_usd"].quantile(0.66)`.
 
-**Part 3.** Verify that the `spending_group` columns produced by `.apply()` and
-`np.select()` are identical, then reflect: given these alternatives, when would
-you actually need `.apply()`?
+</details>
 
 <details>
 <summary>Solution</summary>
@@ -95,44 +481,562 @@ import pandas as pd
 import numpy as np
 
 healthexp = pd.read_csv("data/healthexp.csv")
+healthexp.columns = [col.lower().replace(" ", "_") for col in healthexp.columns]
 
-# Part 1: np.where() for two outcomes
-healthexp["high_spend"] = np.where(
-    healthexp["Spending_USD"] > 3_000, "high", "low"
+# 1. High life expectancy indicator
+median_life = healthexp["life_expectancy"].median()
+healthexp["high_life_exp"] = np.where(
+    healthexp["life_expectancy"] > median_life, 1, 0
 )
-
-# Part 2: np.select() for three outcomes
-conditions = [
-    healthexp["Spending_USD"] < 1_500,
-    healthexp["Spending_USD"] < 5_000
-]
-choices = ["low", "medium"]
-
-healthexp["spending_group"] = np.select(conditions, choices, default="high")
-
-# Part 3: verify against .apply() result
-def classify_spending(amount):
-    if amount < 1_500:
-        return "low"
-    elif amount < 5_000:
-        return "medium"
-    else:
-        return "high"
-
-healthexp["spending_group_apply"] = healthexp["Spending_USD"].apply(classify_spending)
-
-print((healthexp["spending_group"] == healthexp["spending_group_apply"]).all())
-print(healthexp["spending_group"].value_counts())
+print(healthexp["high_life_exp"].value_counts())
 ```
 
-The two columns are identical. `np.select()` evaluates the conditions in order
-and returns the corresponding value for the first condition that is `True` —
-exactly like an `if/elif/else` chain, but applied to the entire column at once.
+```{python}
+# 2. Spending tier
+p33 = healthexp["spending_usd"].quantile(0.33)
+p66 = healthexp["spending_usd"].quantile(0.66)
 
-As a rule of thumb: use `np.where()` for two outcomes, `np.select()` for
-multiple outcomes, and reserve `.apply()` for logic that genuinely cannot be
-expressed as conditions on a single column — for example when the result depends
-on values from two or more columns simultaneously, or when the logic is complex
-enough that `np.select()` would become hard to read.
+conditions = [
+    healthexp["spending_usd"] < p33,
+    healthexp["spending_usd"] < p66
+]
+choices = ["low", "medium"]
+healthexp["spending_tier"] = np.select(conditions, choices, default="high")
+print(healthexp["spending_tier"].value_counts())
+```
+
+```{python}
+# 3. Mean life expectancy by spending tier
+print(
+    healthexp.groupby("spending_tier")["life_expectancy"]
+    .mean()
+    .round(2)
+)
+```
+
+```{python}
+# 4. Share of years above median life expectancy per country
+print(
+    healthexp.groupby("country")["high_life_exp"]
+    .mean()
+    .sort_values(ascending=False)
+    .round(3)
+)
+```
+
+**Task 3** Higher spending tiers are associated with higher mean life expectancy, but the relationship is not perfectly linear. Japan achieves very high life expectancy with moderate spending — it frequently appears in the high life expectancy group despite not being in the highest spending tier.
+
+**Task 4** Japan and France are above the global median life expectancy for all or nearly all of their observed years, while countries with lower spending histories appear above the median for a smaller share of years.
+
+</details>
+
+---
+
+### Exercise 3.11.8
+
+This exercise explores two different ways of merging a monthly and a quarterly time series, and the different results they produce. We will use two files:
+
+- [`FRED_monthly_2010.csv`](https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/FRED/FRED_monthly_2010.csv) — monthly US economic indicators for the 2010s: `CPI` (the Consumer Price Index, a measure of the general price level), `UNRATE` (the unemployment rate, in
+percent), `FEDFUNDS` (the federal funds rate, the Federal Reserve's key short-term interest rate), `REALRATE` (the federal funds rate adjusted for inflation), and `LFPART` (the labor force participation rate, the share of the working-age population that is employed or looking for work).
+- [`GDP.csv`](https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/FRED/GDP.csv) — quarterly US Gross Domestic Product, in billions of dollars.
+
+```python
+import pandas as pd
+
+url_fred = "https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/FRED/FRED_monthly_2010.csv"
+url_gdp  = "https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/FRED/GDP.csv"
+
+fred = pd.read_csv(url_fred)
+fred["DATE"] = pd.to_datetime(fred["DATE"])
+
+gdp = pd.read_csv(url_gdp)
+gdp["DATE"] = pd.to_datetime(gdp["DATE"])
+
+print(fred.head())
+print(gdp.head())
+```
+
+Notice that every row in `gdp` falls on the first day of a quarter (`01-01`, `04-01`, `07-01`, `10-01`), while `fred` has a row for every month. This means there are two reasonable ways to merge the two datasets, and they produce
+different results.
+
+**Approach A: merge on `DATE` directly.**
+
+1. Merge `fred` with the `DATE` and `GDP` columns from `gdp`, using an inner join on `DATE`. Assign the result to `merged_a` and print its shape. How many rows does it have, and which months survived the merge? Why?
+
+**Approach B: merge on year and quarter.**
+
+2. Add `year` and `quarter` columns to both `fred` and `gdp` using the `.dt` accessor. Merge `fred` with the `year`, `quarter`, and `GDP` columns from `gdp`, using a left join on `["year", "quarter"]`. Assign the result to `merged_b` and print its shape. How does it compare to `merged_a`?
+
+**Comparing the two approaches.**
+
+3. Print the first 6 rows of both `merged_a` and `merged_b`. In your own words, explain the difference between the two results: what does each row represent in each case?
+4. Suppose you want to track the unemployment rate month by month throughout the 2010s while always having the corresponding quarter's GDP available alongside it. Which of the two merged DataFrames is the right one to use for this, and why?
+5. Using the DataFrame you identified in step 4, compare the unemployment rate and GDP at the start of the decade to the end. By how many percentage points did unemployment fall? By what percentage did GDP grow?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+url_fred = "https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/FRED/FRED_monthly_2010.csv"
+url_gdp  = "https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/FRED/GDP.csv"
+
+fred = pd.read_csv(url_fred)
+fred["DATE"] = pd.to_datetime(fred["DATE"])
+
+gdp = pd.read_csv(url_gdp)
+gdp["DATE"] = pd.to_datetime(gdp["DATE"])
+
+# 1. Approach A: merge on DATE directly (inner join)
+merged_a = fred.merge(gdp[["DATE", "GDP"]], on="DATE", how="inner")
+print(merged_a.shape)
+print(merged_a[["DATE", "GDP"]])
+```
+
+```{python}
+# 2. Approach B: merge on year and quarter (left join)
+fred["year"]    = fred["DATE"].dt.year
+fred["quarter"] = fred["DATE"].dt.quarter
+gdp["year"]     = gdp["DATE"].dt.year
+gdp["quarter"]  = gdp["DATE"].dt.quarter
+
+merged_b = fred.merge(gdp[["year", "quarter", "GDP"]], on=["year", "quarter"], how="left")
+print(merged_b.shape)
+print(merged_b[["DATE", "GDP"]].head(8))
+```
+
+```{python}
+# 3. Compare the two
+print(merged_a[["DATE", "GDP", "UNRATE"]].head(6))
+print(merged_b[["DATE", "GDP", "UNRATE"]].head(6))
+```
+
+```{python}
+# 5. Compare UNRATE and GDP
+start = merged_b.iloc[0]
+end   = merged_b.iloc[-1]
+
+unemployment_change = end["UNRATE"] - start["UNRATE"]
+gdp_growth = (end["GDP"] - start["GDP"]) / start["GDP"] * 100
+
+print(f"Unemployment change: {unemployment_change:.1f} percentage points")
+print(f"GDP growth: {gdp_growth:.1f}%")
+```
+
+**Task 1** `merged_a` has only 40 rows — one for every quarter in the decade, since an inner join on `DATE` only keeps rows where the exact date matches in both DataFrames. Only January, April, July, and October survive; the other eight months of each year are dropped entirely because `gdp` has no row dated, for example, `2010-02-01`.
+
+**Task 2** `merged_b` has 120 rows — one for every month in the decade, since the left join keeps every row from `fred` regardless of whether it falls on a quarter boundary. Months that are not the start of a quarter (February, March, May, June, and so on) now have the same GDP value as the first month of their quarter, since GDP is constant within a quarter and is simply broadcast across
+all three months.
+
+**Task 3** In `merged_a`, each row represents one full quarter, identified by its first month. In `merged_b`, each row represents one month, with the quarter's GDP value repeated for every month that falls within it. Neither is "more correct" — they represent the same underlying data at two different levels of granularity.
+
+**Task 4** `merged_b` is the right choice. Since the goal is to track unemployment *month by month*, you need a row for every month — which only `merged_b` provides. `merged_a` would silently drop two out of every three months, making it impossible to see the monthly pattern in unemployment at all.
+
+**Task 5** Unemployment fell from 9.8% in January 2010 to 3.6% in December 2019 — a decline of 6.2 percentage points, reflecting the long economic recovery following the 2008 financial crisis. Over the same period, GDP grew by roughly 27%, consistent with a full decade of sustained, if at times slow, economic expansion.
+
+</details>
+
+---
+
+## 🔴 Challenge
+
+### Exercise 3.11.9
+
+This exercise introduces `resample()` — a method for aggregating time series data to a coarser time resolution. It is the time-series equivalent of `groupby()`.
+
+To use `resample()`, the DataFrame must have a datetime column set as the index.
+
+```python
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+flights["date"] = pd.to_datetime(
+    flights["year"].astype(str) + "-" + flights["month"],
+    format="%Y-%b"
+)
+flights = flights.set_index("date").sort_index()
+```
+
+1. Look up the documentation for `pd.DataFrame.resample()` by running `help(pd.DataFrame.resample)` or searching online. What does the `rule=` parameter control? What are some common rule strings for monthly, quarterly, and annual resampling? 
+2. Use `resample()` to compute the total passengers per year. Compare the result to the annual totals we computed using `groupby()` in video 3.9 — are they identical?
+3. Use `resample()` to compute the total passengers per quarter. Which quarter across all years had the single highest passenger total?
+4. Compute the year-on-year percentage change in annual passenger totals using the result from step 2 and `pct_change()`. In which year was the growth rate highest?
+5. `resample()` can also be used to go the other way — **upsampling** from a coarser to a finer resolution. Use `resample("D")` on the monthly `passengers` Series to create a daily-resolution version of the data. Use `.asfreq()` instead of `.sum()` — this keeps the existing values at their
+original dates without aggregating, and introduces `NaN` for the dates that did not exist in the original data. How many missing values are introduced?
+6. Assume that passengers are distributed evenly across the days within each month, so that each day's estimated value is the monthly total divided by the number of days in that month. To compute this: first use `.ffill()` to propagate each month's total to every day in that month, then divide by the number of days in each month — you can get this using `.dt.days_in_month` on the index — to obtain the estimated daily passenger count.
+
+<details>
+<summary>Hint</summary>
+
+Common rule strings for `resample()`: `"YE"` for year-end, `"QE"` for quarter-end, `"ME"` for month-end. After resampling, call `.sum()` or `.mean()` just as you would after `groupby()`. Use `reset_index()` to convert the result back to a regular DataFrame.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+flights["date"] = pd.to_datetime(
+    flights["year"].astype(str) + "-" + flights["month"],
+    format="%Y-%b"
+)
+flights = flights.set_index("date").sort_index()
+
+# 2. Annual totals with resample
+annual = flights["passengers"].resample("YE").sum().reset_index()
+annual.columns = ["date", "total_passengers"]
+print(annual)
+```
+
+```{python}
+# 3. Quarterly totals
+quarterly = flights["passengers"].resample("QE").sum().reset_index()
+quarterly.columns = ["date", "total_passengers"]
+print(quarterly.sort_values("total_passengers", ascending=False).head(5))
+```
+
+**Task 2** The annual totals from `resample("YE")` are identical to those from `groupby(flights["date"].dt.year)`. The two approaches differ in syntax and flexibility — `resample()` is more natural for regularly spaced time series and integrates directly with the datetime index, while `groupby()` with `.dt` components works with any DataFrame regardless of whether the date is the index.
+
+**Task 3** The highest single-quarter total occurs in Q3 of the final years of the dataset, reflecting both the summer peak and the overall upward trend in passenger numbers throughout the 1950s.
+
+**Task 4** The highest year-on-year growth rate occurs in the early years of the dataset, when the base was low and commercial aviation was expanding rapidly.
+
+```{python}
+# 4. Year-on-year growth rate
+annual["pct_change"] = annual["total_passengers"].pct_change() * 100
+print(annual[["date", "total_passengers", "pct_change"]])
+```
+
+```{python}
+# 5. Upsample to daily resolution with asfreq()
+daily = flights["passengers"].resample("D").asfreq()
+print(daily.isna().sum())
+print(daily.head(10))
+```
+
+```{python}
+# 6. Spread monthly totals evenly across days
+daily_filled = flights["passengers"].resample("D").ffill()
+days_in_month = daily_filled.index.days_in_month
+daily_estimate = (daily_filled / days_in_month).round(2)
+print(daily_estimate.head(35))
+```
+
+**Task 5** Upsampling with `.asfreq()` creates a row for every single day between the first and last date in the index, but only the original month-start dates have a value — every other day is `NaN`. This is the gap-filling behavior in action: `resample()` builds its date range from the calendar, not from the rows that happen to exist, so it makes the resolution mismatch between the original data and the daily target explicit rather than silently ignoring it. `groupby()` could not do this at all, since there is nothing in the original data to group by day.
+
+**Task 6** `.ffill()` propagates each month's total forward to every day until the next known value, so every day in a given month temporarily holds that month's total. Dividing by `.dt.days_in_month` then converts each day's value from "the whole month's total" to "this day's share of the total," correctly accounting for the fact that months have different lengths (28–31 days). The result is a daily series whose values sum back up to the original monthly totals — a reasonable estimate given the assumption of even distribution, even though the true day-to-day pattern (e.g. weekday vs weekend travel) is not recoverable from monthly data alone.
+
+</details>
+
+---
+
+### Exercise 3.11.10
+
+This exercise is a complete wrangling workflow on the gapminder dataset — a dataset covering GDP per capita, life expectancy, and population for countries around the world from 1952 to 2007. It mirrors the structure of the Topic 3 capstone but on a dataset you have not used before.
+
+```python
+import pandas as pd
+
+url = "https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv"
+gapminder = pd.read_csv(url)
+```
+
+Work through the following steps:
+
+1. **Inspect** the dataset. How many rows and columns does it have? What are the column names and dtypes? Are there any missing values?
+2. **Standardise** the column names to snake_case (all lowercase, spaces replaced with underscores).
+3. **Filter** to the years 1952 and 2007 only. Create two separate DataFrames — `gapminder_1952` and `gapminder_2007` — and merge them on `country` and `continent` to get both years' values side by side. Use suffixes `_1952` and `_2007` to distinguish the columns.
+4. **Compute** two new columns on the merged DataFrame:
+    - `life_exp_growth`: the change in life expectancy from 1952 to 2007
+    - `gdp_growth`: the percentage change in GDP per capita from 1952 to 2007
+5. **Summarise** by continent: compute the mean `life_exp_growth` and mean `gdp_growth` for each continent. Sort by `life_exp_growth` in descending order.
+6. **Identify** the top 5 and bottom 5 countries by `life_exp_growth`. Do the countries with the greatest improvements also tend to have the highest GDP growth?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+url = "https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv"
+gapminder = pd.read_csv(url)
+
+# 1. Inspect
+print(gapminder.shape)
+print(gapminder.dtypes)
+print(gapminder.isna().sum())
+```
+
+```{python}
+# 2. Standardise column names
+gapminder.columns = [col.lower().replace(" ", "_") for col in gapminder.columns]
+print(gapminder.columns.tolist())
+```
+
+```{python}
+# 3. Filter to 1952 and 2007 and merge
+gapminder_1952 = gapminder[gapminder["year"] == 1952].copy()
+gapminder_2007 = gapminder[gapminder["year"] == 2007].copy()
+
+merged = gapminder_1952.merge(
+    gapminder_2007,
+    on=["country", "continent"],
+    suffixes=("_1952", "_2007")
+)
+print(merged.shape)
+print(merged.head())
+```
+
+```{python}
+# 4. Compute growth columns
+merged["life_exp_growth"] = (
+    merged["lifeexp_2007"] - merged["lifeexp_1952"]
+).round(2)
+
+merged["gdp_growth"] = (
+    (merged["gdppercap_2007"] - merged["gdppercap_1952"])
+    / merged["gdppercap_1952"] * 100
+).round(1)
+```
+
+```{python}
+# 5. Summarise by continent
+print(
+    merged.groupby("continent")
+    .agg(
+        mean_life_exp_growth=("life_exp_growth", "mean"),
+        mean_gdp_growth=("gdp_growth", "mean")
+    )
+    .round(2)
+    .sort_values("mean_life_exp_growth", ascending=False)
+)
+```
+
+```{python}
+# 6. Top 5 and bottom 5 countries by life expectancy growth
+print("Top 5:")
+print(
+    merged.sort_values("life_exp_growth", ascending=False)
+    [["country", "continent", "life_exp_growth", "gdp_growth"]]
+    .head(5)
+)
+
+print("\nBottom 5:")
+print(
+    merged.sort_values("life_exp_growth")
+    [["country", "continent", "life_exp_growth", "gdp_growth"]]
+    .head(5)
+)
+```
+
+**Task 1** The dataset has 1704 rows and 6 columns with no missing values. Each row represents a country-year observation.
+
+**Task 5** Asia shows the greatest mean improvement in both life expectancy and GDP — driven by countries like Japan, South Korea, and China. Europe shows more modest gains because life expectancy and GDP were already high in 1952.
+
+**Task 6** The countries with the greatest life expectancy improvements are not always those with the highest GDP growth — reflecting that improvements in public health, sanitation, and medicine can drive life expectancy gains independently of economic growth. The bottom 5 countries tend to be those affected by conflict or epidemics, which caused life expectancy to stagnate or fall in parts of sub-Saharan Africa.
+
+</details>
+
+---
+
+### Exercise 3.11.11
+
+This exercise is a multi-step data wrangling challenge that combines joining, string manipulation, missing value handling, and groupby on the Titanic data. The `Name` column contains more information than it first appears — last name, title, and for married women, a maiden name in parentheses — and extracting these cleanly requires some careful string work.
+
+Load both Titanic datasets from GitHub and work through the steps below.
+
+```python
+import pandas as pd
+
+url_core  = "https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/titanic_core.csv"
+url_names = "https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/titanic_names.csv"
+
+core  = pd.read_csv(url_core)
+names = pd.read_csv(url_names)
+
+print(names["Name"].head(10).tolist())
+```
+
+1. Prepare `names` for merging: rename `PassengerId`, `Pclass`, and `Sex` to `passenger_id`, `pclass`, and `sex`. Then merge the two DataFrames on all three shared keys using a left join. Verify the row count is 891.
+2. The `Name` column follows the format `"Last, Title. Rest"` (e.g. `"Braund, Mr. Owen Harris"`). Use the `.str` accessor to extract:
+    - `last_name`: everything before the comma
+    - `title`: the word between the comma-space and the following period
+3. Use `.value_counts()` on `title`. You will see a long tail of rare titles (`"Don"`, `"Lady"`, `"Capt"`, and so on). Create a simplified `title_group` column using `.replace()` or `np.select()` with the following mapping:
+    - `"Mr"` → `"Mr"`
+    - `"Miss"` and `"Mrs"` → `"Ms"`
+    - All other titles → `"Other"`
+4. Use the `last_name` column to answer two questions:
+    - Which starting letter is the most common among last names?
+    - What is the most common last name length, measured in number of characters? Compute the length of each last name, then find the most frequent value.
+5. Compute the survival rate for each combination of `title_group` and `pclass`. Which title-class combination had the highest survival rate?
+
+<details>
+<summary>Hint</summary>
+
+For step 2, recall the pattern from earlier exercises: splitting the name on `", "` isolates the part starting with the title, and splitting that result on `"."` extracts just the title word. For `last_name`, you only need a single split on `","` and take the first part.
+
+For step 3, `.replace()` takes a dictionary mapping old values to new values, for example `{"Don": "Other", "Lady": "Other"}`. Rather than typing out every rare title individually, you can build this dictionary automatically using a dictionary comprehension over the titles you want to group as `"Other"`:
+
+```python
+{t: "Other" for t in merged["title"].unique() if t not in ["Mr", "Miss", "Mrs"]}
+```
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+url_core  = "https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/titanic_core.csv"
+url_names = "https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/titanic_names.csv"
+
+core  = pd.read_csv(url_core)
+names = pd.read_csv(url_names)
+
+# 1. Prepare and merge
+names = names.rename(columns={
+    "PassengerId": "passenger_id",
+    "Pclass":      "pclass",
+    "Sex":         "sex"
+})
+merged = core.merge(names, on=["passenger_id", "pclass", "sex"], how="left")
+print("Rows:", len(merged))
+```
+
+```{python}
+# 2. Extract last_name and title
+merged["last_name"] = merged["Name"].str.split(",").str[0]
+merged["title"] = (
+    merged["Name"].str.split(", ").str[1]
+    .str.split(".").str[0]
+)
+print(merged[["Name", "last_name", "title"]].head())
+```
+
+```{python}
+# 3. Simplified title group
+merged["title_group"] = merged["title"].replace(
+    {t: "Other" for t in merged["title"].unique()
+     if t not in ["Mr", "Miss", "Mrs"]}
+)
+merged["title_group"] = merged["title_group"].replace({"Miss": "Ms", "Mrs": "Ms"})
+print(merged["title_group"].value_counts())
+```
+
+```{python}
+# 4. Most common starting letter and length of last names
+print(merged["last_name"].str[0].value_counts().head())
+```
+
+```{python}
+print(merged["last_name"].str.len().value_counts().head())
+```
+
+```{python}
+# 5. Survival rate by title group and class
+print(
+    merged.groupby(["title_group", "pclass"])["survived"]
+    .mean()
+    .round(3)
+    .sort_values(ascending=False)
+)
+```
+
+**Task 2** Splitting on `", "` first isolates the part of the string starting with the title, and splitting that on `"."` extracts just the title word. This relies on the title always being the second comma-separated segment in the name, which holds for every row in this dataset.
+
+**Task 4** The most common starting letter for last names is "S", followed closely by "M" and "B" — a pattern that broadly reflects the most common surname initials among the British and Northern European passengers who make up most of the dataset. The most common last name length is 6 or 7 characters, which is typical for English-language surnames; very short (3-4 character) and very long (10+ character) names are comparatively rare.
+
+**Task 5** First-class "Ms" (Miss/Mrs) passengers had the highest survival rate — consistent with the "women and children first" pattern combined with the class advantage.
+
+</details>
+
+### Exercise 3.11.12
+
+This exercise practices importing and combining multiple files with a for loop.
+
+The data comes from FRED (Federal Reserve Economic Data) and is split into one CSV file per decade, each containing the same five monthly variables. The `CPI` column is the Consumer Price Index for All Urban Consumers, indexed so that the average over 1982–1984 equals 100. The monthly csv files can be found in this Github [folder](https://github.com/isabelhovdahl/skl401/tree/master/03-data-wrangling/data/FRED).
+
+```python
+import pandas as pd
+
+base_url = "https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/FRED/"
+decades = [1950, 1960, 1970, 1980, 1990, 2000, 2010]
+```
+
+1. Use a for loop over `decades` to build the file name for each decade, load it from `base_url`, and store each resulting DataFrame in a list called `fred_dfs`. Print the shape of each DataFrame as you load it.
+2. Use `pd.concat()` to combine the list into a single DataFrame called `fred`. Reset the index, convert the `DATE` column to datetime and sort the data chronologically. Print the shape of the combined DataFrame and confirm it covers 1950 through 2019.
+3. Compute the mean `CPI` for each year using `groupby`. Then compute the year-on-year percentage change in this annual mean using `.pct_change()` — this gives you the annual inflation rate. Multiply by 100 and round to one decimal place.
+4. Identify the 5 years with the highest inflation rate and the 5 years with the lowest (most negative) inflation rate. What historical periods do these correspond to?
+5. Compute the mean annual inflation rate for each decade. Which decade had the highest average inflation?
+
+<details>
+<summary>Hint</summary>
+
+For step 1, build each URL inside the loop using an f-string, for example `base_url + f"FRED_monthly_{decade}.csv"`, then pass it directly to `pd.read_csv()`. Remember to use `.append()` to add each DataFrame to `fred_dfs`.
+
+For step 5, you can extract the decade from the year using integer arithmetic: `(year // 10) * 10` rounds any year down to its decade, for example `1987` becomes `1980`.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+base_url = "https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/FRED/"
+decades = [1950, 1960, 1970, 1980, 1990, 2000, 2010]
+
+# 1. Import each decade's file in a loop
+fred_dfs = []
+
+for decade in decades:
+    url = base_url + f"FRED_monthly_{decade}.csv"
+    df = pd.read_csv(url)
+    fred_dfs.append(df)
+    print(decade, df.shape)
+```
+
+```{python}
+# 2. Combine, convert, and sort
+fred = pd.concat(fred_dfs).reset_index(drop=True)
+fred["DATE"] = pd.to_datetime(fred["DATE"])
+fred = fred.sort_values("DATE").reset_index(drop=True)
+
+print(fred.shape)
+print(fred["DATE"].min(), "to", fred["DATE"].max())
+```
+
+```{python}
+# 3. Annual mean CPI and year-on-year inflation rate
+annual_cpi = fred.groupby(fred["DATE"].dt.year)["CPI"].mean()
+inflation = (annual_cpi.pct_change() * 100).round(1)
+print(inflation.head(10))
+```
+
+```{python}
+# 4. Highest and lowest inflation years
+print("Highest inflation years:")
+print(inflation.sort_values(ascending=False).head(5))
+
+print("\nLowest inflation years:")
+print(inflation.sort_values().head(5))
+```
+
+```{python}
+# 5. Mean inflation rate by decade
+decade_of_year = (inflation.index // 10) * 10
+print(inflation.groupby(decade_of_year).mean().round(2))
+```
+
+**Task 4** The highest inflation years cluster in the mid-to-late 1970s and around 1980 — the period of the oil price shocks and the resulting stagflation, when annual inflation exceeded 10%. The lowest (most negative) values appear around 2009, reflecting the brief period of deflation during the global financial crisis, when prices fell rather than rose.
+
+**Task 5** The 1970s has by far the highest average inflation rate of any decade in the data, consistent with the well-known "Great Inflation" period in US economic history. The 1950s and 2010s show the lowest average inflation, reflecting relatively stable price growth in both the early postwar period and the decade following the 2008 financial crisis.
 
 </details>
