@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Topic 2 — Further Exercises – SKL401 — Introduction to Python</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../03-data-wrangling/03-01-importing-data.html" rel="next">
+<link href="../02-programming-fundamentals/02-10-topic2-capstone.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02-programming-fundamentals/02-01-operators.html">2 - Programming Fundamentals</a></li><li class="breadcrumb-item"><a href="../02-programming-fundamentals/02-11-exercises.html">2.11 Further Exercises</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">SKL401 — Introduction to Python</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">1 - Getting Started and Working Effectively</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-02-installing-python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.2 Installing Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.3 Installing Positron</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-04-files-folders-paths.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.4 Files, Folders and Paths</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Writing Scripts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-06-packages.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.6 Packages</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-07-variables-data-types.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.7 Variables and Basic Data Types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-08-lists-dicts-arrays.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.8 Lists, Dictionaries and Arrays</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-09-indexing-subsetting.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.9 Indexing and Subsetting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-10-dataframes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.10 DataFrames</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-11-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1.11 Further Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">2 - Programming Fundamentals</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-programming-fundamentals/02-01-operators.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1 Comparison and Logical Operators</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-programming-fundamentals/02-02-conditionals.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2 Conditionals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-programming-fundamentals/02-03-for-loops.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3 For Loops</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-programming-fundamentals/02-04-while-loops.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4 While Loops</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-programming-fundamentals/02-05-list-comprehension.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5 List Comprehension</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-programming-fundamentals/02-06-function-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.6 Writing Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-programming-fundamentals/02-07-function-arguments-scope.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.7 Default Arguments and Scope</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-programming-fundamentals/02-08-applying-functions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.8 Applying Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-programming-fundamentals/02-09-string-operations.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.9 String Operations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-programming-fundamentals/02-10-topic2-capstone.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.10 Capstone</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../02-programming-fundamentals/02-11-exercises.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">2.11 Further Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">3 - Data Wrangling</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-wrangling/03-01-importing-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.1 Importing Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-wrangling/03-02-subsetting.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.2 Subsetting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-wrangling/03-03-filtering.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.3 Filtering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-wrangling/03-04-transforming-cols.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.4 Transforming Columns</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-wrangling/03-05-sorting-copying.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.5 Sorting and Copying</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-wrangling/03-06-missing-values.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.6 Missing Values</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-wrangling/03-07-grouping-aggregation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.7 Grouping and Aggregation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-wrangling/03-08-joining.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.8 Joining Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-wrangling/03-09-dates.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.9 Working With Dates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-wrangling/03-10-capstone.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.10 Capstone</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../03-data-wrangling/03-11-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3.11 Further Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">4 - Graphics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-graphics/04-01-matplotlib.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1 matplotlib</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-graphics/04-02-reshaping.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2 Reshaping Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-graphics/04-03-line-charts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3 Line Charts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-graphics/04-04-bar-charts.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4 Bar Charts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-graphics/04-05-scatter-plots.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.5 Scatter Plots</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-graphics/04-06-histograms.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.6 Histograms</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-graphics/04-07-customising.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.7 Customising Plots</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-graphics/04-08-subplots.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.8 Multiple Panels</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-graphics/04-09-pandas-plotting.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.9 Pandas Plotting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-graphics/04-10-capstone.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.10 Capstone</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../04-graphics/04-11-exercises.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.11 Further Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">5 - Analysis, Reporting, and Wrap-up</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../05-analysis-reporting-and-wrap-up/05-01-placeholder.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">5.1 Placeholder</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#warm-up" id="toc-warm-up" class="nav-link active" data-scroll-target="#warm-up">🟢 Warm-up</a>
+  <ul class="collapse">
+  <li><a href="#exercise-2.11.1" id="toc-exercise-2.11.1" class="nav-link" data-scroll-target="#exercise-2.11.1">Exercise 2.11.1</a></li>
+  <li><a href="#exercise-2.11.2" id="toc-exercise-2.11.2" class="nav-link" data-scroll-target="#exercise-2.11.2">Exercise 2.11.2</a></li>
+  <li><a href="#exercise-2.11.3" id="toc-exercise-2.11.3" class="nav-link" data-scroll-target="#exercise-2.11.3">Exercise 2.11.3</a></li>
+  <li><a href="#exercise-2.11.4" id="toc-exercise-2.11.4" class="nav-link" data-scroll-target="#exercise-2.11.4">Exercise 2.11.4</a></li>
+  </ul></li>
+  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice">🟡 Practice</a>
+  <ul class="collapse">
+  <li><a href="#exercise-2.11.5" id="toc-exercise-2.11.5" class="nav-link" data-scroll-target="#exercise-2.11.5">Exercise 2.11.5</a></li>
+  <li><a href="#exercise-2.11.6" id="toc-exercise-2.11.6" class="nav-link" data-scroll-target="#exercise-2.11.6">Exercise 2.11.6</a></li>
+  <li><a href="#exercise-2.11.7" id="toc-exercise-2.11.7" class="nav-link" data-scroll-target="#exercise-2.11.7">Exercise 2.11.7</a></li>
+  <li><a href="#exercise-2.11.8" id="toc-exercise-2.11.8" class="nav-link" data-scroll-target="#exercise-2.11.8">Exercise 2.11.8</a></li>
+  <li><a href="#exercise-2.11.9" id="toc-exercise-2.11.9" class="nav-link" data-scroll-target="#exercise-2.11.9">Exercise 2.11.9</a></li>
+  </ul></li>
+  <li><a href="#challenge" id="toc-challenge" class="nav-link" data-scroll-target="#challenge">🔴 Challenge</a>
+  <ul class="collapse">
+  <li><a href="#exercise-2.11.10" id="toc-exercise-2.11.10" class="nav-link" data-scroll-target="#exercise-2.11.10">Exercise 2.11.10</a></li>
+  <li><a href="#exercise-2.11.11" id="toc-exercise-2.11.11" class="nav-link" data-scroll-target="#exercise-2.11.11">Exercise 2.11.11</a></li>
+  <li><a href="#exercise-2.11.12" id="toc-exercise-2.11.12" class="nav-link" data-scroll-target="#exercise-2.11.12">Exercise 2.11.12</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../02-programming-fundamentals/02-01-operators.html">2 - Programming Fundamentals</a></li><li class="breadcrumb-item"><a href="../02-programming-fundamentals/02-11-exercises.html">2.11 Further Exercises</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Topic 2 — Further Exercises</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>These exercises give you an opportunity to consolidate everything covered in Topic 2 before moving on. Unlike the exercises after each video, many of these combine skills from several videos into a single task. Some exercises also introduce new concepts that extend what you have learned.</p>
+<p>The exercises are organised into three levels:</p>
+<ul>
+<li>🟢 <strong>Warm-up</strong> — single-skill exercises to check your understanding of the basics.</li>
+<li>🟡 <strong>Practice</strong> — exercises that combine two or more topics.</li>
+<li>🔴 <strong>Challenge</strong> — multi-step tasks that may require you to combine ideas in ways you have not seen before. Some may require looking things up or experimenting.</li>
+</ul>
+<hr>
+<section id="warm-up" class="level2">
+<h2 class="anchored" data-anchor-id="warm-up">🟢 Warm-up</h2>
+<section id="exercise-2.11.1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2.11.1">Exercise 2.11.1</h3>
+<p>A cinema charges different ticket prices based on the age of the customer:</p>
+<ul>
+<li>Under 12: 50 NOK</li>
+<li>12–25: 80 NOK</li>
+<li>26–66: 120 NOK</li>
+<li>67 or above: 70 NOK</li>
+</ul>
+<p>The code below produces the correct result but is unnecessarily verbose — each condition explicitly checks both the lower and upper bound of the age range. Rewrite it using <code>if/elif/else</code> to simplify the conditions. Notice that once you use <code>elif</code>, you no longer need to check the upper bound of each range — why is that?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> <span class="dv">15</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> age <span class="op">&gt;=</span> <span class="dv">0</span> <span class="kw">and</span> age <span class="op">&lt;</span> <span class="dv">12</span>:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    price <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> age <span class="op">&gt;=</span> <span class="dv">12</span> <span class="kw">and</span> age <span class="op">&lt;</span> <span class="dv">26</span>:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    price <span class="op">=</span> <span class="dv">80</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> age <span class="op">&gt;=</span> <span class="dv">26</span> <span class="kw">and</span> age <span class="op">&lt;</span> <span class="dv">67</span>:</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    price <span class="op">=</span> <span class="dv">120</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> age <span class="op">&gt;=</span> <span class="dv">67</span>:</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    price <span class="op">=</span> <span class="dv">70</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Age </span><span class="sc">{</span>age<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>price<span class="sc">}</span><span class="ss"> NOK"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Test your improved version on the following ages: <code>8</code>, <code>15</code>, <code>45</code>, <code>70</code>.</p>
+<details>
+<summary>
+Solution
+</summary>
+<div id="a15d3c19" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ages <span class="op">=</span> [<span class="dv">8</span>, <span class="dv">15</span>, <span class="dv">45</span>, <span class="dv">70</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> age <span class="kw">in</span> ages:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> age <span class="op">&lt;</span> <span class="dv">12</span>:</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        price <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> age <span class="op">&lt;</span> <span class="dv">26</span>:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        price <span class="op">=</span> <span class="dv">80</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> age <span class="op">&lt;</span> <span class="dv">67</span>:</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        price <span class="op">=</span> <span class="dv">120</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        price <span class="op">=</span> <span class="dv">70</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Age </span><span class="sc">{</span>age<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>price<span class="sc">}</span><span class="ss"> NOK"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Age 8: 50 NOK
+Age 15: 80 NOK
+Age 45: 120 NOK
+Age 70: 70 NOK</code></pre>
+</div>
+</div>
+With <code>elif</code>, Python stops evaluating as soon as the first <code>True</code> condition is found. This means that by the time we reach <code>elif age &lt; 26</code>, we already know the age is 12 or above — the previous <code>if age &lt; 12</code> was <code>False</code>. The upper bound of each range is therefore implicitly guaranteed by the earlier conditions having failed, and there is no need to check it explicitly.
+</details>
+<hr>
+</section>
+<section id="exercise-2.11.2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2.11.2">Exercise 2.11.2</h3>
+<p>Use a <code>for</code> loop to iterate over the nested list of country records below. For each country, print its name and continent, and use a conditional to classify it according to its GDP using the following thresholds:</p>
+<ul>
+<li>Below 10 000: <code>"low income"</code></li>
+<li>Between 10 000 and 49 999: <code>"middle income"</code></li>
+<li>50 000 or above: <code>"high income"</code></li>
+</ul>
+<p>Print each result in the format: <code>"Norway (Europe): high income"</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Norway"</span>,  <span class="st">"Europe"</span>,   <span class="dv">82500</span>],</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Brazil"</span>,  <span class="st">"Americas"</span>,  <span class="dv">8600</span>],</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Nigeria"</span>, <span class="st">"Africa"</span>,    <span class="dv">2100</span>],</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Japan"</span>,   <span class="st">"Asia"</span>,     <span class="dv">42000</span>],</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Germany"</span>, <span class="st">"Europe"</span>,   <span class="dv">48000</span>],</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details>
+<summary>
+Solution
+</summary>
+<div id="c833fa0d" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Norway"</span>,  <span class="st">"Europe"</span>,   <span class="dv">82500</span>],</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Brazil"</span>,  <span class="st">"Americas"</span>,  <span class="dv">8600</span>],</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Nigeria"</span>, <span class="st">"Africa"</span>,    <span class="dv">2100</span>],</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Japan"</span>,   <span class="st">"Asia"</span>,     <span class="dv">42000</span>],</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Germany"</span>, <span class="st">"Europe"</span>,   <span class="dv">48000</span>],</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative 1: use range() to index list</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># for i in range(len(countries)):</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     country = countries[i][0]</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#     continent = countries[i][1]</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#     gdp = countries[i][2]</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#     ...</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative 2: Unpack list directly in the loop header</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> country, continent, gdp <span class="kw">in</span> countries:</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> gdp <span class="op">&gt;=</span> <span class="dv">50_000</span>:</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        income <span class="op">=</span> <span class="st">"high income"</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> gdp <span class="op">&gt;=</span> <span class="dv">10_000</span>:</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        income <span class="op">=</span> <span class="st">"middle income"</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        income <span class="op">=</span> <span class="st">"low income"</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>country<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>continent<span class="sc">}</span><span class="ss">): </span><span class="sc">{</span>income<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Norway (Europe): high income
+Brazil (Americas): low income
+Nigeria (Africa): low income
+Japan (Asia): middle income
+Germany (Europe): middle income</code></pre>
+</div>
+</div>
+Unpacking the list directly in the loop header — <code>for country, continent, gdp in countries</code> — is a clean alternative to accessing elements by index. The conditional inside the loop classifies each country independently on every iteration, which is the natural pattern for applying the same logic to every item in a collection.
+</details>
+<hr>
+</section>
+<section id="exercise-2.11.3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2.11.3">Exercise 2.11.3</h3>
+<p>The loop below uses <code>enumerate()</code> to print a numbered list of cities. <code>enumerate(lst)</code> returns pairs of <code>(index, value)</code> that you can unpack directly in the loop header.</p>
+<p>Run the code and then rewrite it using <code>range(len())</code> instead and verify that the output is identical. Then reflect on the pros and cons of each approach — when would you prefer one over the other?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cities <span class="op">=</span> [<span class="st">"Oslo"</span>, <span class="st">"Bergen"</span>, <span class="st">"Trondheim"</span>, <span class="st">"Stavanger"</span>, <span class="st">"Tromsø"</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, city <span class="kw">in</span> <span class="bu">enumerate</span>(cities, start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">. </span><span class="sc">{</span>city<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details>
+<summary>
+Solution
+</summary>
+<div id="16e06f25" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cities <span class="op">=</span> [<span class="st">"Oslo"</span>, <span class="st">"Bergen"</span>, <span class="st">"Trondheim"</span>, <span class="st">"Stavanger"</span>, <span class="st">"Tromsø"</span>]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Using enumerate</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, city <span class="kw">in</span> <span class="bu">enumerate</span>(cities, start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">. </span><span class="sc">{</span>city<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1. Oslo
+2. Bergen
+3. Trondheim
+4. Stavanger
+5. Tromsø</code></pre>
+</div>
+</div>
+<div id="d6bdaeb6" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using range(len())</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(cities)):</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">. </span><span class="sc">{</span>cities[i]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1. Oslo
+2. Bergen
+3. Trondheim
+4. Stavanger
+5. Tromsø</code></pre>
+</div>
+</div>
+<p>Both produce identical output. The key differences are:</p>
+<ul>
+<li><strong>Readability</strong> — <code>enumerate()</code> is more readable because you get the index and value together without having to index into the list manually. The loop header clearly communicates that you need both the position and the value.</li>
+<li><strong>Error-proneness</strong> — <code>range(len())</code> requires you to remember to add 1 to the index when printing (<code>i + 1</code>) and to index into the list manually (<code>cities[i]</code>), which introduces more opportunities for off-by-one errors.</li>
+<li><strong>When to prefer <code>range(len())</code></strong> — when you need to access multiple lists by index simultaneously, or when you need to modify elements in the list by position. <code>enumerate()</code> only gives you the index of one list at a time.</li>
+</ul>
+As a general rule, prefer <code>enumerate()</code> when you need both the index and the value of a single list, and <code>range(len())</code> when you need to work with positions directly.
+</details>
+<hr>
+</section>
+<section id="exercise-2.11.4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2.11.4">Exercise 2.11.4</h3>
+<p>Recall that <code>zip()</code> lets you iterate over two or more sequences simultaneously. Use it to iterate over the three lists below and print a formatted summary for each country, e.g., <code>Norway: GDP per capita 82,500, population 5,400,000</code>. Then compute and print the country with the highest GDP per capita.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>countries   <span class="op">=</span> [<span class="st">"Norway"</span>, <span class="st">"Germany"</span>, <span class="st">"Brazil"</span>, <span class="st">"Japan"</span>, <span class="st">"Nigeria"</span>]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>gdp         <span class="op">=</span> [<span class="dv">82500</span>, <span class="dv">48000</span>, <span class="dv">8600</span>, <span class="dv">42000</span>, <span class="dv">2100</span>]</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>populations <span class="op">=</span> [<span class="dv">5_400_000</span>, <span class="dv">84_000_000</span>, <span class="dv">214_000_000</span>, <span class="dv">125_000_000</span>, <span class="dv">200_000_000</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details>
+<summary>
+Solution
+</summary>
+<div id="f32bc292" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>countries   <span class="op">=</span> [<span class="st">"Norway"</span>, <span class="st">"Germany"</span>, <span class="st">"Brazil"</span>, <span class="st">"Japan"</span>, <span class="st">"Nigeria"</span>]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>gdp         <span class="op">=</span> [<span class="dv">82500</span>, <span class="dv">48000</span>, <span class="dv">8600</span>, <span class="dv">42000</span>, <span class="dv">2100</span>]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>populations <span class="op">=</span> [<span class="dv">5_400_000</span>, <span class="dv">84_000_000</span>, <span class="dv">214_000_000</span>, <span class="dv">125_000_000</span>, <span class="dv">200_000_000</span>]</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>max_gdp     <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>max_country <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> country, g, pop <span class="kw">in</span> <span class="bu">zip</span>(countries, gdp, populations):</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>country<span class="sc">}</span><span class="ss">: GDP per capita </span><span class="sc">{</span>g<span class="sc">:,}</span><span class="ss">, population </span><span class="sc">{</span>pop<span class="sc">:,}</span><span class="ss">"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> g <span class="op">&gt;</span> max_gdp:</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        max_gdp     <span class="op">=</span> g</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        max_country <span class="op">=</span> country</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Highest GDP per capita: </span><span class="sc">{</span>max_country<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>max_gdp<span class="sc">:,}</span><span class="ss">)"</span>) <span class="co"># "\n" (newline character) inserts line break</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Norway: GDP per capita 82,500, population 5,400,000
+Germany: GDP per capita 48,000, population 84,000,000
+Brazil: GDP per capita 8,600, population 214,000,000
+Japan: GDP per capita 42,000, population 125,000,000
+Nigeria: GDP per capita 2,100, population 200,000,000
+
+Highest GDP per capita: Norway (82,500)</code></pre>
+</div>
+</div>
+Notice that <code>zip()</code> stops as soon as the shortest list is exhausted, so it is important that all three lists have the same length. The accumulator pattern inside the loop tracks the maximum GDP and the corresponding country name simultaneously.
+</details>
+<hr>
+</section>
+</section>
+<section id="practice" class="level2">
+<h2 class="anchored" data-anchor-id="practice">🟡 Practice</h2>
+<section id="exercise-2.11.5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2.11.5">Exercise 2.11.5</h3>
+<p>Just as lists can be nested inside other lists, loops can be nested inside other loops. The inner loop runs completely for every single iteration of the outer loop. The basic syntax looks like this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> outer_sequence:</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> y <span class="kw">in</span> inner_sequence:</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># this block runs for every combination of x and y</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Use a nested <code>for</code> loop to print a multiplication table for the numbers 1 through 5 in the format <code>"1 x 1 = 1"</code>, <code>"1 x 2 = 2"</code>, etc.</p>
+<details>
+<summary>
+Solution
+</summary>
+<div id="08c11a7c" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">6</span>):</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">6</span>):</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> x </span><span class="sc">{</span>j<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>i <span class="op">*</span> j<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1 x 1 = 1
+1 x 2 = 2
+1 x 3 = 3
+1 x 4 = 4
+1 x 5 = 5
+2 x 1 = 2
+2 x 2 = 4
+2 x 3 = 6
+2 x 4 = 8
+2 x 5 = 10
+3 x 1 = 3
+3 x 2 = 6
+3 x 3 = 9
+3 x 4 = 12
+3 x 5 = 15
+4 x 1 = 4
+4 x 2 = 8
+4 x 3 = 12
+4 x 4 = 16
+4 x 5 = 20
+5 x 1 = 5
+5 x 2 = 10
+5 x 3 = 15
+5 x 4 = 20
+5 x 5 = 25</code></pre>
+</div>
+</div>
+The outer loop iterates over <code>i</code> from 1 to 5. For each value of <code>i</code>, the inner loop runs completely through all values of <code>j</code> from 1 to 5, printing one line per combination. With two loops each running 5 times, the inner block executes 5 × 5 = 25 times in total. Notice that the inner loop is indented one level further than the outer loop — Python uses indentation to determine which code belongs to which loop.
+</details>
+</section>
+<section id="exercise-2.11.6" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2.11.6">Exercise 2.11.6</h3>
+<p>In data work it is common to have observations of the same entities measured over multiple time periods. A natural way to represent this is as a list of records, where each record contains the entity name, the time period, and the measured value. When all combinations of entities and time periods are present, the data is said to be a <strong>balanced panel</strong>.</p>
+<p>Use a nested <code>for</code> loop to generate a balanced panel of all country-year combinations from the lists below. Each record should be a dictionary with keys <code>"country"</code>, <code>"year"</code>, and <code>"gdp"</code> — set <code>"gdp"</code> to <code>None</code> as a placeholder since we do not have the actual values yet. Convert the final list of records to a pandas DataFrame and print it.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [<span class="st">"Norway"</span>, <span class="st">"Germany"</span>, <span class="st">"Brazil"</span>, <span class="st">"Japan"</span>]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>years     <span class="op">=</span> [<span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2021</span>, <span class="dv">2022</span>, <span class="dv">2023</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The first few records should look like this:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>country</th>
+<th>year</th>
+<th>gdp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Norway</td>
+<td>2019</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>Norway</td>
+<td>2020</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td>Norway</td>
+<td>2021</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>
+Solution
+</summary>
+<div id="422fd1a3" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [<span class="st">"Norway"</span>, <span class="st">"Germany"</span>, <span class="st">"Brazil"</span>, <span class="st">"Japan"</span>]</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>years     <span class="op">=</span> [<span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2021</span>, <span class="dv">2022</span>, <span class="dv">2023</span>]</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>records <span class="op">=</span> []</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> country <span class="kw">in</span> countries:</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> year <span class="kw">in</span> years:</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        records.append({<span class="st">"country"</span>: country, <span class="st">"year"</span>: year, <span class="st">"gdp"</span>: <span class="va">None</span>})</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(records)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Total records: </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    country  year   gdp
+0    Norway  2019  None
+1    Norway  2020  None
+2    Norway  2021  None
+3    Norway  2022  None
+4    Norway  2023  None
+5   Germany  2019  None
+6   Germany  2020  None
+7   Germany  2021  None
+8   Germany  2022  None
+9   Germany  2023  None
+10   Brazil  2019  None
+11   Brazil  2020  None
+12   Brazil  2021  None
+13   Brazil  2022  None
+14   Brazil  2023  None
+15    Japan  2019  None
+16    Japan  2020  None
+17    Japan  2021  None
+18    Japan  2022  None
+19    Japan  2023  None
+
+Total records: 20</code></pre>
+</div>
+</div>
+The inner loop runs completely for every iteration of the outer loop — for each country, we generate one record for every year. With 4 countries and 5 years this produces 4 × 5 = 20 records in total. Notice that the records are ordered by country first and then by year within each country, which is exactly how panel data is typically structured. The <code>None</code> placeholders make it clear where GDP values still need to be filled in — in a real project these would be replaced with actual data during a later cleaning or merging step.
+</details>
+<hr>
+</section>
+<section id="exercise-2.11.7" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2.11.7">Exercise 2.11.7</h3>
+<p>You are given a list of daily sales figures and a batch size. The task is to process the sales figures in groups of <code>batch_size</code> consecutive values, compute the total for each group, and print a summary. For example, with <code>batch_size = 3</code> the first batch covers days 1–3, the second covers days 4–6, and so on. Stop when there are fewer remaining values than the batch size.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sales      <span class="op">=</span> [<span class="dv">120</span>, <span class="dv">340</span>, <span class="dv">55</span>, <span class="dv">890</span>, <span class="dv">210</span>, <span class="dv">45</span>, <span class="dv">670</span>, <span class="dv">430</span>, <span class="dv">310</span>, <span class="dv">290</span>, <span class="dv">150</span>, <span class="dv">780</span>]</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>batch_size <span class="op">=</span> <span class="dv">3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>With <code>batch_size = 3</code> the output should look like this:</p>
+<pre><code>Batch 1: [120, 340, 55]  — total: 515
+Batch 2: [890, 210, 45]  — total: 1145
+Batch 3: [670, 430, 310] — total: 1410
+Batch 4: [290, 150, 780] — total: 1220</code></pre>
+<p><em>Hint: Use a <code>while</code> loop to control which batch you are currently processing, and an inner <code>for</code> loop to sum the values within each batch.</em></p>
+<details>
+<summary>
+Solution
+</summary>
+<div id="0a4dabef" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sales      <span class="op">=</span> [<span class="dv">120</span>, <span class="dv">340</span>, <span class="dv">55</span>, <span class="dv">890</span>, <span class="dv">210</span>, <span class="dv">45</span>, <span class="dv">670</span>, <span class="dv">430</span>, <span class="dv">310</span>, <span class="dv">290</span>, <span class="dv">150</span>, <span class="dv">780</span>]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>batch_size <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>index      <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>batch_num  <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> index <span class="op">+</span> batch_size <span class="op">&lt;=</span> <span class="bu">len</span>(sales):</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    batch_total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(index, index <span class="op">+</span> batch_size):</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>        batch_total <span class="op">+=</span> sales[i]</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    batch <span class="op">=</span> sales[index:index <span class="op">+</span> batch_size]</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Batch </span><span class="sc">{</span>batch_num<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>batch<span class="sc">}</span><span class="ss"> — total: </span><span class="sc">{</span>batch_total<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    index     <span class="op">+=</span> batch_size</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    batch_num <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Batch 1: [120, 340, 55] — total: 515
+Batch 2: [890, 210, 45] — total: 1145
+Batch 3: [670, 430, 310] — total: 1410
+Batch 4: [290, 150, 780] — total: 1220</code></pre>
+</div>
+</div>
+The <code>while</code> loop controls which batch we are on by tracking <code>index</code> — the position of the first value in the current batch. The inner <code>for</code> loop iterates over exactly <code>batch_size</code> values starting from <code>index</code> and accumulates their total. After each batch, <code>index</code> is advanced by <code>batch_size</code> to move to the next group. The <code>while</code> condition <code>index + batch_size &lt;= len(sales)</code> ensures we stop as soon as there are fewer remaining values than a full batch. This combination of <code>while</code> and <code>for</code> is natural here: the outer iteration is open-ended (we do not know how many full batches there will be) while the inner iteration always processes exactly <code>batch_size</code> values.
+</details>
+<hr>
+</section>
+<section id="exercise-2.11.8" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2.11.8">Exercise 2.11.8</h3>
+<p>Before converting a string to a number it is good practice to validate it first. Write code that checks whether the string <code>value</code> can be interpreted as a number by performing the following checks in order:</p>
+<ol type="1">
+<li>Strip any leading and trailing whitespace.</li>
+<li>Remove a single leading <code>+</code> or <code>-</code> sign if present.</li>
+<li>Check that the remaining string contains at most one decimal point.</li>
+<li>Check that all remaining characters are digits.</li>
+</ol>
+<p>If all checks pass, print <code>"{value} is a valid number."</code> Otherwise print <code>"{value} is not a valid number."</code>.</p>
+<p>Test your code on the following three cases:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> <span class="st">"  -3.14  "</span>   <span class="co"># should pass</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> <span class="st">"12.5.3"</span>      <span class="co"># should fail</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> <span class="st">"+42"</span>         <span class="co"># should pass</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details>
+<summary>
+Solution
+</summary>
+<div id="2e0f8b7c" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> <span class="st">"  -3.14  "</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> value.strip()</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> cleaned.lstrip(<span class="st">"+-"</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> cleaned.replace(<span class="st">"."</span>, <span class="st">""</span>, <span class="dv">1</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> cleaned.isdigit():</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'"</span><span class="sc">{</span>value<span class="sc">.</span>strip()<span class="sc">}</span><span class="ss">" is a valid number.'</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'"</span><span class="sc">{</span>value<span class="sc">.</span>strip()<span class="sc">}</span><span class="ss">" is not a valid number.'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>"-3.14" is a valid number.</code></pre>
+</div>
+</div>
+<div id="981625f6" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> <span class="st">"12.5.3"</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> value.strip()</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> cleaned.lstrip(<span class="st">"+-"</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> cleaned.replace(<span class="st">"."</span>, <span class="st">""</span>, <span class="dv">1</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> cleaned.isdigit():</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'"</span><span class="sc">{</span>value<span class="sc">.</span>strip()<span class="sc">}</span><span class="ss">" is a valid number.'</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'"</span><span class="sc">{</span>value<span class="sc">.</span>strip()<span class="sc">}</span><span class="ss">" is not a valid number.'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>"12.5.3" is not a valid number.</code></pre>
+</div>
+</div>
+<div id="956760bf" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> <span class="st">"+42"</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> value.strip()</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> cleaned.lstrip(<span class="st">"+-"</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> cleaned.replace(<span class="st">"."</span>, <span class="st">""</span>, <span class="dv">1</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> cleaned.isdigit():</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'"</span><span class="sc">{</span>value<span class="sc">.</span>strip()<span class="sc">}</span><span class="ss">" is a valid number.'</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'"</span><span class="sc">{</span>value<span class="sc">.</span>strip()<span class="sc">}</span><span class="ss">" is not a valid number.'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>"+42" is a valid number.</code></pre>
+</div>
+</div>
+<p>The key steps are: <code>.strip()</code> removes surrounding whitespace, <code>.lstrip("+-")</code> removes a leading sign, and <code>.replace(".", "", 1)</code> removes at most one decimal point — the second argument <code>""</code> replaces it with nothing, and the third argument <code>1</code> ensures only the first occurrence is removed. After these transformations, <code>.isdigit()</code> can reliably check whether what remains consists entirely of digits. While this works for most common cases, it requires careful thinking about every edge case.</p>
+<p><strong>Alternative approach — using try-except:</strong></p>
+<p>A simpler and more robust approach is to attempt the conversion directly and catch the error if it fails:</p>
+<div id="44766023" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> <span class="st">"  -3.14  "</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">float</span>(value)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'"</span><span class="sc">{</span>value<span class="sc">.</span>strip()<span class="sc">}</span><span class="ss">" is a valid number.'</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'"</span><span class="sc">{</span>value<span class="sc">.</span>strip()<span class="sc">}</span><span class="ss">" is not a valid number.'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>"-3.14" is a valid number.</code></pre>
+</div>
+</div>
+<code>float()</code> already knows all the rules for what constitutes a valid number — including leading signs, decimal points, scientific notation, and surrounding whitespace. The try-except approach handles all the same cases and more in just two lines, with no manual string manipulation required.
+</details>
+<hr>
+</section>
+<section id="exercise-2.11.9" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2.11.9">Exercise 2.11.9</h3>
+<p>Convert both approaches from the previous exercise into functions. Write:</p>
+<ol type="1">
+<li><code>is_numeric_strmethod(s)</code> — uses the string method approach to check whether <code>s</code> is a valid number. Returns <code>True</code> or <code>False</code>.</li>
+<li><code>is_numeric_tryexcept(s)</code> — uses a try-except block to check whether <code>s</code> is a valid number. Returns <code>True</code> or <code>False</code>.</li>
+</ol>
+<p>Apply both functions to the list of strings below using a for loop and print the results side by side. Do both functions agree on every case?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="st">"42"</span>, <span class="st">"3.14"</span>, <span class="st">"-7"</span>, <span class="st">"+5.5"</span>, <span class="st">"oslo"</span>, <span class="st">"12.0"</span>, <span class="st">"1e5"</span>, <span class="st">"-4"</span>, <span class="st">"3.14.15"</span>, <span class="st">"  -3.14  "</span>, <span class="st">""</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details>
+<summary>
+Solution
+</summary>
+<div id="f2eee675" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_numeric_strmethod(s):</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    cleaned <span class="op">=</span> s.strip()</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> cleaned:</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    cleaned <span class="op">=</span> cleaned.lstrip(<span class="st">"+-"</span>)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    cleaned <span class="op">=</span> cleaned.replace(<span class="st">"."</span>, <span class="st">""</span>, <span class="dv">1</span>)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cleaned.isdigit()</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_numeric_tryexcept(s):</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">float</span>(s)</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="st">"42"</span>, <span class="st">"3.14"</span>, <span class="st">"-7"</span>, <span class="st">"+5.5"</span>, <span class="st">"oslo"</span>, <span class="st">"12.0"</span>, <span class="st">"1e5"</span>, <span class="st">"-4"</span>, <span class="st">"3.14.15"</span>, <span class="st">"  -3.14  "</span>, <span class="st">""</span>]</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> v <span class="kw">in</span> values:</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>    str_result <span class="op">=</span> is_numeric_strmethod(v)</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>    try_result <span class="op">=</span> is_numeric_tryexcept(v)</span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>    match      <span class="op">=</span> <span class="st">"✓"</span> <span class="cf">if</span> str_result <span class="op">==</span> try_result <span class="cf">else</span> <span class="st">"✗"</span></span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>v<span class="sc">!r:15}</span><span class="ss"> → strmethod: </span><span class="sc">{</span>str_result<span class="sc">!s:5}</span><span class="ss">  tryexcept: </span><span class="sc">{</span>try_result<span class="sc">!s:5}</span><span class="ss">  </span><span class="sc">{</span>match<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'42'            → strmethod: True   tryexcept: True   ✓
+'3.14'          → strmethod: True   tryexcept: True   ✓
+'-7'            → strmethod: True   tryexcept: True   ✓
+'+5.5'          → strmethod: True   tryexcept: True   ✓
+'oslo'          → strmethod: False  tryexcept: False  ✓
+'12.0'          → strmethod: True   tryexcept: True   ✓
+'1e5'           → strmethod: False  tryexcept: True   ✗
+'-4'            → strmethod: True   tryexcept: True   ✓
+'3.14.15'       → strmethod: False  tryexcept: False  ✓
+'  -3.14  '     → strmethod: True   tryexcept: True   ✓
+''              → strmethod: False  tryexcept: False  ✓</code></pre>
+</div>
+</div>
+The two functions disagree on <code>"1e5"</code> — scientific notation is a valid number that <code>float()</code> handles correctly, but the string method approach returns <code>False</code> because <code>"e"</code> is not a digit. This highlights the fundamental limitation of the string method approach: no matter how carefully you handle edge cases, <code>float()</code> will always be more complete and reliable because it implements the full rules for numeric strings. The try-except approach is not just more concise — it is more correct.
+</details>
+<hr>
+</section>
+</section>
+<section id="challenge" class="level2">
+<h2 class="anchored" data-anchor-id="challenge">🔴 Challenge</h2>
+<section id="exercise-2.11.10" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2.11.10">Exercise 2.11.10</h3>
+<p>The Collatz sequence starts from any positive integer and applies the following rule repeatedly until the value reaches 1: if the number is even, divide it by 2; if it is odd, multiply it by 3 and add 1. For example, starting from 6 the sequence is: 6 → 3 → 10 → 5 → 16 → 8 → 4 → 2 → 1.</p>
+<p>Write a function <code>collatz_sequence(n)</code> with a docstring that takes a starting integer and returns the full sequence as a list, including both the starting value and the final 1. Then use a <code>for</code> loop to find which starting number between 1 and 100 produces the longest Collatz sequence and print the starting number, the sequence length, and the full sequence.</p>
+<details>
+<summary>
+Hint
+</summary>
+Use a <code>while</code> loop inside <code>collatz_sequence()</code> with the stopping condition <code>n != 1</code>. To check whether a number is even or odd, use the modulo operator <code>%</code> — <code>n % 2 == 0</code> is <code>True</code> when <code>n</code> is even and <code>False</code> when it is odd. For the division step, use integer division <code>//</code> to keep the result as an integer rather than a float.
+</details>
+<details>
+<summary>
+Solution
+</summary>
+<div id="91d151b7" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> collatz_sequence(n):</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Generate the full Collatz sequence starting from n.</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co">    n : int</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co">        The starting positive integer.</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="co">    list</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co">        The full sequence from n down to 1, inclusive.</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>    sequence <span class="op">=</span> [n]</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> n <span class="op">!=</span> <span class="dv">1</span>:</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> n <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>            n <span class="op">=</span> n <span class="op">//</span> <span class="dv">2</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>            n <span class="op">=</span> n <span class="op">*</span> <span class="dv">3</span> <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>        sequence.append(n)</span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sequence</span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the starting number with the longest sequence between 1 and 100</span></span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>max_length <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>max_start  <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">101</span>):</span>
+<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a>    length <span class="op">=</span> <span class="bu">len</span>(collatz_sequence(i))</span>
+<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> length <span class="op">&gt;</span> max_length:</span>
+<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a>        max_length <span class="op">=</span> length</span>
+<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a>        max_start  <span class="op">=</span> i</span>
+<span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Starting number: </span><span class="sc">{</span>max_start<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb37-36"><a href="#cb37-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Sequence length: </span><span class="sc">{</span>max_length<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb37-37"><a href="#cb37-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Sequence: </span><span class="sc">{</span>collatz_sequence(max_start)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting number: 97
+Sequence length: 119
+Sequence: [97, 292, 146, 73, 220, 110, 55, 166, 83, 250, 125, 376, 188, 94, 47, 142, 71, 214, 107, 322, 161, 484, 242, 121, 364, 182, 91, 274, 137, 412, 206, 103, 310, 155, 466, 233, 700, 350, 175, 526, 263, 790, 395, 1186, 593, 1780, 890, 445, 1336, 668, 334, 167, 502, 251, 754, 377, 1132, 566, 283, 850, 425, 1276, 638, 319, 958, 479, 1438, 719, 2158, 1079, 3238, 1619, 4858, 2429, 7288, 3644, 1822, 911, 2734, 1367, 4102, 2051, 6154, 3077, 9232, 4616, 2308, 1154, 577, 1732, 866, 433, 1300, 650, 325, 976, 488, 244, 122, 61, 184, 92, 46, 23, 70, 35, 106, 53, 160, 80, 40, 20, 10, 5, 16, 8, 4, 2, 1]</code></pre>
+</div>
+</div>
+<code>n % 2 == 0</code> checks whether <code>n</code> is even by testing whether the remainder after dividing by 2 is zero. Using <code>//</code> for the division step ensures the result stays an integer — <code>10 / 2</code> gives <code>5.0</code> in Python, while <code>10 // 2</code> gives <code>5</code>. The outer <code>for</code> loop iterates over all starting numbers from 1 to 100, calling <code>collatz_sequence()</code> on each one and using <code>len()</code> to get the sequence length. The accumulator pattern tracks the longest sequence and its starting number across all iterations.
+</details>
+<hr>
+</section>
+<section id="exercise-2.11.11" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2.11.11">Exercise 2.11.11</h3>
+<p>Write a data cleaning pipeline as a set of functions that process a list of raw records. Each record is a string in the format <code>"country,gdp_per_cap,population"</code> but the data is messy — some records have extra spaces, inconsistent capitalisation, and non-numeric values in the numeric fields.</p>
+<p>Write the following functions, each with a docstring:</p>
+<ol type="1">
+<li><code>parse_record(record)</code> — takes a raw string, splits it on <code>","</code>, strips whitespace from each field, and returns a tuple of <code>(country, gdp_str, pop_str)</code>. Note that a tuple is just like a list (but with parentheses instead of square brackets) that cannot be altered once created.</li>
+<li><code>convert_numeric(value)</code> — takes a string and returns it converted to an integer using try-except. Returns <code>None</code> if the conversion fails.</li>
+<li><code>clean_record(record)</code> — calls <code>parse_record()</code> and <code>convert_numeric()</code> and returns a dictionary with keys <code>"country"</code>, <code>"gdp_per_cap"</code>, and <code>"population"</code>. Capitalizes the country name.</li>
+<li><code>clean_dataset(records)</code> — calls <code>clean_record()</code> on each record in the list and returns a list of cleaned dictionaries, skipping any record where either numeric field is <code>None</code>.</li>
+</ol>
+<p>Test your pipeline on the raw data below and print the cleaned records.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>raw_data <span class="op">=</span> [</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"norway, 82500, 5400000"</span>,</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"GERMANY ,48000,  84000000"</span>,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"brazil, 8600, 214000000"</span>,</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"japan, fortytwo, 125000000"</span>,</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"  nigeria , 2100, 200000000  "</span>,</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"france, 48000, abc"</span>,</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details>
+<summary>
+Hint
+</summary>
+Build and test one function at a time before combining them. Start with <code>parse_record()</code> on a single string, then test <code>convert_numeric()</code> on a few values, then combine them in <code>clean_record()</code>, and finally wrap everything in <code>clean_dataset()</code>.
+</details>
+<details>
+<summary>
+Solution
+</summary>
+<div id="4e11af83" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_record(record):</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Split a raw CSV string into its constituent fields.</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="co">    record : str</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co">        A raw string in the format "country,gdp_per_cap,population".</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="co">    tuple</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a><span class="co">        A tuple of (country, gdp_str, pop_str) with whitespace stripped.</span></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>    parts <span class="op">=</span> record.split(<span class="st">","</span>)</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (parts[<span class="dv">0</span>].strip(), parts[<span class="dv">1</span>].strip(), parts[<span class="dv">2</span>].strip())</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> convert_numeric(value):</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a><span class="co">    Convert a string to an integer, returning None if conversion fails.</span></span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a><span class="co">    value : str</span></span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a><span class="co">        The string to convert.</span></span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a><span class="co">    int or None</span></span>
+<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a><span class="co">        The converted integer, or None if the conversion fails.</span></span>
+<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">int</span>(value)</span>
+<span id="cb40-35"><a href="#cb40-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb40-36"><a href="#cb40-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb40-37"><a href="#cb40-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-38"><a href="#cb40-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clean_record(record):</span>
+<span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb40-41"><a href="#cb40-41" aria-hidden="true" tabindex="-1"></a><span class="co">    Parse and clean a single raw record string.</span></span>
+<span id="cb40-42"><a href="#cb40-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-43"><a href="#cb40-43" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb40-44"><a href="#cb40-44" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb40-45"><a href="#cb40-45" aria-hidden="true" tabindex="-1"></a><span class="co">    record : str</span></span>
+<span id="cb40-46"><a href="#cb40-46" aria-hidden="true" tabindex="-1"></a><span class="co">        A raw string in the format "country,gdp_per_cap,population".</span></span>
+<span id="cb40-47"><a href="#cb40-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-48"><a href="#cb40-48" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb40-49"><a href="#cb40-49" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb40-50"><a href="#cb40-50" aria-hidden="true" tabindex="-1"></a><span class="co">    dict</span></span>
+<span id="cb40-51"><a href="#cb40-51" aria-hidden="true" tabindex="-1"></a><span class="co">        A dictionary with keys "country", "gdp_per_cap", and "population",</span></span>
+<span id="cb40-52"><a href="#cb40-52" aria-hidden="true" tabindex="-1"></a><span class="co">        or None if either numeric field cannot be converted.</span></span>
+<span id="cb40-53"><a href="#cb40-53" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb40-54"><a href="#cb40-54" aria-hidden="true" tabindex="-1"></a>    country, gdp_str, pop_str <span class="op">=</span> parse_record(record)</span>
+<span id="cb40-55"><a href="#cb40-55" aria-hidden="true" tabindex="-1"></a>    gdp <span class="op">=</span> convert_numeric(gdp_str)</span>
+<span id="cb40-56"><a href="#cb40-56" aria-hidden="true" tabindex="-1"></a>    pop <span class="op">=</span> convert_numeric(pop_str)</span>
+<span id="cb40-57"><a href="#cb40-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb40-58"><a href="#cb40-58" aria-hidden="true" tabindex="-1"></a>        <span class="st">"country"</span>:    country.capitalize(),</span>
+<span id="cb40-59"><a href="#cb40-59" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gdp_per_cap"</span>: gdp,</span>
+<span id="cb40-60"><a href="#cb40-60" aria-hidden="true" tabindex="-1"></a>        <span class="st">"population"</span>: pop,</span>
+<span id="cb40-61"><a href="#cb40-61" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb40-62"><a href="#cb40-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-63"><a href="#cb40-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-64"><a href="#cb40-64" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clean_dataset(records):</span>
+<span id="cb40-65"><a href="#cb40-65" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb40-66"><a href="#cb40-66" aria-hidden="true" tabindex="-1"></a><span class="co">    Clean a list of raw record strings, skipping invalid records.</span></span>
+<span id="cb40-67"><a href="#cb40-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-68"><a href="#cb40-68" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb40-69"><a href="#cb40-69" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb40-70"><a href="#cb40-70" aria-hidden="true" tabindex="-1"></a><span class="co">    records : list</span></span>
+<span id="cb40-71"><a href="#cb40-71" aria-hidden="true" tabindex="-1"></a><span class="co">        A list of raw strings in the format "country,gdp_per_cap,population".</span></span>
+<span id="cb40-72"><a href="#cb40-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-73"><a href="#cb40-73" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb40-74"><a href="#cb40-74" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb40-75"><a href="#cb40-75" aria-hidden="true" tabindex="-1"></a><span class="co">    list</span></span>
+<span id="cb40-76"><a href="#cb40-76" aria-hidden="true" tabindex="-1"></a><span class="co">        A list of cleaned dictionaries with invalid records removed.</span></span>
+<span id="cb40-77"><a href="#cb40-77" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb40-78"><a href="#cb40-78" aria-hidden="true" tabindex="-1"></a>    cleaned <span class="op">=</span> []</span>
+<span id="cb40-79"><a href="#cb40-79" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> record <span class="kw">in</span> records:</span>
+<span id="cb40-80"><a href="#cb40-80" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> clean_record(record)</span>
+<span id="cb40-81"><a href="#cb40-81" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> result[<span class="st">"gdp_per_cap"</span>] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="kw">and</span> result[<span class="st">"population"</span>] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb40-82"><a href="#cb40-82" aria-hidden="true" tabindex="-1"></a>            cleaned.append(result)</span>
+<span id="cb40-83"><a href="#cb40-83" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cleaned</span>
+<span id="cb40-84"><a href="#cb40-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-85"><a href="#cb40-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-86"><a href="#cb40-86" aria-hidden="true" tabindex="-1"></a>raw_data <span class="op">=</span> [</span>
+<span id="cb40-87"><a href="#cb40-87" aria-hidden="true" tabindex="-1"></a>    <span class="st">"norway, 82500, 5400000"</span>,</span>
+<span id="cb40-88"><a href="#cb40-88" aria-hidden="true" tabindex="-1"></a>    <span class="st">"GERMANY ,48000,  84000000"</span>,</span>
+<span id="cb40-89"><a href="#cb40-89" aria-hidden="true" tabindex="-1"></a>    <span class="st">"brazil, 8600, 214000000"</span>,</span>
+<span id="cb40-90"><a href="#cb40-90" aria-hidden="true" tabindex="-1"></a>    <span class="st">"japan, fortytwo, 125000000"</span>,</span>
+<span id="cb40-91"><a href="#cb40-91" aria-hidden="true" tabindex="-1"></a>    <span class="st">"  nigeria , 2100, 200000000  "</span>,</span>
+<span id="cb40-92"><a href="#cb40-92" aria-hidden="true" tabindex="-1"></a>    <span class="st">"france, 48000, abc"</span>,</span>
+<span id="cb40-93"><a href="#cb40-93" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb40-94"><a href="#cb40-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-95"><a href="#cb40-95" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> clean_dataset(raw_data)</span>
+<span id="cb40-96"><a href="#cb40-96" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> record <span class="kw">in</span> cleaned:</span>
+<span id="cb40-97"><a href="#cb40-97" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(record)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'country': 'Norway', 'gdp_per_cap': 82500, 'population': 5400000}
+{'country': 'Germany', 'gdp_per_cap': 48000, 'population': 84000000}
+{'country': 'Brazil', 'gdp_per_cap': 8600, 'population': 214000000}
+{'country': 'Nigeria', 'gdp_per_cap': 2100, 'population': 200000000}</code></pre>
+</div>
+</div>
+The pipeline is built from four focused functions, each doing one thing: parsing, converting, cleaning a single record, and cleaning the whole dataset. <code>clean_record()</code> calls both <code>parse_record()</code> and <code>convert_numeric()</code>, and <code>clean_dataset()</code> calls <code>clean_record()</code> for each record. Breaking the logic across multiple functions makes each step easy to test independently and easy to modify without affecting the others — for example you could swap out <code>convert_numeric()</code> for a float version without touching any of the other functions.
+</details>
+<hr>
+</section>
+<section id="exercise-2.11.12" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2.11.12">Exercise 2.11.12</h3>
+<p>Write a text analysis pipeline as a set of functions that analyses a piece of text. The pipeline should break the problem into focused functions that call each other, and each function should have a docstring.</p>
+<p>Write the following functions:</p>
+<ol type="1">
+<li><code>tokenize(text)</code> — takes a string, converts it to lowercase, removes punctuation by replacing <code>","</code>, <code>"."</code>, <code>"!"</code>, <code>"?"</code>, and <code>";"</code> with spaces, and returns a list of individual words by splitting on whitespace.</li>
+<li><code>count_words(words)</code> — takes a list of words and returns a dictionary where each key is a unique word and each value is the number of times it appears.</li>
+<li><code>top_n_words(word_counts, n)</code> — takes the word count dictionary and an integer <code>n</code> and returns a list of the <code>n</code> most common words as <code>(word, count)</code> tuples, sorted from most to least frequent. (<em>Hint: look up <code>sorted()</code> with a <code>key</code> argument and <code>dict.items()</code>.</em>)</li>
+<li><code>summarize_text(text, n=5)</code> — calls all three functions in sequence and prints a formatted summary: the total number of words, the number of unique words, and the top <code>n</code> most frequent words with their counts.</li>
+</ol>
+<p>Test your pipeline on the text below.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"""Python is a versatile programming language. Python is widely used in data science, web development, and automation. Learning Python is a great investment for any aspiring data scientist or developer. Python makes data analysis easier and more</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="st">enjoyable."""</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details>
+<summary>
+Hint
+</summary>
+For <code>top_n_words()</code>, <code>sorted(word_counts.items(), key=lambda x: x[1], reverse=True)</code> sorts the dictionary items by value in descending order. <code>[:n]</code> then takes the first <code>n</code> items.
+</details>
+<details>
+<summary>
+Solution
+</summary>
+<div id="d1b97efa" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tokenize(text):</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Convert text to a list of lowercase words with punctuation removed.</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="co">    text : str</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="co">        The input text to tokenize.</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a><span class="co">    list</span></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a><span class="co">        A list of lowercase words with punctuation removed.</span></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> char <span class="kw">in</span> [<span class="st">","</span>, <span class="st">"."</span>, <span class="st">"!"</span>, <span class="st">"?"</span>, <span class="st">";"</span>]:</span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> text.replace(char, <span class="st">" "</span>)</span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> text.lower().split()</span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_words(words):</span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a><span class="co">    Count the frequency of each word in a list.</span></span>
+<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb43-25"><a href="#cb43-25" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb43-26"><a href="#cb43-26" aria-hidden="true" tabindex="-1"></a><span class="co">    words : list</span></span>
+<span id="cb43-27"><a href="#cb43-27" aria-hidden="true" tabindex="-1"></a><span class="co">        A list of words to count.</span></span>
+<span id="cb43-28"><a href="#cb43-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-29"><a href="#cb43-29" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb43-30"><a href="#cb43-30" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb43-31"><a href="#cb43-31" aria-hidden="true" tabindex="-1"></a><span class="co">    dict</span></span>
+<span id="cb43-32"><a href="#cb43-32" aria-hidden="true" tabindex="-1"></a><span class="co">        A dictionary mapping each unique word to its frequency.</span></span>
+<span id="cb43-33"><a href="#cb43-33" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb43-34"><a href="#cb43-34" aria-hidden="true" tabindex="-1"></a>    counts <span class="op">=</span> {}</span>
+<span id="cb43-35"><a href="#cb43-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> word <span class="kw">in</span> words:</span>
+<span id="cb43-36"><a href="#cb43-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> word <span class="kw">in</span> counts:</span>
+<span id="cb43-37"><a href="#cb43-37" aria-hidden="true" tabindex="-1"></a>            counts[word] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb43-38"><a href="#cb43-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb43-39"><a href="#cb43-39" aria-hidden="true" tabindex="-1"></a>            counts[word] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb43-40"><a href="#cb43-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> counts</span>
+<span id="cb43-41"><a href="#cb43-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-42"><a href="#cb43-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-43"><a href="#cb43-43" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> top_n_words(word_counts, n):</span>
+<span id="cb43-44"><a href="#cb43-44" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb43-45"><a href="#cb43-45" aria-hidden="true" tabindex="-1"></a><span class="co">    Return the n most frequent words and their counts.</span></span>
+<span id="cb43-46"><a href="#cb43-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-47"><a href="#cb43-47" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb43-48"><a href="#cb43-48" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb43-49"><a href="#cb43-49" aria-hidden="true" tabindex="-1"></a><span class="co">    word_counts : dict</span></span>
+<span id="cb43-50"><a href="#cb43-50" aria-hidden="true" tabindex="-1"></a><span class="co">        A dictionary mapping words to their frequencies.</span></span>
+<span id="cb43-51"><a href="#cb43-51" aria-hidden="true" tabindex="-1"></a><span class="co">    n : int</span></span>
+<span id="cb43-52"><a href="#cb43-52" aria-hidden="true" tabindex="-1"></a><span class="co">        The number of top words to return.</span></span>
+<span id="cb43-53"><a href="#cb43-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-54"><a href="#cb43-54" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb43-55"><a href="#cb43-55" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb43-56"><a href="#cb43-56" aria-hidden="true" tabindex="-1"></a><span class="co">    list</span></span>
+<span id="cb43-57"><a href="#cb43-57" aria-hidden="true" tabindex="-1"></a><span class="co">        A list of (word, count) tuples sorted by frequency descending.</span></span>
+<span id="cb43-58"><a href="#cb43-58" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb43-59"><a href="#cb43-59" aria-hidden="true" tabindex="-1"></a>    sorted_words <span class="op">=</span> <span class="bu">sorted</span>(word_counts.items(), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb43-60"><a href="#cb43-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sorted_words[:n]</span>
+<span id="cb43-61"><a href="#cb43-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-62"><a href="#cb43-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-63"><a href="#cb43-63" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> summarize_text(text, n<span class="op">=</span><span class="dv">5</span>):</span>
+<span id="cb43-64"><a href="#cb43-64" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb43-65"><a href="#cb43-65" aria-hidden="true" tabindex="-1"></a><span class="co">    Print a summary of word frequencies in a text.</span></span>
+<span id="cb43-66"><a href="#cb43-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-67"><a href="#cb43-67" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb43-68"><a href="#cb43-68" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb43-69"><a href="#cb43-69" aria-hidden="true" tabindex="-1"></a><span class="co">    text : str</span></span>
+<span id="cb43-70"><a href="#cb43-70" aria-hidden="true" tabindex="-1"></a><span class="co">        The input text to analyse.</span></span>
+<span id="cb43-71"><a href="#cb43-71" aria-hidden="true" tabindex="-1"></a><span class="co">    n : int, optional</span></span>
+<span id="cb43-72"><a href="#cb43-72" aria-hidden="true" tabindex="-1"></a><span class="co">        The number of top words to display. Default is 5.</span></span>
+<span id="cb43-73"><a href="#cb43-73" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb43-74"><a href="#cb43-74" aria-hidden="true" tabindex="-1"></a>    words       <span class="op">=</span> tokenize(text)</span>
+<span id="cb43-75"><a href="#cb43-75" aria-hidden="true" tabindex="-1"></a>    word_counts <span class="op">=</span> count_words(words)</span>
+<span id="cb43-76"><a href="#cb43-76" aria-hidden="true" tabindex="-1"></a>    top_words   <span class="op">=</span> top_n_words(word_counts, n)</span>
+<span id="cb43-77"><a href="#cb43-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-78"><a href="#cb43-78" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Total words:  </span><span class="sc">{</span><span class="bu">len</span>(words)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb43-79"><a href="#cb43-79" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Unique words: </span><span class="sc">{</span><span class="bu">len</span>(word_counts)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb43-80"><a href="#cb43-80" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Top </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> words:"</span>)</span>
+<span id="cb43-81"><a href="#cb43-81" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, (word, count) <span class="kw">in</span> <span class="bu">enumerate</span>(top_words, start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb43-82"><a href="#cb43-82" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">. '</span><span class="sc">{</span>word<span class="sc">}</span><span class="ss">': </span><span class="sc">{</span>count<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb43-83"><a href="#cb43-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-84"><a href="#cb43-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-85"><a href="#cb43-85" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"""Python is a versatile programming language. Python is widely used in data science, web development, and automation. Learning Python is a great investment for any aspiring data scientist or developer. Python makes data analysis easier and more</span></span>
+<span id="cb43-86"><a href="#cb43-86" aria-hidden="true" tabindex="-1"></a><span class="st">enjoyable."""</span></span>
+<span id="cb43-87"><a href="#cb43-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-88"><a href="#cb43-88" aria-hidden="true" tabindex="-1"></a>summarize_text(text)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total words:  38
+Unique words: 29
+
+Top 5 words:
+  1. 'python': 4
+  2. 'is': 3
+  3. 'data': 3
+  4. 'a': 2
+  5. 'and': 2</code></pre>
+</div>
+</div>
+The pipeline is built from four functions that call each other in sequence: <code>summarize_text()</code> calls <code>tokenize()</code>, <code>count_words()</code>, and <code>top_n_words()</code> in order, each passing its output to the next. This is a clean example of function composition — breaking a complex task into simple, focused steps that are easy to understand, test, and reuse independently. Notice the use of <code>enumerate()</code> with <code>start=1</code> for the numbered output, and <code>lambda</code> in the sort key — a compact way to specify that items should be sorted by their second element (the count).
+</details>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../02-programming-fundamentals/02-10-topic2-capstone.html" class="pagination-link" aria-label="2.10 Capstone">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">2.10 Capstone</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../03-data-wrangling/03-01-importing-data.html" class="pagination-link" aria-label="3.1 Importing Data">
+        <span class="nav-page-text"><span class="chapter-title">3.1 Importing Data</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

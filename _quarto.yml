@@ -2,6 +2,9 @@ project:
   type: book
   output-dir: docs
 
+execute:
+  freeze: auto
+
 book:
   title: "SKL401 — Introduction to Python"
   author: "Isabel Hovdahl, Department of Business and Management Science, NHH"
