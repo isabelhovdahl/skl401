@@ -95,9 +95,9 @@ book:
           text: "4.6 Histograms"
         - file: 04-graphics/04-07-customising.qmd
           text: "4.7 Customising Plots"
-        - file: 04-graphics/04-05-subplots.qmd
+        - file: 04-graphics/04-08-subplots.qmd
           text: "4.8 Multiple Panels"
-        - file: 04-graphics/04-05-pandas-plotting.qmd
+        - file: 04-graphics/04-09-pandas-plotting.qmd
           text: "4.9 Pandas Plotting"
         - file: 04-graphics/04-10-capstone.qmd
           text: "4.10 Capstone"
