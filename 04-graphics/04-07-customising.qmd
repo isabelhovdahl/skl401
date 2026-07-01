@@ -1,0 +1,130 @@
+# Customising plots
+
+...
+
+{{< video https://vimeo.com/1196261468/45a25ee2f0?fl=ml&fe=ec >}}
+
+```python
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import matplotlib.dates as mdates
+import pandas as pd
+import seaborn as sns
+
+dowjones = sns.load_dataset("dowjones")
+dowjones["Date"] = pd.to_datetime(dowjones["Date"])
+dowjones = dowjones.sort_values("Date")
+
+# ── Step 1: The starting chart ───────────────────────────────
+
+fig, ax = plt.subplots(figsize=(12, 5))
+
+ax.plot(dowjones["Date"], dowjones["Price"])
+
+ax.set_xlabel("Date")
+ax.set_ylabel("Price")
+ax.set_title("Dow Jones Industrial Average")
+
+plt.tight_layout()
+plt.show()
+plt.close()
+
+# ── Step 2: Applying a style sheet ───────────────────────────
+
+# See all available styles
+print(plt.style.available)
+
+# Set a style globally — affects all subsequent plots
+plt.style.use("seaborn-v0_8-whitegrid")
+
+# ── Step 3: Font sizes and title ─────────────────────────────
+
+fig, ax = plt.subplots(figsize=(12, 5))
+
+ax.plot(dowjones["Date"], dowjones["Price"])
+
+ax.set_xlabel("")                                                          # dates are self-explanatory
+ax.set_ylabel("Price", fontsize=12)
+ax.set_title("Dow Jones Industrial Average, 1914–1968",
+             fontsize=16, fontweight="bold", pad=15)                       # pad adds space above title
+
+ax.tick_params(axis="both", labelsize=12)                                  # tick label size
+
+plt.show()
+plt.close()
+
+# ── Step 4: Formatting tick labels ───────────────────────────
+
+fig, ax = plt.subplots(figsize=(12, 5))
+
+ax.plot(dowjones["Date"], dowjones["Price"])
+
+ax.set_xlabel("")
+ax.set_ylabel("")
+ax.set_title("Dow Jones Industrial Average, 1914–1968",
+             fontsize=16, fontweight="bold", pad=15)
+
+ax.tick_params(axis="both", labelsize=12)
+
+# Format y-axis as dollar amounts: 200 → "$200"
+ax.yaxis.set_major_formatter(ticker.StrMethodFormatter("${x:,.0f}"))
+
+# Format x-axis: show a tick every 5 years, display four-digit year
+ax.xaxis.set_major_locator(mdates.YearLocator(5))
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
+
+plt.show()
+plt.close()
+
+# ── Step 5: Adding visual weight with fill_between ───────────
+
+fig, ax = plt.subplots(figsize=(12, 5))
+
+ax.plot(dowjones["Date"], dowjones["Price"],
+        color="#1F4E79", linewidth=1.2)
+
+# fill_between() shades the area between the line and the bottom of the axes
+ax.fill_between(dowjones["Date"], dowjones["Price"],
+                alpha=0.08, color="#1F4E79")
+
+ax.set_xlabel("")
+ax.set_ylabel("")
+ax.set_title("Dow Jones Industrial Average, 1914–1968",
+             fontsize=16, fontweight="bold", pad=15)
+
+ax.tick_params(axis="both", labelsize=12)
+ax.yaxis.set_major_formatter(ticker.StrMethodFormatter("${x:,.0f}"))
+ax.xaxis.set_major_locator(mdates.YearLocator(5))
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
+
+plt.show()
+plt.close()
+
+# ── Step 6: Add reference line ───────────────────────────────
+
+fig, ax = plt.subplots(figsize=(12, 5))
+
+ax.plot(dowjones["Date"], dowjones["Price"],
+        color="#1F4E79", linewidth=1.2)
+ax.fill_between(dowjones["Date"], dowjones["Price"],
+                alpha=0.08, color="#1F4E79")
+
+ax.set_xlabel("")
+ax.set_ylabel("")
+ax.set_title("Dow Jones Industrial Average, 1914–1968",
+             fontsize=16, fontweight="bold", pad=15)
+
+ax.tick_params(axis="both", labelsize=12)
+ax.yaxis.set_major_formatter(ticker.StrMethodFormatter("${x:,.0f}"))
+ax.xaxis.set_major_locator(mdates.YearLocator(5))
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
+
+# Horizontal reference line at the pre-1930 peak
+peak_price = dowjones.loc[dowjones["Date"] < "1930-01-01", "Price"].max()
+ax.axhline(peak_price, color="red", linestyle=":", linewidth=1)
+
+plt.show()
+plt.close()
+```
+
+## Exercises

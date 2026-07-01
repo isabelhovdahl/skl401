@@ -1,0 +1,60 @@
+# Reshaping data
+
+...
+
+{{< video https://vimeo.com/1195996941/bb8790c15e?fl=ml&fe=ec >}}
+
+```python
+import pandas as pd
+
+# ── The gapminder dataset ────────────────────────────────────
+
+url       = "https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv"
+gapminder = pd.read_csv(url)
+
+gapminder.shape
+gapminder.head()
+gapminder.info()
+
+gapminder["continent"].unique()
+gapminder["country"].nunique()
+gapminder["year"].unique()
+
+gapminder.to_csv("data/gapminder.csv", index=False)
+print("Saved to data/gapminder.csv")
+
+# ── Wide vs long format ──────────────────────────────────────
+
+# Select 4 countries and 4 years
+countries = ["Norway", "Brazil", "Nigeria", "China"]
+years     = [1952, 1972, 1992, 2007]
+
+subset = gapminder[
+    (gapminder["country"].isin(countries)) &
+    (gapminder["year"].isin(years))
+]
+
+subset
+
+# ── Converting long to wide with .pivot() ────────────────────
+
+# pivot() reshapes long data into wide format
+#   index   = column whose values become row labels
+#   columns = column whose values become new column headers
+#   values  = column whose values fill the cells
+wide = subset.pivot(index="country", columns="year", values="lifeExp").reset_index()
+
+wide
+
+# ── Converting wide to long with .melt() ────────────────────
+
+# melt() reshapes wide data into long format
+#   id_vars    = columns to keep as-is
+#   var_name   = name for the new column of old column headers
+#   value_name = name for the new column of values
+long = wide.melt(id_vars = "country", var_name   = "year", value_name = "lifeExp")
+
+long
+```
+
+## Exercises

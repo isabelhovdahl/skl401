@@ -1,0 +1,56 @@
+# pandas plotting
+
+...
+
+{{< video https://vimeo.com/1196291820/84c8571d45?fl=ml&fe=ec >}}
+
+```python
+import matplotlib.pyplot as plt
+import pandas as pd
+
+plt.style.use("seaborn-v0_8-whitegrid")
+
+gapminder = pd.read_csv("data/gapminder.csv")
+flights   = pd.read_csv("data/flights.csv")
+
+# ── df.plot() basics ─────────────────────────────────────────
+
+annual = flights.groupby("year")["passengers"].sum().reset_index()
+
+# kind= switches chart type: "line", "bar", "hist", "scatter"
+annual.plot(x="year", y="passengers", kind="line", 
+            figsize=(8, 4), title="Annual passengers, 1949-1960",
+            xlabel="Year", ylabel="Total passengers", legend=False)
+
+plt.tight_layout()
+plt.show()
+plt.close()
+
+# ── Multi-line charts from wide format ───────────────────────
+
+# Reshape to wide: each column becomes a separate line automatically
+continent_year = gapminder.groupby(["year", "continent"])["lifeExp"].mean().reset_index()
+continent_year = continent_year.pivot(index="year", columns="continent", values="lifeExp")
+continent_year.head()
+
+continent_year.plot(kind="line", figsize=(10, 5), marker="o",
+                    title="Life expectancy by continent",
+                    xlabel="Year", ylabel="Mean life expectancy (years)")
+plt.tight_layout()
+plt.show()
+plt.close()
+
+# ── Subplots from pandas ────────────────────────────────────
+
+# subplots=True creates one panel per column
+# layout=(rows, cols) arranges them in a grid
+continent_year.plot(kind="line", subplots=True,
+                    figsize=(10, 10), layout=(3, 2),
+                    title="Life expectancy by continent",
+                    sharex=True, sharey=True, legend=True)
+plt.tight_layout()
+plt.show()
+plt.close()
+```
+
+## Exercises

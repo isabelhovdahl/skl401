@@ -1,3 +1,33 @@
-# Graphics
+# How matplotlib works
 
-*Content placeholder.*
+...
+
+{{< video https://vimeo.com/1195996942/a4e85b203b?fl=ml&fe=ec >}}
+
+```python
+import matplotlib.pyplot as plt
+
+# ── The Figure and the Axes ──────────────────────────────────
+
+# plt.subplots() creates a Figure (the canvas) and an Axes (the plot area)
+# The convention is to unpack them into fig and ax
+fig, ax = plt.subplots()
+plt.show()
+plt.close()
+
+# ── The anatomy of a plot ────────────────────────────────────
+
+fig, ax = plt.subplots(figsize=(8, 5))          # figsize sets width and height in inches
+
+ax.plot([1, 2, 3, 4], [10, 20, 15, 25])         # draw a line connecting the data points
+
+ax.set_xlabel("X axis label")
+ax.set_ylabel("Y axis label")
+ax.set_title("My first matplotlib plot")
+
+plt.tight_layout()                                # adjust spacing so labels don't get cut off
+plt.show()
+plt.close()
+```
+
+## Exercises

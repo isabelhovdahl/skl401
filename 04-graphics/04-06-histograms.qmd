@@ -1,0 +1,74 @@
+# Historgrams
+
+...
+
+{{< video https://vimeo.com/1196261469/f28aa3884d?fl=ml&fe=ec >}}
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# ── A basic histogram ────────────────────────────────────────
+
+# bins= controls how many intervals the data is split into
+fig, ax = plt.subplots(figsize=(8, 5))
+
+ax.hist(titanic["age"], bins=20, color="steelblue", edgecolor="white")
+
+ax.set_xlabel("Age (years)")
+ax.set_ylabel("Count")
+ax.set_title("Age distribution of Titanic passengers")
+
+plt.show()
+plt.close()
+
+# ── Comparing two groups ────────────────────────────────────
+
+# Overlay two histograms with transparency to compare distributions
+males   = titanic[titanic["sex"] == "male"]
+females = titanic[titanic["sex"] == "female"]
+
+fig, ax = plt.subplots(figsize=(8, 5))
+
+ax.hist(males["age"], bins=20, alpha=0.6, label="Males",
+        color="steelblue", edgecolor="white")
+ax.hist(females["age"], bins=20, alpha=0.6, label="Females",
+        color="coral", edgecolor="white")
+
+ax.set_xlabel("Age (years)")
+ax.set_ylabel("Count")
+ax.set_title("Age distribution of Titanic passengers by sex")
+ax.legend()
+
+plt.show()
+plt.close()
+
+# ── Adding a reference line ──────────────────────────────────
+
+# axvline() draws a vertical line spanning the full height of the axes
+# axhline() does the same horizontally
+fig, ax = plt.subplots(figsize=(8, 5))
+
+ax.hist(titanic["age"], bins=20,
+        color="steelblue", edgecolor="white", alpha=0.8)
+
+mean_val   = titanic["age"].mean()
+median_val = titanic["age"].median()
+
+ax.axvline(mean_val,   color="firebrick",  linestyle="--",
+           linewidth=2, label=f"Mean: {mean_val:.2f}")
+ax.axvline(median_val, color="darkorange", linestyle="-",
+           linewidth=2, label=f"Median: {median_val:.2f}")
+
+ax.set_xlabel("Age (years)")
+ax.set_ylabel("Count")
+ax.set_title("Age distribution of Titanic passengers")
+ax.legend()
+
+plt.show()
+plt.close()
+```
+
+## Exercises

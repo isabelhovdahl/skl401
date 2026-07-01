@@ -1,0 +1,103 @@
+# Line charts
+
+...
+
+{{< video https://vimeo.com/1195996939/34ea75a7e4?fl=ml&fe=ec >}}
+
+```python
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+
+gapminder = pd.read_csv("data/gapminder.csv")
+
+# ── Preparing the data ───────────────────────────────────────
+
+# Average life expectancy per continent per year
+continent_life = gapminder.groupby(["continent", "year"])["lifeExp"].mean().reset_index()
+
+continent_life["continent"].unique()
+continent_life["year"].nunique()
+continent_life.head()
+
+# ── A single line ────────────────────────────────────────────
+
+africa = continent_life[continent_life["continent"] == "Africa"]
+
+fig, ax = plt.subplots(figsize=(9, 5))
+
+ax.plot(africa["year"], africa["lifeExp"])
+
+ax.set_xlabel("Year")
+ax.set_ylabel("Life expectancy (years)")
+ax.set_title("Life expectancy in Africa over time")
+
+plt.show()
+plt.close()
+
+# ── Adding all continents with a loop ────────────────────────
+
+# Loop over unique continents, filter and plot each one
+# label= is used by ax.legend() to populate the legend
+fig, ax = plt.subplots(figsize=(9, 5))
+
+for continent in continent_life["continent"].unique():
+    group = continent_life[continent_life["continent"] == continent]
+    ax.plot(group["year"], group["lifeExp"], label=continent)
+
+ax.set_xlabel("Year")
+ax.set_ylabel("Life expectancy (years)")
+ax.set_title("Life expectancy over time by continent")
+ax.legend(title="Continent")
+
+plt.show()
+plt.close()
+
+# ── Line charts with dates on the x-axis ────────────────────
+
+# The dowjones dataset: monthly closing price of the Dow Jones Industrial Average
+dowjones = sns.load_dataset("dowjones")
+dowjones.shape
+dowjones.info()
+dowjones.head()
+
+# Convert Date from string to datetime
+dowjones["Date"] = pd.to_datetime(dowjones["Date"])
+
+fig, ax = plt.subplots(figsize=(10, 5))
+
+ax.plot(dowjones["Date"], dowjones["Price"])
+
+ax.set_xlabel("Date")
+ax.set_ylabel("Price")
+ax.set_title("Dow Jones Industrial Average")
+
+plt.show()
+plt.close()
+
+# ── What happens when dates are strings ──────────────────────
+
+# Without datetime conversion, tick labels are squashed raw text
+dowjones["Date_str"] = dowjones["Date"].astype("str")
+
+fig, ax = plt.subplots(figsize=(10, 5))
+
+ax.plot(dowjones["Date_str"], dowjones["Price"])
+
+plt.show()
+plt.close()
+
+# ── What happens when data is not sorted ─────────────────────
+
+# matplotlib draws lines in row order — unsorted data produces zigzag lines
+dowjones_shuffled = dowjones.sort_values("Price")
+
+fig, ax = plt.subplots(figsize=(10, 5))
+
+ax.plot(dowjones_shuffled["Date"], dowjones_shuffled["Price"])
+
+plt.show()
+plt.close()
+```
+
+## Exercises

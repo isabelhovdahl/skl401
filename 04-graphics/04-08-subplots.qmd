@@ -1,0 +1,93 @@
+# Multiple panels
+
+...
+
+{{< video https://vimeo.com/1196323608/05204bd71f?fl=ml&fe=ec >}}
+
+```python
+import matplotlib.pyplot as plt
+import pandas as pd
+
+plt.style.use("seaborn-v0_8-whitegrid")
+
+# ── How multi-panel indexing works ───────────────────────────
+
+# 1x2 grid: axes is a 1D array — index with a single number
+fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 4))
+
+axes[0].set_title("Left panel")
+axes[1].set_title("Right panel")
+
+plt.tight_layout()
+plt.show()
+plt.close()
+
+# 2x2 grid: axes is a 2D array — index with row and column
+fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(10, 8))
+
+axes[0, 0].set_title("Top left")
+axes[0, 1].set_title("Top right")
+axes[1, 0].set_title("Bottom left")
+axes[1, 1].set_title("Bottom right")
+
+plt.tight_layout()
+plt.show()
+plt.close()
+
+# ── A 1×2 grid with data ────────────────────────────────────
+
+gapminder = pd.read_csv("data/gapminder.csv")
+continent_life = gapminder.groupby(["continent", "year"])["lifeExp"].mean().reset_index()
+
+europe = continent_life[continent_life["continent"] == "Europe"]
+africa = continent_life[continent_life["continent"] == "Africa"]
+
+fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(12, 5))
+
+axes[0].plot(europe["year"], europe["lifeExp"], marker="o")
+axes[0].set_title("Europe")
+axes[0].set_xlabel("Year")
+axes[0].set_ylabel("Mean life expectancy (years)")
+axes[0].set_ylim(30, 90)                           # same y-axis range for valid comparison
+
+axes[1].plot(africa["year"], africa["lifeExp"], marker="o")
+axes[1].set_title("Africa")
+axes[1].set_xlabel("Year")
+axes[1].set_ylabel("Mean life expectancy (years)")
+axes[1].set_ylim(30, 90)
+
+fig.suptitle("Life expectancy over time", fontsize=14, fontweight="bold")
+
+plt.show()
+plt.close()
+
+# ── A 2×3 grid with shared axes ─────────────────────────────
+
+# sharey=True links all panels to the same y-axis range
+fig, axes = plt.subplots(nrows=2, ncols=3, figsize=(14, 8), sharey=True)
+
+# flatten() converts the 2D array to 1D for easy iteration
+axes_flat = axes.flatten()
+
+# enumerate() returns (index, value) pairs: (0, "Africa"), (1, "Americas"), ...
+# We use the index to pick the right panel from axes_flat
+for i, continent in enumerate(continent_life["continent"].unique()):
+    data = continent_life[continent_life["continent"] == continent]
+    ax   = axes_flat[i]
+
+    ax.plot(data["year"], data["lifeExp"], marker="o")
+    ax.set_title(continent)
+    ax.set_xlabel("Year")
+    ax.set_ylabel("Life expectancy (years)")
+
+# Hide the unused 6th panel (5 continents in a 2x3 grid)
+axes_flat[5].set_visible(False)
+
+fig.suptitle("Life expectancy over time by continent",
+             fontsize=14, fontweight="bold")
+plt.tight_layout()
+plt.show()
+plt.close()
+```
+
+## Exercises

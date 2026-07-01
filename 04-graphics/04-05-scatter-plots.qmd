@@ -1,0 +1,92 @@
+# Scatter plots
+
+...
+
+
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+gapminder = pd.read_csv("data/gapminder.csv")
+gap_2007  = gapminder[gapminder["year"] == 2007].copy()
+
+# ── A basic scatter plot ─────────────────────────────────────
+
+# alpha controls transparency: 0 = invisible, 1 = fully opaque
+fig, ax = plt.subplots(figsize=(9, 6))
+
+ax.scatter(gap_2007["gdpPercap"], gap_2007["lifeExp"], alpha=0.6)
+
+ax.set_xlabel("GDP per capita (USD)")
+ax.set_ylabel("Life expectancy (years)")
+ax.set_title("GDP per capita vs life expectancy, 2007")
+
+plt.show()
+plt.close()
+
+# ── Using a log scale ────────────────────────────────────────
+
+# Log scale spreads out the squashed left side of the chart
+fig, ax = plt.subplots(figsize=(9, 6))
+
+ax.scatter(gap_2007["gdpPercap"], gap_2007["lifeExp"], alpha=0.6)
+
+ax.set_xscale("log")
+
+ax.set_xlabel("GDP per capita (USD, log scale)")
+ax.set_ylabel("Life expectancy (years)")
+ax.set_title("GDP per capita vs life expectancy, 2007")
+
+plt.show()
+plt.close()
+
+# ── Colouring by continent ───────────────────────────────────
+
+# Same loop-over-groups pattern as the line chart video
+fig, ax = plt.subplots(figsize=(10, 6))
+
+for continent in gap_2007["continent"].unique():
+    group = gap_2007[gap_2007["continent"] == continent]
+    ax.scatter(
+        group["gdpPercap"],
+        group["lifeExp"],
+        label = continent,
+        alpha = 0.75,
+    )
+
+ax.set_xscale("log")
+ax.set_xlabel("GDP per capita (USD, log scale)")
+ax.set_ylabel("Life expectancy (years)")
+ax.set_title("GDP per capita vs life expectancy by continent, 2007")
+ax.legend(title="Continent")
+
+plt.show()
+plt.close()
+
+# ── Encoding a fourth variable with marker size ──────────────
+
+# s= controls marker size — passing a column creates a "bubble chart"
+fig, ax = plt.subplots(figsize=(10, 6))
+
+for continent in gap_2007["continent"].unique():
+    group = gap_2007[gap_2007["continent"] == continent]
+    ax.scatter(
+        group["gdpPercap"],
+        group["lifeExp"],
+        s     = group["pop"] / 1_000_000,    # population in millions
+        label = continent,
+        alpha = 0.5,
+    )
+
+ax.set_xscale("log")
+ax.set_xlabel("GDP per capita (USD, log scale)")
+ax.set_ylabel("Life expectancy (years)")
+ax.set_title("Bubble chart: size = population, 2007")
+ax.legend(title="Continent")
+
+plt.show()
+plt.close()
+```
+
+## Exercises

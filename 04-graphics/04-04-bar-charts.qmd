@@ -1,0 +1,58 @@
+# Bar charts
+
+...
+
+{{< video https://vimeo.com/1195996940/db77ae82f0?fl=ml&fe=ec >}}
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+flights = pd.read_csv("data/flights.csv")
+
+# Build a date column and convert to datetime
+flights["date"] = flights["year"].astype(str) + "-" + flights["month"]
+flights["date"] = pd.to_datetime(flights["date"], format="%Y-%b")
+
+flights.head()
+
+# ── Preparing the data ───────────────────────────────────────
+
+# Total passengers per month, summed across all years
+# Group by both the month number (for sorting) and month name (for labels)
+monthly = flights.groupby([flights["date"].dt.month, flights["month"]])["passengers"].sum().reset_index()
+monthly = monthly.sort_values("date")
+
+monthly
+
+# ── A basic bar chart ────────────────────────────────────────
+
+fig, ax = plt.subplots(figsize=(10, 5))
+
+ax.bar(monthly["month"], monthly["passengers"])
+
+ax.set_xlabel("Month")
+ax.set_ylabel("Total passengers (all years)")
+ax.set_title("Monthly passenger totals, 1949–1960")
+
+plt.show()
+plt.close()
+
+# ── Horizontal bars ──────────────────────────────────────────
+
+# barh() is the horizontal version of bar()
+# First argument = y-axis (categories), second = x-axis (values)
+fig, ax = plt.subplots(figsize=(9, 5))
+
+ax.barh(monthly["month"], monthly["passengers"])
+
+ax.set_xlabel("Total passengers (all years)")
+ax.set_ylabel("Month")
+ax.set_title("Monthly passenger totals, 1949–1960")
+
+plt.show()
+plt.close()
+
+```
+
+## Exercises

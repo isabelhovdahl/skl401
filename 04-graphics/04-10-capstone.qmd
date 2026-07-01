@@ -1,0 +1,97 @@
+# Topic 4 capstone
+
+...
+
+{{< video https://vimeo.com/1196320474/2d00e509c3?fl=ml&fe=ec >}}
+
+```python
+# Research question: How has the relationship between wealth and
+# health changed globally since 1952, and does it differ by continent?
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+plt.style.use("seaborn-v0_8-whitegrid")
+
+gapminder = pd.read_csv("data/gapminder.csv")
+
+# Consistent colour palette for continents across all charts
+COLOURS = {
+    "Africa":   "#E07B54",
+    "Americas": "#5B8DB8",
+    "Asia":     "#7AAF6E",
+    "Europe":   "#9B6DB5",
+    "Oceania":  "#E8B84B",
+}
+
+# ── Chart 1: Life expectancy over time by continent ──────────
+
+continent_life = gapminder.groupby(["year", "continent"])["lifeExp"].mean().reset_index()
+
+fig, ax = plt.subplots(figsize=(10, 5))
+
+for continent in continent_life["continent"].unique():
+    group = continent_life[continent_life["continent"] == continent]
+    ax.plot(group["year"], group["lifeExp"],
+            label=continent, color=COLOURS[continent],
+            linewidth=2, marker="o", markersize=4)
+
+ax.set_xlabel("Year", fontsize=11)
+ax.set_ylabel("Mean life expectancy (years)", fontsize=11)
+ax.set_title("Life expectancy over time by continent",
+             fontsize=13, fontweight="bold")
+ax.legend(title="Continent")
+
+plt.tight_layout()
+fig.savefig("output/01_life_expectancy_trend.png",       # save before show
+            dpi=300, bbox_inches="tight")
+plt.show()
+plt.close()
+
+# ── Chart 2: Wealth vs health in 1952 and 2007 ──────────────
+
+fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(14, 6))
+
+# Left panel: 1952
+gap_1952 = gapminder[gapminder["year"] == 1952]
+
+for continent in gap_1952["continent"].unique():
+    group = gap_1952[gap_1952["continent"] == continent]
+    axes[0].scatter(group["gdpPercap"], group["lifeExp"],
+                    s=group["pop"] / 1_000_000,
+                    color=COLOURS[continent],
+                    label=continent, alpha=0.7)
+
+axes[0].set_title("1952", fontsize=13, fontweight="bold")
+
+# Right panel: 2007
+gap_2007 = gapminder[gapminder["year"] == 2007]
+
+for continent in gap_2007["continent"].unique():
+    group = gap_2007[gap_2007["continent"] == continent]
+    axes[1].scatter(group["gdpPercap"], group["lifeExp"],
+                    s=group["pop"] / 1_000_000,
+                    color=COLOURS[continent],
+                    label=continent, alpha=0.7)
+
+axes[1].set_title("2007", fontsize=13, fontweight="bold")
+
+# Apply shared formatting to both panels
+for i in range(2):
+    axes[i].set_xscale("log")
+    axes[i].set_xlabel("GDP per capita (USD, log scale)")
+    axes[i].set_ylabel("Life expectancy (years)")
+    axes[i].set_ylim(20, 90)
+    axes[i].legend()
+
+fig.suptitle("GDP per capita vs life expectancy (bubble size = population)",
+             fontsize=13, fontweight="bold")
+
+plt.tight_layout()
+fig.savefig("output/02_wealth_health_scatter.png",
+            dpi=300, bbox_inches="tight")
+plt.show()
+plt.close()
+```
+
+## Exercises
