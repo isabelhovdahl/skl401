@@ -152,7 +152,12 @@ The list below contains a mix of values stored as strings — some are whole num
 raw_values = ["12", "oslo", "8", "3", "bergen", "42", "7", "trondheim", "5"]
 ```
 
-_Hint: `.isdigit()` is a string method that returns `True` if all characters in the string are digits and `False` otherwise. For example, `"42".isdigit()` returns `True` while `"oslo".isdigit()` returns `False`._
+<details>
+<summary>Hint</summary>
+
+`.isdigit()` is a string method that returns `True` if all characters in the string are digits and `False` otherwise. For example, `"42".isdigit()` returns `True` while `"oslo".isdigit()` returns `False`.
+
+</details>
 
 <details>
 <summary>Solution</summary>
@@ -185,7 +190,12 @@ The string below contains a comma-separated list of country names with inconsist
 countries = "norway ,  GERMANY, brazil ,france,   JAPAN  "
 ```
 
-_Hint: To reassemble the cleaned names, you can either use a `for` loop or the string method `join()`._
+<details>
+<summary>Hint</summary>
+
+To reassemble the cleaned names, you can either use a `for` loop or the string method `join()`.
+
+</details>
 
 <details>
 <summary>Solution</summary>

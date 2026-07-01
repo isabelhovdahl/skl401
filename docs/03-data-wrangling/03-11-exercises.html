@@ -109,7 +109,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
+
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -542,7 +545,7 @@ window.Quarto = {
 <summary>
 Solution
 </summary>
-<div id="945dbc4f" class="cell" data-execution_count="1">
+<div id="b495f6d6" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> pd.read_csv(<span class="st">"data/titanic.csv"</span>)</span>
@@ -561,7 +564,7 @@ Q             13.28         7.75
 S             27.08        13.00</code></pre>
 </div>
 </div>
-<div id="73dfb781" class="cell" data-execution_count="2">
+<div id="a44ae645" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Survival rate and count by class and sex</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    titanic.groupby([<span class="st">"pclass"</span>, <span class="st">"sex"</span>])</span>
@@ -580,7 +583,7 @@ pclass sex
 3      male            0.135  347</code></pre>
 </div>
 </div>
-<div id="005b5d0a" class="cell" data-execution_count="3">
+<div id="e26a7e14" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Mean age and fare by passenger class</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(titanic.groupby(<span class="st">"pclass"</span>)[[<span class="st">"fare"</span>, <span class="st">"age"</span>]].mean().<span class="bu">round</span>(<span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -591,9 +594,11 @@ pclass
 3       13.7  25.1</code></pre>
 </div>
 </div>
-<p><strong>Task 1</strong> Port C (Cherbourg) has the highest mean fare by a considerable margin. The mean is likely less representative than the median here because fare distributions tend to be right-skewed — a small number of first-class passengers paying very high fares pulls the mean upward.</p>
-<p><strong>Task 2</strong> First-class female passengers have the highest survival rate. The pattern is consistent: within each class, female passengers survived at much higher rates than male passengers, and within each sex, higher classes survived at higher rates.</p>
-<p><strong>Task 3</strong> Both the average age and fare are increasing with class. Note that because the same aggregation (mean) is computed on the two columns, it is not necessary to use <code>agg()</code>.</p>
+<ol type="1">
+<li><p>Port C (Cherbourg) has the highest mean fare by a considerable margin. The mean is likely less representative than the median here because fare distributions tend to be right-skewed — a small number of first-class passengers paying very high fares pulls the mean upward.</p></li>
+<li><p>First-class female passengers have the highest survival rate. The pattern is consistent: within each class, female passengers survived at much higher rates than male passengers, and within each sex, higher classes survived at higher rates.</p></li>
+<li><p>Both the average age and fare are increasing with class. Note that because the same aggregation (mean) is computed on the two columns, it is not necessary to use <code>agg()</code>.</p></li>
+</ol>
 </details>
 <hr>
 </section>
@@ -612,7 +617,7 @@ pclass
 <summary>
 Solution
 </summary>
-<div id="c113c0b0" class="cell" data-execution_count="4">
+<div id="043f746f" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>healthexp <span class="op">=</span> pd.read_csv(<span class="st">"data/healthexp.csv"</span>)</span>
@@ -640,7 +645,7 @@ Solution
 [66 rows x 4 columns]</code></pre>
 </div>
 </div>
-<div id="1524dcf7" class="cell" data-execution_count="5">
+<div id="c8369880" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Sort by life expectancy descending, top 10</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    healthexp.sort_values(<span class="st">"Life_Expectancy"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
@@ -660,7 +665,7 @@ Solution
 206   Japan  2009             83.0</code></pre>
 </div>
 </div>
-<div id="2f70e7d1" class="cell" data-execution_count="6">
+<div id="06a1e959" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Most recent year, sorted by spending ascending</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>latest <span class="op">=</span> healthexp[healthexp[<span class="st">"Year"</span>] <span class="op">==</span> healthexp[<span class="st">"Year"</span>].<span class="bu">max</span>()]</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
@@ -700,7 +705,7 @@ Solution
 <summary>
 Solution
 </summary>
-<div id="1b5c6498" class="cell" data-execution_count="7">
+<div id="3767f877" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>flights <span class="op">=</span> pd.read_csv(<span class="st">"data/flights.csv"</span>)</span>
@@ -729,7 +734,7 @@ Solution
 Name: passengers, dtype: float64</code></pre>
 </div>
 </div>
-<div id="c292aa41" class="cell" data-execution_count="8">
+<div id="2207b937" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. First vs second half of the year</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>first_half  <span class="op">=</span> flights[flights[<span class="st">"month_num"</span>] <span class="op">&lt;=</span> <span class="dv">6</span>][<span class="st">"passengers"</span>].<span class="bu">sum</span>()</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>second_half <span class="op">=</span> flights[flights[<span class="st">"month_num"</span>] <span class="op">&gt;</span> <span class="dv">6</span>][<span class="st">"passengers"</span>].<span class="bu">sum</span>()</span>
@@ -740,7 +745,7 @@ Name: passengers, dtype: float64</code></pre>
 Second half: 21,193</code></pre>
 </div>
 </div>
-<div id="ffed5e34" class="cell" data-execution_count="9">
+<div id="a5719f67" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Day of the week</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>flights[<span class="st">"day_name"</span>] <span class="op">=</span> flights[<span class="st">"date"</span>].dt.day_name()</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(flights[<span class="st">"day_name"</span>].value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -756,9 +761,11 @@ Monday       19
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<p><strong>Task 1</strong> Month 7 (July) has the highest average passenger count, consistent with summer being the peak travel season.</p>
-<p><strong>Task 2</strong> The second half of the year has more total passengers than the first half, driven by the summer peak in July through September.</p>
-<p><strong>Task 3</strong> All dates fall on the first day of the month. Because <code>pd.to_datetime()</code> with a <code>%Y-%b</code> format string sets the day to 1 by default, every date in the dataset is the first of a month. The day of the week on which the first of the month falls depends on the year and month, so the distribution across weekdays is roughly even — but all values represent the same type of date (first of month), not randomly distributed days.</p>
+<ol type="1">
+<li><p>Month 7 (July) has the highest average passenger count, consistent with summer being the peak travel season.</p></li>
+<li><p>The second half of the year has more total passengers than the first half, driven by the summer peak in July through September.</p></li>
+<li><p>All dates fall on the first day of the month. Because <code>pd.to_datetime()</code> with a <code>%Y-%b</code> format string sets the day to 1 by default, every date in the dataset is the first of a month. The day of the week on which the first of the month falls depends on the year and month, so the distribution across weekdays is roughly even — but all values represent the same type of date (first of month), not randomly distributed days.</p></li>
+</ol>
 </details>
 <hr>
 </section>
@@ -796,7 +803,7 @@ Hint
 <summary>
 Solution
 </summary>
-<div id="77a313be" class="cell" data-execution_count="10">
+<div id="2f287dca" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -814,7 +821,7 @@ embarked    0
 dtype: int64</code></pre>
 </div>
 </div>
-<div id="5fbcc354" class="cell" data-execution_count="11">
+<div id="f385eef3" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Create age_group</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>conditions <span class="op">=</span> [titanic[<span class="st">"age"</span>] <span class="op">&lt;</span> <span class="dv">18</span>, titanic[<span class="st">"age"</span>] <span class="op">&lt;</span> <span class="dv">60</span>]</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>choices    <span class="op">=</span> [<span class="st">"child"</span>, <span class="st">"adult"</span>]</span>
@@ -828,7 +835,7 @@ senior     25
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="5b496ac1" class="cell" data-execution_count="12">
+<div id="88a585db" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Survival rate by age group and class</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    titanic.groupby([<span class="st">"age_group"</span>, <span class="st">"pclass"</span>])[<span class="st">"survived"</span>]</span>
@@ -850,7 +857,7 @@ senior     3         0.200
 Name: survived, dtype: float64</code></pre>
 </div>
 </div>
-<div id="48278b29" class="cell" data-execution_count="13">
+<div id="3bc4eaeb" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Share of each age group within each class</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>age_class <span class="op">=</span> titanic.groupby([<span class="st">"pclass"</span>, <span class="st">"age_group"</span>]).size()</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>age_class_share <span class="op">=</span> (age_class <span class="op">/</span> titanic.groupby(<span class="st">"pclass"</span>)[<span class="st">"age_group"</span>].count()).<span class="bu">round</span>(<span class="dv">3</span>)</span>
@@ -869,8 +876,10 @@ Name: survived, dtype: float64</code></pre>
 dtype: float64</code></pre>
 </div>
 </div>
-<p><strong>Task 3</strong> First-class children had the highest survival rate. In general, children and first-class passengers survived at higher rates. The “women and children first” evacuation policy is clearly visible in the data.</p>
-<p><strong>Task 4</strong> Third-class passengers tend to be younger on average than first-class passengers, with a higher share of children and young adults — consistent with the historical pattern of younger emigrants travelling in lower classes. Note the difference between <code>.size()</code> and <code>.count()</code> used above. <code>.size()</code> is applied directly to the grouped object and counts the number of rows in each group, including rows with missing values. <code>.count()</code> is applied to a specific column and counts only the non-missing values in that column. This also means <code>.size()</code> can be used to count rows even when you have not selected a column. Since <code>age_group</code> has no missing values here, the two approaches give the same result — but with a column that does have missing values, <code>.count()</code> would return a smaller number than <code>.size()</code>.</p>
+<ol start="3" type="1">
+<li><p>First-class children had the highest survival rate. In general, children and first-class passengers survived at higher rates. The “women and children first” evacuation policy is clearly visible in the data.</p></li>
+<li><p>Third-class passengers tend to be younger on average than first-class passengers, with a higher share of children and young adults — consistent with the historical pattern of younger emigrants travelling in lower classes. Note the difference between <code>.size()</code> and <code>.count()</code> used above. <code>.size()</code> is applied directly to the grouped object and counts the number of rows in each group, including rows with missing values. <code>.count()</code> is applied to a specific column and counts only the non-missing values in that column. This also means <code>.size()</code> can be used to count rows even when you have not selected a column. Since <code>age_group</code> has no missing values here, the two approaches give the same result — but with a column that does have missing values, <code>.count()</code> would return a smaller number than <code>.size()</code>.</p></li>
+</ol>
 </details>
 <hr>
 </section>
@@ -899,7 +908,7 @@ Hint
 <summary>
 Solution
 </summary>
-<div id="c3377d07" class="cell" data-execution_count="14">
+<div id="ece7f6de" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>flights <span class="op">=</span> pd.read_csv(<span class="st">"data/flights.csv"</span>)</span>
@@ -1014,7 +1023,7 @@ Solution
 </div>
 </div>
 </div>
-<div id="2a8d634a" class="cell" data-execution_count="15">
+<div id="c877b46c" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Part 3: verify and filter to spikes above 20%</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>flights <span class="op">=</span> flights.dropna()</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((flights[<span class="st">"pct_change_manual"</span>].<span class="bu">round</span>(<span class="dv">6</span>) <span class="op">==</span> flights[<span class="st">"pct_change_pandas"</span>].<span class="bu">round</span>(<span class="dv">6</span>)).<span class="bu">all</span>())</span>
@@ -1072,7 +1081,7 @@ Hint
 <summary>
 Solution
 </summary>
-<div id="28eaee97" class="cell" data-execution_count="16">
+<div id="2874efff" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>healthexp <span class="op">=</span> pd.read_csv(<span class="st">"data/healthexp.csv"</span>)</span>
@@ -1107,7 +1116,7 @@ Europe                  77.8         2557.9
 North America           77.2         3599.9</code></pre>
 </div>
 </div>
-<div id="5e99630e" class="cell" data-execution_count="17">
+<div id="e2075397" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Life expectancy growth per country</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>earliest <span class="op">=</span> healthexp.groupby(<span class="st">"country"</span>)[<span class="st">"life_expectancy"</span>].first()</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>latest   <span class="op">=</span> healthexp.groupby(<span class="st">"country"</span>)[<span class="st">"life_expectancy"</span>].last()</span>
@@ -1124,7 +1133,7 @@ United States      6.1
 Name: life_expectancy, dtype: float64</code></pre>
 </div>
 </div>
-<div id="96d79512" class="cell" data-execution_count="18">
+<div id="6728f11f" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Deviation from continent mean spending by year</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>healthexp[<span class="st">"continent_mean_spending"</span>] <span class="op">=</span> (</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    healthexp.groupby([<span class="st">"continent"</span>, <span class="st">"year"</span>])[<span class="st">"spending_usd"</span>]</span>
@@ -1186,7 +1195,7 @@ Hint
 <summary>
 Solution
 </summary>
-<div id="7388ce6d" class="cell" data-execution_count="19">
+<div id="a8c46d67" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1206,7 +1215,7 @@ Solution
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="4116c558" class="cell" data-execution_count="20">
+<div id="b456041e" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Spending tier</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>p33 <span class="op">=</span> healthexp[<span class="st">"spending_usd"</span>].quantile(<span class="fl">0.33</span>)</span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>p66 <span class="op">=</span> healthexp[<span class="st">"spending_usd"</span>].quantile(<span class="fl">0.66</span>)</span>
@@ -1226,7 +1235,7 @@ medium    90
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="7f049798" class="cell" data-execution_count="21">
+<div id="6b6b21e2" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Mean life expectancy by spending tier</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    healthexp.groupby(<span class="st">"spending_tier"</span>)[<span class="st">"life_expectancy"</span>]</span>
@@ -1241,7 +1250,7 @@ medium    78.39
 Name: life_expectancy, dtype: float64</code></pre>
 </div>
 </div>
-<div id="9d995f81" class="cell" data-execution_count="22">
+<div id="d8adec6f" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Share of years above median life expectancy per country</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    healthexp.groupby(<span class="st">"country"</span>)[<span class="st">"high_life_exp"</span>]</span>
@@ -1260,8 +1269,10 @@ USA              0.216
 Name: high_life_exp, dtype: float64</code></pre>
 </div>
 </div>
-<p><strong>Task 3</strong> Higher spending tiers are associated with higher mean life expectancy, but the relationship is not perfectly linear. Japan achieves very high life expectancy with moderate spending — it frequently appears in the high life expectancy group despite not being in the highest spending tier.</p>
-<p><strong>Task 4</strong> Japan and France are above the global median life expectancy for all or nearly all of their observed years, while countries with lower spending histories appear above the median for a smaller share of years.</p>
+<ol start="3" type="1">
+<li><p>Higher spending tiers are associated with higher mean life expectancy, but the relationship is not perfectly linear. Japan achieves very high life expectancy with moderate spending — it frequently appears in the high life expectancy group despite not being in the highest spending tier.</p></li>
+<li><p>Japan and France are above the global median life expectancy for all or nearly all of their observed years, while countries with lower spending histories appear above the median for a smaller share of years.</p></li>
+</ol>
 </details>
 <hr>
 </section>
@@ -1304,7 +1315,7 @@ Name: high_life_exp, dtype: float64</code></pre>
 <summary>
 Solution
 </summary>
-<div id="8db27fdd" class="cell" data-execution_count="23">
+<div id="351d4415" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>url_fred <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/FRED/FRED_monthly_2010.csv"</span></span>
@@ -1365,7 +1376,7 @@ Solution
 39 2019-10-01  20985.4</code></pre>
 </div>
 </div>
-<div id="2235d419" class="cell" data-execution_count="24">
+<div id="c889467a" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Approach B: merge on year and quarter (left join)</span></span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>fred[<span class="st">"year"</span>]    <span class="op">=</span> fred[<span class="st">"DATE"</span>].dt.year</span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>fred[<span class="st">"quarter"</span>] <span class="op">=</span> fred[<span class="st">"DATE"</span>].dt.quarter</span>
@@ -1388,7 +1399,7 @@ Solution
 7 2010-08-01  16872.3</code></pre>
 </div>
 </div>
-<div id="48beaefe" class="cell" data-execution_count="25">
+<div id="21693b56" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Compare the two</span></span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(merged_a[[<span class="st">"DATE"</span>, <span class="st">"GDP"</span>, <span class="st">"UNRATE"</span>]].head(<span class="dv">6</span>))</span>
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(merged_b[[<span class="st">"DATE"</span>, <span class="st">"GDP"</span>, <span class="st">"UNRATE"</span>]].head(<span class="dv">6</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1409,7 +1420,7 @@ Solution
 5 2010-06-01  16743.2     9.4</code></pre>
 </div>
 </div>
-<div id="5f9777fc" class="cell" data-execution_count="26">
+<div id="64dd7ae7" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Compare UNRATE and GDP</span></span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>start <span class="op">=</span> merged_b.iloc[<span class="dv">0</span>]</span>
 <span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>end   <span class="op">=</span> merged_b.iloc[<span class="op">-</span><span class="dv">1</span>]</span>
@@ -1424,11 +1435,13 @@ Solution
 GDP growth: 26.5%</code></pre>
 </div>
 </div>
-<p><strong>Task 1</strong> <code>merged_a</code> has only 40 rows — one for every quarter in the decade, since an inner join on <code>DATE</code> only keeps rows where the exact date matches in both DataFrames. Only January, April, July, and October survive; the other eight months of each year are dropped entirely because <code>gdp</code> has no row dated, for example, <code>2010-02-01</code>.</p>
-<p><strong>Task 2</strong> <code>merged_b</code> has 120 rows — one for every month in the decade, since the left join keeps every row from <code>fred</code> regardless of whether it falls on a quarter boundary. Months that are not the start of a quarter (February, March, May, June, and so on) now have the same GDP value as the first month of their quarter, since GDP is constant within a quarter and is simply broadcast across all three months.</p>
-<p><strong>Task 3</strong> In <code>merged_a</code>, each row represents one full quarter, identified by its first month. In <code>merged_b</code>, each row represents one month, with the quarter’s GDP value repeated for every month that falls within it. Neither is “more correct” — they represent the same underlying data at two different levels of granularity.</p>
-<p><strong>Task 4</strong> <code>merged_b</code> is the right choice. Since the goal is to track unemployment <em>month by month</em>, you need a row for every month — which only <code>merged_b</code> provides. <code>merged_a</code> would silently drop two out of every three months, making it impossible to see the monthly pattern in unemployment at all.</p>
-<p><strong>Task 5</strong> Unemployment fell from 9.8% in January 2010 to 3.6% in December 2019 — a decline of 6.2 percentage points, reflecting the long economic recovery following the 2008 financial crisis. Over the same period, GDP grew by roughly 27%, consistent with a full decade of sustained, if at times slow, economic expansion.</p>
+<ol type="1">
+<li><p><code>merged_a</code> has only 40 rows — one for every quarter in the decade, since an inner join on <code>DATE</code> only keeps rows where the exact date matches in both DataFrames. Only January, April, July, and October survive; the other eight months of each year are dropped entirely because <code>gdp</code> has no row dated, for example, <code>2010-02-01</code>.</p></li>
+<li><p><code>merged_b</code> has 120 rows — one for every month in the decade, since the left join keeps every row from <code>fred</code> regardless of whether it falls on a quarter boundary. Months that are not the start of a quarter (February, March, May, June, and so on) now have the same GDP value as the first month of their quarter, since GDP is constant within a quarter and is simply broadcast across all three months.</p></li>
+<li><p>In <code>merged_a</code>, each row represents one full quarter, identified by its first month. In <code>merged_b</code>, each row represents one month, with the quarter’s GDP value repeated for every month that falls within it. Neither is “more correct” — they represent the same underlying data at two different levels of granularity.</p></li>
+<li><p><code>merged_b</code> is the right choice. Since the goal is to track unemployment <em>month by month</em>, you need a row for every month — which only <code>merged_b</code> provides. <code>merged_a</code> would silently drop two out of every three months, making it impossible to see the monthly pattern in unemployment at all.</p></li>
+<li><p>Unemployment fell from 9.8% in January 2010 to 3.6% in December 2019 — a decline of 6.2 percentage points, reflecting the long economic recovery following the 2008 financial crisis. Over the same period, GDP grew by roughly 27%, consistent with a full decade of sustained, if at times slow, economic expansion.</p></li>
+</ol>
 </details>
 <hr>
 </section>
@@ -1465,7 +1478,7 @@ Hint
 <summary>
 Solution
 </summary>
-<div id="d8556adc" class="cell" data-execution_count="27">
+<div id="c4fdc6b0" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>flights <span class="op">=</span> pd.read_csv(<span class="st">"data/flights.csv"</span>)</span>
@@ -1495,7 +1508,7 @@ Solution
 11 1960-12-31              5714</code></pre>
 </div>
 </div>
-<div id="5de39269" class="cell" data-execution_count="28">
+<div id="73592708" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Quarterly totals</span></span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>quarterly <span class="op">=</span> flights[<span class="st">"passengers"</span>].resample(<span class="st">"QE"</span>).<span class="bu">sum</span>().reset_index()</span>
 <span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>quarterly.columns <span class="op">=</span> [<span class="st">"date"</span>, <span class="st">"total_passengers"</span>]</span>
@@ -1509,10 +1522,12 @@ Solution
 34 1957-09-30              1336</code></pre>
 </div>
 </div>
-<p><strong>Task 2</strong> The annual totals from <code>resample("YE")</code> are identical to those from <code>groupby(flights["date"].dt.year)</code>. The two approaches differ in syntax and flexibility — <code>resample()</code> is more natural for regularly spaced time series and integrates directly with the datetime index, while <code>groupby()</code> with <code>.dt</code> components works with any DataFrame regardless of whether the date is the index.</p>
-<p><strong>Task 3</strong> The highest single-quarter total occurs in Q3 of the final years of the dataset, reflecting both the summer peak and the overall upward trend in passenger numbers throughout the 1950s.</p>
-<p><strong>Task 4</strong> The highest year-on-year growth rate occurs in the early years of the dataset, when the base was low and commercial aviation was expanding rapidly.</p>
-<div id="c1d9545d" class="cell" data-execution_count="29">
+<ol start="2" type="1">
+<li><p>The annual totals from <code>resample("YE")</code> are identical to those from <code>groupby(flights["date"].dt.year)</code>. The two approaches differ in syntax and flexibility — <code>resample()</code> is more natural for regularly spaced time series and integrates directly with the datetime index, while <code>groupby()</code> with <code>.dt</code> components works with any DataFrame regardless of whether the date is the index.</p></li>
+<li><p>The highest single-quarter total occurs in Q3 of the final years of the dataset, reflecting both the summer peak and the overall upward trend in passenger numbers throughout the 1950s.</p></li>
+<li><p>The highest year-on-year growth rate occurs in the early years of the dataset, when the base was low and commercial aviation was expanding rapidly.</p></li>
+</ol>
+<div id="d23aab1b" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Year-on-year growth rate</span></span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>annual[<span class="st">"pct_change"</span>] <span class="op">=</span> annual[<span class="st">"total_passengers"</span>].pct_change() <span class="op">*</span> <span class="dv">100</span></span>
 <span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(annual[[<span class="st">"date"</span>, <span class="st">"total_passengers"</span>, <span class="st">"pct_change"</span>]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1532,7 +1547,7 @@ Solution
 11 1960-12-31              5714   11.167315</code></pre>
 </div>
 </div>
-<div id="9b5f530e" class="cell" data-execution_count="30">
+<div id="27713651" class="cell" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Upsample to daily resolution with asfreq()</span></span>
 <span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>daily <span class="op">=</span> flights[<span class="st">"passengers"</span>].resample(<span class="st">"D"</span>).asfreq()</span>
 <span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(daily.isna().<span class="bu">sum</span>())</span>
@@ -1553,7 +1568,7 @@ date
 Freq: D, Name: passengers, dtype: float64</code></pre>
 </div>
 </div>
-<div id="0d84b1e6" class="cell" data-execution_count="31">
+<div id="5941262d" class="cell" data-execution_count="31">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Spread monthly totals evenly across days</span></span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>daily_filled <span class="op">=</span> flights[<span class="st">"passengers"</span>].resample(<span class="st">"D"</span>).ffill()</span>
 <span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>days_in_month <span class="op">=</span> daily_filled.index.days_in_month</span>
@@ -1599,8 +1614,10 @@ Freq: D, Name: passengers, dtype: float64</code></pre>
 Freq: D, dtype: float64</code></pre>
 </div>
 </div>
-<p><strong>Task 5</strong> Upsampling with <code>.asfreq()</code> creates a row for every single day between the first and last date in the index, but only the original month-start dates have a value — every other day is <code>NaN</code>. This is the gap-filling behavior in action: <code>resample()</code> builds its date range from the calendar, not from the rows that happen to exist, so it makes the resolution mismatch between the original data and the daily target explicit rather than silently ignoring it. <code>groupby()</code> could not do this at all, since there is nothing in the original data to group by day.</p>
-<p><strong>Task 6</strong> <code>.ffill()</code> propagates each month’s total forward to every day until the next known value, so every day in a given month temporarily holds that month’s total. Dividing by <code>.dt.days_in_month</code> then converts each day’s value from “the whole month’s total” to “this day’s share of the total,” correctly accounting for the fact that months have different lengths (28–31 days). The result is a daily series whose values sum back up to the original monthly totals — a reasonable estimate given the assumption of even distribution, even though the true day-to-day pattern (e.g.&nbsp;weekday vs weekend travel) is not recoverable from monthly data alone.</p>
+<ol start="5" type="1">
+<li><p>Upsampling with <code>.asfreq()</code> creates a row for every single day between the first and last date in the index, but only the original month-start dates have a value — every other day is <code>NaN</code>. This is the gap-filling behavior in action: <code>resample()</code> builds its date range from the calendar, not from the rows that happen to exist, so it makes the resolution mismatch between the original data and the daily target explicit rather than silently ignoring it. <code>groupby()</code> could not do this at all, since there is nothing in the original data to group by day.</p></li>
+<li><p><code>.ffill()</code> propagates each month’s total forward to every day until the next known value, so every day in a given month temporarily holds that month’s total. Dividing by <code>.dt.days_in_month</code> then converts each day’s value from “the whole month’s total” to “this day’s share of the total,” correctly accounting for the fact that months have different lengths (28–31 days). The result is a daily series whose values sum back up to the original monthly totals — a reasonable estimate given the assumption of even distribution, even though the true day-to-day pattern (e.g.&nbsp;weekday vs weekend travel) is not recoverable from monthly data alone.</p></li>
+</ol>
 </details>
 <hr>
 </section>
@@ -1628,7 +1645,7 @@ Freq: D, dtype: float64</code></pre>
 <summary>
 Solution
 </summary>
-<div id="ae6a8c12" class="cell" data-execution_count="32">
+<div id="c5efc347" class="cell" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv"</span></span>
@@ -1656,7 +1673,7 @@ gdpPercap    0
 dtype: int64</code></pre>
 </div>
 </div>
-<div id="636baf8e" class="cell" data-execution_count="33">
+<div id="6822c5a6" class="cell" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Standardise column names</span></span>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>gapminder.columns <span class="op">=</span> [col.lower().replace(<span class="st">" "</span>, <span class="st">"_"</span>) <span class="cf">for</span> col <span class="kw">in</span> gapminder.columns]</span>
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gapminder.columns.tolist())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1664,7 +1681,7 @@ dtype: int64</code></pre>
 <pre><code>['country', 'year', 'pop', 'continent', 'lifeexp', 'gdppercap']</code></pre>
 </div>
 </div>
-<div id="2a671b3f" class="cell" data-execution_count="34">
+<div id="abdfce17" class="cell" data-execution_count="34">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Filter to 1952 and 2007 and merge</span></span>
 <span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>gapminder_1952 <span class="op">=</span> gapminder[gapminder[<span class="st">"year"</span>] <span class="op">==</span> <span class="dv">1952</span>].copy()</span>
 <span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>gapminder_2007 <span class="op">=</span> gapminder[gapminder[<span class="st">"year"</span>] <span class="op">==</span> <span class="dv">2007</span>].copy()</span>
@@ -1693,7 +1710,7 @@ dtype: int64</code></pre>
 4       2007  40301927.0        75.320    12779.379640  </code></pre>
 </div>
 </div>
-<div id="d1b9de9b" class="cell" data-execution_count="35">
+<div id="d35ae4f0" class="cell" data-execution_count="35">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Compute growth columns</span></span>
 <span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>merged[<span class="st">"life_exp_growth"</span>] <span class="op">=</span> (</span>
 <span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>    merged[<span class="st">"lifeexp_2007"</span>] <span class="op">-</span> merged[<span class="st">"lifeexp_1952"</span>]</span>
@@ -1704,7 +1721,7 @@ dtype: int64</code></pre>
 <span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">/</span> merged[<span class="st">"gdppercap_1952"</span>] <span class="op">*</span> <span class="dv">100</span></span>
 <span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a>).<span class="bu">round</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="5fd578a3" class="cell" data-execution_count="36">
+<div id="573459bb" class="cell" data-execution_count="36">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Summarise by continent</span></span>
 <span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
 <span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>    merged.groupby(<span class="st">"continent"</span>)</span>
@@ -1725,7 +1742,7 @@ Europe                    13.24           372.42
 Oceania                   11.46           190.80</code></pre>
 </div>
 </div>
-<div id="e6b08670" class="cell" data-execution_count="37">
+<div id="ec2dca37" class="cell" data-execution_count="37">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Top 5 and bottom 5 countries by life expectancy growth</span></span>
 <span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Top 5:"</span>)</span>
 <span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
@@ -1758,9 +1775,9 @@ Bottom 5:
 13    Botswana    Africa             3.11      1376.6</code></pre>
 </div>
 </div>
-<p><strong>Task 1</strong> The dataset has 1704 rows and 6 columns with no missing values. Each row represents a country-year observation.</p>
-<p><strong>Task 5</strong> Asia shows the greatest mean improvement in both life expectancy and GDP — driven by countries like Japan, South Korea, and China. Europe shows more modest gains because life expectancy and GDP were already high in 1952.</p>
-<p><strong>Task 6</strong> The countries with the greatest life expectancy improvements are not always those with the highest GDP growth — reflecting that improvements in public health, sanitation, and medicine can drive life expectancy gains independently of economic growth. The bottom 5 countries tend to be those affected by conflict or epidemics, which caused life expectancy to stagnate or fall in parts of sub-Saharan Africa.</p>
+<p><strong>Task 1:</strong> The dataset has 1704 rows and 6 columns with no missing values. Each row represents a country-year observation.</p>
+<p><strong>Task 5:</strong> Asia shows the greatest mean improvement in both life expectancy and GDP — driven by countries like Japan, South Korea, and China. Europe shows more modest gains because life expectancy and GDP were already high in 1952.</p>
+<p><strong>Task 6:</strong> The countries with the greatest life expectancy improvements are not always those with the highest GDP growth — reflecting that improvements in public health, sanitation, and medicine can drive life expectancy gains independently of economic growth. The bottom 5 countries tend to be those affected by conflict or epidemics, which caused life expectancy to stagnate or fall in parts of sub-Saharan Africa.</p>
 </details>
 <hr>
 </section>
@@ -1809,7 +1826,7 @@ Hint
 <summary>
 Solution
 </summary>
-<div id="6a19bc65" class="cell" data-execution_count="38">
+<div id="73d48511" class="cell" data-execution_count="38">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>url_core  <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/titanic_core.csv"</span></span>
@@ -1830,7 +1847,7 @@ Solution
 <pre><code>Rows: 891</code></pre>
 </div>
 </div>
-<div id="7481aee6" class="cell" data-execution_count="39">
+<div id="b48380f5" class="cell" data-execution_count="39">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Extract last_name and title</span></span>
 <span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>merged[<span class="st">"last_name"</span>] <span class="op">=</span> merged[<span class="st">"Name"</span>].<span class="bu">str</span>.split(<span class="st">","</span>).<span class="bu">str</span>[<span class="dv">0</span>]</span>
 <span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>merged[<span class="st">"title"</span>] <span class="op">=</span> (</span>
@@ -1847,7 +1864,7 @@ Solution
 4                           Allen, Mr. William Henry      Allen    Mr</code></pre>
 </div>
 </div>
-<div id="91f00bcc" class="cell" data-execution_count="40">
+<div id="ab9f656d" class="cell" data-execution_count="40">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Simplified title group</span></span>
 <span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>merged[<span class="st">"title_group"</span>] <span class="op">=</span> merged[<span class="st">"title"</span>].replace(</span>
 <span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>    {t: <span class="st">"Other"</span> <span class="cf">for</span> t <span class="kw">in</span> merged[<span class="st">"title"</span>].unique()</span>
@@ -1863,7 +1880,7 @@ Other     67
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="b434e22a" class="cell" data-execution_count="41">
+<div id="b99ef94a" class="cell" data-execution_count="41">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Most common starting letter and length of last names</span></span>
 <span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(merged[<span class="st">"last_name"</span>].<span class="bu">str</span>[<span class="dv">0</span>].value_counts().head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1876,7 +1893,7 @@ H    69
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="7e90a02b" class="cell" data-execution_count="42">
+<div id="30e2d450" class="cell" data-execution_count="42">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(merged[<span class="st">"last_name"</span>].<span class="bu">str</span>.<span class="bu">len</span>().value_counts().head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>last_name
@@ -1888,7 +1905,7 @@ Name: count, dtype: int64</code></pre>
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="0fe9876e" class="cell" data-execution_count="43">
+<div id="e1edb25b" class="cell" data-execution_count="43">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb97"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Survival rate by title group and class</span></span>
 <span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
 <span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>    merged.groupby([<span class="st">"title_group"</span>, <span class="st">"pclass"</span>])[<span class="st">"survived"</span>]</span>
@@ -1910,9 +1927,9 @@ Mr           1         0.346
 Name: survived, dtype: float64</code></pre>
 </div>
 </div>
-<p><strong>Task 2</strong> Splitting on <code>", "</code> first isolates the part of the string starting with the title, and splitting that on <code>"."</code> extracts just the title word. This relies on the title always being the second comma-separated segment in the name, which holds for every row in this dataset.</p>
-<p><strong>Task 4</strong> The most common starting letter for last names is “S”, followed closely by “M” and “B” — a pattern that broadly reflects the most common surname initials among the British and Northern European passengers who make up most of the dataset. The most common last name length is 6 or 7 characters, which is typical for English-language surnames; very short (3-4 character) and very long (10+ character) names are comparatively rare.</p>
-<p><strong>Task 5</strong> First-class “Ms” (Miss/Mrs) passengers had the highest survival rate — consistent with the “women and children first” pattern combined with the class advantage.</p>
+<p><strong>Task 2:</strong> Splitting on <code>", "</code> first isolates the part of the string starting with the title, and splitting that on <code>"."</code> extracts just the title word. This relies on the title always being the second comma-separated segment in the name, which holds for every row in this dataset.</p>
+<p><strong>Task 4:</strong> The most common starting letter for last names is “S”, followed closely by “M” and “B” — a pattern that broadly reflects the most common surname initials among the British and Northern European passengers who make up most of the dataset. The most common last name length is 6 or 7 characters, which is typical for English-language surnames; very short (3-4 character) and very long (10+ character) names are comparatively rare.</p>
+<p><strong>Task 5:</strong> First-class “Ms” (Miss/Mrs) passengers had the highest survival rate — consistent with the “women and children first” pattern combined with the class advantage.</p>
 </details>
 </section>
 <section id="exercise-3.11.12" class="level3">
@@ -1941,7 +1958,7 @@ Hint
 <summary>
 Solution
 </summary>
-<div id="fd16f428" class="cell" data-execution_count="44">
+<div id="a5b2ecb7" class="cell" data-execution_count="44">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>base_url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/FRED/"</span></span>
@@ -1965,7 +1982,7 @@ Solution
 2010 (120, 6)</code></pre>
 </div>
 </div>
-<div id="b11e074a" class="cell" data-execution_count="45">
+<div id="7e0901c6" class="cell" data-execution_count="45">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Combine, convert, and sort</span></span>
 <span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> pd.concat(fred_dfs).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>fred[<span class="st">"DATE"</span>] <span class="op">=</span> pd.to_datetime(fred[<span class="st">"DATE"</span>])</span>
@@ -1978,7 +1995,7 @@ Solution
 1950-01-01 00:00:00 to 2019-12-01 00:00:00</code></pre>
 </div>
 </div>
-<div id="34215522" class="cell" data-execution_count="46">
+<div id="049c9d8a" class="cell" data-execution_count="46">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Annual mean CPI and year-on-year inflation rate</span></span>
 <span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>annual_cpi <span class="op">=</span> fred.groupby(fred[<span class="st">"DATE"</span>].dt.year)[<span class="st">"CPI"</span>].mean()</span>
 <span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>inflation <span class="op">=</span> (annual_cpi.pct_change() <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">1</span>)</span>
@@ -1998,7 +2015,7 @@ Solution
 Name: CPI, dtype: float64</code></pre>
 </div>
 </div>
-<div id="8243afda" class="cell" data-execution_count="47">
+<div id="313b6b10" class="cell" data-execution_count="47">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb106"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Highest and lowest inflation years</span></span>
 <span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Highest inflation years:"</span>)</span>
 <span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inflation.sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">5</span>))</span>
@@ -2025,7 +2042,7 @@ DATE
 Name: CPI, dtype: float64</code></pre>
 </div>
 </div>
-<div id="cac517bc" class="cell" data-execution_count="48">
+<div id="b9a7beb8" class="cell" data-execution_count="48">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb108"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Mean inflation rate by decade</span></span>
 <span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>decade_of_year <span class="op">=</span> (inflation.index <span class="op">//</span> <span class="dv">10</span>) <span class="op">*</span> <span class="dv">10</span></span>
 <span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(inflation.groupby(decade_of_year).mean().<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2041,8 +2058,10 @@ Name: CPI, dtype: float64</code></pre>
 Name: CPI, dtype: float64</code></pre>
 </div>
 </div>
-<p><strong>Task 4</strong> The highest inflation years cluster in the mid-to-late 1970s and around 1980 — the period of the oil price shocks and the resulting stagflation, when annual inflation exceeded 10%. The lowest (most negative) values appear around 2009, reflecting the brief period of deflation during the global financial crisis, when prices fell rather than rose.</p>
-<p><strong>Task 5</strong> The 1970s has by far the highest average inflation rate of any decade in the data, consistent with the well-known “Great Inflation” period in US economic history. The 1950s and 2010s show the lowest average inflation, reflecting relatively stable price growth in both the early postwar period and the decade following the 2008 financial crisis.</p>
+<ol start="4" type="1">
+<li><p>The highest inflation years cluster in the mid-to-late 1970s and around 1980 — the period of the oil price shocks and the resulting stagflation, when annual inflation exceeded 10%. The lowest (most negative) values appear around 2009, reflecting the brief period of deflation during the global financial crisis, when prices fell rather than rose.</p></li>
+<li><p>The 1970s has by far the highest average inflation rate of any decade in the data, consistent with the well-known “Great Inflation” period in US economic history. The 1950s and 2010s show the lowest average inflation, reflecting relatively stable price growth in both the early postwar period and the decade following the 2008 financial crisis.</p></li>
+</ol>
 </details>
 
 

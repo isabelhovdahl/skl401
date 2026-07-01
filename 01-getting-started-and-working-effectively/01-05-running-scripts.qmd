@@ -45,7 +45,12 @@ In your script, write code that computes and prints the result of:
 
 Run each line individually using `Ctrl+Enter` (Windows) or `Cmd+Enter` (Mac).
 
-(_Hint_: the modulo operator in Python is `%`, integer division is `//`, and the power operator is `**`.)
+<details>
+<summary>Hint</summary>
+
+The modulo operator in Python is `%`, integer division is `//`, and the power operator is `**`.
+
+</details>
 
 <details>
 <summary>Solution</summary>

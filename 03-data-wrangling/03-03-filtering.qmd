@@ -255,9 +255,9 @@ print(summer_q.shape)
 
 All three approaches return the same 36 rows — 3 months × 12 years.
 
-2. `.isin()` is considerably more concise than chaining conditions with `|`. The difference becomes even more pronounced if you needed to filter for five or six months — chaining that many `|` conditions would be tedious to write and hard to read.
+**Task 2:** `.isin()` is considerably more concise than chaining conditions with `|`. The difference becomes even more pronounced if you needed to filter for five or six months — chaining that many `|` conditions would be tedious to write and hard to read.
 
-4. `.query()` is often more readable for simple conditions because the expression reads like a plain English sentence. `.isin()` tends to be preferable when the list of values is long, stored in a variable, or constructed dynamically — for example `flights[flights["month"].isin(summer_months)]` where `summer_months` is a list defined elsewhere in your script. Embedding a long list directly inside a `.query()` string becomes harder to read and maintain.
+**Task 4:** `.query()` is often more readable for simple conditions because the expression reads like a plain English sentence. `.isin()` tends to be preferable when the list of values is long, stored in a variable, or constructed dynamically — for example `flights[flights["month"].isin(summer_months)]` where `summer_months` is a list defined elsewhere in your script. Embedding a long list directly inside a `.query()` string becomes harder to read and maintain.
 
 </details>
 

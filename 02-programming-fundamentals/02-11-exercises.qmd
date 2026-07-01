@@ -279,7 +279,12 @@ Batch 3: [670, 430, 310] — total: 1410
 Batch 4: [290, 150, 780] — total: 1220
 ```
 
-_Hint: Use a `while` loop to control which batch you are currently processing, and an inner `for` loop to sum the values within each batch._
+<details>
+<summary>Hint</summary>
+
+Use a `while` loop to control which batch you are currently processing, and an inner `for` loop to sum the values within each batch.
+
+</details>
 
 <details>
 <summary>Solution</summary>

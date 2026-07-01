@@ -214,7 +214,7 @@ merged = merged.drop(columns=["first_name", "last_name"])
 print(merged)
 ```
 
-2. Merging on both keys avoids the duplicate name column problem from exercise 3.8.1. When two tables share a column that you want to use as a key rather than a data column, include it in the `on=` list. This is also safer: merging on multiple keys reduces the risk of false matches where two different people happen to share the same student ID or the same name.
+**Task 2:** Merging on both keys avoids the duplicate name column problem from exercise 3.8.1. When two tables share a column that you want to use as a key rather than a data column, include it in the `on=` list. This is also safer: merging on multiple keys reduces the risk of false matches where two different people happen to share the same student ID or the same name.
 
 </details>
 
@@ -426,10 +426,10 @@ summary = merged.groupby(["pclass", "sex"])["survived"].mean().round(3)
 print(summary)
 ```
 
-1. Both DataFrames contain `passenger_id`/`PassengerId`, `pclass`/`Pclass`, and `sex`/`Sex`. The casing difference matters because pandas treats column names as case-sensitive — `pclass` and `Pclass` are different column names and will not be recognised as the same key unless you standardise them first.
+**Task 1:** Both DataFrames contain `passenger_id`/`PassengerId`, `pclass`/`Pclass`, and `sex`/`Sex`. The casing difference matters because pandas treats column names as case-sensitive — `pclass` and `Pclass` are different column names and will not be recognised as the same key unless you standardise them first.
 
-3. Merging on all three shared keys is the cleanest approach — it avoids duplicate columns entirely and provides an additional check that the rows match correctly across all three variables. The row count should be 891 in both `core` and `merged`, confirming no rows were lost.
+**Task 3:** Merging on all three shared keys is the cleanest approach — it avoids duplicate columns entirely and provides an additional check that the rows match correctly across all three variables. The row count should be 891 in both `core` and `merged`, confirming no rows were lost.
 
-4. First class female passengers had by far the highest survival rate at around 97%. In general, female passengers survived at much higher rates than male passengers across all classes, and higher passenger classes survived at higher rates than lower classes — with the exception that second class female passengers also survived at very high rates.
+**Task 4:** First class female passengers had by far the highest survival rate at around 97%. In general, female passengers survived at much higher rates than male passengers across all classes, and higher passenger classes survived at higher rates than lower classes — with the exception that second class female passengers also survived at very high rates.
 
 </details>

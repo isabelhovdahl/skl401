@@ -559,7 +559,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <summary>
 Solution
 </summary>
-<div id="23297356" class="cell" data-execution_count="1">
+<div id="3204e267" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>exam1 <span class="op">=</span> pd.DataFrame({</span>
@@ -585,7 +585,7 @@ Solution
 2           3  Carol        78  Carol        95</code></pre>
 </div>
 </div>
-<div id="916c93c3" class="cell" data-execution_count="2">
+<div id="cd062f0a" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Left join</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Left:"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(exam1.merge(exam2, on<span class="op">=</span><span class="st">"student_id"</span>, how<span class="op">=</span><span class="st">"left"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -599,7 +599,7 @@ Solution
 4           5    Eva        88    NaN       NaN</code></pre>
 </div>
 </div>
-<div id="861e392e" class="cell" data-execution_count="3">
+<div id="88f253bc" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Right join</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Right:"</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(exam1.merge(exam2, on<span class="op">=</span><span class="st">"student_id"</span>, how<span class="op">=</span><span class="st">"right"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -613,7 +613,7 @@ Solution
 4           7    NaN       NaN  Grace        85</code></pre>
 </div>
 </div>
-<div id="cbdd8ec3" class="cell" data-execution_count="4">
+<div id="4ecb7460" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Outer join</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Outer:"</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(exam1.merge(exam2, on<span class="op">=</span><span class="st">"student_id"</span>, how<span class="op">=</span><span class="st">"outer"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -668,7 +668,7 @@ Solution
 <summary>
 Solution
 </summary>
-<div id="6f5f4152" class="cell" data-execution_count="5">
+<div id="b1f1575a" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>exam1 <span class="op">=</span> pd.DataFrame({</span>
@@ -697,7 +697,7 @@ Solution
 4           5        Eva     Davis        88    eva davis</code></pre>
 </div>
 </div>
-<div id="47f46ae7" class="cell" data-execution_count="6">
+<div id="2ab8b18e" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Merge on both student_id and name</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> exam1.merge(exam2, on<span class="op">=</span>[<span class="st">"student_id"</span>, <span class="st">"name"</span>], how<span class="op">=</span><span class="st">"left"</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(merged)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -710,7 +710,7 @@ Solution
 4           5        Eva     Davis        88    eva davis       NaN</code></pre>
 </div>
 </div>
-<div id="95fccd79" class="cell" data-execution_count="7">
+<div id="f56524db" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Drop first_name and last_name</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> merged.drop(columns<span class="op">=</span>[<span class="st">"first_name"</span>, <span class="st">"last_name"</span>])</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(merged)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -723,9 +723,7 @@ Solution
 4           5        88    eva davis       NaN</code></pre>
 </div>
 </div>
-<ol start="2" type="1">
-<li>Merging on both keys avoids the duplicate name column problem from exercise 3.8.1. When two tables share a column that you want to use as a key rather than a data column, include it in the <code>on=</code> list. This is also safer: merging on multiple keys reduces the risk of false matches where two different people happen to share the same student ID or the same name.</li>
-</ol>
+<p><strong>Task 2:</strong> Merging on both keys avoids the duplicate name column problem from exercise 3.8.1. When two tables share a column that you want to use as a key rather than a data column, include it in the <code>on=</code> list. This is also safer: merging on multiple keys reduces the risk of false matches where two different people happen to share the same student ID or the same name.</p>
 </details>
 <hr>
 </section>
@@ -765,7 +763,7 @@ Hint
 <summary>
 Solution
 </summary>
-<div id="2decfddc" class="cell" data-execution_count="8">
+<div id="c10ed2af" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>products <span class="op">=</span> pd.DataFrame({</span>
@@ -794,7 +792,7 @@ Merged rows:   5
 4           3        Juice   Jan          60</code></pre>
 </div>
 </div>
-<div id="d6709faf" class="cell" data-execution_count="9">
+<div id="597066f3" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Check for duplicate keys in sales</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sales[<span class="st">"product_id"</span>].value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -805,7 +803,7 @@ Merged rows:   5
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="2979a167" class="cell" data-execution_count="10">
+<div id="b760353c" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Aggregate sales first, then merge</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sales_total <span class="op">=</span> sales.groupby(<span class="st">"product_id"</span>)[<span class="st">"units_sold"</span>].<span class="bu">sum</span>().reset_index()</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>merged_clean <span class="op">=</span> products.merge(sales_total, on<span class="op">=</span><span class="st">"product_id"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
@@ -848,7 +846,7 @@ Hint
 <summary>
 Solution
 </summary>
-<div id="015d1275" class="cell" data-execution_count="11">
+<div id="6a07859c" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>flights <span class="op">=</span> pd.read_csv(<span class="st">"data/flights.csv"</span>)</span>
@@ -875,7 +873,7 @@ Solution
 (12, 3)</code></pre>
 </div>
 </div>
-<div id="64f7b849" class="cell" data-execution_count="12">
+<div id="b018daac" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Reassemble with pd.concat()</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>flights_combined <span class="op">=</span> pd.concat(month_dfs).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(flights_combined.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -883,7 +881,7 @@ Solution
 <pre><code>(144, 3)</code></pre>
 </div>
 </div>
-<div id="de817228" class="cell" data-execution_count="13">
+<div id="d0dfa040" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Verify against original</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(flights.shape <span class="op">==</span> flights_combined.shape)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(flights[<span class="st">"passengers"</span>].<span class="bu">sum</span>() <span class="op">==</span> flights_combined[<span class="st">"passengers"</span>].<span class="bu">sum</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -927,7 +925,7 @@ Hint
 <summary>
 Solution
 </summary>
-<div id="52d04a99" class="cell" data-execution_count="14">
+<div id="8409f6c2" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>url_core  <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/03-data-wrangling/data/titanic_core.csv"</span></span>
@@ -943,7 +941,7 @@ Solution
 <span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sex"</span>:         <span class="st">"sex"</span></span>
 <span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="6080d16c" class="cell" data-execution_count="15">
+<div id="fee047fe" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Merge on all three shared keys to avoid duplicate columns</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> core.merge(names, on<span class="op">=</span>[<span class="st">"passenger_id"</span>, <span class="st">"pclass"</span>, <span class="st">"sex"</span>], how<span class="op">=</span><span class="st">"left"</span>)</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Core rows:  "</span>, <span class="bu">len</span>(core))</span>
@@ -967,7 +965,7 @@ Merged rows: 891
 4                           Allen, Mr. William Henry            373450   NaN  </code></pre>
 </div>
 </div>
-<div id="75936a54" class="cell" data-execution_count="16">
+<div id="d93ec095" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Survival rate by class and sex</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> merged.groupby([<span class="st">"pclass"</span>, <span class="st">"sex"</span>])[<span class="st">"survived"</span>].mean().<span class="bu">round</span>(<span class="dv">3</span>)</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -982,11 +980,9 @@ Merged rows: 891
 Name: survived, dtype: float64</code></pre>
 </div>
 </div>
-<ol type="1">
-<li><p>Both DataFrames contain <code>passenger_id</code>/<code>PassengerId</code>, <code>pclass</code>/<code>Pclass</code>, and <code>sex</code>/<code>Sex</code>. The casing difference matters because pandas treats column names as case-sensitive — <code>pclass</code> and <code>Pclass</code> are different column names and will not be recognised as the same key unless you standardise them first.</p></li>
-<li><p>Merging on all three shared keys is the cleanest approach — it avoids duplicate columns entirely and provides an additional check that the rows match correctly across all three variables. The row count should be 891 in both <code>core</code> and <code>merged</code>, confirming no rows were lost.</p></li>
-<li><p>First class female passengers had by far the highest survival rate at around 97%. In general, female passengers survived at much higher rates than male passengers across all classes, and higher passenger classes survived at higher rates than lower classes — with the exception that second class female passengers also survived at very high rates.</p></li>
-</ol>
+<p><strong>Task 1:</strong> Both DataFrames contain <code>passenger_id</code>/<code>PassengerId</code>, <code>pclass</code>/<code>Pclass</code>, and <code>sex</code>/<code>Sex</code>. The casing difference matters because pandas treats column names as case-sensitive — <code>pclass</code> and <code>Pclass</code> are different column names and will not be recognised as the same key unless you standardise them first.</p>
+<p><strong>Task 3:</strong> Merging on all three shared keys is the cleanest approach — it avoids duplicate columns entirely and provides an additional check that the rows match correctly across all three variables. The row count should be 891 in both <code>core</code> and <code>merged</code>, confirming no rows were lost.</p>
+<p><strong>Task 4:</strong> First class female passengers had by far the highest survival rate at around 97%. In general, female passengers survived at much higher rates than male passengers across all classes, and higher passenger classes survived at higher rates than lower classes — with the exception that second class female passengers also survived at very high rates.</p>
 </details>
 
 

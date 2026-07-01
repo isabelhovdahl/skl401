@@ -58,11 +58,11 @@ print(
 print(titanic.groupby("pclass")[["fare", "age"]].mean().round(1))
 ```
 
-**Task 1** Port C (Cherbourg) has the highest mean fare by a considerable margin. The mean is likely less representative than the median here because fare distributions tend to be right-skewed — a small number of first-class passengers paying very high fares pulls the mean upward.
+1. Port C (Cherbourg) has the highest mean fare by a considerable margin. The mean is likely less representative than the median here because fare distributions tend to be right-skewed — a small number of first-class passengers paying very high fares pulls the mean upward.
 
-**Task 2** First-class female passengers have the highest survival rate. The pattern is consistent: within each class, female passengers survived at much higher rates than male passengers, and within each sex, higher classes survived at higher rates.
+2. First-class female passengers have the highest survival rate. The pattern is consistent: within each class, female passengers survived at much higher rates than male passengers, and within each sex, higher classes survived at higher rates.
 
-**Task 3** Both the average age and fare are increasing with class. Note that because the same aggregation (mean) is computed on the two columns, it is not necessary to use `agg()`.
+3. Both the average age and fare are increasing with class. Note that because the same aggregation (mean) is computed on the two columns, it is not necessary to use `agg()`.
 
 </details>
 
@@ -170,11 +170,11 @@ flights["day_name"] = flights["date"].dt.day_name()
 print(flights["day_name"].value_counts())
 ```
 
-**Task 1** Month 7 (July) has the highest average passenger count, consistent with summer being the peak travel season.
+1. Month 7 (July) has the highest average passenger count, consistent with summer being the peak travel season.
 
-**Task 2** The second half of the year has more total passengers than the first half, driven by the summer peak in July through September.
+2. The second half of the year has more total passengers than the first half, driven by the summer peak in July through September.
 
-**Task 3** All dates fall on the first day of the month. Because `pd.to_datetime()` with a `%Y-%b` format string sets the day to 1 by default, every date in the dataset is the first of a month. The day of the week on which the first of the month falls depends on the year and month, so the distribution across weekdays is roughly even — but all values represent the same type of date (first of month), not randomly distributed days.
+3. All dates fall on the first day of the month. Because `pd.to_datetime()` with a `%Y-%b` format string sets the day to 1 by default, every date in the dataset is the first of a month. The day of the week on which the first of the month falls depends on the year and month, so the distribution across weekdays is roughly even — but all values represent the same type of date (first of month), not randomly distributed days.
 
 </details>
 
@@ -257,9 +257,9 @@ age_class_share = (age_class / titanic.groupby("pclass")["age_group"].count()).r
 print(age_class_share)
 ```
 
-**Task 3** First-class children had the highest survival rate. In general, children and first-class passengers survived at higher rates. The "women and children first" evacuation policy is clearly visible in the data.
+3. First-class children had the highest survival rate. In general, children and first-class passengers survived at higher rates. The "women and children first" evacuation policy is clearly visible in the data.
 
-**Task 4** Third-class passengers tend to be younger on average than first-class passengers, with a higher share of children and young adults — consistent with the historical pattern of younger emigrants travelling in lower classes. Note the difference between `.size()` and `.count()` used above. `.size()` is applied directly to the grouped object and counts the number of rows in each group, including rows with missing values. `.count()` is applied to a specific column and counts only the non-missing values in that column. This also means `.size()` can be used to count rows even when you have not selected a column. Since `age_group` has no missing values here, the two approaches give the same result — but with a column that does have missing values, `.count()` would return a smaller number than `.size()`.
+4. Third-class passengers tend to be younger on average than first-class passengers, with a higher share of children and young adults — consistent with the historical pattern of younger emigrants travelling in lower classes. Note the difference between `.size()` and `.count()` used above. `.size()` is applied directly to the grouped object and counts the number of rows in each group, including rows with missing values. `.count()` is applied to a specific column and counts only the non-missing values in that column. This also means `.size()` can be used to count rows even when you have not selected a column. Since `age_group` has no missing values here, the two approaches give the same result — but with a column that does have missing values, `.count()` would return a smaller number than `.size()`.
 
 </details>
 
@@ -524,9 +524,9 @@ print(
 )
 ```
 
-**Task 3** Higher spending tiers are associated with higher mean life expectancy, but the relationship is not perfectly linear. Japan achieves very high life expectancy with moderate spending — it frequently appears in the high life expectancy group despite not being in the highest spending tier.
+3. Higher spending tiers are associated with higher mean life expectancy, but the relationship is not perfectly linear. Japan achieves very high life expectancy with moderate spending — it frequently appears in the high life expectancy group despite not being in the highest spending tier.
 
-**Task 4** Japan and France are above the global median life expectancy for all or nearly all of their observed years, while countries with lower spending histories appear above the median for a smaller share of years.
+4. Japan and France are above the global median life expectancy for all or nearly all of their observed years, while countries with lower spending histories appear above the median for a smaller share of years.
 
 </details>
 
@@ -624,16 +624,16 @@ print(f"Unemployment change: {unemployment_change:.1f} percentage points")
 print(f"GDP growth: {gdp_growth:.1f}%")
 ```
 
-**Task 1** `merged_a` has only 40 rows — one for every quarter in the decade, since an inner join on `DATE` only keeps rows where the exact date matches in both DataFrames. Only January, April, July, and October survive; the other eight months of each year are dropped entirely because `gdp` has no row dated, for example, `2010-02-01`.
+1. `merged_a` has only 40 rows — one for every quarter in the decade, since an inner join on `DATE` only keeps rows where the exact date matches in both DataFrames. Only January, April, July, and October survive; the other eight months of each year are dropped entirely because `gdp` has no row dated, for example, `2010-02-01`.
 
-**Task 2** `merged_b` has 120 rows — one for every month in the decade, since the left join keeps every row from `fred` regardless of whether it falls on a quarter boundary. Months that are not the start of a quarter (February, March, May, June, and so on) now have the same GDP value as the first month of their quarter, since GDP is constant within a quarter and is simply broadcast across
+2. `merged_b` has 120 rows — one for every month in the decade, since the left join keeps every row from `fred` regardless of whether it falls on a quarter boundary. Months that are not the start of a quarter (February, March, May, June, and so on) now have the same GDP value as the first month of their quarter, since GDP is constant within a quarter and is simply broadcast across
 all three months.
 
-**Task 3** In `merged_a`, each row represents one full quarter, identified by its first month. In `merged_b`, each row represents one month, with the quarter's GDP value repeated for every month that falls within it. Neither is "more correct" — they represent the same underlying data at two different levels of granularity.
+3. In `merged_a`, each row represents one full quarter, identified by its first month. In `merged_b`, each row represents one month, with the quarter's GDP value repeated for every month that falls within it. Neither is "more correct" — they represent the same underlying data at two different levels of granularity.
 
-**Task 4** `merged_b` is the right choice. Since the goal is to track unemployment *month by month*, you need a row for every month — which only `merged_b` provides. `merged_a` would silently drop two out of every three months, making it impossible to see the monthly pattern in unemployment at all.
+4. `merged_b` is the right choice. Since the goal is to track unemployment *month by month*, you need a row for every month — which only `merged_b` provides. `merged_a` would silently drop two out of every three months, making it impossible to see the monthly pattern in unemployment at all.
 
-**Task 5** Unemployment fell from 9.8% in January 2010 to 3.6% in December 2019 — a decline of 6.2 percentage points, reflecting the long economic recovery following the 2008 financial crisis. Over the same period, GDP grew by roughly 27%, consistent with a full decade of sustained, if at times slow, economic expansion.
+5. Unemployment fell from 9.8% in January 2010 to 3.6% in December 2019 — a decline of 6.2 percentage points, reflecting the long economic recovery following the 2008 financial crisis. Over the same period, GDP grew by roughly 27%, consistent with a full decade of sustained, if at times slow, economic expansion.
 
 </details>
 
@@ -699,11 +699,11 @@ quarterly.columns = ["date", "total_passengers"]
 print(quarterly.sort_values("total_passengers", ascending=False).head(5))
 ```
 
-**Task 2** The annual totals from `resample("YE")` are identical to those from `groupby(flights["date"].dt.year)`. The two approaches differ in syntax and flexibility — `resample()` is more natural for regularly spaced time series and integrates directly with the datetime index, while `groupby()` with `.dt` components works with any DataFrame regardless of whether the date is the index.
+2. The annual totals from `resample("YE")` are identical to those from `groupby(flights["date"].dt.year)`. The two approaches differ in syntax and flexibility — `resample()` is more natural for regularly spaced time series and integrates directly with the datetime index, while `groupby()` with `.dt` components works with any DataFrame regardless of whether the date is the index.
 
-**Task 3** The highest single-quarter total occurs in Q3 of the final years of the dataset, reflecting both the summer peak and the overall upward trend in passenger numbers throughout the 1950s.
+3. The highest single-quarter total occurs in Q3 of the final years of the dataset, reflecting both the summer peak and the overall upward trend in passenger numbers throughout the 1950s.
 
-**Task 4** The highest year-on-year growth rate occurs in the early years of the dataset, when the base was low and commercial aviation was expanding rapidly.
+4. The highest year-on-year growth rate occurs in the early years of the dataset, when the base was low and commercial aviation was expanding rapidly.
 
 ```{python}
 # 4. Year-on-year growth rate
@@ -726,9 +726,9 @@ daily_estimate = (daily_filled / days_in_month).round(2)
 print(daily_estimate.head(35))
 ```
 
-**Task 5** Upsampling with `.asfreq()` creates a row for every single day between the first and last date in the index, but only the original month-start dates have a value — every other day is `NaN`. This is the gap-filling behavior in action: `resample()` builds its date range from the calendar, not from the rows that happen to exist, so it makes the resolution mismatch between the original data and the daily target explicit rather than silently ignoring it. `groupby()` could not do this at all, since there is nothing in the original data to group by day.
+5. Upsampling with `.asfreq()` creates a row for every single day between the first and last date in the index, but only the original month-start dates have a value — every other day is `NaN`. This is the gap-filling behavior in action: `resample()` builds its date range from the calendar, not from the rows that happen to exist, so it makes the resolution mismatch between the original data and the daily target explicit rather than silently ignoring it. `groupby()` could not do this at all, since there is nothing in the original data to group by day.
 
-**Task 6** `.ffill()` propagates each month's total forward to every day until the next known value, so every day in a given month temporarily holds that month's total. Dividing by `.dt.days_in_month` then converts each day's value from "the whole month's total" to "this day's share of the total," correctly accounting for the fact that months have different lengths (28–31 days). The result is a daily series whose values sum back up to the original monthly totals — a reasonable estimate given the assumption of even distribution, even though the true day-to-day pattern (e.g. weekday vs weekend travel) is not recoverable from monthly data alone.
+6. `.ffill()` propagates each month's total forward to every day until the next known value, so every day in a given month temporarily holds that month's total. Dividing by `.dt.days_in_month` then converts each day's value from "the whole month's total" to "this day's share of the total," correctly accounting for the fact that months have different lengths (28–31 days). The result is a daily series whose values sum back up to the original monthly totals — a reasonable estimate given the assumption of even distribution, even though the true day-to-day pattern (e.g. weekday vs weekend travel) is not recoverable from monthly data alone.
 
 </details>
 
@@ -833,11 +833,11 @@ print(
 )
 ```
 
-**Task 1** The dataset has 1704 rows and 6 columns with no missing values. Each row represents a country-year observation.
+**Task 1:** The dataset has 1704 rows and 6 columns with no missing values. Each row represents a country-year observation.
 
-**Task 5** Asia shows the greatest mean improvement in both life expectancy and GDP — driven by countries like Japan, South Korea, and China. Europe shows more modest gains because life expectancy and GDP were already high in 1952.
+**Task 5:** Asia shows the greatest mean improvement in both life expectancy and GDP — driven by countries like Japan, South Korea, and China. Europe shows more modest gains because life expectancy and GDP were already high in 1952.
 
-**Task 6** The countries with the greatest life expectancy improvements are not always those with the highest GDP growth — reflecting that improvements in public health, sanitation, and medicine can drive life expectancy gains independently of economic growth. The bottom 5 countries tend to be those affected by conflict or epidemics, which caused life expectancy to stagnate or fall in parts of sub-Saharan Africa.
+**Task 6:** The countries with the greatest life expectancy improvements are not always those with the highest GDP growth — reflecting that improvements in public health, sanitation, and medicine can drive life expectancy gains independently of economic growth. The bottom 5 countries tend to be those affected by conflict or epidemics, which caused life expectancy to stagnate or fall in parts of sub-Saharan Africa.
 
 </details>
 
@@ -948,11 +948,11 @@ print(
 )
 ```
 
-**Task 2** Splitting on `", "` first isolates the part of the string starting with the title, and splitting that on `"."` extracts just the title word. This relies on the title always being the second comma-separated segment in the name, which holds for every row in this dataset.
+**Task 2:** Splitting on `", "` first isolates the part of the string starting with the title, and splitting that on `"."` extracts just the title word. This relies on the title always being the second comma-separated segment in the name, which holds for every row in this dataset.
 
-**Task 4** The most common starting letter for last names is "S", followed closely by "M" and "B" — a pattern that broadly reflects the most common surname initials among the British and Northern European passengers who make up most of the dataset. The most common last name length is 6 or 7 characters, which is typical for English-language surnames; very short (3-4 character) and very long (10+ character) names are comparatively rare.
+**Task 4:** The most common starting letter for last names is "S", followed closely by "M" and "B" — a pattern that broadly reflects the most common surname initials among the British and Northern European passengers who make up most of the dataset. The most common last name length is 6 or 7 characters, which is typical for English-language surnames; very short (3-4 character) and very long (10+ character) names are comparatively rare.
 
-**Task 5** First-class "Ms" (Miss/Mrs) passengers had the highest survival rate — consistent with the "women and children first" pattern combined with the class advantage.
+**Task 5:** First-class "Ms" (Miss/Mrs) passengers had the highest survival rate — consistent with the "women and children first" pattern combined with the class advantage.
 
 </details>
 
@@ -1035,8 +1035,8 @@ decade_of_year = (inflation.index // 10) * 10
 print(inflation.groupby(decade_of_year).mean().round(2))
 ```
 
-**Task 4** The highest inflation years cluster in the mid-to-late 1970s and around 1980 — the period of the oil price shocks and the resulting stagflation, when annual inflation exceeded 10%. The lowest (most negative) values appear around 2009, reflecting the brief period of deflation during the global financial crisis, when prices fell rather than rose.
+4. The highest inflation years cluster in the mid-to-late 1970s and around 1980 — the period of the oil price shocks and the resulting stagflation, when annual inflation exceeded 10%. The lowest (most negative) values appear around 2009, reflecting the brief period of deflation during the global financial crisis, when prices fell rather than rose.
 
-**Task 5** The 1970s has by far the highest average inflation rate of any decade in the data, consistent with the well-known "Great Inflation" period in US economic history. The 1950s and 2010s show the lowest average inflation, reflecting relatively stable price growth in both the early postwar period and the decade following the 2008 financial crisis.
+5. The 1970s has by far the highest average inflation rate of any decade in the data, consistent with the well-known "Great Inflation" period in US economic history. The 1950s and 2010s show the lowest average inflation, reflecting relatively stable price growth in both the early postwar period and the decade following the 2008 financial crisis.
 
 </details>

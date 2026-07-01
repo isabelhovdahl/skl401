@@ -145,7 +145,12 @@ Use a `for` loop to iterate over the string below character by character. Build 
 word = "programming"
 ```
 
-_Hint: you can check whether a character is a vowel by testing `char in "aeiou"`._
+<details>
+<summary>Hint</summary>
+
+You can check whether a character is a vowel by testing `char in "aeiou"`.
+
+</details>
 
 <details>
 <summary>Solution</summary>
@@ -183,7 +188,12 @@ populations = {
 }
 ```
 
-_Hint: iterating over a dictionary with a plain `for` loop gives you the keys one by one. You can then use each key to look up the corresponding value. Alternatively, `.items()` lets you unpack both the key and value directly in the loop header: `for country, pop in populations.items()`._
+<details>
+<summary>Hint</summary>
+
+Iterating over a dictionary with a plain `for` loop gives you the keys one by one. You can then use each key to look up the corresponding value. Alternatively, `.items()` lets you unpack both the key and value directly in the loop header: `for country, pop in populations.items()`.
+
+</details>
 
 <details>
 <summary>Solution</summary>

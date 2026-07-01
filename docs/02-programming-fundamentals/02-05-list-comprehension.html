@@ -516,7 +516,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <summary>
 Solution
 </summary>
-<div id="95cf6c69" class="cell" data-execution_count="1">
+<div id="ac74263b" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>temperatures_c <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">100</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Original for loop</span></span>
@@ -548,7 +548,7 @@ A list comprehension is a compact way to write the pattern: create an empty list
 <summary>
 Solution
 </summary>
-<div id="b52abb53" class="cell" data-execution_count="2">
+<div id="68849ec7" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [<span class="st">"Norway"</span>, <span class="st">"UK"</span>, <span class="st">"Germany"</span>, <span class="st">"Chad"</span>, <span class="st">"Brazil"</span>, <span class="st">"Peru"</span>, <span class="st">"Netherlands"</span>]</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># For loop version</span></span>
@@ -577,12 +577,17 @@ Adding an <code>if</code> clause to a list comprehension filters the iterable �
 <h3 class="anchored" data-anchor-id="exercise-2.5.3">Exercise 2.5.3</h3>
 <p>Use a list comprehension with an <code>if/else</code> expression to label each temperature in the list below as <code>"warm"</code> if it is above 15 degrees and <code>"cold"</code> otherwise. Print the result alongside the original temperatures.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>temperatures <span class="op">=</span> [<span class="fl">4.2</span>, <span class="fl">18.5</span>, <span class="fl">11.0</span>, <span class="fl">22.3</span>, <span class="fl">8.7</span>, <span class="fl">16.1</span>, <span class="fl">3.5</span>, <span class="fl">19.8</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><em>Hint: the syntax for an if/else expression inside a list comprehension is: <code>[a if condition else b for item in iterable]</code>. Note that the if/else comes before the <code>for</code> keyword, not after it. To print the temperatures and labels side by side, you can either use <code>range(len(...))</code> to index into both lists, or use <code>zip(list1, list2)</code> which lets you iterate over two lists simultaneously — try both.</em></p>
+<details>
+<summary>
+Hint
+</summary>
+<p>The syntax for an if/else expression inside a list comprehension is: <code>[a if condition else b for item in iterable]</code>. Note that the if/else comes before the <code>for</code> keyword, not after it. To print the temperatures and labels side by side, you can either use <code>range(len(...))</code> to index into both lists, or use <code>zip(list1, list2)</code> which lets you iterate over two lists simultaneously — try both.</p>
+</details>
 <details>
 <summary>
 Solution
 </summary>
-<div id="3091c255" class="cell" data-execution_count="3">
+<div id="f66724a8" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>temperatures <span class="op">=</span> [<span class="fl">4.2</span>, <span class="fl">18.5</span>, <span class="fl">11.0</span>, <span class="fl">22.3</span>, <span class="fl">8.7</span>, <span class="fl">16.1</span>, <span class="fl">3.5</span>, <span class="fl">19.8</span>]</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [<span class="st">"warm"</span> <span class="cf">if</span> temp <span class="op">&gt;</span> <span class="dv">15</span> <span class="cf">else</span> <span class="st">"cold"</span> <span class="cf">for</span> temp <span class="kw">in</span> temperatures]</span>
@@ -601,7 +606,7 @@ Solution
 19.8°C — warm</code></pre>
 </div>
 </div>
-<div id="1eb54be8" class="cell" data-execution_count="4">
+<div id="cdd48d81" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using zip</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> temp, label <span class="kw">in</span> <span class="bu">zip</span>(temperatures, labels):</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>temp<span class="sc">}</span><span class="ss">°C — </span><span class="sc">{</span>label<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -626,12 +631,17 @@ Both approaches produce the same result. <code>range(len(...))</code> accesses b
 <p>You are given two lists — one of country names and one of their GDP per capita values. First use a <code>for</code> loop to combine them into a dictionary where country names are keys and GDP values are values. Then rewrite it as a dictionary comprehension and verify that both produce the same result.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [<span class="st">"Norway"</span>, <span class="st">"Brazil"</span>, <span class="st">"Germany"</span>, <span class="st">"Nigeria"</span>, <span class="st">"Japan"</span>]</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>gdp       <span class="op">=</span> [<span class="dv">82500</span>, <span class="dv">8600</span>, <span class="dv">48000</span>, <span class="dv">2100</span>, <span class="dv">42000</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><em>Hint: <code>zip(list1, list2)</code> lets you iterate over two lists simultaneously, giving you one item from each list on every iteration.</em></p>
+<details>
+<summary>
+Hint
+</summary>
+<p><code>zip(list1, list2)</code> lets you iterate over two lists simultaneously, giving you one item from each list on every iteration.</p>
+</details>
 <details>
 <summary>
 Solution
 </summary>
-<div id="b3a53b8b" class="cell" data-execution_count="5">
+<div id="8b06badf" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [<span class="st">"Norway"</span>, <span class="st">"Brazil"</span>, <span class="st">"Germany"</span>, <span class="st">"Nigeria"</span>, <span class="st">"Japan"</span>]</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>gdp       <span class="op">=</span> [<span class="dv">82500</span>, <span class="dv">8600</span>, <span class="dv">48000</span>, <span class="dv">2100</span>, <span class="dv">42000</span>]</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -669,7 +679,7 @@ Dictionary comprehensions follow the same logic as list comprehensions but use c
 <summary>
 Solution
 </summary>
-<div id="d6e524bb" class="cell" data-execution_count="6">
+<div id="c0b960b6" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>

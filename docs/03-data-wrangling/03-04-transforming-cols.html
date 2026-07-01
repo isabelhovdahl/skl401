@@ -546,7 +546,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <summary>
 Solution
 </summary>
-<div id="0e33529d" class="cell" data-execution_count="1">
+<div id="e15c0d01" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>healthexp <span class="op">=</span> pd.read_csv(<span class="st">"data/healthexp.csv"</span>)</span>
@@ -588,7 +588,7 @@ Solution
 <summary>
 Solution
 </summary>
-<div id="8a829658" class="cell" data-execution_count="2">
+<div id="8983dd18" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>healthexp <span class="op">=</span> pd.read_csv(<span class="st">"data/healthexp.csv"</span>)</span>
@@ -631,7 +631,7 @@ Name: count, dtype: int64</code></pre>
 <summary>
 Solution
 </summary>
-<div id="1e08f701" class="cell" data-execution_count="3">
+<div id="dd060e0d" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -662,9 +662,7 @@ high    110
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<ol start="3" type="1">
-<li><code>np.where()</code> is the better choice here. It is more concise and faster because it operates on the entire column at once rather than calling a function once per row. As a rule of thumb: use <code>np.where()</code> for simple two-way conditions, and <code>.apply()</code> only when the logic requires multiple branches or depends on more than one column simultaneously.</li>
-</ol>
+<p><strong>Task 3:</strong> <code>np.where()</code> is the better choice here. It is more concise and faster because it operates on the entire column at once rather than calling a function once per row. As a rule of thumb: use <code>np.where()</code> for simple two-way conditions, and <code>.apply()</code> only when the logic requires multiple branches or depends on more than one column simultaneously.</p>
 </details>
 <hr>
 </section>
@@ -687,7 +685,7 @@ Name: count, dtype: int64</code></pre>
 <summary>
 Solution
 </summary>
-<div id="c30fac2f" class="cell" data-execution_count="4">
+<div id="cf6c3792" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame({</span>
@@ -733,7 +731,7 @@ Solution
 <summary>
 Solution
 </summary>
-<div id="29c0dce0" class="cell" data-execution_count="5">
+<div id="6758c107" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> pd.read_csv(<span class="st">"data/titanic.csv"</span>)</span>
@@ -753,7 +751,7 @@ pclass
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="372ccc7b" class="cell" data-execution_count="6">
+<div id="64cab6f5" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Convert fare to integer</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(titanic[<span class="st">"fare"</span>].head())</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>titanic[<span class="st">"fare"</span>] <span class="op">=</span> titanic[<span class="st">"fare"</span>].astype(<span class="bu">int</span>)</span>
@@ -773,7 +771,7 @@ Name: fare, dtype: float64
 Name: fare, dtype: int64</code></pre>
 </div>
 </div>
-<div id="52559fa4" class="cell" data-execution_count="7">
+<div id="75161c1e" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Try to convert age to integer</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    titanic[<span class="st">"age"</span>] <span class="op">=</span> titanic[<span class="st">"age"</span>].astype(<span class="bu">int</span>)</span>

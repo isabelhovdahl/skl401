@@ -553,7 +553,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 Solution
 </summary>
 <p><code>city</code> is not modified by any of the method calls — strings are immutable, so every method returns a new string without changing the original. The final <code>print(city)</code> still prints <code>"  oslo  "</code>. To store the results, you must assign them back to a variable:</p>
-<div id="e65b8a4f" class="cell" data-execution_count="1">
+<div id="fc816a51" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>city <span class="op">=</span> <span class="st">"  oslo  "</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>city_clean <span class="op">=</span> city.strip().upper()</span>
@@ -587,7 +587,7 @@ Notice that methods can be chained: <code>.strip()</code> removes the surroundin
 <summary>
 Solution
 </summary>
-<div id="6016f587" class="cell" data-execution_count="2">
+<div id="e157dda4" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>filenames <span class="op">=</span> [</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"raw_data.csv"</span>,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"raw_data.xlsx"</span>,</span>
@@ -622,12 +622,17 @@ raw_survey.csv is a raw CSV file and should be cleaned before use.</code></pre>
 <h3 class="anchored" data-anchor-id="exercise-2.9.3">Exercise 2.9.3</h3>
 <p>The list below contains a mix of values stored as strings — some are whole numbers and some are not. Use a loop with string methods and conditionals to build two new lists: one containing the numeric values converted to integers, and one containing the non-numeric values left as strings. Print both lists when the loop is finished.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>raw_values <span class="op">=</span> [<span class="st">"12"</span>, <span class="st">"oslo"</span>, <span class="st">"8"</span>, <span class="st">"3"</span>, <span class="st">"bergen"</span>, <span class="st">"42"</span>, <span class="st">"7"</span>, <span class="st">"trondheim"</span>, <span class="st">"5"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><em>Hint: <code>.isdigit()</code> is a string method that returns <code>True</code> if all characters in the string are digits and <code>False</code> otherwise. For example, <code>"42".isdigit()</code> returns <code>True</code> while <code>"oslo".isdigit()</code> returns <code>False</code>.</em></p>
+<details>
+<summary>
+Hint
+</summary>
+<p><code>.isdigit()</code> is a string method that returns <code>True</code> if all characters in the string are digits and <code>False</code> otherwise. For example, <code>"42".isdigit()</code> returns <code>True</code> while <code>"oslo".isdigit()</code> returns <code>False</code>.</p>
+</details>
 <details>
 <summary>
 Solution
 </summary>
-<div id="4f5ebd7a" class="cell" data-execution_count="3">
+<div id="6eb82020" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>raw_values <span class="op">=</span> [<span class="st">"12"</span>, <span class="st">"oslo"</span>, <span class="st">"8"</span>, <span class="st">"3"</span>, <span class="st">"bergen"</span>, <span class="st">"42"</span>, <span class="st">"7"</span>, <span class="st">"trondheim"</span>, <span class="st">"5"</span>]</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>numeric     <span class="op">=</span> []</span>
@@ -654,12 +659,17 @@ Non-numeric values: ['oslo', 'bergen', 'trondheim']</code></pre>
 <h3 class="anchored" data-anchor-id="exercise-2.9.4">Exercise 2.9.4</h3>
 <p>The string below contains a comma-separated list of country names with inconsistent formatting — extra spaces and mixed capitalisation. Split it into individual country names, clean each one so that it has no leading or trailing spaces and starts with a capital letter, and then reassemble the cleaned names into a single string separated by <code>" | "</code>. Print the final result.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> <span class="st">"norway ,  GERMANY, brazil ,france,   JAPAN  "</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><em>Hint: To reassemble the cleaned names, you can either use a <code>for</code> loop or the string method <code>join()</code>.</em></p>
+<details>
+<summary>
+Hint
+</summary>
+<p>To reassemble the cleaned names, you can either use a <code>for</code> loop or the string method <code>join()</code>.</p>
+</details>
 <details>
 <summary>
 Solution
 </summary>
-<div id="7655b41b" class="cell" data-execution_count="4">
+<div id="f2178703" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> <span class="st">"norway ,  GERMANY, brazil ,france,   JAPAN  "</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Split into individual names</span></span>
@@ -703,7 +713,7 @@ Norway | Germany | Brazil | France | Japan</code></pre>
 <summary>
 Solution
 </summary>
-<div id="974fc683" class="cell" data-execution_count="5">
+<div id="75d6f98f" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clean_string(s):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> s.strip().lower().replace(<span class="st">" "</span>, <span class="st">"_"</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>

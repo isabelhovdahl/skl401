@@ -111,7 +111,12 @@ Use a list comprehension with an `if/else` expression to label each temperature 
 temperatures = [4.2, 18.5, 11.0, 22.3, 8.7, 16.1, 3.5, 19.8]
 ```
 
-_Hint: the syntax for an if/else expression inside a list comprehension is: `[a if condition else b for item in iterable]`. Note that the if/else comes before the `for` keyword, not after it. To print the temperatures and labels side by side, you can either use `range(len(...))` to index into both lists, or use `zip(list1, list2)` which lets you iterate over two lists simultaneously — try both._
+<details>
+<summary>Hint</summary>
+
+The syntax for an if/else expression inside a list comprehension is: `[a if condition else b for item in iterable]`. Note that the if/else comes before the `for` keyword, not after it. To print the temperatures and labels side by side, you can either use `range(len(...))` to index into both lists, or use `zip(list1, list2)` which lets you iterate over two lists simultaneously — try both.
+
+</details>
 
 <details>
 <summary>Solution</summary>
@@ -148,7 +153,12 @@ countries = ["Norway", "Brazil", "Germany", "Nigeria", "Japan"]
 gdp       = [82500, 8600, 48000, 2100, 42000]
 ```
 
-_Hint: `zip(list1, list2)` lets you iterate over two lists simultaneously, giving you one item from each list on every iteration._
+<details>
+<summary>Hint</summary>
+
+`zip(list1, list2)` lets you iterate over two lists simultaneously, giving you one item from each list on every iteration.
+
+</details>
 
 <details>
 <summary>Solution</summary>

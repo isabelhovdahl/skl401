@@ -184,7 +184,7 @@ print((healthexp["high_spend"] == healthexp["high_spend_apply"]).all())
 print(healthexp["high_spend"].value_counts())
 ```
 
-3. `np.where()` is the better choice here. It is more concise and faster because it operates on the entire column at once rather than calling a function once per row. As a rule of thumb: use `np.where()` for simple two-way conditions, and `.apply()` only when the logic requires multiple branches or depends on more than one column simultaneously.
+**Task 3:** `np.where()` is the better choice here. It is more concise and faster because it operates on the entire column at once rather than calling a function once per row. As a rule of thumb: use `np.where()` for simple two-way conditions, and `.apply()` only when the logic requires multiple branches or depends on more than one column simultaneously.
 
 </details>
 

@@ -529,7 +529,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <summary>
 Solution
 </summary>
-<div id="8006fe8a" class="cell" data-execution_count="1">
+<div id="89108629" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>healthexp <span class="op">=</span> pd.read_csv(<span class="st">"data/healthexp.csv"</span>)</span>
@@ -541,7 +541,7 @@ Solution
 <pre><code>&lt;class 'pandas.api.typing.DataFrameGroupBy'&gt;</code></pre>
 </div>
 </div>
-<div id="b81d0a47" class="cell" data-execution_count="2">
+<div id="3a8ee649" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Mean spending and life expectancy per country</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grouped[<span class="st">"Spending_USD"</span>].mean().<span class="bu">round</span>(<span class="dv">2</span>))</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grouped[<span class="st">"Life_Expectancy"</span>].mean().<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -564,7 +564,7 @@ USA              75.84
 Name: Life_Expectancy, dtype: float64</code></pre>
 </div>
 </div>
-<div id="8ae7771f" class="cell" data-execution_count="3">
+<div id="a22a8418" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Group by country and year</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> healthexp.groupby([<span class="st">"Country"</span>, <span class="st">"Year"</span>])[<span class="st">"Spending_USD"</span>].mean()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.shape)</span>
@@ -618,7 +618,7 @@ Name: Spending_USD, dtype: float64
 <summary>
 Solution
 </summary>
-<div id="0470523a" class="cell" data-execution_count="4">
+<div id="ec9926b0" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>flights <span class="op">=</span> pd.read_csv(<span class="st">"data/flights.csv"</span>)</span>
@@ -642,7 +642,7 @@ Solution
 1960: 5714</code></pre>
 </div>
 </div>
-<div id="a583657d" class="cell" data-execution_count="5">
+<div id="6bdf23f0" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. groupby + sum</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(flights.groupby(<span class="st">"year"</span>)[<span class="st">"passengers"</span>].<span class="bu">sum</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -687,7 +687,7 @@ Name: passengers, dtype: int64</code></pre>
 <summary>
 Solution
 </summary>
-<div id="534d27ce" class="cell" data-execution_count="6">
+<div id="5a0f7d4c" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>healthexp <span class="op">=</span> pd.read_csv(<span class="st">"data/healthexp.csv"</span>)</span>
@@ -712,7 +712,7 @@ Great Britain         2034.2        5018.7           77.6       43
 Japan                 1860.3        4665.6           79.6       51</code></pre>
 </div>
 </div>
-<div id="3126bb11" class="cell" data-execution_count="7">
+<div id="187ede49" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Most and fewest years</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(summary[<span class="st">"n_years"</span>].idxmax(), summary[<span class="st">"n_years"</span>].<span class="bu">max</span>())</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(summary[<span class="st">"n_years"</span>].idxmin(), summary[<span class="st">"n_years"</span>].<span class="bu">min</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -741,7 +741,7 @@ France 35</code></pre>
 <summary>
 Solution
 </summary>
-<div id="440a382f" class="cell" data-execution_count="8">
+<div id="6d6fd7e2" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>healthexp <span class="op">=</span> pd.read_csv(<span class="st">"data/healthexp.csv"</span>)</span>
@@ -762,7 +762,7 @@ USA              75.84
 Name: Life_Expectancy, dtype: float64</code></pre>
 </div>
 </div>
-<div id="8f57d1c3" class="cell" data-execution_count="9">
+<div id="1a63d2ce" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. transform() - adds group statistic as a new column</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>healthexp[<span class="st">"country_mean_life_exp"</span>] <span class="op">=</span> (</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    healthexp.groupby(<span class="st">"Country"</span>)[<span class="st">"Life_Expectancy"</span>].transform(<span class="st">"mean"</span>).<span class="bu">round</span>(<span class="dv">2</span>)</span>
@@ -784,13 +784,13 @@ Name: Life_Expectancy, dtype: float64</code></pre>
 9            USA  1971             71.2                  75.84</code></pre>
 </div>
 </div>
-<div id="df484ad4" class="cell" data-execution_count="10">
+<div id="333fe759" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Deviation from country mean</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>healthexp[<span class="st">"life_exp_vs_mean"</span>] <span class="op">=</span> (</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    healthexp[<span class="st">"Life_Expectancy"</span>] <span class="op">-</span> healthexp[<span class="st">"country_mean_life_exp"</span>]</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>).<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="a5e1689b" class="cell" data-execution_count="11">
+<div id="d6b30689" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Years below long-run average</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>below_avg <span class="op">=</span> healthexp[healthexp[<span class="st">"life_exp_vs_mean"</span>] <span class="op">&lt;</span> <span class="dv">0</span>]</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(below_avg[[<span class="st">"Country"</span>, <span class="st">"Year"</span>, <span class="st">"Life_Expectancy"</span>, <span class="st">"life_exp_vs_mean"</span>]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -811,10 +811,8 @@ Name: Life_Expectancy, dtype: float64</code></pre>
 [136 rows x 4 columns]</code></pre>
 </div>
 </div>
-<ol start="2" type="1">
-<li><p><code>.transform()</code> returns a Series with the same number of rows as the original DataFrame — each row receives the mean life expectancy for its country. This is the key difference: <code>.agg()</code> collapses the data to one row per group, while <code>.transform()</code> broadcasts the group statistic back to every row in the group, keeping the original shape intact.</p></li>
-<li><p>The rows below the long-run average tend to cluster in the earlier years of the dataset for each country — reflecting the fact that life expectancy has generally increased over time, so earlier years naturally fall below the long-run mean. Any sharp dips in specific years may reflect historical events such as disease outbreaks or periods of economic hardship.</p></li>
-</ol>
+<p><strong>Task 2:</strong> <code>.transform()</code> returns a Series with the same number of rows as the original DataFrame — each row receives the mean life expectancy for its country. This is the key difference: <code>.agg()</code> collapses the data to one row per group, while <code>.transform()</code> broadcasts the group statistic back to every row in the group, keeping the original shape intact.</p>
+<p><strong>Task 4:</strong> The rows below the long-run average tend to cluster in the earlier years of the dataset for each country — reflecting the fact that life expectancy has generally increased over time, so earlier years naturally fall below the long-run mean. Any sharp dips in specific years may reflect historical events such as disease outbreaks or periods of economic hardship.</p>
 </details>
 <hr>
 </section>
@@ -835,7 +833,7 @@ Name: Life_Expectancy, dtype: float64</code></pre>
 <summary>
 Solution
 </summary>
-<div id="6dc5ba7c" class="cell" data-execution_count="12">
+<div id="11151f2c" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> pd.read_csv(<span class="st">"data/titanic.csv"</span>)</span>
@@ -850,11 +848,11 @@ Solution
 Name: age, dtype: float64</code></pre>
 </div>
 </div>
-<div id="7900a3e6" class="cell" data-execution_count="13">
+<div id="768820bd" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Add median age by class as a new column</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>titanic[<span class="st">"age_median_by_class"</span>] <span class="op">=</span> titanic.groupby(<span class="st">"pclass"</span>)[<span class="st">"age"</span>].transform(<span class="st">"median"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="eb28ff3b" class="cell" data-execution_count="14">
+<div id="c701ee92" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Fill missing age with class-specific median</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>titanic[<span class="st">"age"</span>] <span class="op">=</span> titanic[<span class="st">"age"</span>].fillna(titanic[<span class="st">"age_median_by_class"</span>])</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(titanic[<span class="st">"age"</span>].isna().<span class="bu">sum</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -862,7 +860,7 @@ Name: age, dtype: float64</code></pre>
 <pre><code>0</code></pre>
 </div>
 </div>
-<div id="491bcc1c" class="cell" data-execution_count="15">
+<div id="ba3e690d" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Compare overall vs class-specific medians</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Overall median:"</span>, titanic[<span class="st">"age"</span>].median().<span class="bu">round</span>(<span class="dv">1</span>))</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(titanic.groupby(<span class="st">"pclass"</span>)[<span class="st">"age"</span>].median())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -875,11 +873,9 @@ pclass
 Name: age, dtype: float64</code></pre>
 </div>
 </div>
-<ol type="1">
-<li><p>The median ages differ noticeably across classes — first class passengers tend to be older than third class passengers. This makes intuitive sense: older, more established individuals were more likely to afford a first class ticket. Using class-specific medians is clearly preferable to a single overall median.</p></li>
-<li><p>After filling, there are zero missing values in <code>age</code>.</p></li>
-<li><p>The overall median would have been most misleading for first class passengers, whose median age is notably higher than the overall median. Imputing a younger age for older first class passengers would introduce a systematic bias into any analysis involving age.</p></li>
-</ol>
+<p><strong>Task 1:</strong> The median ages differ noticeably across classes — first class passengers tend to be older than third class passengers. This makes intuitive sense: older, more established individuals were more likely to afford a first class ticket. Using class-specific medians is clearly preferable to a single overall median.</p>
+<p><strong>Task 3:</strong> After filling, there are zero missing values in <code>age</code>.</p>
+<p><strong>Task 4:</strong> The overall median would have been most misleading for first class passengers, whose median age is notably higher than the overall median. Imputing a younger age for older first class passengers would introduce a systematic bias into any analysis involving age.</p>
 </details>
 
 
