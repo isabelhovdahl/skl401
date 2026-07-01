@@ -1,6 +1,6 @@
 # Topic 4 capstone
 
-...
+We bring together the chart types and customisation tools from this topic to answer a single research question — producing two complementary publication-ready figures.
 
 {{< video https://vimeo.com/1196320474/2d00e509c3?fl=ml&fe=ec >}}
 

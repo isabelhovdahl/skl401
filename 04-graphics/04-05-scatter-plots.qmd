@@ -1,6 +1,6 @@
 # Scatter plots
 
-...
+We cover scatter plots for visualising the relationship between two numeric variables.
 
 
 

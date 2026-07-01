@@ -1,6 +1,6 @@
 # Reshaping data
 
-...
+We cover two reshaping operations — `pivot()` to convert long data to wide format, and `melt()` to go back the other way — since the shape of a DataFrame directly affects how easy it is to plot.
 
 {{< video https://vimeo.com/1195996941/bb8790c15e?fl=ml&fe=ec >}}
 
@@ -58,3 +58,252 @@ long
 ```
 
 ## Exercises
+
+### Exercise 4.2.1
+
+For each of the three small DataFrames below, decide whether it is in **wide** or **long** format, and explain your reasoning in one sentence.
+
+```python
+import pandas as pd
+
+df_a = pd.DataFrame({
+    "country": ["Norway", "Norway", "Sweden", "Sweden"],
+    "year":    [2000, 2010, 2000, 2010],
+    "gdp":     [36000, 60000, 34000, 52000]
+})
+
+df_b = pd.DataFrame({
+    "country": ["Norway", "Sweden"],
+    "gdp_2000": [36000, 34000],
+    "gdp_2010": [60000, 52000]
+})
+
+df_c = pd.DataFrame({
+    "student": ["Alice", "Alice", "Bob", "Bob"],
+    "subject": ["Math", "English", "Math", "English"],
+    "score":   [88, 76, 91, 82]
+})
+```
+
+<details>
+<summary>Solution</summary>
+
+`df_a` is **long** — each row is a single country-year observation, and `year` appears as values within a column rather than as separate columns.
+
+`df_b` is **wide** — each row is a single country, and each year has its own column (`gdp_2000`, `gdp_2010`). The same information as `df_a`, but reshaped.
+
+`df_c` is **long** — each row is a single student-subject observation. Reshaping this to wide would produce one row per student, with `Math` and `English` as separate columns.
+
+The general test: in long format, a variable like `year` or `subject` is stored as *values* inside a column. In wide format, those same values become the column *headers* themselves.
+
+</details>
+
+---
+
+### Exercise 4.2.2
+
+The `flights` dataset is a good example of data that is about as long as it can be — 144 rows, one per month per year, with a single `passengers` column.
+
+```python
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+flights.head()
+```
+
+1. Use `.pivot()` to reshape `flights` to wide format, with `year` as the row index, `month` as the columns, and `passengers` as the values. Assign the result to `flights_wide`.
+2. What is the shape of `flights_wide`? How does it compare to the shape of `flights`, and why?
+3. The columns of `flights_wide` are not in calendar order (January to December). Use the following list to reorder them: `["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]`
+
+<details>
+<summary>Hint</summary>
+
+For step 3, you can select columns in a specific order by passing a list of column names inside square brackets, e.g. `flights_wide[my_ordered_list]`.
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+
+# 1. Pivot to wide
+flights_wide = flights.pivot(index="year", columns="month", values="passengers")
+print(flights_wide.head())
+```
+
+```{python}
+# 2. Shape comparison
+print("Long shape:", flights.shape)
+print("Wide shape:", flights_wide.shape)
+```
+
+```{python}
+# 3. Reorder columns chronologically
+month_order = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+               "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+flights_wide = flights_wide[month_order]
+print(flights_wide.head())
+```
+
+2. `flights` has 144 rows and 3 columns. `flights_wide` has 12 rows (one per year) and 12 columns (one per month) — the same 144 values, just rearranged into a grid instead of a long list. This is about as compact as this data can get: every month-year combination now has its own cell rather than its own row.
+
+3. `.pivot()` sorts the new columns alphabetically by default, which is why the months came out in the wrong order — this is a common surprise the first time you pivot on a text column like month names.
+
+</details>
+
+---
+
+### Exercise 4.2.3
+
+Continue with `flights_wide` from the previous exercise, or recreate it if needed. This exercise reshapes it back to long format and checks that nothing was lost in the process.
+
+```python
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+flights_wide = flights.pivot(index="year", columns="month", values="passengers")
+```
+
+1. `.melt()` expects the row index to be a regular column rather than the DataFrame's index. Use `.reset_index()` on `flights_wide` first, and inspect the result.
+2. Use `.melt()` to reshape the result of step 1 back to long format, with `year` as `id_vars`, and set `var_name="month"` and `value_name="passengers"`. Assign the result to `flights_long`.
+3. Compare `flights_long` to the original `flights` DataFrame: do they have the same number of rows? Sort both by `year` and `month` and compare the total passenger count in each — do they match?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+flights = pd.read_csv("data/flights.csv")
+flights_wide = flights.pivot(index="year", columns="month", values="passengers")
+
+# 1. Reset index
+flights_wide_reset = flights_wide.reset_index()
+print(flights_wide_reset.head())
+```
+
+```{python}
+# 2. Melt back to long
+flights_long = flights_wide_reset.melt(
+    id_vars="year", var_name="month", value_name="passengers"
+)
+print(flights_long.head())
+```
+
+```{python}
+# 3. Compare row counts and totals
+print("Original rows:", len(flights))
+print("Reshaped rows:", len(flights_long))
+print("Original total passengers:", flights["passengers"].sum())
+print("Reshaped total passengers:", flights_long["passengers"].sum())
+```
+
+3. Both DataFrames have 144 rows and the same total passenger count, confirming that `.pivot()` followed by `.melt()` is a true round trip — no information was lost, only the shape changed. The row order may differ from the original since `.melt()` processes column by column, but the set of values is identical.
+
+</details>
+
+---
+
+### Exercise 4.2.4
+
+Load the full gapminder dataset and practice pivoting on a larger subset than shown in the video, using a different `values=` column each time.
+
+```python
+import pandas as pd
+
+gapminder = pd.read_csv("data/gapminder.csv")
+print(gapminder.shape)
+gapminder.head()
+```
+
+1. Filter `gapminder` to just the continent `"Europe"`. Pivot this subset to wide format with `country` as the index, `year` as the columns, and `lifeExp` as the values. How many rows and columns does the result have?
+2. Repeat the same pivot, but this time use `gdpPercap` as the values instead of `lifeExp`. What changed between this result and the one in step 1, and what stayed the same?
+3. Why can `index=`, `columns=`, and `values=` be treated as three independent choices rather than a fixed template? Give an example of a different valid combination of the three arguments using the gapminder columns.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+gapminder = pd.read_csv("data/gapminder.csv")
+
+# 1. Pivot Europe on lifeExp
+europe = gapminder[gapminder["continent"] == "Europe"]
+europe_life_wide = europe.pivot(index="country", columns="year", values="lifeExp")
+print(europe_life_wide.shape)
+print(europe_life_wide.head())
+```
+
+```{python}
+# 2. Pivot Europe on gdpPercap
+europe_gdp_wide = europe.pivot(index="country", columns="year", values="gdpPercap")
+print(europe_gdp_wide.head())
+```
+
+2. The row and column structure — which countries, which years — is identical in both results, since `index=` and `columns=` were unchanged. What changed is the values filling the grid: life expectancy figures in step 1, GDP per capita figures in step 2.
+
+3. `index=`, `columns=`, and `values=` each independently answer a different question: what should identify the rows, what should identify the columns, and what number should fill each cell. Any column not used as `index=` or `columns=` can be used as `values=`, provided the `index`-`columns` combination uniquely identifies each cell. For example, `index="year"`, `columns="country"`, `values="pop"` would produce a table of population figures with years as rows and countries as columns instead.
+
+</details>
+
+---
+
+### Exercise 4.2.5
+
+When reshaping data, you sometimes want to keep more than one identifying column intact. This exercise practices that using `country` and `continent` together.
+
+```python
+import pandas as pd
+
+gapminder = pd.read_csv("data/gapminder.csv")
+
+subset = gapminder[
+    gapminder["country"].isin(["Norway", "Sweden", "Denmark", "Egypt", "Kenya"])
+]
+```
+
+1. Pivot `subset` to wide format using **both** `["country", "continent"]` as the index, `year` as the columns, and `lifeExp` as the values. What does the resulting index look like?
+2. Reset the index so `country` and `continent` become regular columns again. 
+3. Melt the result of step 2 back to long format, using **both** `["country", "continent"]` as `id_vars`. Verify the result has one row per country-year combination, with `continent` correctly preserved for every row.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+gapminder = pd.read_csv("data/gapminder.csv")
+
+subset = gapminder[
+    gapminder["country"].isin(["Norway", "Sweden", "Denmark", "Egypt", "Kenya"])
+]
+
+# 1. Pivot with two identifier columns
+wide = subset.pivot(index=["country", "continent"], columns="year", values="lifeExp")
+print(wide.head())
+```
+
+Passing a list to `index=` creates a two-level row index — each row is identified by the combination of `country` and `continent` together, rather than by `country` alone. This is useful because `continent` would otherwise be lost during the pivot, since it is neither the index, the columns, nor the values.
+
+```{python}
+# 2. Reset index
+wide = wide.reset_index()
+print(wide.head())
+```
+
+```{python}
+# 3. Melt back with two id_vars
+long = wide.melt(
+    id_vars=["country", "continent"], var_name="year", value_name="lifeExp"
+)
+print(long.sort_values(["country", "year"]).head(10))
+```
+
+The melted result has one row per country-year combination, and every row correctly retains its `continent` value. Passing a list to `id_vars=` works the same way as passing a list to `index=` in `.pivot()` — both let you carry more than one identifying column through the reshape.
+
+</details>

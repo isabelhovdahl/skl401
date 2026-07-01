@@ -1,6 +1,6 @@
 # pandas plotting
 
-...
+We cover pandas' built-in `.plot()` method as a faster alternative to writing matplotlib from scratch.
 
 {{< video https://vimeo.com/1196291820/84c8571d45?fl=ml&fe=ec >}}
 

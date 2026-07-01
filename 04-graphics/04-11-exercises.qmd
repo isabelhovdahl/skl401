@@ -1,1 +1,6 @@
 # Further exercises
+
+
+Extend exercise 4.2.3: Plot using both long and wide format of flights data.
+
+Extend of topic 4.3 and ask students to loop over columns in a dataset instead of countries, for example fred data.

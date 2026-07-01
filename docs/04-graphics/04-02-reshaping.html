@@ -439,7 +439,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#exercise-4.2.1" id="toc-exercise-4.2.1" class="nav-link" data-scroll-target="#exercise-4.2.1">Exercise 4.2.1</a></li>
+  <li><a href="#exercise-4.2.2" id="toc-exercise-4.2.2" class="nav-link" data-scroll-target="#exercise-4.2.2">Exercise 4.2.2</a></li>
+  <li><a href="#exercise-4.2.3" id="toc-exercise-4.2.3" class="nav-link" data-scroll-target="#exercise-4.2.3">Exercise 4.2.3</a></li>
+  <li><a href="#exercise-4.2.4" id="toc-exercise-4.2.4" class="nav-link" data-scroll-target="#exercise-4.2.4">Exercise 4.2.4</a></li>
+  <li><a href="#exercise-4.2.5" id="toc-exercise-4.2.5" class="nav-link" data-scroll-target="#exercise-4.2.5">Exercise 4.2.5</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -465,7 +472,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>…</p>
+<p>We cover two reshaping operations — <code>pivot()</code> to convert long data to wide format, and <code>melt()</code> to go back the other way — since the shape of a DataFrame directly affects how easy it is to plot.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1195996941?h=bb8790c15e" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -519,8 +526,365 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="bu">long</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="exercise-4.2.1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.2.1">Exercise 4.2.1</h3>
+<p>For each of the three small DataFrames below, decide whether it is in <strong>wide</strong> or <strong>long</strong> format, and explain your reasoning in one sentence.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df_a <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"country"</span>: [<span class="st">"Norway"</span>, <span class="st">"Norway"</span>, <span class="st">"Sweden"</span>, <span class="st">"Sweden"</span>],</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"year"</span>:    [<span class="dv">2000</span>, <span class="dv">2010</span>, <span class="dv">2000</span>, <span class="dv">2010</span>],</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gdp"</span>:     [<span class="dv">36000</span>, <span class="dv">60000</span>, <span class="dv">34000</span>, <span class="dv">52000</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>df_b <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"country"</span>: [<span class="st">"Norway"</span>, <span class="st">"Sweden"</span>],</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gdp_2000"</span>: [<span class="dv">36000</span>, <span class="dv">34000</span>],</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"gdp_2010"</span>: [<span class="dv">60000</span>, <span class="dv">52000</span>]</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>df_c <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"student"</span>: [<span class="st">"Alice"</span>, <span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Bob"</span>],</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"subject"</span>: [<span class="st">"Math"</span>, <span class="st">"English"</span>, <span class="st">"Math"</span>, <span class="st">"English"</span>],</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"score"</span>:   [<span class="dv">88</span>, <span class="dv">76</span>, <span class="dv">91</span>, <span class="dv">82</span>]</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details>
+<summary>
+Solution
+</summary>
+<p><code>df_a</code> is <strong>long</strong> — each row is a single country-year observation, and <code>year</code> appears as values within a column rather than as separate columns.</p>
+<p><code>df_b</code> is <strong>wide</strong> — each row is a single country, and each year has its own column (<code>gdp_2000</code>, <code>gdp_2010</code>). The same information as <code>df_a</code>, but reshaped.</p>
+<p><code>df_c</code> is <strong>long</strong> — each row is a single student-subject observation. Reshaping this to wide would produce one row per student, with <code>Math</code> and <code>English</code> as separate columns.</p>
+<p>The general test: in long format, a variable like <code>year</code> or <code>subject</code> is stored as <em>values</em> inside a column. In wide format, those same values become the column <em>headers</em> themselves.</p>
+</details>
+<hr>
+</section>
+<section id="exercise-4.2.2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.2.2">Exercise 4.2.2</h3>
+<p>The <code>flights</code> dataset is a good example of data that is about as long as it can be — 144 rows, one per month per year, with a single <code>passengers</code> column.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>flights <span class="op">=</span> pd.read_csv(<span class="st">"data/flights.csv"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>flights.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Use <code>.pivot()</code> to reshape <code>flights</code> to wide format, with <code>year</code> as the row index, <code>month</code> as the columns, and <code>passengers</code> as the values. Assign the result to <code>flights_wide</code>.</li>
+<li>What is the shape of <code>flights_wide</code>? How does it compare to the shape of <code>flights</code>, and why?</li>
+<li>The columns of <code>flights_wide</code> are not in calendar order (January to December). Use the following list to reorder them: <code>["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]</code></li>
+</ol>
+<details>
+<summary>
+Hint
+</summary>
+<p>For step 3, you can select columns in a specific order by passing a list of column names inside square brackets, e.g.&nbsp;<code>flights_wide[my_ordered_list]</code>.</p>
+</details>
+<details>
+<summary>
+Solution
+</summary>
+<div id="bc8436e3" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>flights <span class="op">=</span> pd.read_csv(<span class="st">"data/flights.csv"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Pivot to wide</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>flights_wide <span class="op">=</span> flights.pivot(index<span class="op">=</span><span class="st">"year"</span>, columns<span class="op">=</span><span class="st">"month"</span>, values<span class="op">=</span><span class="st">"passengers"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(flights_wide.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>month  Apr  Aug  Dec  Feb  Jan  Jul  Jun  Mar  May  Nov  Oct  Sep
+year                                                             
+1949   129  148  118  118  112  148  135  132  121  104  119  136
+1950   135  170  140  126  115  170  149  141  125  114  133  158
+1951   163  199  166  150  145  199  178  178  172  146  162  184
+1952   181  242  194  180  171  230  218  193  183  172  191  209
+1953   235  272  201  196  196  264  243  236  229  180  211  237</code></pre>
+</div>
+</div>
+<div id="cdce14ce" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Shape comparison</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Long shape:"</span>, flights.shape)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Wide shape:"</span>, flights_wide.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Long shape: (144, 3)
+Wide shape: (12, 12)</code></pre>
+</div>
+</div>
+<div id="9f559b3c" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Reorder columns chronologically</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>month_order <span class="op">=</span> [<span class="st">"Jan"</span>, <span class="st">"Feb"</span>, <span class="st">"Mar"</span>, <span class="st">"Apr"</span>, <span class="st">"May"</span>, <span class="st">"Jun"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Jul"</span>, <span class="st">"Aug"</span>, <span class="st">"Sep"</span>, <span class="st">"Oct"</span>, <span class="st">"Nov"</span>, <span class="st">"Dec"</span>]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>flights_wide <span class="op">=</span> flights_wide[month_order]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(flights_wide.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>month  Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec
+year                                                             
+1949   112  118  132  129  121  135  148  148  136  119  104  118
+1950   115  126  141  135  125  149  170  170  158  133  114  140
+1951   145  150  178  163  172  178  199  199  184  162  146  166
+1952   171  180  193  181  183  218  230  242  209  191  172  194
+1953   196  196  236  235  229  243  264  272  237  211  180  201</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li><p><code>flights</code> has 144 rows and 3 columns. <code>flights_wide</code> has 12 rows (one per year) and 12 columns (one per month) — the same 144 values, just rearranged into a grid instead of a long list. This is about as compact as this data can get: every month-year combination now has its own cell rather than its own row.</p></li>
+<li><p><code>.pivot()</code> sorts the new columns alphabetically by default, which is why the months came out in the wrong order — this is a common surprise the first time you pivot on a text column like month names.</p></li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="exercise-4.2.3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.2.3">Exercise 4.2.3</h3>
+<p>Continue with <code>flights_wide</code> from the previous exercise, or recreate it if needed. This exercise reshapes it back to long format and checks that nothing was lost in the process.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>flights <span class="op">=</span> pd.read_csv(<span class="st">"data/flights.csv"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>flights_wide <span class="op">=</span> flights.pivot(index<span class="op">=</span><span class="st">"year"</span>, columns<span class="op">=</span><span class="st">"month"</span>, values<span class="op">=</span><span class="st">"passengers"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li><code>.melt()</code> expects the row index to be a regular column rather than the DataFrame’s index. Use <code>.reset_index()</code> on <code>flights_wide</code> first, and inspect the result.</li>
+<li>Use <code>.melt()</code> to reshape the result of step 1 back to long format, with <code>year</code> as <code>id_vars</code>, and set <code>var_name="month"</code> and <code>value_name="passengers"</code>. Assign the result to <code>flights_long</code>.</li>
+<li>Compare <code>flights_long</code> to the original <code>flights</code> DataFrame: do they have the same number of rows? Sort both by <code>year</code> and <code>month</code> and compare the total passenger count in each — do they match?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="469f9a6c" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>flights <span class="op">=</span> pd.read_csv(<span class="st">"data/flights.csv"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>flights_wide <span class="op">=</span> flights.pivot(index<span class="op">=</span><span class="st">"year"</span>, columns<span class="op">=</span><span class="st">"month"</span>, values<span class="op">=</span><span class="st">"passengers"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Reset index</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>flights_wide_reset <span class="op">=</span> flights_wide.reset_index()</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(flights_wide_reset.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>month  year  Apr  Aug  Dec  Feb  Jan  Jul  Jun  Mar  May  Nov  Oct  Sep
+0      1949  129  148  118  118  112  148  135  132  121  104  119  136
+1      1950  135  170  140  126  115  170  149  141  125  114  133  158
+2      1951  163  199  166  150  145  199  178  178  172  146  162  184
+3      1952  181  242  194  180  171  230  218  193  183  172  191  209
+4      1953  235  272  201  196  196  264  243  236  229  180  211  237</code></pre>
+</div>
+</div>
+<div id="94e014a6" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Melt back to long</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>flights_long <span class="op">=</span> flights_wide_reset.melt(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    id_vars<span class="op">=</span><span class="st">"year"</span>, var_name<span class="op">=</span><span class="st">"month"</span>, value_name<span class="op">=</span><span class="st">"passengers"</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(flights_long.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   year month  passengers
+0  1949   Apr         129
+1  1950   Apr         135
+2  1951   Apr         163
+3  1952   Apr         181
+4  1953   Apr         235</code></pre>
+</div>
+</div>
+<div id="635989d7" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Compare row counts and totals</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Original rows:"</span>, <span class="bu">len</span>(flights))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Reshaped rows:"</span>, <span class="bu">len</span>(flights_long))</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Original total passengers:"</span>, flights[<span class="st">"passengers"</span>].<span class="bu">sum</span>())</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Reshaped total passengers:"</span>, flights_long[<span class="st">"passengers"</span>].<span class="bu">sum</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Original rows: 144
+Reshaped rows: 144
+Original total passengers: 40363
+Reshaped total passengers: 40363</code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Both DataFrames have 144 rows and the same total passenger count, confirming that <code>.pivot()</code> followed by <code>.melt()</code> is a true round trip — no information was lost, only the shape changed. The row order may differ from the original since <code>.melt()</code> processes column by column, but the set of values is identical.</li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="exercise-4.2.4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.2.4">Exercise 4.2.4</h3>
+<p>Load the full gapminder dataset and practice pivoting on a larger subset than shown in the video, using a different <code>values=</code> column each time.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>gapminder <span class="op">=</span> pd.read_csv(<span class="st">"data/gapminder.csv"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gapminder.shape)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>gapminder.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Filter <code>gapminder</code> to just the continent <code>"Europe"</code>. Pivot this subset to wide format with <code>country</code> as the index, <code>year</code> as the columns, and <code>lifeExp</code> as the values. How many rows and columns does the result have?</li>
+<li>Repeat the same pivot, but this time use <code>gdpPercap</code> as the values instead of <code>lifeExp</code>. What changed between this result and the one in step 1, and what stayed the same?</li>
+<li>Why can <code>index=</code>, <code>columns=</code>, and <code>values=</code> be treated as three independent choices rather than a fixed template? Give an example of a different valid combination of the three arguments using the gapminder columns.</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="77dcd117" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>gapminder <span class="op">=</span> pd.read_csv(<span class="st">"data/gapminder.csv"</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Pivot Europe on lifeExp</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>europe <span class="op">=</span> gapminder[gapminder[<span class="st">"continent"</span>] <span class="op">==</span> <span class="st">"Europe"</span>]</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>europe_life_wide <span class="op">=</span> europe.pivot(index<span class="op">=</span><span class="st">"country"</span>, columns<span class="op">=</span><span class="st">"year"</span>, values<span class="op">=</span><span class="st">"lifeExp"</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(europe_life_wide.shape)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(europe_life_wide.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(30, 12)
+year                     1952   1957   1962   1967   1972   1977   1982  \
+country                                                                   
+Albania                 55.23  59.28  64.82  66.22  67.69  68.93  70.42   
+Austria                 66.80  67.48  69.54  70.14  70.63  72.17  73.18   
+Belgium                 68.00  69.24  70.25  70.94  71.44  72.80  73.93   
+Bosnia and Herzegovina  53.82  58.45  61.93  64.79  67.45  69.86  70.69   
+Bulgaria                59.60  66.61  69.51  70.42  70.90  70.81  71.08   
+
+year                     1987    1992    1997    2002    2007  
+country                                                        
+Albania                 72.00  71.581  72.950  75.651  76.423  
+Austria                 74.94  76.040  77.510  78.980  79.829  
+Belgium                 75.35  76.460  77.530  78.320  79.441  
+Bosnia and Herzegovina  71.14  72.178  73.244  74.090  74.852  
+Bulgaria                71.34  71.190  70.320  72.140  73.005  </code></pre>
+</div>
+</div>
+<div id="151f8718" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Pivot Europe on gdpPercap</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>europe_gdp_wide <span class="op">=</span> europe.pivot(index<span class="op">=</span><span class="st">"country"</span>, columns<span class="op">=</span><span class="st">"year"</span>, values<span class="op">=</span><span class="st">"gdpPercap"</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(europe_gdp_wide.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>year                           1952         1957          1962          1967  \
+country                                                                        
+Albania                 1601.056136  1942.284244   2312.888958   2760.196931   
+Austria                 6137.076492  8842.598030  10750.721110  12834.602400   
+Belgium                 8343.105127  9714.960623  10991.206760  13149.041190   
+Bosnia and Herzegovina   973.533195  1353.989176   1709.683679   2172.352423   
+Bulgaria                2444.286648  3008.670727   4254.337839   5577.002800   
+
+year                            1972          1977          1982  \
+country                                                            
+Albania                  3313.422188   3533.003910   3630.880722   
+Austria                 16661.625600  19749.422300  21597.083620   
+Belgium                 16672.143560  19117.974480  20979.845890   
+Bosnia and Herzegovina   2860.169750   3528.481305   4126.613157   
+Bulgaria                 6597.494398   7612.240438   8224.191647   
+
+year                            1987          1992          1997  \
+country                                                            
+Albania                  3738.932735   2497.437901   3193.054604   
+Austria                 23687.826070  27042.018680  29095.920660   
+Belgium                 22525.563080  25575.570690  27561.196630   
+Bosnia and Herzegovina   4314.114757   2546.781445   4766.355904   
+Bulgaria                 8239.854824   6302.623438   5970.388760   
+
+year                            2002          2007  
+country                                             
+Albania                  4604.211737   5937.029526  
+Austria                 32417.607690  36126.492700  
+Belgium                 30485.883750  33692.605080  
+Bosnia and Herzegovina   6018.975239   7446.298803  
+Bulgaria                 7696.777725  10680.792820  </code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li><p>The row and column structure — which countries, which years — is identical in both results, since <code>index=</code> and <code>columns=</code> were unchanged. What changed is the values filling the grid: life expectancy figures in step 1, GDP per capita figures in step 2.</p></li>
+<li><p><code>index=</code>, <code>columns=</code>, and <code>values=</code> each independently answer a different question: what should identify the rows, what should identify the columns, and what number should fill each cell. Any column not used as <code>index=</code> or <code>columns=</code> can be used as <code>values=</code>, provided the <code>index</code>-<code>columns</code> combination uniquely identifies each cell. For example, <code>index="year"</code>, <code>columns="country"</code>, <code>values="pop"</code> would produce a table of population figures with years as rows and countries as columns instead.</p></li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="exercise-4.2.5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.2.5">Exercise 4.2.5</h3>
+<p>When reshaping data, you sometimes want to keep more than one identifying column intact. This exercise practices that using <code>country</code> and <code>continent</code> together.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>gapminder <span class="op">=</span> pd.read_csv(<span class="st">"data/gapminder.csv"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>subset <span class="op">=</span> gapminder[</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    gapminder[<span class="st">"country"</span>].isin([<span class="st">"Norway"</span>, <span class="st">"Sweden"</span>, <span class="st">"Denmark"</span>, <span class="st">"Egypt"</span>, <span class="st">"Kenya"</span>])</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Pivot <code>subset</code> to wide format using <strong>both</strong> <code>["country", "continent"]</code> as the index, <code>year</code> as the columns, and <code>lifeExp</code> as the values. What does the resulting index look like?</li>
+<li>Reset the index so <code>country</code> and <code>continent</code> become regular columns again.</li>
+<li>Melt the result of step 2 back to long format, using <strong>both</strong> <code>["country", "continent"]</code> as <code>id_vars</code>. Verify the result has one row per country-year combination, with <code>continent</code> correctly preserved for every row.</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="ae0b9f16" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>gapminder <span class="op">=</span> pd.read_csv(<span class="st">"data/gapminder.csv"</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>subset <span class="op">=</span> gapminder[</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    gapminder[<span class="st">"country"</span>].isin([<span class="st">"Norway"</span>, <span class="st">"Sweden"</span>, <span class="st">"Denmark"</span>, <span class="st">"Egypt"</span>, <span class="st">"Kenya"</span>])</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Pivot with two identifier columns</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>wide <span class="op">=</span> subset.pivot(index<span class="op">=</span>[<span class="st">"country"</span>, <span class="st">"continent"</span>], columns<span class="op">=</span><span class="st">"year"</span>, values<span class="op">=</span><span class="st">"lifeExp"</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(wide.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>year                 1952    1957    1962    1967    1972    1977    1982  \
+country continent                                                           
+Denmark Europe     70.780  71.810  72.350  72.960  73.470  74.690  74.630   
+Egypt   Africa     41.893  44.444  46.992  49.293  51.137  53.319  56.006   
+Kenya   Africa     42.270  44.686  47.949  50.654  53.559  56.155  58.766   
+Norway  Europe     72.670  73.440  73.470  74.080  74.340  75.370  75.970   
+Sweden  Europe     71.860  72.490  73.370  74.160  74.720  75.440  76.420   
+
+year                 1987    1992    1997    2002    2007  
+country continent                                          
+Denmark Europe     74.800  75.330  76.110  77.180  78.332  
+Egypt   Africa     59.797  63.674  67.217  69.806  71.338  
+Kenya   Africa     59.339  59.285  54.407  50.992  54.110  
+Norway  Europe     75.890  77.320  78.320  79.050  80.196  
+Sweden  Europe     77.190  78.160  79.390  80.040  80.884  </code></pre>
+</div>
+</div>
+<p>Passing a list to <code>index=</code> creates a two-level row index — each row is identified by the combination of <code>country</code> and <code>continent</code> together, rather than by <code>country</code> alone. This is useful because <code>continent</code> would otherwise be lost during the pivot, since it is neither the index, the columns, nor the values.</p>
+<div id="96e3e1bd" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Reset index</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>wide <span class="op">=</span> wide.reset_index()</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(wide.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>year  country continent    1952    1957    1962    1967    1972    1977  \
+0     Denmark    Europe  70.780  71.810  72.350  72.960  73.470  74.690   
+1       Egypt    Africa  41.893  44.444  46.992  49.293  51.137  53.319   
+2       Kenya    Africa  42.270  44.686  47.949  50.654  53.559  56.155   
+3      Norway    Europe  72.670  73.440  73.470  74.080  74.340  75.370   
+4      Sweden    Europe  71.860  72.490  73.370  74.160  74.720  75.440   
+
+year    1982    1987    1992    1997    2002    2007  
+0     74.630  74.800  75.330  76.110  77.180  78.332  
+1     56.006  59.797  63.674  67.217  69.806  71.338  
+2     58.766  59.339  59.285  54.407  50.992  54.110  
+3     75.970  75.890  77.320  78.320  79.050  80.196  
+4     76.420  77.190  78.160  79.390  80.040  80.884  </code></pre>
+</div>
+</div>
+<div id="a7a55b9e" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Melt back with two id_vars</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">long</span> <span class="op">=</span> wide.melt(</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    id_vars<span class="op">=</span>[<span class="st">"country"</span>, <span class="st">"continent"</span>], var_name<span class="op">=</span><span class="st">"year"</span>, value_name<span class="op">=</span><span class="st">"lifeExp"</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">long</span>.sort_values([<span class="st">"country"</span>, <span class="st">"year"</span>]).head(<span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    country continent  year  lifeExp
+0   Denmark    Europe  1952    70.78
+5   Denmark    Europe  1957    71.81
+10  Denmark    Europe  1962    72.35
+15  Denmark    Europe  1967    72.96
+20  Denmark    Europe  1972    73.47
+25  Denmark    Europe  1977    74.69
+30  Denmark    Europe  1982    74.63
+35  Denmark    Europe  1987    74.80
+40  Denmark    Europe  1992    75.33
+45  Denmark    Europe  1997    76.11</code></pre>
+</div>
+</div>
+<p>The melted result has one row per country-year combination, and every row correctly retains its <code>continent</code> value. Passing a list to <code>id_vars=</code> works the same way as passing a list to <code>index=</code> in <code>.pivot()</code> — both let you carry more than one identifying column through the reshape.</p>
+</details>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -1,6 +1,6 @@
 # Multiple panels
 
-...
+We cover how to display several charts side by side in a grid of panels.
 
 {{< video https://vimeo.com/1196323608/05204bd71f?fl=ml&fe=ec >}}
 

@@ -1,6 +1,6 @@
 # Customising plots
 
-...
+We cover the main tools for turning a working chart into a polished one, such as applying a style sheet and formatting tick labels.
 
 {{< video https://vimeo.com/1196261468/45a25ee2f0?fl=ml&fe=ec >}}
 

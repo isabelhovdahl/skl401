@@ -1,6 +1,6 @@
 # Historgrams
 
-...
+We cover histograms for visualising the distribution of a single numeric variable — where values cluster, how spread out they are, and whether the distribution is skewed.
 
 {{< video https://vimeo.com/1196261469/f28aa3884d?fl=ml&fe=ec >}}
 

@@ -1,6 +1,6 @@
 # Bar charts
 
-...
+We cover bar charts for comparing values across discrete categories.
 
 {{< video https://vimeo.com/1195996940/db77ae82f0?fl=ml&fe=ec >}}
 
