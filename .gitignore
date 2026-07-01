@@ -9,7 +9,6 @@
 **/*.quarto_ipynb
 /*_files/
 /*_cache/
-/data/
 
 # Python
 __pycache__/
