@@ -4,3 +4,5 @@
 Extend exercise 4.2.3: Plot using both long and wide format of flights data.
 
 Extend of topic 4.3 and ask students to loop over columns in a dataset instead of countries, for example fred data.
+
+4.6.5 — End-to-end: gapminder, a single year, life expectancy distribution with bins, reference line for the global mean, and a comparison of two continents overlapping

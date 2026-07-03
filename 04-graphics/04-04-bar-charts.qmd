@@ -56,3 +56,283 @@ plt.close()
 ```
 
 ## Exercises
+
+### Exercise 4.4.1
+
+The DataFrame below is already in the right shape to be plotted directly — one row per category, with a single value to plot for each.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+sales = pd.DataFrame({
+    "product": ["Coffee", "Tea", "Juice", "Water"],
+    "units_sold": [420, 310, 265, 190]
+})
+```
+
+1. Create a Figure and Axes with `figsize=(7, 5)`.
+2. Use `ax.bar()` to plot `product` on the x-axis and `units_sold` on the y-axis.
+3. Add axis labels and a title.
+4. Recreate the same chart using `ax.barh()` instead. What changes about which column goes on which axis?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+sales = pd.DataFrame({
+    "product": ["Coffee", "Tea", "Juice", "Water"],
+    "units_sold": [420, 310, 265, 190]
+})
+
+fig, ax = plt.subplots(figsize=(7, 5))
+
+ax.bar(sales["product"], sales["units_sold"])
+
+ax.set_xlabel("Product")
+ax.set_ylabel("Units sold")
+ax.set_title("Units sold by product")
+
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+# 4. Horizontal version
+fig, ax = plt.subplots(figsize=(7, 5))
+
+ax.barh(sales["product"], sales["units_sold"])
+
+ax.set_xlabel("Units sold")
+ax.set_ylabel("Product")
+ax.set_title("Units sold by product")
+
+plt.tight_layout()
+plt.show()
+```
+
+4. With `ax.barh()`, the categories (`product`) go on the y-axis and the values (`units_sold`) go on the x-axis — the opposite of `ax.bar()`. The data passed in is exactly the same; only the orientation of the bars changes.
+
+</details>
+
+---
+
+### Exercise 4.4.2
+
+Unlike the previous exercise, real data usually needs to be summarised before it can be plotted as a bar chart. Use the `titanic` dataset to practice this.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+```
+
+1. Compute the survival rate for each passenger class using `groupby`.
+2. Create a Figure and Axes with `figsize=(7, 5)`.
+3. Plot the result as a vertical bar chart using `ax.bar()`.
+4. Add axis labels and a title. What does the chart show about the relationship between passenger class and survival?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+
+survival_by_class = titanic.groupby("pclass")["survived"].mean()
+print(survival_by_class)
+
+fig, ax = plt.subplots(figsize=(7, 5))
+
+ax.bar(survival_by_class.index, survival_by_class.values)
+
+ax.set_xlabel("Passenger class")
+ax.set_ylabel("Survival rate")
+ax.set_title("Titanic survival rate by passenger class")
+
+plt.tight_layout()
+plt.show()
+```
+
+4. Survival rate decreases clearly as passenger class number increases — first class passengers survived at the highest rate, third class at the lowest. This is the same pattern explored numerically in Topic 3, now visible at a glance.
+
+</details>
+
+---
+
+### Exercise 4.4.3
+
+The `gapminder` dataset contains 142 countries — far too many to fit comfortably on a vertical bar chart.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+gapminder = pd.read_csv("data/gapminder.csv")
+print(gapminder["country"].nunique())
+```
+
+1. Filter `gapminder` to the year 2007 and the continent `"Americas"`.
+2. Create a Figure and Axes with `figsize=(8, 10)`.
+3. Plot `gdpPercap` for each country as a horizontal bar chart using `ax.barh()`, with `country` on the y-axis.
+4. Add axis labels and a title. Try recreating the same chart with `ax.bar()` instead of `ax.barh()`, keeping the same `figsize`. What goes wrong, and why is `ax.barh()` clearly the better choice for this data?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+gapminder = pd.read_csv("data/gapminder.csv")
+
+americas_2007 = gapminder[
+    (gapminder["year"] == 2007) & (gapminder["continent"] == "Americas")
+]
+
+fig, ax = plt.subplots(figsize=(8, 10))
+
+ax.barh(americas_2007["country"], americas_2007["gdpPercap"])
+
+ax.set_xlabel("GDP per capita (USD)")
+ax.set_ylabel("Country")
+ax.set_title("GDP per capita by country, Americas, 2007")
+
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+# Vertical version for comparison
+fig, ax = plt.subplots(figsize=(8, 10))
+
+ax.bar(americas_2007["country"], americas_2007["gdpPercap"])
+
+ax.set_xlabel("Country")
+ax.set_ylabel("GDP per capita (USD)")
+ax.set_title("GDP per capita by country, Americas, 2007")
+
+plt.tight_layout()
+plt.show()
+```
+
+4. With `ax.bar()`, the country names on the x-axis overlap and become unreadable, even with a tall `figsize`, because there is not enough horizontal space for 25 long text labels side by side. With `ax.barh()`, the same labels sit comfortably on the y-axis, stacked vertically with plenty of room, since `figsize` height easily accommodates one row per country. As a rule of thumb, switch to horizontal bars whenever you have many categories or long category labels.
+
+</details>
+
+---
+
+### Exercise 4.4.4
+
+This exercise builds on the previous one. The chart is readable now that it is horizontal, but the bars are still in whatever order the countries happen to appear in the data, which makes it hard to compare countries at a glance.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+gapminder = pd.read_csv("data/gapminder.csv")
+
+americas_2007 = gapminder[
+    (gapminder["year"] == 2007) & (gapminder["continent"] == "Americas")
+]
+```
+
+1. Plot `americas_2007` as a horizontal bar chart of `gdpPercap` by `country`, exactly as in the previous exercise, with `figsize=(8, 10)`. In what order do the bars currently appear?
+2. Sort `americas_2007` by `gdpPercap` before plotting, and create the chart again. How does this change what you can read off the chart immediately?
+3. Which country has the highest GDP per capita in the Americas in 2007? Which has the lowest? 
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+gapminder = pd.read_csv("data/gapminder.csv")
+
+americas_2007 = gapminder[
+    (gapminder["year"] == 2007) & (gapminder["continent"] == "Americas")
+]
+
+# 1. Unsorted
+fig, ax = plt.subplots(figsize=(8, 10))
+ax.barh(americas_2007["country"], americas_2007["gdpPercap"])
+ax.set_title("Unsorted")
+plt.show()
+```
+
+```{python}
+# 2. Sorted
+americas_sorted = americas_2007.sort_values("gdpPercap")
+
+fig, ax = plt.subplots(figsize=(8, 10))
+ax.barh(americas_sorted["country"], americas_sorted["gdpPercap"])
+ax.set_xlabel("GDP per capita (USD)")
+ax.set_ylabel("Country")
+ax.set_title("GDP per capita by country, Americas, 2007 (sorted)")
+plt.tight_layout()
+plt.show()
+```
+
+In the unsorted chart, countries appear in whatever order they happened to be listed in the original dataset — typically alphabetical or the order they first appear in the raw data — which has nothing to do with their GDP values. Sorting makes it immediate: the country with the highest GDP per capita appears at one end of the chart, the lowest at the other, and the overall ranking is visible in one glance. In the unsorted version, you would have to scan every single bar and mentally compare lengths to find the extremes — sorting does that comparison for you before the chart is even drawn.
+
+</details>
+
+---
+
+### Exercise 4.4.5
+
+This exercise combines data preparation, sorting, and orientation choice using the Titanic dataset.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+```
+
+1. Compute the survival rate for each embarkation port using `groupby`, and drop any missing values before proceeding.
+2. Sort the result so the highest survival rate appears first.
+3. Decide whether a vertical or horizontal bar chart is more appropriate here, given the number of categories. Create a Figure and Axes with `figsize=(7, 5)` and plot accordingly.
+4. Add axis labels and a title. Replace the single-letter port codes with full port names in your title or labels for clarity: `S` = Southampton, `C` = Cherbourg, `Q` = Queenstown.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# 1. Survival rate by embarkation port
+survival_by_port = titanic.dropna(subset=["embarked"]).groupby("embarked")["survived"].mean()
+
+# 2. Sort by survival rate
+survival_by_port = survival_by_port.sort_values(ascending=False)
+print(survival_by_port)
+```
+
+```{python}
+# 3-4. Vertical bar chart (only 3 categories, so vertical works fine)
+fig, ax = plt.subplots(figsize=(7, 5))
+
+ax.bar(survival_by_port.index, survival_by_port.values)
+
+ax.set_xlabel("Embarkation port (S = Southampton, C = Cherbourg, Q = Queenstown)")
+ax.set_ylabel("Survival rate")
+ax.set_title("Titanic survival rate by embarkation port")
+
+plt.tight_layout()
+plt.show()
+```
+
+With only three categories, either orientation works well — vertical bars are a perfectly reasonable default choice here, unlike the 25-country case in the previous exercises where horizontal was necessary. The plot shows that passengers who embarked at Cherbourg had the highest survival rate.
+
+</details>

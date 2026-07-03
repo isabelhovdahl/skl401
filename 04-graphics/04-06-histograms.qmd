@@ -1,6 +1,6 @@
 # Historgrams
 
-We cover histograms for visualising the distribution of a single numeric variable — where values cluster, how spread out they are, and whether the distribution is skewed.
+We cover histograms for visualising the distribution of a single numeric variable.
 
 {{< video https://vimeo.com/1196261469/f28aa3884d?fl=ml&fe=ec >}}
 
@@ -72,3 +72,264 @@ plt.close()
 ```
 
 ## Exercises
+
+### Exercise 4.6.1
+
+The number of bins you choose has a big effect on what a histogram shows. Use the `titanic` dataset to see this directly.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+```
+
+1. Create a histogram of `fare` using `ax.hist()` with `bins=5`. What does the distribution look like? Can you tell much about its shape?
+2. Create the same histogram again with `bins=30`. How does this change what you can see?
+3. Create the same histogram a third time with `bins=200`. What goes wrong now?
+4. Based on what you observed, what would you say is a reasonable number of bins for this variable, and why?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# 1. Too few bins
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.hist(titanic["fare"], bins=5, edgecolor="white")
+ax.set_title("bins=5")
+plt.show()
+```
+
+```{python}
+# 2. Reasonable number of bins
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.hist(titanic["fare"], bins=30, edgecolor="white")
+ax.set_title("bins=30")
+plt.show()
+```
+
+```{python}
+# 3. Too many bins
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.hist(titanic["fare"], bins=200, edgecolor="white")
+ax.set_title("bins=200")
+plt.show()
+```
+
+1. With only 5 bins, almost all passengers fall into a single bin at the low end of the fare range. The chart tells you fares are generally low, but nothing more — any finer structure is completely hidden.
+
+2. With 30 bins, the right-skewed shape becomes clearly visible: a tall concentration of low fares that tapers off into a long tail of higher fares. This is detailed enough to see the shape of the distribution without being too noisy.
+
+3. With 200 bins, the histogram becomes jagged and full of gaps — many bins contain only one or two passengers, or none at all, since the data is being sliced more finely than there is data to fill it. The overall shape is now harder to see through the noise, not easier.
+
+4. Somewhere around 20–40 bins works well for this variable and this sample size — fine enough to reveal the skew, coarse enough to stay readable. There is no single correct number; it depends on the sample size and how much detail is useful for the question you are asking.
+
+</details>
+
+---
+
+### Exercise 4.6.2
+
+Use the `healthexp` dataset to practice describing the shape of a distribution.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+healthexp = pd.read_csv("data/healthexp.csv")
+```
+
+1. Create a histogram of `Spending_USD` with `bins=25` and `edgecolor="white"`.
+2. Add axis labels and a title.
+3. In your own words, describe the shape of this distribution. Is it symmetric or skewed? If skewed, in which direction? Does it have one peak or more than one?
+4. Based on the shape you described, would you expect the mean to be higher or lower than the median for this variable?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+healthexp = pd.read_csv("data/healthexp.csv")
+
+fig, ax = plt.subplots(figsize=(8, 5))
+
+ax.hist(healthexp["Spending_USD"], bins=25, edgecolor="white")
+
+ax.set_xlabel("Health spending per capita (USD)")
+ax.set_ylabel("Count")
+ax.set_title("Distribution of health spending")
+
+plt.tight_layout()
+plt.show()
+```
+
+3. The distribution is right-skewed: most country-year observations cluster at lower spending levels, with a long tail stretching out toward a small number of very high-spending observations (largely the USA in recent years). It has a single main peak rather than multiple distinct clusters.
+
+4. For a right-skewed distribution, the mean is pulled upward by the long tail of high values, so you would expect the mean to be higher than the median.
+
+</details>
+
+---
+
+### Exercise 4.6.3
+
+This exercise revisits the mean vs median discussion, this time making the difference visible on a histogram using reference lines.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+```
+
+1. Compute the mean and median of `fare`.
+2. Create a histogram of `fare` with `bins=30` and `edgecolor="white"`.
+3. Add a vertical reference line at the mean using `ax.axvline()`, with `color="red"` and `label="Mean"`. Add a second reference line at the median with `color="black"` and `label="Median"`.
+4. Add axis labels, a title, and call `ax.legend()`.
+5. Explain, using the chart, why the mean and median differ the way they do.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+
+mean_fare = titanic["fare"].mean()
+median_fare = titanic["fare"].median()
+
+fig, ax = plt.subplots(figsize=(8, 5))
+
+ax.hist(titanic["fare"], bins=30, edgecolor="white")
+ax.axvline(mean_fare, color="red", label="Mean")
+ax.axvline(median_fare, color="black", label="Median")
+
+ax.set_xlabel("Fare")
+ax.set_ylabel("Count")
+ax.set_title("Distribution of fare, with mean and median")
+ax.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+5. The median line sits close to the tall peak of low fares, where most passengers actually paid. The mean line sits further to the right, pulled away from the bulk of the data by the small number of passengers who paid very high fares — visible here as the thin, sparse tail of bars stretching out to the right of the main peak.
+
+</details>
+
+---
+
+### Exercise 4.6.4
+
+Comparing two groups' distributions on the same chart is a common task. Use `alpha=` to overlay the age distribution of survivors and non-survivors on the Titanic.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+survivors = titanic[titanic["survived"] == 1]
+non_survivors = titanic[titanic["survived"] == 0]
+```
+
+1. Create a Figure and Axes with `figsize=(9, 6)`.
+2. Plot a histogram of `age` for `survivors` with `bins=25`, `alpha=0.5`, and `label="Survived"`. Plot a histogram of `age` for `non_survivors` on the same Axes with the same `bins`, `alpha=0.5`, and `label="Did not survive"`.
+3. Add axis labels, a title, and call `ax.legend()`.
+4. Do the two distributions look noticeably different? Is there any age range where one group appears to be more common than the other?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+survivors = titanic[titanic["survived"] == 1]
+non_survivors = titanic[titanic["survived"] == 0]
+
+fig, ax = plt.subplots(figsize=(9, 6))
+
+ax.hist(survivors["age"], bins=25, alpha=0.5, label="Survived")
+ax.hist(non_survivors["age"], bins=25, alpha=0.5, label="Did not survive")
+
+ax.set_xlabel("Age")
+ax.set_ylabel("Count")
+ax.set_title("Age distribution by survival")
+ax.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+4. Both distributions have a broadly similar overall shape, but young children (roughly under 10) show a visibly higher share of survivors relative to non-survivors compared to other age ranges — consistent with the "children first" evacuation pattern seen elsewhere in this course. Among adults, the two distributions look fairly similar in shape, suggesting age alone was not a strong predictor of survival once childhood is excluded.
+
+</details>
+
+---
+
+### Exercise 4.6.5
+
+Extend the previous exercise by adding a reference line for the mean age of each group, so the comparison combines both techniques from this video.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+survivors = titanic[titanic["survived"] == 1]
+non_survivors = titanic[titanic["survived"] == 0]
+```
+
+1. Compute the mean age separately for `survivors` and `non_survivors`.
+2. Recreate the overlapping histogram from exercise 4.6.4.
+3. Add a vertical reference line at the mean age of `survivors`, using a colour that clearly matches the survivors' histogram, with an appropriate `label=`. Add a second reference line at the mean age of `non_survivors` in a matching colour.
+4. Add axis labels, a title, and call `ax.legend()`.
+5. Is the difference in mean age between the two groups large or small relative to the spread of each distribution? What does this tell you about how useful age alone would be for predicting survival?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+survivors = titanic[titanic["survived"] == 1]
+non_survivors = titanic[titanic["survived"] == 0]
+
+mean_age_survived = survivors["age"].mean()
+mean_age_died = non_survivors["age"].mean()
+
+print(f"Mean age (survived): {mean_age_survived:.1f}")
+print(f"Mean age (did not survive): {mean_age_died:.1f}")
+
+fig, ax = plt.subplots(figsize=(9, 6))
+
+ax.hist(survivors["age"], bins=25, alpha=0.5, color="tab:blue", label="Survived")
+ax.hist(non_survivors["age"], bins=25, alpha=0.5, color="tab:orange", label="Did not survive")
+
+ax.axvline(mean_age_survived, color="tab:blue", linestyle="--", label="Mean age (survived)")
+ax.axvline(mean_age_died, color="tab:orange", linestyle="--", label="Mean age (did not survive)")
+
+ax.set_xlabel("Age")
+ax.set_ylabel("Count")
+ax.set_title("Age distribution by survival, with group means")
+ax.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+5. The two mean age lines sit quite close together — only a couple of years apart — while each individual distribution spans the full range from infancy to old age. A difference this small relative to the spread within each group suggests that age alone does not separate survivors from non-survivors very well; most of the difference in survival is driven by other factors, such as passenger class and sex, rather than age by itself.
+
+</details>

@@ -3,6 +3,7 @@
 We cover scatter plots for visualising the relationship between two numeric variables.
 
 
+*Video will be embedded*
 
 ```python
 import pandas as pd
@@ -90,3 +91,259 @@ plt.close()
 ```
 
 ## Exercises
+
+### Exercise 4.5.1
+
+Use the `healthexp` dataset to practice reading a relationship off a basic scatter plot.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+healthexp = pd.read_csv("data/healthexp.csv")
+```
+
+1. Create a Figure and Axes with `figsize=(8, 6)`.
+2. Plot `Spending_USD` on the x-axis and `Life_Expectancy` on the y-axis using `ax.scatter()`. Each point here represents one country in one year.
+3. Add axis labels and a title.
+4. In your own words, describe the relationship shown in the chart. Is it positive, negative, or is there no clear relationship? Does the relationship look like a straight line, or does it flatten out at higher spending levels?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+healthexp = pd.read_csv("data/healthexp.csv")
+
+fig, ax = plt.subplots(figsize=(8, 6))
+
+ax.scatter(healthexp["Spending_USD"], healthexp["Life_Expectancy"])
+
+ax.set_xlabel("Health spending per capita (USD)")
+ax.set_ylabel("Life expectancy (years)")
+ax.set_title("Health spending vs life expectancy")
+
+plt.tight_layout()
+plt.show()
+```
+
+4. There is a positive relationship overall — countries that spend more on health tend to have higher life expectancy. However, the relationship is not a straight line: life expectancy rises quickly at low spending levels but flattens out at higher spending levels, meaning additional spending buys smaller and smaller gains in life expectancy once a country is already spending a lot.
+
+</details>
+
+---
+
+### Exercise 4.5.2
+
+Overlapping points can make a scatter plot hard to read. This exercise uses the full `titanic` dataset, which has enough passengers that points frequently land on top of each other.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+```
+
+1. Create a Figure and Axes with `figsize=(8, 6)`.
+2. Plot `age` on the x-axis and `fare` on the y-axis using `ax.scatter()`, without setting `alpha`. With 891 passengers, how easy is it to tell where points are most densely packed?
+3. Create the same chart again, this time setting `alpha=0.3`. How does this change what you can see?
+4. Based on the second chart, where are most passengers concentrated in terms of age and fare?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# 2. Without alpha
+fig, ax = plt.subplots(figsize=(8, 6))
+ax.scatter(titanic["age"], titanic["fare"])
+ax.set_title("Without alpha")
+plt.show()
+```
+
+```{python}
+# 3. With alpha
+fig, ax = plt.subplots(figsize=(8, 6))
+ax.scatter(titanic["age"], titanic["fare"], alpha=0.3)
+ax.set_xlabel("Age")
+ax.set_ylabel("Fare")
+ax.set_title("Age vs fare (with alpha)")
+plt.tight_layout()
+plt.show()
+```
+
+2. Without `alpha`, every point is drawn fully opaque, so in areas where many passengers share similar age and fare values, the points simply stack on top of each other and look identical to a single point — there is no way to tell whether ten passengers or one passenger is represented there.
+
+3. Setting `alpha=0.3` makes each point partially transparent, so overlapping points appear darker than isolated points. Areas with many overlapping passengers now stand out visually as darker patches.
+
+4. Most passengers are concentrated in the lower-left area of the chart — young to middle-aged adults who paid relatively low fares. The high-fare points are comparatively sparse and spread out, visible now as faint, isolated dots rather than being lost among the dense cluster.
+
+</details>
+
+---
+
+### Exercise 4.5.3
+
+The DataFrame below records the valuation and employee count of 15 startup companies. A small number of very large companies dominate the scale.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+startups = pd.DataFrame({
+    "company":    [f"Company {i}" for i in range(1, 16)],
+    "employees":  [12, 45, 8, 230, 15, 60, 5000, 90, 25, 40,
+                   18000, 33, 70, 150, 22],
+    "valuation":  [2, 15, 1, 80, 4, 25, 45000, 30, 6, 12,
+                   150000, 9, 22, 55, 5]  # millions USD
+})
+```
+
+1. Create a Figure and Axes with `figsize=(8, 6)`.
+2. Plot `employees` on the x-axis and `valuation` on the y-axis using `ax.scatter()`. What does the chart look like? Can you distinguish most of the companies from each other?
+3. Set the x-axis to a log scale using `ax.set_xscale("log")` and create the chart again, keeping the y-axis as it is. Has this fixed the problem from step 2? Fix the y-axis too, using `ax.set_yscale("log")`.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+startups = pd.DataFrame({
+    "company":    [f"Company {i}" for i in range(1, 16)],
+    "employees":  [12, 45, 8, 230, 15, 60, 5000, 90, 25, 40,
+                   18000, 33, 70, 150, 22],
+    "valuation":  [2, 15, 1, 80, 4, 25, 45000, 30, 6, 12,
+                   150000, 9, 22, 55, 5]
+})
+
+# 2. Regular scale
+fig, ax = plt.subplots(figsize=(8, 6))
+ax.scatter(startups["employees"], startups["valuation"])
+ax.set_title("Regular scale")
+plt.show()
+```
+
+```{python}
+# 3. Log scale on both axes
+fig, ax = plt.subplots(figsize=(8, 6))
+ax.scatter(startups["employees"], startups["valuation"])
+ax.set_xscale("log")
+ax.set_yscale("log")
+ax.set_xlabel("Employees (log scale)")
+ax.set_ylabel("Valuation, millions USD (log scale)")
+ax.set_title("Company size vs valuation")
+plt.tight_layout()
+plt.show()
+```
+
+2. On a regular scale, two companies with enormous employee counts and valuations squash all 13 other companies into a tiny cluster in the bottom-left corner. It is essentially impossible to distinguish most of the companies from each other or to see any relationship among them.
+
+3. A log scale helps here because the data spans several orders of magnitude — from 5 employees to 18,000. Log scales are most useful when a variable is extremely right-skewed, with a few very large values dwarfing the rest; for more moderately skewed data, a regular scale is often still perfectly readable.
+
+</details>
+
+---
+
+### Exercise 4.5.4
+
+This exercise extends the age-vs-fare scatter plot from exercise 4.5.2 by colouring the points according to passenger class.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+classes = sorted(titanic["pclass"].unique())
+```
+
+1. Create a Figure and Axes with `figsize=(8, 6)`.
+2. Use a `for` loop over `classes` to plot `age` vs `fare` separately for each passenger class, using `alpha=0.5` and `label=` to identify each class.
+3. Add axis labels, a title, and call `ax.legend()`.
+4. Does colouring by class reveal anything about the high-fare outliers visible in exercise 4.5.2?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+classes = sorted(titanic["pclass"].unique())
+
+fig, ax = plt.subplots(figsize=(8, 6))
+
+for pclass in classes:
+    group = titanic[titanic["pclass"] == pclass]
+    ax.scatter(group["age"], group["fare"], alpha=0.5, label=f"Class {pclass}")
+
+ax.set_xlabel("Age")
+ax.set_ylabel("Fare")
+ax.set_title("Age vs fare by passenger class")
+ax.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+4. Yes — the high-fare outliers are almost entirely first-class passengers (class 1), while second and third class passengers cluster tightly in the lower fare range regardless of age. This makes it clear that fare is driven much more strongly by passenger class than by age, something that was not visible at all in the single-colour version of this chart.
+
+</details>
+
+---
+
+### Exercise 4.5.5
+
+This exercise extends the same age-vs-fare relationship once more, this time encoding family size as the size of each point — a bubble chart.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+titanic["family_size"] = titanic["sibsp"] + titanic["parch"] + 1
+```
+
+1. `family_size` counts each passenger plus their siblings/spouses (`sibsp`) and parents/children (`parch`) aboard. Print `family_size.describe()` to see its range.
+2. Create a Figure and Axes with `figsize=(9, 6)`.
+3. Plot `age` vs `fare` using `ax.scatter()`, with `alpha=0.4` and marker size set using `s=titanic["family_size"] * 20` — multiplying by 20 makes the size differences easier to see.
+4. Add axis labels and a title that mentions what the bubble size represents.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+titanic["family_size"] = titanic["sibsp"] + titanic["parch"] + 1
+
+print(titanic["family_size"].describe())
+```
+
+```{python}
+fig, ax = plt.subplots(figsize=(9, 6))
+
+ax.scatter(
+    titanic["age"], titanic["fare"],
+    s=titanic["family_size"] * 20, alpha=0.4
+)
+
+ax.set_xlabel("Age")
+ax.set_ylabel("Fare")
+ax.set_title("Age vs fare, bubble size = family size aboard")
+
+plt.tight_layout()
+plt.show()
+```
+
+</details>
