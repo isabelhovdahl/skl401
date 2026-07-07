@@ -128,3 +128,300 @@ plt.close()
 ```
 
 ## Exercises
+
+### Exercise 4.7.1
+
+Create a simple line chart of life expectancy over time for a single country in the `healthexp` dataset, then apply a style sheet to change its appearance.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+healthexp = pd.read_csv("data/healthexp.csv")
+germany = healthexp[healthexp["Country"] == "Germany"]
+```
+
+1. Create a Figure and Axes with `figsize=(8, 5)`. Plot `Year` against `Life_Expectancy` for Germany, with full axis labels and a title. This is the default matplotlib appearance.
+2. Look up the list of available style sheets by running `print(plt.style.available)`. Choose one style you find appealing and apply it using `plt.style.use()` before recreating the same chart.
+3. Try a second, different style sheet and recreate the chart once more.
+4. Which of the three versions (default, style 1, style 2) do you find most readable, and why?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+healthexp = pd.read_csv("data/healthexp.csv")
+germany = healthexp[healthexp["Country"] == "Germany"]
+
+# 1. Default appearance
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.plot(germany["Year"], germany["Life_Expectancy"])
+ax.set_xlabel("Year")
+ax.set_ylabel("Life expectancy (years)")
+ax.set_title("Life expectancy over time in Germany (default style)")
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+# 2. First style
+plt.style.use("seaborn-v0_8-darkgrid")
+
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.plot(germany["Year"], germany["Life_Expectancy"])
+ax.set_xlabel("Year")
+ax.set_ylabel("Life expectancy (years)")
+ax.set_title("Life expectancy over time in Germany (seaborn-darkgrid style)")
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+# 3. Second style
+plt.style.use("ggplot")
+
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.plot(germany["Year"], germany["Life_Expectancy"])
+ax.set_xlabel("Year")
+ax.set_ylabel("Life expectancy (years)")
+ax.set_title("Life expectancy over time in Germany (ggplot style)")
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+# Reset to default for the rest of the notebook
+plt.style.use("default")
+```
+
+4. Answers will vary. A grid-based style like `seaborn-v0_8-darkgrid` often makes it easier to read off approximate values, while `ggplot` gives a more polished, publication-like appearance. Once `plt.style.use()` is called, it
+affects every chart created afterward in the same session — this is why the last cell resets it back to `"default"`.
+
+</details>
+
+---
+
+### Exercise 4.7.2
+
+Create a bar chart of survival rate by passenger class using the Titanic dataset, then adjust font sizes and weight to make it presentation-ready.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+survival_by_class = titanic.groupby("pclass")["survived"].mean()
+```
+
+1. Create a Figure and Axes with `figsize=(8, 5)`. Plot `survival_by_class` as a vertical bar chart, converting the index to strings first so the x-axis shows clean category labels. Add axis labels and a title using the default
+font sizes.
+2. Recreate the chart, this time setting the title's font size to 18 and `fontweight="bold"`.
+3. Set the axis label font sizes to 13.
+4. Compare the two versions. In a real presentation slide, which would be easier to read from the back of a room?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+survival_by_class = titanic.groupby("pclass")["survived"].mean()
+
+# 1. Default font sizes
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.bar(survival_by_class.index.astype(str), survival_by_class.values)
+ax.set_xlabel("Passenger class")
+ax.set_ylabel("Survival rate")
+ax.set_title("Titanic survival rate by passenger class")
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+# 2-3. Larger, bold title and larger axis labels
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.bar(survival_by_class.index.astype(str), survival_by_class.values)
+ax.set_xlabel("Passenger class", fontsize=13)
+ax.set_ylabel("Survival rate", fontsize=13)
+ax.set_title("Titanic survival rate by passenger class", fontsize=18, fontweight="bold")
+plt.tight_layout()
+plt.show()
+```
+
+4. The second version, with a larger and bolder title and larger axis labels, is much easier to read from a distance. Default matplotlib font sizes are tuned for reading on a screen up close, not for a projected presentation slide
+— increasing font sizes and using `fontweight="bold"` for titles is a common adjustment before presenting a chart to an audience.
+
+</details>
+
+---
+
+### Exercise 4.7.3
+
+Create a line chart of total yearly passengers over time using the `flights` dataset, then format the y-axis so large numbers are easier to read.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+
+flights = pd.read_csv("data/flights.csv")
+flights_annual = flights.groupby("year")["passengers"].sum().sort_index()
+
+```
+
+1. Create a Figure and Axes with `figsize=(10, 5)`. Plot total number of passengers against year, with axis labels and a title. Look closely at the y-axis tick labels — are they easy to read at a glance?
+2. Use `ticker.StrMethodFormatter("{x:,.0f}")` together with `ax.yaxis.set_major_formatter()` to add thousands separators to the y-axis tick labels. Recreate the chart with this formatting applied.
+3. Why does a thousands separator matter more here than it would for a chart where the y-axis only goes up to, say, 20?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+
+flights = pd.read_csv("data/flights.csv")
+flights_annual = flights.groupby("year")["passengers"].sum().sort_index()
+
+# 1. Without formatting
+fig, ax = plt.subplots(figsize=(10, 5))
+ax.plot(flights_annual.index, flights_annual.values)
+ax.set_xlabel("Year")
+ax.set_ylabel("Passengers")
+ax.set_title("Yearly passengers over time")
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+# 2. With thousands separator
+fig, ax = plt.subplots(figsize=(10, 5))
+ax.plot(flights_annual.index, flights_annual.values)
+ax.set_xlabel("Year")
+ax.set_ylabel("Passengers")
+ax.set_title("Yearly passengers over time")
+ax.yaxis.set_major_formatter(ticker.StrMethodFormatter("{x:,.0f}"))
+plt.tight_layout()
+plt.show()
+```
+
+3. When y-axis values are small (like a handful of countries or a percentage between 0 and 1), every tick label is short and easy to read instantly. Once values run into the hundreds or thousands, a label like `500` is easy to
+misread relative to `5000` at a glance, and comma separators (`5,000`) make the magnitude of each tick immediately clear without needing to carefully count digits.
+
+</details>
+
+---
+
+### Exercise 4.7.4
+
+Create a line chart comparing life expectancy over time for two countries in the `healthexp` dataset, then use `fill_between()` to visually emphasize the gap between them.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+healthexp = pd.read_csv("data/healthexp.csv")
+usa = healthexp[healthexp["Country"] == "USA"].sort_values("Year")
+japan = healthexp[healthexp["Country"] == "Japan"].sort_values("Year")
+```
+
+1. Create a Figure and Axes with `figsize=(9, 6)`. Plot both countries' life expectancy over time as two separate lines, with a legend.
+2. `usa` and `japan` share the same `Year` values, so you can shade the area between their two lines using
+`ax.fill_between(usa["Year"], usa["Life_Expectancy"], japan["Life_Expectancy"], alpha=0.2)`. Add this to the chart.
+3. Add axis labels and a title.
+4. Does the shaded gap stay roughly constant over time, widen, or narrow?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+healthexp = pd.read_csv("data/healthexp.csv")
+usa = healthexp[healthexp["Country"] == "USA"].sort_values("Year")
+japan = healthexp[healthexp["Country"] == "Japan"].sort_values("Year")
+
+fig, ax = plt.subplots(figsize=(9, 6))
+
+ax.plot(usa["Year"], usa["Life_Expectancy"], label="USA")
+ax.plot(japan["Year"], japan["Life_Expectancy"], label="Japan")
+
+ax.fill_between(
+    usa["Year"], usa["Life_Expectancy"], japan["Life_Expectancy"], alpha=0.2
+)
+
+ax.set_xlabel("Year")
+ax.set_ylabel("Life expectancy (years)")
+ax.set_title("Life expectancy gap: USA vs Japan")
+ax.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+4. The shaded gap widens over time — Japan's life expectancy rises steadily above the USA's, and the gap between the two lines becomes visibly larger in more recent years. Shading the area between two lines like this draws the
+reader's eye directly to the size of the gap itself, which is easy to underestimate just by looking at two separate lines.
+
+</details>
+
+---
+
+### Exercise 4.7.5
+
+Create a histogram of GDP per capita for a single year in the `gapminder` dataset, then add an annotated reference line marking a specific threshold.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+gapminder = pd.read_csv("data/gapminder.csv")
+gapminder_2007 = gapminder[gapminder["year"] == 2007]
+```
+
+1. Create a Figure and Axes with `figsize=(9, 6)`. Plot a histogram of `gdpPercap` for `gapminder_2007` with `bins=30` and `edgecolor="white"`. Add axis labels and a title.
+2. Add a vertical reference line at $10,000 using `ax.axvline(10000, color="red", linestyle="--")`.
+3. Add a text annotation near the top of the line explaining what it represents, using `ax.text(10500, <a suitable y-value>, "10,000 USD threshold", color="red")`. You will need to choose a y-value that places the text visibly above the bars without overlapping the tallest ones.
+4. What share of countries in 2007 fall below this threshold? Compute this directly from the data and compare it to what the chart suggests visually.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+gapminder = pd.read_csv("data/gapminder.csv")
+gapminder_2007 = gapminder[gapminder["year"] == 2007]
+
+fig, ax = plt.subplots(figsize=(9, 6))
+
+ax.hist(gapminder_2007["gdpPercap"], bins=30, edgecolor="white")
+
+ax.axvline(10000, color="red", linestyle="--")
+ax.text(10500, 25, "10,000 USD threshold", color="red")
+
+ax.set_xlabel("GDP per capita (USD)")
+ax.set_ylabel("Number of countries")
+ax.set_title("Distribution of GDP per capita, 2007")
+
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+# 4. Share of countries below the threshold
+below_threshold = (gapminder_2007["gdpPercap"] < 10000).mean()
+print(f"{below_threshold:.1%} of countries had GDP per capita below $10,000 in 2007")
+```
+
+4. A large majority of countries — roughly three-quarters — fall below the $10,000 threshold, consistent with the chart showing a tall concentration of bars to the left of the reference line and only a thin scattering of bars to
+its right. Annotating a specific, meaningful threshold like this turns a generic histogram into a chart that answers a concrete question at a glance.
+
+</details>

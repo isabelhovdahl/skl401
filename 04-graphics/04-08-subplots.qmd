@@ -91,3 +91,295 @@ plt.close()
 ```
 
 ## Exercises
+
+### Exercise 4.8.1
+
+Before working with real data, practice the basic mechanics of building a grid of panels using simple made-up data.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 10, 50)
+y1 = np.sin(x)
+y2 = np.cos(x)
+```
+
+1. Create a Figure with a **1x2** grid of panels using `plt.subplots(nrows=1, ncols=2, figsize=(10, 4))`. Plot `y1` against `x` in the first panel and `y2` against `x` in the second panel. Add a title to each panel individually.
+2. Create the same two plots again, but this time using a **2x1** grid (`nrows=2, ncols=1`). What changes about how the panels are arranged?
+3. When you have a 1x2 or 2x1 grid, is `axes` a 1D or a 2D array? How many indices do you need to access a single panel?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 10, 50)
+y1 = np.sin(x)
+y2 = np.cos(x)
+
+# 1. 1x2 grid
+fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 4))
+
+axes[0].plot(x, y1)
+axes[0].set_title("Sine")
+
+axes[1].plot(x, y2)
+axes[1].set_title("Cosine")
+
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+# 2. 2x1 grid
+fig, axes = plt.subplots(nrows=2, ncols=1, figsize=(6, 8))
+
+axes[0].plot(x, y1)
+axes[0].set_title("Sine")
+
+axes[1].plot(x, y2)
+axes[1].set_title("Cosine")
+
+plt.tight_layout()
+plt.show()
+```
+
+2. With a 2x1 grid, the two panels are stacked vertically instead of placed side by side, since there are now 2 rows and 1 column instead of 1 row and 2 columns.
+
+3. Whenever one of `nrows` or `ncols` is 1, `axes` is a 1D array, and a single panel is accessed with one index, e.g. `axes[0]` or `axes[1]`. A 2D array (and therefore two indices, like `axes[0, 1]`) is only needed once both `nrows` and
+`ncols` are greater than 1.
+
+</details>
+
+---
+
+### Exercise 4.8.2
+
+Extend the previous exercise to a **2x2** grid, using two more made-up series alongside `y1` and `y2`.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 10, 50)
+y1 = np.sin(x)
+y2 = np.cos(x)
+y3 = x
+y4 = x ** 2
+```
+
+1. Create a Figure with a 2x2 grid of panels using `plt.subplots(nrows=2, ncols=2, figsize=(10, 8))`.
+2. Plot `y1` in the top-left panel, `y2` in the top-right panel, `y3` in the bottom-left panel, and `y4` in the bottom-right panel, using two indices to address each one (e.g. `axes[0, 0]`). Add a title to each panel.
+3. Call `fig.suptitle("Four functions of x")` to add one title above the whole grid.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 10, 50)
+y1 = np.sin(x)
+y2 = np.cos(x)
+y3 = x
+y4 = x ** 2
+
+fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(10, 8))
+
+axes[0, 0].plot(x, y1)
+axes[0, 0].set_title("Sine")
+
+axes[0, 1].plot(x, y2)
+axes[0, 1].set_title("Cosine")
+
+axes[1, 0].plot(x, y3)
+axes[1, 0].set_title("Linear")
+
+axes[1, 1].plot(x, y4)
+axes[1, 1].set_title("Quadratic")
+
+fig.suptitle("Four functions of x")
+
+plt.tight_layout()
+plt.show()
+```
+
+With a 2x2 grid, `axes` is a genuine 2D array, so each panel needs two indices: a row and a column. `fig.suptitle()` adds one title above the entire grid, separate from the four individual panel titles set with `.set_title()` — the
+two serve different purposes and are not interchangeable.
+
+</details>
+
+---
+
+### Exercise 4.8.3
+
+Manually indexing each panel works for a small, fixed grid, but becomes impractical with more groups. This exercise introduces the loop pattern for filling panels automatically, using the `healthexp` dataset.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+healthexp = pd.read_csv("data/healthexp.csv")
+countries = healthexp["Country"].unique()
+print(countries)
+```
+
+1. Create a Figure with a **2x3** grid of panels, `figsize=(14, 8)`, to fit one panel per country.
+2. Use `.flatten()` on the Axes array to turn it into a 1D array, then use a `for` loop with `enumerate()` over `countries` to plot each country's life expectancy over time in its own panel. Add each country's name as that panel's
+title.
+3. Call `fig.suptitle()` with an overall title for the whole grid.
+4. Why is `.flatten()` necessary here, when it was not needed in the previous two exercises?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+healthexp = pd.read_csv("data/healthexp.csv")
+countries = healthexp["Country"].unique()
+
+fig, axes = plt.subplots(nrows=2, ncols=3, figsize=(14, 8))
+axes = axes.flatten()
+
+for i, country in enumerate(countries):
+    group = healthexp[healthexp["Country"] == country]
+    axes[i].plot(group["Year"], group["Life_Expectancy"])
+    axes[i].set_title(country)
+
+fig.suptitle("Life expectancy over time by country")
+
+plt.tight_layout()
+plt.show()
+```
+
+4. `.flatten()` converts the 2D Axes array into a 1D array so that a single loop variable `i` from `enumerate()` can address each panel with one index, `axes[i]`, instead of needing to compute a separate row and column index for
+every iteration. In the previous exercises there were only 2 or 4 panels, few enough to address by hand — with 6 countries here, a loop is far less error-prone than writing out six manual `axes[row, col]` assignments.
+
+</details>
+
+---
+
+### Exercise 4.8.4
+
+This exercise demonstrates why `sharey=` matters when comparing panels, using histograms of fare split by passenger class.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+classes = sorted(titanic["pclass"].unique())
+```
+
+1. Create a Figure with a **1x3** grid of panels, `figsize=(15, 5)`, without setting `sharey=`. Loop over `classes` and plot a histogram of `fare` for each class in its own panel, with `bins=20` and the class number as the title. Look
+closely at the y-axis range in each panel — are they the same?
+2. Create the same grid again, this time passing `sharey=True` to `plt.subplots()`. What changes about the y-axis across the three panels?
+3. Based on the `sharey=True` version, how does the number of first-class passengers compare to the number of third-class passengers in the most common fare range? Would this comparison have been misleading in the first version?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+
+# 1. Without sharey
+fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(15, 5))
+
+for i in range(3):
+    group = titanic[titanic["pclass"] == i+1]
+    axes[i].hist(group["fare"], bins=20)
+    axes[i].set_title(f"Class {i+1}")
+
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+# 2. With sharey=True
+fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(15, 5), sharey=True)
+
+for i in range(3):
+    group = titanic[titanic["pclass"] == i+1]
+    axes[i].hist(group["fare"], bins=20)
+    axes[i].set_title(f"Class {i+1}")
+
+plt.tight_layout()
+plt.show()
+```
+
+1. Without `sharey=`, matplotlib automatically scales each panel's y-axis to fit its own data, so each panel gets a different y-axis range depending on how many passengers it contains.
+
+2. With `sharey=True`, all three panels use the same y-axis range, determined by whichever panel has the tallest bar. This forces a fair visual comparison across panels.
+
+3. With shared axes, it becomes clear that third class has substantially more passengers in its most common fare range than first class does in its own — something the first version obscured, since each panel's bars were scaled to
+fill the available height regardless of the actual passenger count. Comparing bar heights directly across panels is only valid once the axes are shared. 
+
+Note that `ax.hist()` also accepts a `density=True` argument, which rescales each histogram so the area under its bars sums to 1, rather than showing raw counts. This is a different fix for a related problem: it makes the *shape* of each group's distribution comparable regardless of group size, which is useful when the groups have very different numbers of observations and you care about proportions rather than counts. However, `density=True` would no longer let you
+read off the actual number of passengers in each bar — you would lose exactly the comparison made in this exercise, since all three panels would be rescaled to the same total area regardless of how many passengers they actually contain. `sharey=True` is the right tool when the absolute counts themselves are what you want to compare.
+
+</details>
+
+---
+
+### Exercise 4.8.5
+
+Not every dataset divides evenly into a rectangular grid. This exercise practices hiding an unused panel, using histograms of age split by embarkation port.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+titanic = titanic.dropna(subset=["embarked"])
+ports = sorted(titanic["embarked"].unique())
+print(ports)
+```
+
+1. There are 3 embarkation ports, but a 2x2 grid has 4 panels. Create a Figure with a 2x2 grid, `figsize=(10, 8)`, flatten the Axes array, and loop over `embarked` to plot a histogram of `age` for each port in its own panel with
+`bins=20`, using the port code as the panel title.
+2. The 4th panel is currently empty. Use `axes[3].set_visible(False)` to hide it.
+3. Add an overall title using `fig.suptitle()`, and a separate title for each individual panel using `.set_title()`. Explain in your own words why both are needed and what would be lost if you only used one of them.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+titanic = pd.read_csv("data/titanic.csv")
+titanic = titanic.dropna(subset=["embarked"])
+ports = sorted(titanic["embarked"].unique())
+
+fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(10, 8))
+axes = axes.flatten()
+
+for i, port in enumerate(ports):
+    group = titanic[titanic["embarked"] == port]
+    axes[i].hist(group["age"], bins=20)
+    axes[i].set_title(port)
+
+# 2. Hide the unused 4th panel
+axes[3].set_visible(False)
+
+# 3. Overall title
+fig.suptitle("Age distribution by embarkation port")
+
+plt.tight_layout()
+plt.show()
+```
+
+3. `fig.suptitle()` describes what the entire grid of panels is about as a whole — here, that all three panels show age distributions grouped by embarkation port. Each panel's `.set_title()` identifies which specific group
+that individual panel represents — here, which port. Without the overall title, a reader would not immediately know what connects the three panels together; without the individual titles, a reader would not know which port
+each specific histogram belongs to. `axes[3].set_visible(False)` removes the empty fourth panel from view entirely, rather than leaving a blank box in the grid.
+
+</details>

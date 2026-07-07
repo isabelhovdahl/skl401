@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Further exercises – SKL401 — Introduction to Python</title>
+<title>Topic 4 — Further Exercises – SKL401 — Introduction to Python</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -85,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-graphics/04-01-matplotlib.html">4 - Graphics</a></li><li class="breadcrumb-item"><a href="../04-graphics/04-11-exercises.html"><span class="chapter-title">4.11 Further Exercises</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-graphics/04-01-matplotlib.html">4 - Graphics</a></li><li class="breadcrumb-item"><a href="../04-graphics/04-11-exercises.html">4.11 Further Exercises</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -373,7 +408,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../04-graphics/04-11-exercises.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">4.11 Further Exercises</span></a>
+  <a href="../04-graphics/04-11-exercises.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">4.11 Further Exercises</span></a>
   </div>
 </li>
       </ul>
@@ -399,15 +435,41 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#warm-up" id="toc-warm-up" class="nav-link active" data-scroll-target="#warm-up">🟢 Warm-up</a>
+  <ul class="collapse">
+  <li><a href="#exercise-4.11.1" id="toc-exercise-4.11.1" class="nav-link" data-scroll-target="#exercise-4.11.1">Exercise 4.11.1</a></li>
+  <li><a href="#exercise-4.11.2" id="toc-exercise-4.11.2" class="nav-link" data-scroll-target="#exercise-4.11.2">Exercise 4.11.2</a></li>
+  <li><a href="#exercise-4.11.3" id="toc-exercise-4.11.3" class="nav-link" data-scroll-target="#exercise-4.11.3">Exercise 4.11.3</a></li>
+  </ul></li>
+  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice">🟡 Practice</a>
+  <ul class="collapse">
+  <li><a href="#exercise-4.11.4" id="toc-exercise-4.11.4" class="nav-link" data-scroll-target="#exercise-4.11.4">Exercise 4.11.4</a></li>
+  <li><a href="#exercise-4.11.5" id="toc-exercise-4.11.5" class="nav-link" data-scroll-target="#exercise-4.11.5">Exercise 4.11.5</a></li>
+  <li><a href="#exercise-4.11.6" id="toc-exercise-4.11.6" class="nav-link" data-scroll-target="#exercise-4.11.6">Exercise 4.11.6</a></li>
+  <li><a href="#exercise-4.11.7" id="toc-exercise-4.11.7" class="nav-link" data-scroll-target="#exercise-4.11.7">Exercise 4.11.7</a></li>
+  <li><a href="#exercise-4.11.8" id="toc-exercise-4.11.8" class="nav-link" data-scroll-target="#exercise-4.11.8">Exercise 4.11.8</a></li>
+  </ul></li>
+  <li><a href="#challenge" id="toc-challenge" class="nav-link" data-scroll-target="#challenge">🔴 Challenge</a>
+  <ul class="collapse">
+  <li><a href="#exercise-4.11.9" id="toc-exercise-4.11.9" class="nav-link" data-scroll-target="#exercise-4.11.9">Exercise 4.11.9</a></li>
+  <li><a href="#exercise-4.11.10" id="toc-exercise-4.11.10" class="nav-link" data-scroll-target="#exercise-4.11.10">Exercise 4.11.10</a></li>
+  <li><a href="#exercise-4.11.11" id="toc-exercise-4.11.11" class="nav-link" data-scroll-target="#exercise-4.11.11">Exercise 4.11.11</a></li>
+  <li><a href="#exercise-4.11.12" id="toc-exercise-4.11.12" class="nav-link" data-scroll-target="#exercise-4.11.12">Exercise 4.11.12</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-graphics/04-01-matplotlib.html">4 - Graphics</a></li><li class="breadcrumb-item"><a href="../04-graphics/04-11-exercises.html"><span class="chapter-title">4.11 Further Exercises</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../04-graphics/04-01-matplotlib.html">4 - Graphics</a></li><li class="breadcrumb-item"><a href="../04-graphics/04-11-exercises.html">4.11 Further Exercises</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Further exercises</span></h1>
+<h1 class="title">Topic 4 — Further Exercises</h1>
 </div>
 
 
@@ -424,11 +486,820 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Extend exercise 4.2.3: Plot using both long and wide format of flights data.</p>
-<p>Extend of topic 4.3 and ask students to loop over columns in a dataset instead of countries, for example fred data.</p>
-<p>4.6.5 — End-to-end: gapminder, a single year, life expectancy distribution with bins, reference line for the global mean, and a comparison of two continents overlapping</p>
+<p>These exercises give you an opportunity to consolidate everything covered in Topic 4 before moving on. Some combine skills from several videos into a single task, and some introduce new tools that were not shown in the videos — for these, you are expected to look up the documentation yourself, the same way you would when working independently.</p>
+<p>The exercises are organised into three levels:</p>
+<ul>
+<li>🟢 <strong>Warm-up</strong> — single-skill exercises to check your understanding of the basics.</li>
+<li>🟡 <strong>Practice</strong> — exercises that combine two or more topics.</li>
+<li>🔴 <strong>Challenge</strong> — multi-step tasks that may require you to combine ideas in ways you have not seen before, or to use a new tool introduced through its documentation.</li>
+</ul>
+<hr>
+<section id="warm-up" class="level2">
+<h2 class="anchored" data-anchor-id="warm-up">🟢 Warm-up</h2>
+<section id="exercise-4.11.1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.11.1">Exercise 4.11.1</h3>
+<p>Use the FRED monthly data to practice the basic single-line chart pattern.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/data/FRED/FRED_monthly_2010.csv"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> pd.read_csv(url)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Create a Figure and Axes with <code>figsize=(10, 5)</code>.</li>
+<li>Plot <code>DATE</code> on the x-axis and <code>UNRATE</code> on the y-axis.</li>
+<li>Add axis labels and a title.</li>
+<li>In which year within this decade does unemployment appear highest?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="7082bd4b" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/data/FRED/FRED_monthly_2010.csv"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>fred[<span class="st">"DATE"</span>] <span class="op">=</span> pd.to_datetime(fred[<span class="st">"DATE"</span>])</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> fred.sort_values(<span class="st">"DATE"</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>ax.plot(fred[<span class="st">"DATE"</span>], fred[<span class="st">"UNRATE"</span>])</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Year"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Unemployment rate (%)"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"US unemployment rate, 2010–2019"</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-11-exercises_files/figure-html/cell-2-output-1.png" width="950" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Unemployment is highest at the very start of the decade, in 2010, reflecting the aftermath of the 2008 financial crisis. It then falls steadily throughout the rest of the decade.</li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="exercise-4.11.2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.11.2">Exercise 4.11.2</h3>
+<p>Use the same FRED monthly data from exercise 4.11.1 to practice a basic scatter plot.</p>
+<ol type="1">
+<li>Create a Figure and Axes with <code>figsize=(8, 6)</code>.</li>
+<li>Plot <code>UNRATE</code> on the x-axis and <code>FEDFUNDS</code> on the y-axis using <code>ax.scatter()</code>.</li>
+<li>Add axis labels and a title.</li>
+<li>In your own words, describe the relationship shown in the chart. Is it positive, negative, or is there no clear relationship?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="4ac24921" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/data/FRED/FRED_monthly_2010.csv"</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>ax.scatter(fred[<span class="st">"UNRATE"</span>], fred[<span class="st">"FEDFUNDS"</span>])</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Unemployment rate (%)"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Federal funds rate (%)"</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Unemployment vs federal funds rate, 2010–2019"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-11-exercises_files/figure-html/cell-3-output-1.png" width="758" height="566" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li>The relationship is clearly negative: months with higher unemployment tend to have a lower federal funds rate, and vice versa. This is consistent with the Federal Reserve’s typical approach of cutting interest rates when unemployment is high to stimulate the economy, and raising rates once unemployment falls and the labour market strengthens.</li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="exercise-4.11.3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.11.3">Exercise 4.11.3</h3>
+<p>Practice preparing data for a bar chart using a summary statistic.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>healthexp <span class="op">=</span> pd.read_csv(<span class="st">"data/healthexp.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Compute the <strong>median</strong> (not mean) health spending for each country.</li>
+<li>Sort the result so the highest-spending country appears first.</li>
+<li>Create a Figure and Axes with <code>figsize=(8, 5)</code> and plot the result as a vertical bar chart.</li>
+<li>Add axis labels and a title that makes clear you are showing the median.</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="c6e7af78" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>healthexp <span class="op">=</span> pd.read_csv(<span class="st">"data/healthexp.csv"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>median_spending <span class="op">=</span> (</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    healthexp.groupby(<span class="st">"Country"</span>)[<span class="st">"Spending_USD"</span>]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    .median()</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    .sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>ax.bar(median_spending.index, median_spending.values)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Country"</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Median health spending per capita (USD)"</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Median health spending by country"</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-11-exercises_files/figure-html/cell-4-output-1.png" width="758" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Using the median instead of the mean is a small change mechanically, but it can matter for skewed data — a country whose spending grew sharply in only the most recent years might have a mean pulled upward relative to its typical (median) spending level across the full time period.</p>
+</details>
+<hr>
+</section>
+</section>
+<section id="practice" class="level2">
+<h2 class="anchored" data-anchor-id="practice">🟡 Practice</h2>
+<section id="exercise-4.11.4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.11.4">Exercise 4.11.4</h3>
+<p>This exercise combines the line chart and scatter plot from the two first warm-up exercises into a single figure with two panels side by side — a different chart type in each panel, rather than the same chart type repeated across panels as in Topic 4.8.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/data/FRED/FRED_monthly_2010.csv"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> pd.read_csv(url)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Create a Figure with a 1x2 grid of panels, <code>figsize=(14, 5)</code>.</li>
+<li>In the first panel, plot <code>UNRATE</code> against <code>DATE</code> as a line chart, with axis labels and a title.</li>
+<li>In the second panel, plot <code>UNRATE</code> against <code>FEDFUNDS</code> as a scatter plot, with axis labels and a title.</li>
+<li>Add an overall title for the figure using <code>fig.suptitle()</code>.</li>
+<li>What does having these two charts side by side let you see that either chart alone would not?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="82216864" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/data/FRED/FRED_monthly_2010.csv"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>fred[<span class="st">"DATE"</span>] <span class="op">=</span> pd.to_datetime(fred[<span class="st">"DATE"</span>])</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> fred.sort_values(<span class="st">"DATE"</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].plot(fred[<span class="st">"DATE"</span>], fred[<span class="st">"UNRATE"</span>])</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xlabel(<span class="st">"Year"</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">"Unemployment rate (%)"</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">"Unemployment over time"</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].scatter(fred[<span class="st">"UNRATE"</span>], fred[<span class="st">"FEDFUNDS"</span>])</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">"Unemployment rate (%)"</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">"Federal funds rate (%)"</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">"Unemployment vs federal funds rate"</span>)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"Unemployment in the 2010s: over time and against interest rates"</span>)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-11-exercises_files/figure-html/cell-5-output-1.png" width="1334" height="475" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="5" type="1">
+<li>Neither of these panels needs to show the same variable pairing to still work together well: <code>plt.subplots()</code> does not require the panels to be the same chart type or even share a variable, since each Axes is independent once created. The left panel shows <em>when</em> unemployment was high or low across the decade, while the right panel shows <em>how</em> unemployment relates to interest rate decisions, independent of time. Seeing them together makes it easier to connect a specific period (for example, the high-unemployment early 2010s) to where those months fall on the scatter plot — something that would require mentally cross-referencing two separate charts if they were not placed side by side.</li>
+</ol>
+</details>
+</section>
+<section id="exercise-4.11.5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.11.5">Exercise 4.11.5</h3>
+<p>The <code>flights</code> dataset can be reshaped into both long and wide format. This exercise builds the same multi-line chart from each shape, using a different technique for each.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>flights <span class="op">=</span> pd.read_csv(<span class="st">"data/flights.csv"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> [<span class="dv">1950</span>, <span class="dv">1955</span>, <span class="dv">1960</span>]</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>month_order <span class="op">=</span> [<span class="st">"Jan"</span>, <span class="st">"Feb"</span>, <span class="st">"Mar"</span>, <span class="st">"Apr"</span>, <span class="st">"May"</span>, <span class="st">"Jun"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Jul"</span>, <span class="st">"Aug"</span>, <span class="st">"Sep"</span>, <span class="st">"Oct"</span>, <span class="st">"Nov"</span>, <span class="st">"Dec"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Using the long format.</strong></p>
+<ol type="1">
+<li>Filter <code>flights</code> to the three years listed in <code>years</code>. Create a Figure and Axes with <code>figsize=(9, 5)</code>, then use a <code>for</code> loop over <code>years</code> to plot each year’s passengers by month as its own line, with a legend.</li>
+</ol>
+<p><strong>Using the wide format.</strong></p>
+<ol start="2" type="1">
+<li>Use <code>.pivot()</code> to reshape <code>flights</code> to wide format, with <code>month</code> as the index and <code>year</code> as the columns. Reindex the result with <code>reindex()</code> using <code>month_order</code> so the months are in calendar order.</li>
+<li>Select just the three columns in <code>years</code> and call <code>.plot()</code> directly on the result to produce the same multi-line chart in a single line of code.</li>
+</ol>
+<p><strong>Comparing the two.</strong></p>
+<ol start="4" type="1">
+<li>Which approach required more code? Which approach would scale better if you wanted to plot 20 years instead of 3?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="813dcd9f" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>flights <span class="op">=</span> pd.read_csv(<span class="st">"data/flights.csv"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> [<span class="dv">1950</span>, <span class="dv">1955</span>, <span class="dv">1960</span>]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>month_order <span class="op">=</span> [<span class="st">"Jan"</span>, <span class="st">"Feb"</span>, <span class="st">"Mar"</span>, <span class="st">"Apr"</span>, <span class="st">"May"</span>, <span class="st">"Jun"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Jul"</span>, <span class="st">"Aug"</span>, <span class="st">"Sep"</span>, <span class="st">"Oct"</span>, <span class="st">"Nov"</span>, <span class="st">"Dec"</span>]</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Long format with a loop</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>subset <span class="op">=</span> flights[flights[<span class="st">"year"</span>].isin(years)]</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> years:</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    group <span class="op">=</span> subset[subset[<span class="st">"year"</span>] <span class="op">==</span> year]</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    ax.plot(group[<span class="st">"month"</span>], group[<span class="st">"passengers"</span>], label<span class="op">=</span><span class="bu">str</span>(year))</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Month"</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Passengers"</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Monthly passengers (long format, loop)"</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-11-exercises_files/figure-html/cell-6-output-1.png" width="854" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="3a14e31d" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2-3. Wide format with a single .plot() call</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>flights_wide <span class="op">=</span> flights.pivot(index<span class="op">=</span><span class="st">"month"</span>, columns<span class="op">=</span><span class="st">"year"</span>, values<span class="op">=</span><span class="st">"passengers"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>flights_wide <span class="op">=</span> flights_wide.reindex(month_order)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> flights_wide[years].plot(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Month"</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Passengers"</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Monthly passengers (wide format, single call)"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-11-exercises_files/figure-html/cell-7-output-1.png" width="854" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li>The long-format approach required a separate filtering step and a <code>for</code> loop with an explicit <code>label=</code> on each iteration. The wide-format approach needed a one-time reshape, but then plotted all three years in a single call, with the legend generated automatically from the column names. If you wanted to plot 20 years instead of 3, the loop-based long-format approach would need no code changes beyond the year list — but the wide-format approach would only need <code>flights_wide[my_20_years].plot()</code>, which is arguably even simpler. The real cost of the wide-format approach is the reshape itself; once paid, plotting becomes trivial for any number of columns.</li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="exercise-4.11.6" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.11.6">Exercise 4.11.6</h3>
+<p>This exercise contrasts two ways of building a multi-panel grid, using FRED monthly data — one panel per <strong>variable</strong> (a column), rather than one panel per group.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/data/FRED/FRED_monthly_2010.csv"</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>variables <span class="op">=</span> [<span class="st">"CPI"</span>, <span class="st">"UNRATE"</span>, <span class="st">"FEDFUNDS"</span>, <span class="st">"LFPART"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Building the grid manually.</strong></p>
+<ol type="1">
+<li>Create a Figure with a 2x2 grid of panels, <code>figsize=(12, 8)</code>, and flatten the Axes array. Loop over <code>variables</code> with <code>enumerate()</code>, plotting <code>DATE</code> against each variable in its own panel, with the variable name as that panel’s title.</li>
+</ol>
+<p><strong>Building the same grid with pandas.</strong></p>
+<ol start="2" type="1">
+<li>Set <code>DATE</code> as the index of <code>fred</code>. Then select the four columns in <code>variables</code> and call <code>.plot()</code> with <code>subplots=True</code> directly on the result.</li>
+</ol>
+<p><strong>Comparing the two.</strong></p>
+<ol start="3" type="1">
+<li>How many lines of code did each approach take? Which approach would you reach for if you just wanted a quick look at your data, and which would you reach for if you needed to customize each panel individually (different colors, annotations, or reference lines per panel)?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="0ec4876c" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/data/FRED/FRED_monthly_2010.csv"</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>fred[<span class="st">"DATE"</span>] <span class="op">=</span> pd.to_datetime(fred[<span class="st">"DATE"</span>])</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> fred.sort_values(<span class="st">"DATE"</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>variables <span class="op">=</span> [<span class="st">"CPI"</span>, <span class="st">"UNRATE"</span>, <span class="st">"FEDFUNDS"</span>, <span class="st">"LFPART"</span>]</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Manual matplotlib grid, looping over columns</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">2</span>, ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>axes <span class="op">=</span> axes.flatten()</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, col <span class="kw">in</span> <span class="bu">enumerate</span>(variables):</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    axes[i].plot(fred[<span class="st">"DATE"</span>], fred[col])</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    axes[i].set_title(col)</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-11-exercises_files/figure-html/cell-8-output-1.png" width="1140" height="758" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="2862a142" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. pandas equivalent</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>fred_indexed <span class="op">=</span> fred.set_index(<span class="st">"DATE"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>fred_indexed[variables].plot(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    subplots<span class="op">=</span><span class="va">True</span>, layout<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">2</span>), figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>), legend<span class="op">=</span><span class="va">False</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-11-exercises_files/figure-html/cell-9-output-1.png" width="1142" height="757" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>The pandas version takes a single line of plotting code, compared to five lines (the grid setup, the flatten, and the loop) for the manual version — a clear demonstration of how cumbersome even a simple multi-panel chart becomes in matplotlib once you have already reshaped your data. For a quick first look at several variables, the pandas shortcut is clearly faster. However, the manual matplotlib version gives you a named <code>ax</code> for each panel individually, making it easy to add a different reference line, colour, or annotation to just one panel — something that is much harder to do cleanly once <code>.plot(subplots=True)</code> has already built the grid for you.</li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="exercise-4.11.7" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.11.7">Exercise 4.11.7</h3>
+<p>Combine histograms and overlapping distributions using the <code>gapminder</code> dataset, in the spirit of the mean/median reference line exercises from Topic 4.6.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>gapminder <span class="op">=</span> pd.read_csv(<span class="st">"data/gapminder.csv"</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>gapminder_2007 <span class="op">=</span> gapminder[gapminder[<span class="st">"year"</span>] <span class="op">==</span> <span class="dv">2007</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Create a Figure and Axes with <code>figsize=(9, 6)</code>. Plot a histogram of <code>lifeExp</code> for all countries in <code>gapminder_2007</code>, with <code>bins=20</code>, <code>alpha=0.3</code>, and <code>label="All countries"</code>.</li>
+<li>Add a vertical reference line at the global mean life expectancy using <code>ax.axvline()</code>, with <code>label="Global mean"</code>.</li>
+<li>Filter <code>gapminder_2007</code> to <code>"Asia"</code> and to <code>"Europe"</code> separately. Overlay both continents’ life expectancy distributions on the same Axes, each with <code>bins=20</code>, <code>alpha=0.5</code>, and an appropriate <code>label=</code>.</li>
+<li>Add axis labels, a title, and call <code>ax.legend()</code>.</li>
+<li>How does the spread of life expectancy within Europe compare to the spread within Asia? Where does the global mean fall relative to each continent’s distribution?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="59e02ae6" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>gapminder <span class="op">=</span> pd.read_csv(<span class="st">"data/gapminder.csv"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>gapminder_2007 <span class="op">=</span> gapminder[gapminder[<span class="st">"year"</span>] <span class="op">==</span> <span class="dv">2007</span>]</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>asia <span class="op">=</span> gapminder_2007[gapminder_2007[<span class="st">"continent"</span>] <span class="op">==</span> <span class="st">"Asia"</span>]</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>europe <span class="op">=</span> gapminder_2007[gapminder_2007[<span class="st">"continent"</span>] <span class="op">==</span> <span class="st">"Europe"</span>]</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">6</span>))</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>ax.hist(gapminder_2007[<span class="st">"lifeExp"</span>], bins<span class="op">=</span><span class="dv">20</span>, alpha<span class="op">=</span><span class="fl">0.3</span>, color<span class="op">=</span><span class="st">"gray"</span>, label<span class="op">=</span><span class="st">"All countries"</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>ax.axvline(gapminder_2007[<span class="st">"lifeExp"</span>].mean(), color<span class="op">=</span><span class="st">"black"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, label<span class="op">=</span><span class="st">"Global mean"</span>)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>ax.hist(asia[<span class="st">"lifeExp"</span>], bins<span class="op">=</span><span class="dv">20</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">"Asia"</span>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>ax.hist(europe[<span class="st">"lifeExp"</span>], bins<span class="op">=</span><span class="dv">20</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">"Europe"</span>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Life expectancy (years)"</span>)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Number of countries"</span>)</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Life expectancy distribution, 2007"</span>)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-11-exercises_files/figure-html/cell-10-output-1.png" width="854" height="566" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="5" type="1">
+<li>Europe’s distribution is tightly clustered at high life expectancy values with little spread, while Asia’s distribution is much wider, ranging from relatively low to relatively high life expectancy across its many countries. The global mean falls below the smallest value observed in Europe but within Asia’s cluster, reflecting that a meaningful share of Asian countries still had lower life expectancy than the world average in 2007.</li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="exercise-4.11.8" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.11.8">Exercise 4.11.8</h3>
+<p>This exercise introduces the <strong>box plot</strong> — a chart type not covered in the videos — for comparing distributions across groups more compactly than overlapping histograms.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> pd.read_csv(<span class="st">"data/titanic.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Look up the documentation for <code>ax.boxplot()</code> (for example by running <code>help(plt.boxplot)</code> or searching online). Unlike <code>ax.hist()</code> or <code>ax.scatter()</code>, it does not take a single column directly — it expects a list where each element is the data for one group. Build this list for <code>fare</code>, with one array per passenger class.</li>
+<li>Create a Figure and Axes with <code>figsize=(8, 6)</code>, and call <code>ax.boxplot()</code> on the list you built. Use the <code>tick_labels=</code> parameter to label each box with its class number.</li>
+<li>Add axis labels and a title.</li>
+<li>A box plot shows the median, the interquartile range (the box), and outlier points individually. Compare what this chart shows about first-class fares to what the overlapping histogram approach from Topic 4.6 would have shown. What does the box plot make easier to see, and what does it hide that a histogram would show?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="d486e38b" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> pd.read_csv(<span class="st">"data/titanic.csv"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Build one array of fares per class</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> <span class="bu">sorted</span>(titanic[<span class="st">"pclass"</span>].unique())</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>fare_by_class <span class="op">=</span> [titanic[titanic[<span class="st">"pclass"</span>] <span class="op">==</span> c][<span class="st">"fare"</span>] <span class="cf">for</span> c <span class="kw">in</span> classes]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="faa4cb1e" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2-3. Box plot</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>ax.boxplot(fare_by_class, tick_labels<span class="op">=</span>[<span class="bu">str</span>(c) <span class="cf">for</span> c <span class="kw">in</span> classes])</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Passenger class"</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Fare"</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Fare distribution by passenger class"</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-11-exercises_files/figure-html/cell-12-output-1.png" width="758" height="566" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Task 1:</strong> <code>ax.boxplot()</code> expects a sequence of array-like objects, one per box, rather than a single column with a separate grouping variable — this is a genuinely different data shape than every other chart type covered so far in this topic, which is why building the list explicitly is the key first step.</p>
+<p><strong>Task 4:</strong> The box plot makes it very easy to compare the median fare and the spread of the middle 50% of passengers across the three classes at a glance, and it flags individual outliers (very high first-class fares) as separate points rather than folding them into the shape of a histogram. What it hides is the overall shape of the distribution within each group — you cannot tell from a box plot whether a class’s fares are unimodal, bimodal, or evenly spread within its box, something an overlapping histogram would show directly.</p>
+</details>
+<hr>
+</section>
+</section>
+<section id="challenge" class="level2">
+<h2 class="anchored" data-anchor-id="challenge">🔴 Challenge</h2>
+<section id="exercise-4.11.9" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.11.9">Exercise 4.11.9</h3>
+<p>This exercise introduces <strong>twin axes</strong> — a matplotlib feature not covered in the videos, and one that is genuinely awkward to reproduce using pandas’ <code>.plot()</code> alone, since it involves two independently scaled y-axes.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/data/FRED/FRED_monthly_2010.csv"</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> pd.read_csv(url)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>UNRATE</code> and <code>FEDFUNDS</code> are both percentages, but on very different scales — plotting them on the same y-axis would flatten one of them almost to a flat line.</p>
+<ol type="1">
+<li>Look up the documentation for <code>ax.twinx()</code> (for example by searching “matplotlib twinx”). What does it return, and how does it relate to the original Axes?</li>
+<li>Create a Figure and Axes with <code>figsize=(10, 5)</code>. Plot <code>UNRATE</code> against <code>DATE</code> on the original Axes, coloured blue, with the y-axis labeled “Unemployment rate (%)” in blue (use <code>ax.set_ylabel(..., color="tab:blue")</code> and <code>ax.tick_params(axis="y", labelcolor="tab:blue")</code>).</li>
+<li>Create a second Axes using <code>ax.twinx()</code> and plot <code>FEDFUNDS</code> against <code>DATE</code> on it, coloured red, with its own y-axis labeled and coloured to match.</li>
+<li>Add a title to the original Axes.</li>
+<li>Try to imagine building this exact chart using only <code>fred.plot()</code> with a single call. What would go wrong, and why does this chart type push you back toward matplotlib directly?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="d28074cd" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/data/FRED/FRED_monthly_2010.csv"</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>fred[<span class="st">"DATE"</span>] <span class="op">=</span> pd.to_datetime(fred[<span class="st">"DATE"</span>])</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> fred.sort_values(<span class="st">"DATE"</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>ax1.plot(fred[<span class="st">"DATE"</span>], fred[<span class="st">"UNRATE"</span>], color<span class="op">=</span><span class="st">"tab:blue"</span>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">"Unemployment rate (%)"</span>, color<span class="op">=</span><span class="st">"tab:blue"</span>)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(axis<span class="op">=</span><span class="st">"y"</span>, labelcolor<span class="op">=</span><span class="st">"tab:blue"</span>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> ax1.twinx()</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>ax2.plot(fred[<span class="st">"DATE"</span>], fred[<span class="st">"FEDFUNDS"</span>], color<span class="op">=</span><span class="st">"tab:red"</span>)</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">"Federal funds rate (%)"</span>, color<span class="op">=</span><span class="st">"tab:red"</span>)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">"y"</span>, labelcolor<span class="op">=</span><span class="st">"tab:red"</span>)</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">"Unemployment vs federal funds rate, 2010–2019"</span>)</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-11-exercises_files/figure-html/cell-13-output-1.png" width="950" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Task 1:</strong> <code>ax.twinx()</code> creates a new Axes that shares the same x-axis as the original but has its own independent y-axis, drawn on the right-hand side of the chart. This lets you plot two series with very different scales on the same chart without one flattening the other.</p>
+<p><strong>Task 5:</strong> A single <code>fred.plot()</code> call has no built-in way to say “put this column on a second, independently scaled y-axis” — <code>.plot()</code> either puts every selected column on the same shared y-axis, or splits them into entirely separate panels with <code>subplots=True</code>. Neither option achieves what <code>twinx()</code> does: two series, same x-axis, same panel, genuinely different y-scales. This is a case where the convenience of pandas plotting runs out, and dropping down to matplotlib directly is the only practical option.</p>
+</details>
+<hr>
+</section>
+<section id="exercise-4.11.10" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.11.10">Exercise 4.11.10</h3>
+<p>This exercise combines <code>.resample()</code> (introduced in the Topic 3) with proper date-axis formatting from Topic 4.7.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.dates <span class="im">as</span> mdates</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>base_url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/data/FRED/"</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>decades <span class="op">=</span> [<span class="dv">1950</span>, <span class="dv">1960</span>, <span class="dv">1970</span>, <span class="dv">1980</span>, <span class="dv">1990</span>, <span class="dv">2000</span>, <span class="dv">2010</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Import the FRED monthly data for all seven decades from the urls using the same loop-based import pattern you used in the Topic 3 further exercises.</p>
+<ol type="1">
+<li>Combine the seven decade files into a single DataFrame, convert <code>DATE</code> to datetime, and sort chronologically.</li>
+<li>Resample the data to compute the <strong>annual mean CPI</strong> across the full 1950–2019 period.</li>
+<li>Plot the resulting annual CPI series as a line chart with <code>figsize=(12, 5)</code>.</li>
+<li>Format the x-axis so that a tick appears every 10 years, labeled with just the 4-digit year. Look up <code>mdates.YearLocator()</code> and <code>mdates.DateFormatter()</code> in the documentation to find the right approach.</li>
+<li>Add a <em>horizontal</em> reference line at <code>CPI = 100</code>, since the CPI series is indexed so that the average over 1982–1984 equals exactly 100. Add axis labels, a title, and a legend identifying the reference line.</li>
+<li>Around which years does the line cross the reference value of 100? Does this match what you would expect, given how the index is defined?</li>
+</ol>
+<details>
+<summary>
+Hint
+</summary>
+<p>For step 2, set <code>DATE</code> as the index and use <code>.resample("YE")</code> (year-end) together with <code>.mean()</code> to compute the annual mean CPI. For step 4, <code>mdates.YearLocator(10)</code> passed to <code>ax.xaxis.set_major_locator()</code> places a tick every 10 years, and <code>mdates.DateFormatter("%Y")</code> passed to <code>ax.xaxis.set_major_formatter()</code> formats each tick as a plain year. For step 5, use <code>ax.axhline()</code> — not <code>ax.axvline()</code> — since you are marking a fixed <em>value on the y-axis</em> (CPI = 100), not a fixed date.</p>
+</details>
+<details>
+<summary>
+Solution
+</summary>
+<div id="f972eb1c" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.dates <span class="im">as</span> mdates</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>base_url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/data/FRED/"</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>decades <span class="op">=</span> [<span class="dv">1950</span>, <span class="dv">1960</span>, <span class="dv">1970</span>, <span class="dv">1980</span>, <span class="dv">1990</span>, <span class="dv">2000</span>, <span class="dv">2010</span>]</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>fred_dfs <span class="op">=</span> [pd.read_csv(base_url <span class="op">+</span> <span class="ss">f"FRED_monthly_</span><span class="sc">{</span>d<span class="sc">}</span><span class="ss">.csv"</span>) <span class="cf">for</span> d <span class="kw">in</span> decades]</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> pd.concat(fred_dfs).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>fred[<span class="st">"DATE"</span>] <span class="op">=</span> pd.to_datetime(fred[<span class="st">"DATE"</span>])</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> fred.sort_values(<span class="st">"DATE"</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Resample to annual mean CPI</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>fred_indexed <span class="op">=</span> fred.set_index(<span class="st">"DATE"</span>)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>annual_cpi <span class="op">=</span> fred_indexed[<span class="st">"CPI"</span>].resample(<span class="st">"YE"</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="bdb06454" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3-5. Plot with formatted date axis and reference line</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">5</span>))</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>ax.plot(annual_cpi.index, annual_cpi.values)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_major_locator(mdates.YearLocator(<span class="dv">10</span>))</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_major_formatter(mdates.DateFormatter(<span class="st">"%Y"</span>))</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">100</span>, color<span class="op">=</span><span class="st">"gray"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, label<span class="op">=</span><span class="st">"CPI = 100 (1982–84 baseline)"</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Year"</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"CPI (1982–84 = 100)"</span>)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"US Consumer Price Index, 1950–2019"</span>)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-11-exercises_files/figure-html/cell-15-output-1.png" width="1142" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="6" type="1">
+<li>The line crosses CPI = 100 right around 1982–1984 — exactly matching the definition of the index. This makes sense: since the index is defined so that the average across 1982–1984 equals 100, the CPI series must pass through (or very near) 100 during that exact period, and values before it are below 100 while values after it are above 100.</li>
+</ol>
+<p><code>mdates.YearLocator(10)</code> and <code>mdates.DateFormatter("%Y")</code> give you control over the tick spacing and format that matplotlib would otherwise choose automatically — useful whenever the default date-axis ticks are too sparse, too dense, or formatted in a way that doesn’t suit the chart.</p>
+</details>
+<hr>
+</section>
+<section id="exercise-4.11.11" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.11.11">Exercise 4.11.11</h3>
+<p>This exercise introduces the <strong>stacked bar chart</strong> — a chart type not covered in the videos, built using the <code>bottom=</code> parameter of <code>ax.bar()</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> pd.read_csv(<span class="st">"data/titanic.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Use <code>groupby</code> on <code>["pclass", "survived"]</code> and <code>.size()</code> to count passengers in each combination. Use <code>.unstack()</code> to reshape the result so <code>survived</code> (0 and 1) become separate columns, one per outcome.</li>
+<li>Look up the documentation for the <code>bottom=</code> parameter of <code>ax.bar()</code>. Create a Figure and Axes with <code>figsize=(7, 5)</code>. Plot the “died” counts as a first bar layer with <code>ax.bar()</code>. Plot the “survived” counts as a second layer on top of the first, using <code>bottom=</code> set to the “died” values so the second layer stacks rather than overlaps.</li>
+<li>Add axis labels, a title, and a legend distinguishing the two layers.</li>
+<li>In which class does the “died” segment take up the largest share of the total bar? In which class is it smallest?</li>
+</ol>
+<details>
+<summary>
+Hint
+</summary>
+<p>After <code>.unstack()</code>, you will have a DataFrame with one column for <code>survived=0</code> and one for <code>survived=1</code>. Passing the <code>survived=0</code> column as <code>bottom=</code> when plotting the <code>survived=1</code> column tells matplotlib to start the second layer’s bars where the first layer’s bars end, rather than starting from zero.</p>
+</details>
+<details>
+<summary>
+Solution
+</summary>
+<div id="10be8a3d" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> pd.read_csv(<span class="st">"data/titanic.csv"</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Counts by class and survival, reshaped wide</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> titanic.groupby([<span class="st">"pclass"</span>, <span class="st">"survived"</span>]).size().unstack()</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(counts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>survived    0    1
+pclass            
+1          80  136
+2          97   87
+3         372  119</code></pre>
+</div>
+</div>
+<div id="2e47560a" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2-3. Stacked bar chart</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>died <span class="op">=</span> counts[<span class="dv">0</span>]</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>survived <span class="op">=</span> counts[<span class="dv">1</span>]</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>ax.bar(counts.index.astype(<span class="bu">str</span>), died, label<span class="op">=</span><span class="st">"Died"</span>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>ax.bar(counts.index.astype(<span class="bu">str</span>), survived, bottom<span class="op">=</span>died, label<span class="op">=</span><span class="st">"Survived"</span>)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Passenger class"</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Number of passengers"</span>)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Titanic passenger outcomes by class"</span>)</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-11-exercises_files/figure-html/cell-17-output-1.png" width="662" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Third class has by far the largest “died” segment, both in absolute count and as a share of its total bar height. First class has the smallest “died” share, with survivors making up the majority of the bar — a visual confirmation of the class-based survival pattern explored numerically throughout this course.</li>
+</ol>
+<p>Notice that the stacked bar chart could also have been produced with the simple one-liner <code>.plot()</code> function call: <code>counts.plot(kind='bar', stacked=True, width=0.5)</code>.</p>
+</details>
+<hr>
+</section>
+<section id="exercise-4.11.12" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.11.12">Exercise 4.11.12</h3>
+<p>This is a mini-capstone: pose and answer a research question using the FRED monthly data, producing two coordinated, consistently styled figures and saving both to disk. As in the previous exercise, you will need to import and combine the data using the loop-based pattern.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>base_url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/data/FRED/"</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>decades <span class="op">=</span> [<span class="dv">1950</span>, <span class="dv">1960</span>, <span class="dv">1970</span>, <span class="dv">1980</span>, <span class="dv">1990</span>, <span class="dv">2000</span>, <span class="dv">2010</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Research question: How did the relationship between unemployment and the federal funds rate differ across the 1970s, 1990s, and 2010s?</strong></p>
+<p><strong>Chart 1.</strong> Create a 1x3 grid of panels (<code>figsize=(15, 5), sharey=True</code>), one for each of the decades 1970, 1990, and 2010. In each panel, plot both <code>UNRATE</code> and <code>FEDFUNDS</code> over time as two separate lines, using a consistent colour for each variable across all three panels. Give each panel a title naming its decade.</p>
+<p>Rather than adding a legend to every panel individually — which would repeat the same two labels three times — figure out how to add a <strong>single legend shared by the whole figure</strong> instead (search online for “matplotlib subplots shared legend”). Add an overall title for the figure.</p>
+<p>Then style the chart:</p>
+<ul>
+<li>Format the x-axis so dates are shown as month name and year (e.g.&nbsp;“Jan 1970”) rather than the default, and rotate the tick labels so they do not overlap.</li>
+<li>Format the y-axis so each tick label ends with a <code>%</code> sign, since both variables are percentages.</li>
+</ul>
+<p><strong>Chart 2.</strong> Create a single scatter plot with <code>figsize=(8, 6)</code> of <code>UNRATE</code> (x-axis) against <code>FEDFUNDS</code> (y-axis), with one colour per decade using the same colors as in the first chart, and a legend identifying each decade.</p>
+<p><strong>Saving.</strong> Save both figures to <code>output/</code> using <code>fig.savefig()</code> with <code>dpi=300</code> and <code>bbox_inches="tight"</code>.</p>
+<p><strong>Interpreting.</strong> Based on both charts, does the relationship between unemployment and the federal funds rate look similar across the three decades, or does it differ? In which decade does the Federal Reserve appear to have kept rates high despite relatively high unemployment, and in which decade does the opposite pattern appear?</p>
+<details>
+<summary>
+Hint
+</summary>
+<p>For the shared legend: call <code>.get_legend_handles_labels()</code> on just one of the panels (for example <code>axes[0]</code>) to retrieve the handles and labels already defined by its <code>label=</code> arguments, then pass them to <code>fig.legend()</code> instead of calling <code>.legend()</code> on each panel individually.</p>
+<p>For the x-axis date formatting, look up <code>mdates.DateFormatter()</code> and use a format code that combines abbreviated month name and year — the codes <code>%b</code> and <code>%Y</code> from earlier date-formatting exercises are relevant here. To rotate tick labels, either <code>ax.tick_params(axis="x", rotation=45)</code> or <code>plt.setp(ax.get_xticklabels(), rotation=45)</code> will work.</p>
+<p>For the y-axis percent formatting, look up <code>ticker.StrMethodFormatter()</code> from Topic 4.7 and adjust the format string so it appends a <code>%</code> character after the number.</p>
+</details>
+<details>
+<summary>
+Solution
+</summary>
+<div id="2b8ea48a" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.dates <span class="im">as</span> mdates</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.ticker <span class="im">as</span> ticker</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>base_url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/data/FRED/"</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>decades <span class="op">=</span> [<span class="dv">1950</span>, <span class="dv">1960</span>, <span class="dv">1970</span>, <span class="dv">1980</span>, <span class="dv">1990</span>, <span class="dv">2000</span>, <span class="dv">2010</span>]</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>fred_dfs <span class="op">=</span> [pd.read_csv(base_url <span class="op">+</span> <span class="ss">f"FRED_monthly_</span><span class="sc">{</span>d<span class="sc">}</span><span class="ss">.csv"</span>) <span class="cf">for</span> d <span class="kw">in</span> decades]</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> pd.concat(fred_dfs).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>fred[<span class="st">"DATE"</span>] <span class="op">=</span> pd.to_datetime(fred[<span class="st">"DATE"</span>])</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>fred <span class="op">=</span> fred.sort_values(<span class="st">"DATE"</span>).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>fred[<span class="st">"decade"</span>] <span class="op">=</span> (fred[<span class="st">"DATE"</span>].dt.year <span class="op">//</span> <span class="dv">10</span>) <span class="op">*</span> <span class="dv">10</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>COLOURS <span class="op">=</span> {<span class="st">"UNRATE"</span>: <span class="st">"tab:blue"</span>, <span class="st">"FEDFUNDS"</span>: <span class="st">"tab:red"</span>}</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>decades_to_compare <span class="op">=</span> [<span class="dv">1970</span>, <span class="dv">1990</span>, <span class="dv">2010</span>]</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Chart 1: multi-panel with shared legend and styled axes</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">5</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, dec <span class="kw">in</span> <span class="bu">enumerate</span>(decades_to_compare):</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>    sub <span class="op">=</span> fred[fred[<span class="st">"decade"</span>] <span class="op">==</span> dec]</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>    axes[i].plot(sub[<span class="st">"DATE"</span>], sub[<span class="st">"UNRATE"</span>], color<span class="op">=</span>COLOURS[<span class="st">"UNRATE"</span>], label<span class="op">=</span><span class="st">"Unemployment rate"</span>)</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>    axes[i].plot(sub[<span class="st">"DATE"</span>], sub[<span class="st">"FEDFUNDS"</span>], color<span class="op">=</span>COLOURS[<span class="st">"FEDFUNDS"</span>], label<span class="op">=</span><span class="st">"Fed funds rate"</span>)</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>    axes[i].set_title(<span class="ss">f"</span><span class="sc">{</span>dec<span class="sc">}</span><span class="ss">s"</span>)</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>    axes[i].xaxis.set_major_formatter(mdates.DateFormatter(<span class="st">"%b %Y"</span>))</span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>    axes[i].xaxis.set_major_locator(mdates.YearLocator(<span class="dv">2</span>))</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>    plt.setp(axes[i].get_xticklabels(), rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">"right"</span>)</span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">"Percent"</span>)</span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].yaxis.set_major_formatter(ticker.StrMethodFormatter(<span class="st">"</span><span class="sc">{x:.0f}</span><span class="st">%"</span>))</span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>handles, labels <span class="op">=</span> axes[<span class="dv">0</span>].get_legend_handles_labels()</span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>fig.legend(handles, labels, loc<span class="op">=</span><span class="st">"upper center"</span>, ncol<span class="op">=</span><span class="dv">2</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">0.5</span>, <span class="fl">1.1</span>))</span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"Unemployment vs federal funds rate by decade"</span>, y<span class="op">=</span><span class="fl">1.2</span>)</span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a><span class="co"># fig.savefig("output/01_unemployment_fedfunds_by_decade.png", dpi=300, bbox_inches="tight")</span></span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a>plt.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-11-exercises_files/figure-html/cell-18-output-1.png" width="1430" height="580" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="c3c78c6a" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Chart 2: scatter, one colour per decade</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>decade_colours <span class="op">=</span> {<span class="dv">1970</span>: <span class="st">"tab:orange"</span>, <span class="dv">1990</span>: <span class="st">"tab:green"</span>, <span class="dv">2010</span>: <span class="st">"tab:purple"</span>}</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> dec <span class="kw">in</span> decades_to_compare:</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    sub <span class="op">=</span> fred[fred[<span class="st">"decade"</span>] <span class="op">==</span> dec]</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    ax.scatter(sub[<span class="st">"UNRATE"</span>], sub[<span class="st">"FEDFUNDS"</span>], color<span class="op">=</span>decade_colours[dec], alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>dec<span class="sc">}</span><span class="ss">s"</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Unemployment rate (%)"</span>)</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Federal funds rate (%)"</span>)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Unemployment vs federal funds rate"</span>)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>ax.legend(title<span class="op">=</span><span class="st">"Decade"</span>)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="co"># fig.savefig("output/02_unemployment_fedfunds_scatter.png", dpi=300, bbox_inches="tight")</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>plt.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-11-exercises_files/figure-html/cell-19-output-1.png" width="758" height="566" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Using <code>axes[0].get_legend_handles_labels()</code> retrieves the line objects and labels already defined in the first panel, so <code>fig.legend()</code> can display one shared legend for the whole figure instead of three repeated, identical per-panel legends — a cleaner result when every panel shares the same two series.</p>
+<p>In the 1970s, the federal funds rate and unemployment often rise together, consistent with the “stagflation” period where the Fed raised rates aggressively even as unemployment climbed, to combat runaway inflation. In the 1990s, the relationship looks closer to the more conventional pattern, with rates falling as unemployment falls. In the 2010s, the federal funds rate stays near zero for most of the decade even as unemployment falls substantially — the Fed’s post-financial-crisis policy of keeping rates low for an extended period. The scatter plot makes this contrast especially visible: the 1970s points occupy a region of both high unemployment and high rates, while the 2010s points cluster at low rates across a wide range of unemployment values.</p>
+</details>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

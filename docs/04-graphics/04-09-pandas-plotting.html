@@ -408,7 +408,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../04-graphics/04-11-exercises.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.11 Further Exercises</span></a>
+  <a href="../04-graphics/04-11-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4.11 Further Exercises</span></a>
   </div>
 </li>
       </ul>
@@ -439,7 +440,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#exercise-4.9.1" id="toc-exercise-4.9.1" class="nav-link" data-scroll-target="#exercise-4.9.1">Exercise 4.9.1</a></li>
+  <li><a href="#exercise-4.9.2" id="toc-exercise-4.9.2" class="nav-link" data-scroll-target="#exercise-4.9.2">Exercise 4.9.2</a></li>
+  <li><a href="#exercise-4.9.3" id="toc-exercise-4.9.3" class="nav-link" data-scroll-target="#exercise-4.9.3">Exercise 4.9.3</a></li>
+  <li><a href="#exercise-4.9.4" id="toc-exercise-4.9.4" class="nav-link" data-scroll-target="#exercise-4.9.4">Exercise 4.9.4</a></li>
+  <li><a href="#exercise-4.9.5" id="toc-exercise-4.9.5" class="nav-link" data-scroll-target="#exercise-4.9.5">Exercise 4.9.5</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -515,8 +523,240 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>plt.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="exercise-4.9.1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.9.1">Exercise 4.9.1</h3>
+<p>Recreate a simple line chart using pandas’ <code>.plot()</code> instead of matplotlib directly.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>healthexp <span class="op">=</span> pd.read_csv(<span class="st">"data/healthexp.csv"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>germany <span class="op">=</span> healthexp[healthexp[<span class="st">"Country"</span>] <span class="op">==</span> <span class="st">"Germany"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Use <code>germany.plot()</code> to create a line chart with <code>x="Year"</code> and <code>y="Life_Expectancy"</code>, passing <code>xlabel=</code>, <code>ylabel=</code>, and <code>title=</code> directly as arguments to <code>.plot()</code>.</li>
+<li>Compare this code to how you would have built the same chart using <code>plt.subplots()</code> and <code>ax.plot()</code> directly. What is missing here that you did not need to write?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="4dd807d3" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>healthexp <span class="op">=</span> pd.read_csv(<span class="st">"data/healthexp.csv"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>germany <span class="op">=</span> healthexp[healthexp[<span class="st">"Country"</span>] <span class="op">==</span> <span class="st">"Germany"</span>]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>germany.plot(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"Year"</span>, y<span class="op">=</span><span class="st">"Life_Expectancy"</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">"Year"</span>, ylabel<span class="op">=</span><span class="st">"Life expectancy (years)"</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Life expectancy over time in Germany"</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-09-pandas-plotting_files/figure-html/cell-2-output-1.png" width="659" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li>With pandas’ <code>.plot()</code>, there is no need to call <code>plt.subplots()</code> first — pandas creates the Figure and Axes for you behind the scenes. It also accepts <code>xlabel=</code>, <code>ylabel=</code>, and <code>title=</code> directly as parameters, so labelling the chart does not require separate <code>.set_xlabel()</code>, <code>.set_ylabel()</code>, and <code>.set_title()</code> calls at all. This is what makes <code>.plot()</code> convenient for quick, exploratory charts.</li>
+</ol>
+<p>Note that <code>.plot()</code> always returns the Axes object, even when you do not assign it to a variable. Capturing it with <code>ax = germany.plot(...)</code> still works exactly as before, and becomes necessary the moment you want to add something <code>.plot()</code> has no built-in parameter for — such as a reference line with <code>ax.axvline()</code>.</p>
+</details>
+<hr>
+</section>
+<section id="exercise-4.9.2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.9.2">Exercise 4.9.2</h3>
+<p>Recreate a bar chart of survival rate by passenger class using <code>.plot(kind="bar")</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> pd.read_csv(<span class="st">"data/titanic.csv"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>survival_by_class <span class="op">=</span> titanic.groupby(<span class="st">"pclass"</span>)[<span class="st">"survived"</span>].mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Use <code>survival_by_class.plot(kind="bar")</code> to create the chart, passing <code>figsize=</code>, <code>xlabel=</code>, <code>ylabel=</code>, and <code>title=</code> directly as arguments.</li>
+<li>Look at the x-axis labels. In the matplotlib version of this chart, the numeric <code>pclass</code> index needed to be converted to strings manually to get clean category labels. Does that problem occur here?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="d65160ab" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> pd.read_csv(<span class="st">"data/titanic.csv"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>survival_by_class <span class="op">=</span> titanic.groupby(<span class="st">"pclass"</span>)[<span class="st">"survived"</span>].mean()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>survival_by_class.plot(</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"bar"</span>, figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">"Passenger class"</span>, ylabel<span class="op">=</span><span class="st">"Survival rate"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Titanic survival rate by passenger class"</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-09-pandas-plotting_files/figure-html/cell-3-output-1.png" width="589" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li>No — pandas’ <code>.plot(kind="bar")</code> automatically treats the index as categorical labels, regardless of whether the index is numeric or text. This is one of the small conveniences of pandas plotting: it makes reasonable assumptions about how a Series or DataFrame should be plotted based on its structure, which is why the same fix that was needed with matplotlib is not needed here.</li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="exercise-4.9.3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.9.3">Exercise 4.9.3</h3>
+<p>Recreate a histogram of Titanic fares using <code>.plot(kind="hist")</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> pd.read_csv(<span class="st">"data/titanic.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Use <code>titanic["fare"].plot(kind="hist")</code>, passing <code>bins=</code>, <code>figsize=</code>, <code>xlabel=</code>, <code>ylabel=</code>, and <code>title=</code> directly as arguments. Assign the result to <code>ax</code>, since you will need it in the next step.</li>
+<li>Add a vertical reference line at the median fare using <code>ax.axvline()</code>, exactly as you would for a matplotlib-built histogram.</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="e90df932" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> pd.read_csv(<span class="st">"data/titanic.csv"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> titanic[<span class="st">"fare"</span>].plot(</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"hist"</span>, bins<span class="op">=</span><span class="dv">30</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>), edgecolor<span class="op">=</span><span class="st">"white"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">"Fare"</span>, ylabel<span class="op">=</span><span class="st">"Count"</span>, title<span class="op">=</span><span class="st">"Distribution of fare"</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>ax.axvline(titanic[<span class="st">"fare"</span>].median(), color<span class="op">=</span><span class="st">"black"</span>, label<span class="op">=</span><span class="st">"Median"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>ax.legend()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-09-pandas-plotting_files/figure-html/cell-4-output-1.png" width="667" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This is a good example of when capturing the returned Axes is necessary: <code>.plot()</code> has parameters for labels and titles, but it has no parameter for adding a reference line. Once you have <code>ax</code>, every matplotlib customization method you have learned — <code>axvline()</code>, <code>legend()</code>, tick formatting, and so on — works exactly the same as it does on an Axes created with <code>plt.subplots()</code>. Pandas plotting is a shortcut for creating the chart, not a separate system for customizing it.</p>
+</details>
+<hr>
+</section>
+<section id="exercise-4.9.4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.9.4">Exercise 4.9.4</h3>
+<p>Recreate a scatter plot of health spending vs life expectancy using <code>.plot(kind="scatter")</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>healthexp <span class="op">=</span> pd.read_csv(<span class="st">"data/healthexp.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Use <code>healthexp.plot(kind="scatter", x="Spending_USD", y="Life_Expectancy")</code>, passing <code>figsize=</code>, <code>xlabel=</code>, <code>ylabel=</code>, and <code>title=</code> directly as arguments.</li>
+<li>In the matplotlib version of a scatter plot, you would write <code>ax.scatter(healthexp["Spending_USD"], healthexp["Life_Expectancy"])</code>, passing the two columns positionally. How does specifying the columns differ when using <code>.plot(kind="scatter")</code>?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="4064d09a" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>healthexp <span class="op">=</span> pd.read_csv(<span class="st">"data/healthexp.csv"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>healthexp.plot(</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"scatter"</span>, x<span class="op">=</span><span class="st">"Spending_USD"</span>, y<span class="op">=</span><span class="st">"Life_Expectancy"</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">"Health spending per capita (USD)"</span>, ylabel<span class="op">=</span><span class="st">"Life expectancy (years)"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Health spending vs life expectancy"</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-09-pandas-plotting_files/figure-html/cell-5-output-1.png" width="660" height="523" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li>With matplotlib’s <code>ax.scatter()</code>, you pass the actual data for the x- and y-axes as two separate arguments — usually <code>df["col1"]</code> and <code>df["col2"]</code>. With pandas’ <code>.plot(kind="scatter")</code>, you instead call <code>.plot()</code> directly on the whole DataFrame and pass the <strong>column names</strong> as strings to <code>x=</code> and <code>y=</code>, letting pandas look up the data itself. This is generally more convenient when both columns come from the same DataFrame, since you do not need to repeat the DataFrame’s name twice.</li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="exercise-4.9.5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4.9.5">Exercise 4.9.5</h3>
+<p>This exercise contrasts the loop-based approach to multi-line charts from earlier in this topic with pandas’ built-in support for plotting directly from wide-format data.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>healthexp <span class="op">=</span> pd.read_csv(<span class="st">"data/healthexp.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Use <code>.pivot()</code> to reshape <code>healthexp</code> to wide format, with <code>Year</code> as the index, <code>Country</code> as the columns, and <code>Life_Expectancy</code> as the values. Assign the result to <code>healthexp_wide</code>.</li>
+<li>Call <code>healthexp_wide.plot()</code> directly, passing <code>figsize=</code>, <code>xlabel=</code>, <code>ylabel=</code>, and <code>title=</code>, with no <code>x=</code> or <code>y=</code> argument. What does pandas do automatically with the index and the columns?</li>
+<li>Compare this to how you would have built the same multi-line chart using matplotlib directly — looping over each country, filtering the data, and calling <code>ax.plot()</code> inside the loop each time. What has pandas done for you here that you had to do manually before?</li>
+<li>Now call <code>healthexp_wide.plot(subplots=True, layout=(2, 3), figsize=(14, 8), legend=False)</code> to create one panel per country automatically. Compare this to how you built a grid of panels manually in Topic 4.8, looping over countries with <code>enumerate()</code> and <code>.flatten()</code>.</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="b029c5e9" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>healthexp <span class="op">=</span> pd.read_csv(<span class="st">"data/healthexp.csv"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Pivot to wide format</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>healthexp_wide <span class="op">=</span> healthexp.pivot(index<span class="op">=</span><span class="st">"Year"</span>, columns<span class="op">=</span><span class="st">"Country"</span>, values<span class="op">=</span><span class="st">"Life_Expectancy"</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(healthexp_wide.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Country  Canada  France  Germany  Great Britain  Japan   USA
+Year                                                        
+1970        NaN    72.2     70.6           71.9   72.0  70.9
+1971       72.8     NaN     70.8           71.9   72.9  71.2
+1972        NaN     NaN     71.0            NaN   73.2  71.2
+1973        NaN     NaN     71.3            NaN   73.4  71.4
+1974        NaN     NaN     71.5            NaN   73.7  72.0</code></pre>
+</div>
+</div>
+<div id="52ee563b" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Multi-line chart directly from wide data</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>healthexp_wide.plot(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">"Year"</span>, ylabel<span class="op">=</span><span class="st">"Life expectancy (years)"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Life expectancy over time by country"</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-09-pandas-plotting_files/figure-html/cell-7-output-1.png" width="808" height="523" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cd399fcb" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. One panel per country automatically</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>healthexp_wide.plot(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    subplots<span class="op">=</span><span class="va">True</span>, layout<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">3</span>), figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">8</span>), legend<span class="op">=</span><span class="va">False</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>array([[&lt;Axes: xlabel='Year'&gt;, &lt;Axes: xlabel='Year'&gt;,
+        &lt;Axes: xlabel='Year'&gt;],
+       [&lt;Axes: xlabel='Year'&gt;, &lt;Axes: xlabel='Year'&gt;,
+        &lt;Axes: xlabel='Year'&gt;]], dtype=object)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-09-pandas-plotting_files/figure-html/cell-8-output-2.png" width="1090" height="651" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li><p>pandas automatically uses the DataFrame’s index (<code>Year</code>) as the x-axis, and draws one line for every column (each country), automatically using the column names as the legend labels. This only works because the data is in wide format — one column per country — which is exactly why the reshaping step in question 1 was necessary first.</p></li>
+<li><p>In the matplotlib version, you needed to write a <code>for</code> loop, filter the data to one country at a time inside the loop, and call <code>ax.plot()</code> with an explicit <code>label=</code> for each iteration. Here, a single <code>.plot()</code> call on the wide DataFrame does all of that automatically — the reshaping step did the “one series per country” work up front, so pandas could draw every line without any looping at all.</p></li>
+<li><p><code>subplots=True</code> together with <code>layout=(2, 3)</code> automatically creates a 2x3 grid, and draws each country’s line in its own panel with the country name as that panel’s title. This replaces the entire manual process from Topic 4.8 — creating the grid, flattening the Axes array, looping with <code>enumerate()</code>, and filtering the data at each step — with a single line of code. The trade-off is control: <code>.plot(subplots=True)</code> decides the layout and defaults for you, while the manual matplotlib approach lets you customize every panel individually if needed.</p></li>
+</ol>
+</details>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
