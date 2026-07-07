@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Files, folders and paths – SKL401 — Introduction to Python</title>
+<title>Using generative AI – SKL401 — Introduction to Python</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,41 +23,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -68,8 +33,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" rel="next">
-<link href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" rel="prev">
+<link href="../05-analysis-reporting-and-wrap-up/05-09-wrap-up.html" rel="next">
+<link href="../05-analysis-reporting-and-wrap-up/05-07-getting-help.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -120,7 +85,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-02-installing-python.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-04-files-folders-paths.html"><span class="chapter-title">1.4 Files, Folders and Paths</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../05-analysis-reporting-and-wrap-up/05-01-regression.html">5 - Analysis, Reporting, and Wrap-up</a></li><li class="breadcrumb-item"><a href="../05-analysis-reporting-and-wrap-up/05-08-using-AI.html"><span class="chapter-title">5.8 Using AI</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -153,13 +118,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">1 - Getting Started and Working Effectively</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../01-getting-started-and-working-effectively/01-02-installing-python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.2 Installing Python</span></a>
@@ -172,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../01-getting-started-and-working-effectively/01-04-files-folders-paths.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">1.4 Files, Folders and Paths</span></a>
+  <a href="../01-getting-started-and-working-effectively/01-04-files-folders-paths.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.4 Files, Folders and Paths</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -416,13 +381,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
  <span class="menu-text">5 - Analysis, Reporting, and Wrap-up</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../05-analysis-reporting-and-wrap-up/05-01-regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">5.1 Linear Regression</span></a>
@@ -460,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../05-analysis-reporting-and-wrap-up/05-08-using-AI.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">5.8 Using AI</span></a>
+  <a href="../05-analysis-reporting-and-wrap-up/05-08-using-AI.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">5.8 Using AI</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -475,27 +440,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a>
-  <ul class="collapse">
-  <li><a href="#exercise-1.4.1" id="toc-exercise-1.4.1" class="nav-link" data-scroll-target="#exercise-1.4.1">Exercise 1.4.1</a></li>
-  <li><a href="#exercise-1.4.2" id="toc-exercise-1.4.2" class="nav-link" data-scroll-target="#exercise-1.4.2">Exercise 1.4.2</a></li>
-  <li><a href="#exercise-1.4.3" id="toc-exercise-1.4.3" class="nav-link" data-scroll-target="#exercise-1.4.3">Exercise 1.4.3</a></li>
-  <li><a href="#exercise-1.4.4" id="toc-exercise-1.4.4" class="nav-link" data-scroll-target="#exercise-1.4.4">Exercise 1.4.4</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-02-installing-python.html">1 - Getting Started and Working Effectively</a></li><li class="breadcrumb-item"><a href="../01-getting-started-and-working-effectively/01-04-files-folders-paths.html"><span class="chapter-title">1.4 Files, Folders and Paths</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../05-analysis-reporting-and-wrap-up/05-01-regression.html">5 - Analysis, Reporting, and Wrap-up</a></li><li class="breadcrumb-item"><a href="../05-analysis-reporting-and-wrap-up/05-08-using-AI.html"><span class="chapter-title">5.8 Using AI</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Files, folders and paths</span></h1>
+<h1 class="title"><span class="chapter-title">Using generative AI</span></h1>
 </div>
 
 
@@ -512,99 +465,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>We explain the difference between absolute and relative paths, set up a clean project folder structure for the course, and open it as our working directory in Positron.</p>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1194354318?h=f0c8077b97" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Absolute path on Windows</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># "C:/Users/yourname/Documents/skl401/data/gapminder.csv"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Absolute path on Mac/Linux</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># "/Users/yourname/Documents/skl401/data/gapminder.csv"</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Relative path (if your working directory is the skl401 folder)</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># "data/gapminder.csv"</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Print current working directory</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>os.getcwd()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
-<section id="exercise-1.4.1" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.4.1">Exercise 1.4.1</h3>
-<p>Open File Explorer (Windows) or Finder (Mac) and confirm that you have created the following folder structure. Then open Positron and verify that you can see the same structure in the file browser on the left-hand side.</p>
-<pre><code>skl401/
-├── data/
-├── scripts/
-└── output/</code></pre>
-<p>Can you see how the file browser in Positron is simply a reflection of what exists on your computer’s file system?</p>
-<details>
-<summary>
-Solution
-</summary>
-In Positron, go to <strong>Open → Open Folder</strong> and select your <code>skl401/</code> folder if you have not already done so. The file browser on the left should show the three subfolders <code>data/</code>, <code>scripts/</code>, and <code>output/</code>. If any of them are missing, create them in File Explorer or Finder and they will appear in Positron automatically.
-</details>
-<hr>
-</section>
-<section id="exercise-1.4.2" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.4.2">Exercise 1.4.2</h3>
-<p>In the Positron console, run the following code and confirm that the path printed ends with <code>skl401</code>. If it does not, go to <strong>Open → Open Folder</strong> in Positron and open the correct folder.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(os.getcwd())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<details>
-<summary>
-Solution
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(os.getcwd())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>/Users/isabel/Documents/skl401</code></pre>
-The exact path will differ depending on your name and operating system, but it should end with <code>skl401</code>. This confirms that Positron is working from the right folder, which means relative paths in your scripts will be resolved from here.
-</details>
-<hr>
-</section>
-<section id="exercise-1.4.3" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.4.3">Exercise 1.4.3</h3>
-<p>Using <code>os.listdir()</code>, print the contents of your <code>skl401/</code> folder and then the contents of your <code>data/</code> subfolder. Use a relative path for the subfolder.</p>
-<details>
-<summary>
-Solution
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Contents of the project folder</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(os.listdir())</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Contents of the data subfolder using a relative path</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(os.listdir(<span class="st">"data"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>['data', 'scripts', 'output']
-[]</code></pre>
-The <code>.</code> in <code>os.listdir()</code> refers to the current working directory — it is a shorthand for “the folder I am currently in”. The <code>data/</code> folder is empty for now, which is expected. Once you start saving data files there, they will appear in this list.
-</details>
-<hr>
-</section>
-<section id="exercise-1.4.4" class="level3">
-<h3 class="anchored" data-anchor-id="exercise-1.4.4">Exercise 1.4.4</h3>
-<p>Consider the two paths below. One is an absolute path and one is a relative path.</p>
-<pre><code>/Users/isabel/Documents/skl401/data/gapminder.csv
-data/gapminder.csv</code></pre>
-<p>Answer the following questions:</p>
-<ol type="1">
-<li><p>Which is the absolute path and which is the relative path?</p></li>
-<li><p>Both paths currently point to the same file. What would happen to each path if you moved your <code>skl401/</code> folder from <code>Documents/</code> to your Desktop?</p></li>
-<li><p>Which path would you use in a script, and why?</p></li>
-</ol>
-<details>
-<summary>
-Solution
-</summary>
-<ol type="1">
-<li><p>The first path is the <strong>absolute path</strong> — it gives the full address of the file starting from the root of the file system. The second is the <strong>relative path</strong> — it gives the address relative to the current working directory (<code>skl401/</code>).</p></li>
-<li><p>If you moved <code>skl401/</code> to the Desktop, the <strong>absolute path would break</strong> — it still points to <code>Documents/skl401/</code>, which no longer exists. The <strong>relative path would continue to work</strong> — it only describes the location of the file relative to the project folder, so as long as <code>gapminder.csv</code> is inside the <code>data/</code> subfolder, the path is still valid regardless of where <code>skl401/</code> lives on your computer.</p></li>
-<li><p>You should use the <strong>relative path</strong> in your scripts. Relative paths make your code portable — if you move the project folder, share it with a colleague, or copy it to a different computer, the paths will still work without any changes.</p></li>
-</ol>
-</details>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1196320770?h=5a34b28c55" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1009,13 +872,13 @@ Solution
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../01-getting-started-and-working-effectively/01-03-installing-positron.html" class="pagination-link" aria-label="1.3 Installing Positron">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">1.3 Installing Positron</span></span>
+      <a href="../05-analysis-reporting-and-wrap-up/05-07-getting-help.html" class="pagination-link" aria-label="5.7 Getting Help">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">5.7 Getting Help</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../01-getting-started-and-working-effectively/01-05-running-scripts.html" class="pagination-link" aria-label="1.5 Writing Scripts">
-        <span class="nav-page-text"><span class="chapter-title">1.5 Writing Scripts</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../05-analysis-reporting-and-wrap-up/05-09-wrap-up.html" class="pagination-link" aria-label="5.9 Course Wrap-up">
+        <span class="nav-page-text"><span class="chapter-title">5.9 Course Wrap-up</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

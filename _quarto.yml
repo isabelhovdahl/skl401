@@ -109,8 +109,24 @@ book:
           text: "4.11 Further Exercises"
     - part: "5 - Analysis, Reporting, and Wrap-up"
       chapters:
-        - file: 05-analysis-reporting-and-wrap-up/05-01-placeholder.qmd
-          text: "5.1 Placeholder"
+        - file: 05-analysis-reporting-and-wrap-up/05-01-regression.qmd
+          text: "5.1 Linear Regression"
+        - file: 05-analysis-reporting-and-wrap-up/05-02-model-objects.qmd
+          text: "5.2 Model Objects"
+        - file: 05-analysis-reporting-and-wrap-up/05-03-running-models.qmd
+          text: "5.3 Running Models"
+        - file: 05-analysis-reporting-and-wrap-up/05-04-exporting-tables.qmd
+          text: "5.4 Exporting Tables"
+        - file: 05-analysis-reporting-and-wrap-up/05-05-notebooks.qmd
+          text: "5.5 Jupyter Notebooks"
+        - file: 05-analysis-reporting-and-wrap-up/05-06-debugging.qmd
+          text: "5.6 Debugging"
+        - file: 05-analysis-reporting-and-wrap-up/05-07-getting-help.qmd
+          text: "5.7 Getting Help"
+        - file: 05-analysis-reporting-and-wrap-up/05-08-using-AI.qmd
+          text: "5.8 Using AI"
+        - file: 05-analysis-reporting-and-wrap-up/05-09-wrap-up.qmd
+          text: "5.9 Course Wrap-up"
 
 format:
   html:

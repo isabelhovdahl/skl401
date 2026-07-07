@@ -1,0 +1,4 @@
+# Linear regression with statsmodels
+
+{{< video https://vimeo.com/1196320133/fd3ae39cac?fl=ml&fe=ec >}}
+

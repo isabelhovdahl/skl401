@@ -1,0 +1,3 @@
+# Reading documentation and getting help
+
+{{< video https://vimeo.com/1196320757/b2adae7bf1?fl=ml&fe=ec >}}

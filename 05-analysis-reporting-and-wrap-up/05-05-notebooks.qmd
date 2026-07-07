@@ -1,0 +1,3 @@
+# Reproducible reporting with Jupyter notebooks
+
+{{< video https://vimeo.com/1196320606/3acd0a68f8?fl=ml&fe=ec >}}
