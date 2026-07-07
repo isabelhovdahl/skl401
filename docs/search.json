@@ -54,7 +54,7 @@
     "href": "01-getting-started-and-working-effectively/01-02-installing-python.html",
     "title": "Installing Python",
     "section": "",
-    "text": "We install Python from the official website and verify the installation in the terminal. Download Python at python.org/downloads.\n\n\n\n\n\n\nNote\n\n\n\nIf you already have Python installed on your computer — for example through Anaconda — you do not need to reinstall it. Skip ahead to video 1.3 and make sure Positron can find your existing installation.\n\n\nVideo will be embedded here.",
+    "text": "We install Python from the official website and verify the installation in the terminal. Download Python at python.org/downloads.\n\n\n\n\n\n\nNote\n\n\n\nIf you already have Python installed on your computer — for example through Anaconda — you do not need to reinstall it. Skip ahead to video 1.3 and make sure Positron can find your existing installation.\n\n\n\n# Run commands in the terminal to check python installation\n#   On Windows: open Powershell\n#   On Mac: open Terminal\n\npython --version  # alternatively: python3 --version\npip --version     # alternatively: pip3 --version",
     "crumbs": [
       "1 - Getting Started and Working Effectively",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>1.2 Installing Python</span>"
@@ -65,7 +65,7 @@
     "href": "01-getting-started-and-working-effectively/01-03-installing-positron.html",
     "title": "Installing Positron",
     "section": "",
-    "text": "We install Positron, take a tour of its main panels — the editor, console, environment, and plots pane — and run our first Python command. Download Positron at positron.posit.co.\n\n\n\n\n\n\nNote\n\n\n\nYou are welcome to use a different code editor if you already have one you are comfortable with — for example VS Code or PyCharm. The core content of this course does not depend on Positron specifically. That said, the videos are recorded in Positron, so following along will be easiest if you use the same editor.\n\n\nVideo will be embedded here.",
+    "text": "We install Positron, take a tour of its main panels — the editor, console, environment, and plots pane — and run our first Python command. Download Positron at positron.posit.co.\n\n\n\n\n\n\nNote\n\n\n\nYou are welcome to use a different code editor if you already have one you are comfortable with — for example VS Code or PyCharm. The core content of this course does not depend on Positron specifically. That said, the videos are recorded in Positron, so following along will be easiest if you use the same editor.\n\n\n\n\n\n\n\n\nNoteChoosing the right installer\n\n\n\nThe Positron download page will ask you to choose your operating system and, for some systems, a specific version:\n\nMac users: you will be asked to choose between an Apple Silicon (arm64) and an Intel (x64) installer. If you are not sure which chip your Mac has, click the Apple menu (⌘) in the top-left corner and select About This Mac. If the entry says “Chip: Apple M1/M2/M3/M4” or similar, choose Apple Silicon; if it says “Processor: Intel”, choose Intel. Installing the wrong version can still appear to work, but may run slower or behave strangely later on, so it is worth double-checking this now.\nWindows users: you will be asked to choose between a System and a User installer. Either works fine for a personal laptop — choose User if you are not sure, since it does not require administrator permissions.",
     "crumbs": [
       "1 - Getting Started and Working Effectively",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>1.3 Installing Positron</span>"
@@ -868,7 +868,7 @@
     "href": "04-graphics/04-05-scatter-plots.html",
     "title": "Scatter plots",
     "section": "",
-    "text": "Exercises\nWe cover scatter plots for visualising the relationship between two numeric variables.\nVideo will be embedded",
+    "text": "Exercises\nWe cover scatter plots for visualising the relationship between two numeric variables.",
     "crumbs": [
       "4 - Graphics",
       "<span class='chapter-number'>34</span>  <span class='chapter-title'>4.5 Scatter Plots</span>"

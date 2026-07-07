@@ -3,7 +3,7 @@
 We cover scatter plots for visualising the relationship between two numeric variables.
 
 
-*Video will be embedded*
+{{< video https://vimeo.com/1195997233/13d6015fab?share=copy&fl=sv&fe=ci >}}
 
 ```python
 import pandas as pd

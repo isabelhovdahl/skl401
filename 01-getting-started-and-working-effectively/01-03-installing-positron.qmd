@@ -3,8 +3,16 @@
 We install Positron, take a tour of its main panels — the editor, console, environment, and plots pane — and run our first Python command. Download Positron at [positron.posit.co](https://positron.posit.co/).
 
 ::: {.callout-note}
-You are welcome to use a different code editor if you already have one you are comfortable with — for example VS Code or PyCharm. The core content of this course
-does not depend on Positron specifically. That said, the videos are recorded in Positron, so following along will be easiest if you use the same editor.
+You are welcome to use a different code editor if you already have one you are comfortable with — for example VS Code or PyCharm. The core content of this course does not depend on Positron specifically. That said, the videos are recorded in Positron, so following along will be easiest if you use the same editor.
 :::
 
-*Video will be embedded here.*
+::: {.callout-note}
+## Choosing the right installer
+
+The Positron download page will ask you to choose your operating system and, for some systems, a specific version:
+
+- **Mac users:** you will be asked to choose between an **Apple Silicon (arm64)** and an **Intel (x64)** installer. If you are not sure which chip your Mac has, click the Apple menu (⌘) in the top-left corner and select **About This Mac**. If the entry says "Chip: Apple M1/M2/M3/M4" or similar, choose Apple Silicon; if it says "Processor: Intel", choose Intel. Installing the wrong version can still appear to work, but may run slower or behave strangely later on, so it is worth double-checking this now.
+- **Windows users:** you will be asked to choose between a **System** and a **User** installer. Either works fine for a personal laptop — choose **User** if you are not sure, since it does not require administrator permissions.
+:::
+
+{{< video https://vimeo.com/1204855952/8f85685bf9?share=copy&fl=sv&fe=ci >}}

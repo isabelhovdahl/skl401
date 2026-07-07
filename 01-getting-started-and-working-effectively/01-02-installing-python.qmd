@@ -6,7 +6,16 @@ We install Python from the official website and verify the installation in the t
 If you already have Python installed on your computer — for example through Anaconda — you do not need to reinstall it. Skip ahead to video 1.3 and make sure Positron can find your existing installation.
 :::
 
-*Video will be embedded here.*
+{{< video https://vimeo.com/1204855821/5e9998ea51?share=copy&fl=sv&fe=ci >}}
+
+```python
+# Run commands in the terminal to check python installation
+#   On Windows: open Powershell
+#   On Mac: open Terminal
+
+python --version  # alternatively: python3 --version
+pip --version     # alternatively: pip3 --version
+```
 
 
 

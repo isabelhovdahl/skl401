@@ -7,7 +7,7 @@ We install the core packages used throughout the course using pip, and learn how
 ```python
 # Purpose: verify that all course packages are installed and importable
 # Note: packages must first be installed
-#   In the Terminal, run this once:
+#   In the terminal, run this once:
 #   pip install pandas openpyxl matplotlib statsmodels seaborn numpy
 
 import pandas as pd
