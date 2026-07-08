@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -440,8 +475,21 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#exercise-5.2.1" id="toc-exercise-5.2.1" class="nav-link" data-scroll-target="#exercise-5.2.1">Exercise 5.2.1</a></li>
+  <li><a href="#exercise-5.2.2" id="toc-exercise-5.2.2" class="nav-link" data-scroll-target="#exercise-5.2.2">Exercise 5.2.2</a></li>
+  <li><a href="#exercise-5.2.3" id="toc-exercise-5.2.3" class="nav-link" data-scroll-target="#exercise-5.2.3">Exercise 5.2.3</a></li>
+  <li><a href="#exercise-5.2.4" id="toc-exercise-5.2.4" class="nav-link" data-scroll-target="#exercise-5.2.4">Exercise 5.2.4</a></li>
+  <li><a href="#exercise-5.2.5" id="toc-exercise-5.2.5" class="nav-link" data-scroll-target="#exercise-5.2.5">Exercise 5.2.5</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -465,9 +513,427 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1196320133?h=fd3ae39cac" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>We cover how to extract individual components from a fitted model and how to generate predictions and residuals for plotting and diagnostics.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1196320131?h=88aa863828" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">"seaborn-v0_8-whitegrid"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>gapminder <span class="op">=</span> pd.read_csv(<span class="st">"data/gapminder.csv"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>gap_2007  <span class="op">=</span> gapminder[gapminder[<span class="st">"year"</span>] <span class="op">==</span> <span class="dv">2007</span>].copy()</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>gap_2007[<span class="st">"log_gdp"</span>] <span class="op">=</span> np.log(gap_2007[<span class="st">"gdpPercap"</span>])</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(<span class="st">"lifeExp ~ log_gdp"</span>, data<span class="op">=</span>gap_2007).fit()</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Key model attributes ---</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.params)         <span class="co"># coefficients as a Series</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.bse)            <span class="co"># standard errors as a Series</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.tvalues)        <span class="co"># t-statistics as a Series</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.pvalues)        <span class="co"># p-values as a Series</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.rsquared)       <span class="co"># R-squared (float)</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.rsquared_adj)   <span class="co"># adjusted R-squared (float)</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.conf_int())     <span class="co"># 95% confidence intervals as a DataFrame</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Building a tidy results table manually ---</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>results_table <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"coefficient"</span>: model.params,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"std_error"</span>:   model.bse,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"t_stat"</span>:      model.tvalues,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"p_value"</span>:     model.pvalues,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ci_low"</span>:      model.conf_int()[<span class="dv">0</span>],</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ci_high"</span>:     model.conf_int()[<span class="dv">1</span>],</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>results_table</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Using summary2() as a shortcut ---</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>tidy_table <span class="op">=</span> model.summary2().tables[<span class="dv">1</span>]</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>tidy_table</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co"># --- In-sample predictions and residuals ---</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Add them directly to the DataFrame</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>gap_2007[<span class="st">"fitted"</span>]   <span class="op">=</span> model.fittedvalues <span class="co"># predicted values for the original data</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>gap_2007[<span class="st">"residual"</span>] <span class="op">=</span> model.resid        <span class="co"># residuals (observed - predicted)</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>gap_2007.head()</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Out-of-sample predictions ---</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a DataFrame with the same column names used in the formula</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>log_gdp_vals <span class="op">=</span> np.linspace(gap_2007[<span class="st">'log_gdp'</span>].<span class="bu">min</span>(), gap_2007[<span class="st">'log_gdp'</span>].<span class="bu">max</span>(), <span class="dv">100</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>new_data <span class="op">=</span> pd.DataFrame({<span class="st">"log_gdp"</span>: log_gdp_vals})</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>new_data[<span class="st">"predicted"</span>] <span class="op">=</span> model.predict(new_data)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>new_data.head()</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Visualizing the regression line ---</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>ax.scatter(gap_2007[<span class="st">"log_gdp"</span>], gap_2007[<span class="st">"lifeExp"</span>], alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">"Observed"</span>)</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>ax.plot(new_data[<span class="st">"log_gdp"</span>], new_data[<span class="st">"predicted"</span>], color<span class="op">=</span><span class="st">"red"</span>, label<span class="op">=</span><span class="st">"Regression line"</span>)</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Log GDP per capita"</span>)</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Life expectancy"</span>)</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>plt.close()</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Residual plot ---</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>ax.scatter(gap_2007[<span class="st">"fitted"</span>], gap_2007[<span class="st">"residual"</span>], alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"red"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Fitted values"</span>)</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Residuals"</span>)</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>plt.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="exercise-5.2.1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.2.1">Exercise 5.2.1</h3>
+<p>Refit the simple regression from exercise 5.1.1, then practice extracting individual pieces of information from the model object instead of reading everything from <code>.summary()</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna(subset<span class="op">=</span>[<span class="st">"horsepower"</span>])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(<span class="st">"mpg ~ horsepower"</span>, data<span class="op">=</span>mpg).fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Print <code>model.params</code>. What type of object is this?</li>
+<li>Print <code>model.bse</code>, <code>model.tvalues</code>, and <code>model.pvalues</code>. What does each of these represent?</li>
+<li>Print <code>model.rsquared</code>. How does this compare to reading the R-squared value off <code>.summary()</code>?</li>
+<li>Print <code>model.conf_int()</code>. What type of object is this, and what do the two columns represent?</li>
+<li>Using only these attributes (not <code>.summary()</code>), write one line of code that prints just the p-value for the <code>horsepower</code> coefficient.</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="49f2fcd1" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna(subset<span class="op">=</span>[<span class="st">"horsepower"</span>])</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(<span class="st">"mpg ~ horsepower"</span>, data<span class="op">=</span>mpg).fit()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.params)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.bse)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.tvalues)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.pvalues)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.rsquared)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.conf_int())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Intercept     39.935861
+horsepower    -0.157845
+dtype: float64
+Intercept     0.717499
+horsepower    0.006446
+dtype: float64
+Intercept     55.659841
+horsepower   -24.489135
+dtype: float64
+Intercept     1.220362e-187
+horsepower     7.031989e-81
+dtype: float64
+0.6059482578894348
+                    0          1
+Intercept   38.525212  41.346510
+horsepower  -0.170517  -0.145172</code></pre>
+</div>
+</div>
+<div id="c0667cb7" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. p-value for horsepower only</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.pvalues[<span class="st">"horsepower"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>7.031989029404482e-81</code></pre>
+</div>
+</div>
+<ol type="1">
+<li><p><code>model.params</code> is a pandas Series, indexed by coefficient name (<code>Intercept</code> and <code>horsepower</code>).</p></li>
+<li><p><code>model.bse</code> gives the standard error of each coefficient, <code>model.tvalues</code> gives the t-statistic (the coefficient divided by its standard error), and <code>model.pvalues</code> gives the p-value associated with each t-statistic.</p></li>
+<li><p><code>model.rsquared</code> returns the exact same R-squared value shown in <code>.summary()</code> (about 0.606), just as a plain float you can use directly in further calculations, rather than a formatted text block.</p></li>
+<li><p><code>model.conf_int()</code> returns a DataFrame with one row per coefficient and two unnamed columns (0 and 1), representing the lower and upper bounds of the 95% confidence interval for each coefficient.</p></li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="exercise-5.2.2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.2.2">Exercise 5.2.2</h3>
+<p>Build a tidy results table from the model in the previous exercise, first manually and then using a built-in shortcut.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna(subset<span class="op">=</span>[<span class="st">"horsepower"</span>])</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(<span class="st">"mpg ~ horsepower"</span>, data<span class="op">=</span>mpg).fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Build a DataFrame called <code>results_table</code> with columns <code>coefficient</code>, <code>std_error</code>, <code>t_stat</code>, <code>p_value</code>, <code>ci_low</code>, and <code>ci_high</code>, using the model attributes from the previous exercise. Round the result to 4 decimal places.</li>
+<li>Now use <code>model.summary2().tables[1]</code> to produce essentially the same table in a single line. Compare the column names and values to your manual version.</li>
+<li>Given that <code>.summary2()</code> produces this table automatically, when might it still be worth building the table manually as in step 1?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="cd96cb27" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna(subset<span class="op">=</span>[<span class="st">"horsepower"</span>])</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(<span class="st">"mpg ~ horsepower"</span>, data<span class="op">=</span>mpg).fit()</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Manual tidy table</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>results_table <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"coefficient"</span>: model.params,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"std_error"</span>:   model.bse,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"t_stat"</span>:      model.tvalues,</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"p_value"</span>:     model.pvalues,</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ci_low"</span>:      model.conf_int()[<span class="dv">0</span>],</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ci_high"</span>:     model.conf_int()[<span class="dv">1</span>],</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>}).<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results_table)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            coefficient  std_error   t_stat  p_value   ci_low  ci_high
+Intercept       39.9359     0.7175  55.6598      0.0  38.5252  41.3465
+horsepower      -0.1578     0.0064 -24.4891      0.0  -0.1705  -0.1452</code></pre>
+</div>
+</div>
+<div id="102aa391" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Built-in shortcut</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>tidy_table <span class="op">=</span> model.summary2().tables[<span class="dv">1</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tidy_table)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                Coef.  Std.Err.          t          P&gt;|t|     [0.025  \
+Intercept   39.935861  0.717499  55.659841  1.220362e-187  38.525212   
+horsepower  -0.157845  0.006446 -24.489135   7.031989e-81  -0.170517   
+
+               0.975]  
+Intercept   41.346510  
+horsepower  -0.145172  </code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li><p>The values are identical — both tables report the same coefficients, standard errors, t-statistics, p-values, and confidence intervals. The only differences are cosmetic: <code>.summary2()</code> uses its own column names (<code>Coef.</code>, <code>Std.Err.</code>, and so on) and slightly different formatting.</p></li>
+<li><p>Building the table manually is worth doing when you want specific column names (for example, to match a report template), want to select or reorder only some of the statistics, or want to combine results from several models into one combined table — something <code>.summary2()</code> alone does not do for you.</p></li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="exercise-5.2.3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.2.3">Exercise 5.2.3</h3>
+<p>Add in-sample predictions and residuals to the <code>mpg</code> DataFrame, and use them to find which cars the model over- and under-predicts the most.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna(subset<span class="op">=</span>[<span class="st">"horsepower"</span>]).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(<span class="st">"mpg ~ horsepower"</span>, data<span class="op">=</span>mpg).fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Add two new columns to <code>mpg</code>: <code>fitted</code>, using <code>model.fittedvalues</code>, and <code>residual</code>, using <code>model.resid</code>.</li>
+<li>Sort <code>mpg</code> by <code>residual</code> in descending order and print the <code>name</code>, <code>horsepower</code>, <code>mpg</code>, <code>fitted</code>, and <code>residual</code> columns for the top 3 rows. These are the cars whose actual fuel efficiency is highest <em>relative to what the model predicts given their horsepower</em>.</li>
+<li>Now sort by <code>residual</code> in ascending order and print the same columns for the bottom 3 rows.</li>
+<li>In plain language, what does a large positive residual tell you about a specific car? What might explain why a car outperforms what its horsepoweralone would predict?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="b7018d00" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna(subset<span class="op">=</span>[<span class="st">"horsepower"</span>]).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(<span class="st">"mpg ~ horsepower"</span>, data<span class="op">=</span>mpg).fit()</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Add fitted values and residuals</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>mpg[<span class="st">"fitted"</span>] <span class="op">=</span> model.fittedvalues</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>mpg[<span class="st">"residual"</span>] <span class="op">=</span> model.resid</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Largest positive residuals</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mpg.sort_values(<span class="st">"residual"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">3</span>)[[<span class="st">"name"</span>, <span class="st">"horsepower"</span>, <span class="st">"mpg"</span>, <span class="st">"fitted"</span>, <span class="st">"residual"</span>]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    name  horsepower   mpg     fitted   residual
+320            mazda glc        65.0  46.6  29.675953  16.924047
+327  honda civic 1500 gl        67.0  44.6  29.360264  15.239736
+330        datsun 280-zx       132.0  32.7  19.100356  13.599644</code></pre>
+</div>
+</div>
+<div id="94a24a9b" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Largest negative residuals</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mpg.sort_values(<span class="st">"residual"</span>).head(<span class="dv">3</span>)[[<span class="st">"name"</span>, <span class="st">"horsepower"</span>, <span class="st">"mpg"</span>, <span class="st">"fitted"</span>, <span class="st">"residual"</span>]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  name  horsepower   mpg     fitted   residual
+153      ford maverick        72.0  15.0  28.571040 -13.571040
+152    mercury monarch        72.0  15.0  28.571040 -13.571040
+198  ford granada ghia        78.0  18.0  27.623972  -9.623972</code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li>A large positive residual means the model substantially under-predicts that car’s actual fuel efficiency — the car does much better than its horsepower alone would suggest. The Mazda GLC and Honda Civic, for example, both have modest horsepower but very high actual mpg, well above what the model predicts — likely because they are also unusually lightweight cars, a factor the model does not account for since it only uses horsepower. This is exactly the motivation for the multiple regression in exercise 5.1.2: adding <code>weight</code> as a second predictor should shrink residuals like these.</li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="exercise-5.2.4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.2.4">Exercise 5.2.4</h3>
+<p>Use out-of-sample prediction to draw the fitted regression line on top of the observed data.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna(subset<span class="op">=</span>[<span class="st">"horsepower"</span>])</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(<span class="st">"mpg ~ horsepower"</span>, data<span class="op">=</span>mpg).fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Use <code>np.linspace()</code> to generate 100 evenly spaced values of <code>horsepower</code> between its minimum and maximum in the data.</li>
+<li>Build a new DataFrame called <code>new_data</code> with a single column named <code>horsepower</code>, containing the values from step 1. This column name must exactly match the variable name used in the model formula.</li>
+<li>Use <code>model.predict(new_data)</code> to generate predicted <code>mpg</code> values for these new horsepower values, and add them to <code>new_data</code> as a column called <code>predicted</code>.</li>
+<li>Create a scatter plot of the observed data (<code>mpg</code> vs <code>horsepower</code>, with <code>alpha=0.5</code> and <code>label="Observed"</code>), and overlay the predicted line from <code>new_data</code> in red with <code>label="Regression line"</code>. Add axis labels and a legend.</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="ff53ae14" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna(subset<span class="op">=</span>[<span class="st">"horsepower"</span>])</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(<span class="st">"mpg ~ horsepower"</span>, data<span class="op">=</span>mpg).fit()</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 1-3. Build new data and predict</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>hp_vals <span class="op">=</span> np.linspace(mpg[<span class="st">"horsepower"</span>].<span class="bu">min</span>(), mpg[<span class="st">"horsepower"</span>].<span class="bu">max</span>(), <span class="dv">100</span>)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>new_data <span class="op">=</span> pd.DataFrame({<span class="st">"horsepower"</span>: hp_vals})</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>new_data[<span class="st">"predicted"</span>] <span class="op">=</span> model.predict(new_data)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(new_data.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   horsepower  predicted
+0   46.000000  32.675003
+1   47.858586  32.381635
+2   49.717172  32.088267
+3   51.575758  31.794899
+4   53.434343  31.501531</code></pre>
+</div>
+</div>
+<div id="edee4660" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Plot observed data with regression line overlay</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>ax.scatter(mpg[<span class="st">"horsepower"</span>], mpg[<span class="st">"mpg"</span>], alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">"Observed"</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>ax.plot(new_data[<span class="st">"horsepower"</span>], new_data[<span class="st">"predicted"</span>], color<span class="op">=</span><span class="st">"red"</span>, label<span class="op">=</span><span class="st">"Regression line"</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Horsepower"</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Miles per gallon"</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Fuel efficiency vs horsepower, with fitted regression line"</span>)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-02-model-objects_files/figure-html/cell-9-output-1.png" width="758" height="566" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The column name in <code>new_data</code> must match <code>horsepower</code> exactly, since <code>model.predict()</code> looks up the formula’s variables by name in whatever DataFrame you pass it — this is the same reason a mismatched or misspelled column name produces a confusing error rather than a silently wrong result.</p>
+</details>
+<hr>
+</section>
+<section id="exercise-5.2.5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.2.5">Exercise 5.2.5</h3>
+<p>Use a residual plot to check whether the simple linear model from exercise 5.1.1 is missing something, and see whether the quadratic model from exercise 5.1.4 fixes it.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna(subset<span class="op">=</span>[<span class="st">"horsepower"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Fit the simple linear model <code>mpg ~ horsepower</code>. Add <code>fitted</code> and <code>residual</code> columns to <code>mpg</code> using <code>.fittedvalues</code> and <code>.resid</code>.</li>
+<li>Create a residual plot: scatter <code>fitted</code> (x-axis) against <code>residual</code> (y-axis), with <code>alpha=0.5</code>, and add a horizontal reference line at 0 using <code>ax.axhline()</code>. A well-fitting model should show residuals scattered randomly around zero with no clear pattern. Does this one?</li>
+<li>Fit the quadratic model <code>mpg ~ horsepower + I(horsepower**2)</code> from exercise 5.1.4. Add its own <code>fitted_quad</code> and <code>residual_quad</code> columns, and create the same residual plot for this model.</li>
+<li>Compare the two residual plots. Does the pattern from step 2 improve in step 3?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="3ab0caa5" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna(subset<span class="op">=</span>[<span class="st">"horsepower"</span>])</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Simple linear model</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> smf.ols(<span class="st">"mpg ~ horsepower"</span>, data<span class="op">=</span>mpg).fit()</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>mpg[<span class="st">"fitted"</span>] <span class="op">=</span> model.fittedvalues</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>mpg[<span class="st">"residual"</span>] <span class="op">=</span> model.resid</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Residual plot</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>ax.scatter(mpg[<span class="st">"fitted"</span>], mpg[<span class="st">"residual"</span>], alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"red"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Fitted values"</span>)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Residuals"</span>)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Residual plot: linear model"</span>)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-02-model-objects_files/figure-html/cell-10-output-1.png" width="758" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The residual plot for the linear model shows a visible curved pattern rather than a random scatter around zero — residuals tend to be positive at both low and high fitted values, and more negative in the middle. This is a classic sign that the model is missing curvature in the true relationship, consistent with what the original scatter plot in exercise 5.1.1 suggested.</p>
+<div id="76337618" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Quadratic model</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>model_quad <span class="op">=</span> smf.ols(<span class="st">"mpg ~ horsepower + I(horsepower**2)"</span>, data<span class="op">=</span>mpg).fit()</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>mpg[<span class="st">"fitted_quad"</span>] <span class="op">=</span> model_quad.fittedvalues</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>mpg[<span class="st">"residual_quad"</span>] <span class="op">=</span> model_quad.resid</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>ax.scatter(mpg[<span class="st">"fitted_quad"</span>], mpg[<span class="st">"residual_quad"</span>], alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"red"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Fitted values"</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Residuals"</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Residual plot: quadratic model"</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-02-model-objects_files/figure-html/cell-11-output-1.png" width="758" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The residual plot for the quadratic model looks noticeably more like a random scatter around zero, with the curved pattern from the linear model largely gone. This confirms that adding the squared horsepower term captured most of the non-linearity that the simple linear model was missing.</p>
+</details>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

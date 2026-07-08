@@ -2,7 +2,7 @@
 
 We install the core packages used throughout the course using pip, and learn how to import them into a script at the start of each session.
 
-*Video will be embedded here.*
+{{< video https://vimeo.com/1207901856/f1a673c674?share=copy&fl=sv&fe=ci >}}
 
 ```python
 # Purpose: verify that all course packages are installed and importable
