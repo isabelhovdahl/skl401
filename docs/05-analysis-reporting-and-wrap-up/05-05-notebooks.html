@@ -440,8 +440,21 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#exercise-5.5.1" id="toc-exercise-5.5.1" class="nav-link" data-scroll-target="#exercise-5.5.1">Exercise 5.5.1</a></li>
+  <li><a href="#exercise-5.5.2" id="toc-exercise-5.5.2" class="nav-link" data-scroll-target="#exercise-5.5.2">Exercise 5.5.2</a></li>
+  <li><a href="#exercise-5.5.3" id="toc-exercise-5.5.3" class="nav-link" data-scroll-target="#exercise-5.5.3">Exercise 5.5.3</a></li>
+  <li><a href="#exercise-5.5.4" id="toc-exercise-5.5.4" class="nav-link" data-scroll-target="#exercise-5.5.4">Exercise 5.5.4</a></li>
+  <li><a href="#exercise-5.5.5" id="toc-exercise-5.5.5" class="nav-link" data-scroll-target="#exercise-5.5.5">Exercise 5.5.5</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -465,9 +478,77 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>We introduce Jupyter notebooks as a way to combine code, output, and written explanation in a single document, and walk through a prepared notebook that puts together several skills from this course into a small analysis.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1196320606?h=3acd0a68f8" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>The notebook used in the video is available on GitHub: <a href="https://github.com/isabelhovdahl/skl401/blob/master/skl401-notebook.ipynb">skl401-notebook.ipynb</a>. Open the page and use the download button there to save it to your computer.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The notebook loads its data with <code>pd.read_csv("data/gapminder.csv")</code>, a relative path. For this to work, place the notebook file in the root of your project folder, alongside a <code>data</code> subfolder that contains <code>gapminder.csv</code>.</p>
+</div>
+</div>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="exercise-5.5.1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.5.1">Exercise 5.5.1</h3>
+<p>Start a new Jupyter notebook. You will build it up progressively across the exercises on this page, ending with a small finished analysis.</p>
+<ol type="1">
+<li>Add a markdown cell at the top with a title (<code># Health Spending and Life Expectancy</code>) and one sentence describing what the notebook explores: how health spending and life expectancy compare across six countries, using the <code>healthexp</code> dataset.</li>
+<li>Add a code cell below it that imports <code>pandas</code>, <code>seaborn</code>, and <code>matplotlib.pyplot</code>, loads <code>healthexp</code> with <code>sns.load_dataset()</code>, and prints its shape.</li>
+<li>Run both cells. Confirm the shape appears directly below the code cell, and that the markdown cell renders as formatted text rather than plain code.</li>
+</ol>
+<hr>
+</section>
+<section id="exercise-5.5.2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.5.2">Exercise 5.5.2</h3>
+<p>Continue the same notebook by adding a summary of the data.</p>
+<ol type="1">
+<li>Add a markdown cell with a short header introducing a question: how does health spending compare across countries?</li>
+<li>Add a code cell below it that groups <code>healthexp</code> by <code>Country</code>, computes the mean <code>Spending_USD</code> and mean <code>Life_Expectancy</code> for each, rounds to 1 decimal place, resets the index, and sorts by mean spending in descending order. Assign the result to <code>summary</code>.</li>
+<li>Run the cell and confirm the table appears as output directly below the code.</li>
+</ol>
+<hr>
+</section>
+<section id="exercise-5.5.3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.5.3">Exercise 5.5.3</h3>
+<p>Add a “dynamic sentence” to the notebook — a sentence that inserts an actual computed value from your data, rather than a number you typed in by hand.</p>
+<ol type="1">
+<li>Add a code cell that extracts the country name and mean spending value from the first row of <code>summary</code> (the highest-spending country).</li>
+<li>In the same cell, use an f-string inside a <code>print()</code> statement to display a sentence such as: <code>"The country with the highest average health spending is USA, at $4388.6 per capita."</code> — but built from the variables you just extracted, not typed as a fixed string.</li>
+</ol>
+<hr>
+</section>
+<section id="exercise-5.5.4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.5.4">Exercise 5.5.4</h3>
+<p>Add a chart to visualize the comparison from exercise 5.5.2.</p>
+<ol type="1">
+<li>Add a markdown cell with a short line introducing the chart: a bar chart will make the differences across countries easier to see than the table alone.</li>
+<li>Add a code cell that creates a horizontal bar chart of <code>summary</code>, with country on the y-axis and mean spending on the x-axis, using <code>figsize=(8, 5)</code> and a colour of your choice. Add an axis label and a title.</li>
+<li>Run the cell and confirm the chart appears as output directly below the code, in the same way the table did in exercise 5.5.2.</li>
+</ol>
+<hr>
+</section>
+<section id="exercise-5.5.5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.5.5">Exercise 5.5.5</h3>
+<p>Export the finished notebook to a format you could share with someone who does not have Python installed.</p>
+<ol type="1">
+<li>In Positron, find the notebook export option in the notebook toolbar and export your notebook to HTML. (If you’d rather do this from a terminal: it requires a package called <code>nbconvert</code>, which isn’t installed by default in this course, so run <code>pip install nbconvert</code> once, then <code>python -m nbconvert --to html your-notebook.ipynb</code> — on a Mac, use <code>python3</code> instead of <code>python</code>.)</li>
+<li>Open the resulting HTML file in a browser. Does it look the same as the notebook?</li>
+<li>Try clicking on one of the code cells in the exported HTML file. Can you edit it and re-run it? What does this tell you about the difference between the notebook file itself and an exported copy of it?</li>
+</ol>
+<hr>
+<p>A complete, worked version of this notebook — with all five exercises finished and every cell executed — is available on GitHub: <a href="https://github.com/isabelhovdahl/skl401/blob/master/05-05-exercise-solution.ipynb">05-05-exercise-solution.ipynb</a>. Open the page and use the download button there to save it to your computer.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -1,3 +1,322 @@
 # Exporting tables and results
 
+We cover how to get your results out of Python and into a report: saving DataFrames to Excel, and building publication-style regression tables with the stargazer package.
+
+::: {.callout-note}
+This video installs the `stargazer` package, which is not part of the standard packages covered in 1.6. If you have not installed it yet, run the following in the terminal before running the code below:
+```
+pip install stargazer
+```
+:::
+
 {{< video https://vimeo.com/1196320132/094cbf89ae?fl=ml&fe=ec >}}
+
+```python
+import pandas as pd
+import numpy as np
+import statsmodels.formula.api as smf
+from stargazer.stargazer import Stargazer
+
+gapminder = pd.read_csv("data/gapminder.csv")
+gap_2007  = gapminder[gapminder["year"] == 2007].copy()
+gap_2007["log_gdp"] = np.log(gap_2007["gdpPercap"])
+gap_2007["pop_millions"] = gap_2007["pop"] / 1_000_000
+
+# --- Exporting a DataFrame to CSV or Excel ---
+summary = (
+    gap_2007
+    .groupby("continent")
+    .agg(
+        n_countries = ("country",  "count"),
+        mean_life   = ("lifeExp",  "mean"),
+        mean_gdp    = ("log_gdp", "mean"),
+        mean_pop    = ("pop_millions", "mean")
+    )
+    .round(1)
+    .reset_index()
+)
+
+summary.to_excel("output/continent_summary.xlsx", index=False)
+
+# --- Build models for stargazer ---
+controls = ["log_gdp", "pop_millions", "C(continent)"]
+
+models = []
+
+for i in range(1, len(controls) + 1):
+    rhs = " + ".join(controls[:i])
+    formula = f"lifeExp ~ {rhs}"
+    models.append(smf.ols(formula, data=gap_2007).fit())
+
+# --- Create a stargazer table ---
+# Stargazer accepts a list of fitted model objects
+table = Stargazer(models)
+
+# --- Customize the table ---
+# Rename covariates to readable labels
+table.rename_covariates({
+    "log_gdp":                   "Log GDP per capita",
+    "pop_millions":              "Population (millions)",
+    "C(continent)[T.Americas]":  "Americas",
+    "C(continent)[T.Asia]":      "Asia",
+    "C(continent)[T.Europe]":    "Europe",
+    "C(continent)[T.Oceania]":   "Oceania",
+    "Intercept":                 "Intercept",
+})
+
+# Control the row order
+table.covariate_order([
+    "log_gdp",
+    "pop_millions",
+    "C(continent)[T.Americas]",
+    "C(continent)[T.Asia]",
+    "C(continent)[T.Europe]",
+    "C(continent)[T.Oceania]",
+    "Intercept",
+])
+
+# Add title, rename dependent variable, and add a note
+table.title("OLS Regression: Life Expectancy (2007)")
+table.dependent_variable_name("Life Expectancy")
+table.add_custom_notes(["Standard errors in parentheses."])
+
+# --- Save the table ---
+# HTML format (for Quarto documents, Jupyter notebooks, websites)
+with open("output/regression_table.html", "w") as f:
+    f.write(table.render_html())
+
+# LaTeX format (for academic papers)
+with open("output/regression_table.tex", "w") as f:
+    f.write(table.render_latex())
+```
+
+## Exercises
+
+### Exercise 5.4.1
+
+Build a summary table on the `mpg` dataset and export it to Excel.
+
+```python
+import seaborn as sns
+import pandas as pd
+
+mpg = sns.load_dataset("mpg").dropna(subset=["horsepower"])
+```
+
+1. Group `mpg` by `origin` and compute the number of cars, the mean `mpg`, and the mean `horsepower` for each group, using named aggregations. Round the result to 1 decimal place and reset the index.
+2. Save the result to an Excel file.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import seaborn as sns
+import pandas as pd
+
+mpg = sns.load_dataset("mpg").dropna(subset=["horsepower"])
+
+summary = (
+    mpg.groupby("origin")
+    .agg(
+        n_cars=("name", "count"),
+        mean_mpg=("mpg", "mean"),
+        mean_hp=("horsepower", "mean")
+    )
+    .round(1)
+    .reset_index()
+)
+
+print(summary)
+
+# Uncomment the line below to save the file — make sure an "output" folder
+# already exists in your project directory first, or this will raise an error.
+# summary.to_excel("output/origin_summary.xlsx", index=False)
+```
+
+American cars have the lowest average fuel efficiency and the highest average horsepower among the three origins, consistent with the patterns explored throughout this topic's regression exercises.
+
+</details>
+
+---
+
+### Exercise 5.4.2
+
+Use the `models` list from exercise 5.3.4 to build a formatted regression table with `Stargazer`.
+
+```python
+import seaborn as sns
+import pandas as pd
+import statsmodels.formula.api as smf
+from stargazer.stargazer import Stargazer
+
+mpg = sns.load_dataset("mpg").dropna(subset=["horsepower"])
+mpg["weight_tons"] = mpg["weight"] / 1000
+
+controls = ["horsepower", "weight_tons", "C(origin)"]
+models = []
+for i in range(1, len(controls) + 1):
+    rhs = " + ".join(controls[:i])
+    formula = f"mpg ~ {rhs}"
+    models.append(smf.ols(formula, data=mpg).fit())
+```
+
+1. Pass `models` to `Stargazer()` to build a side-by-side comparison table.
+2. Display the table (simply write `table` on its own line, or use `print()` in a script). Look at the variable names in the leftmost column — are they easy to read, or do they still look like raw statsmodels output?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import seaborn as sns
+import pandas as pd
+import statsmodels.formula.api as smf
+from stargazer.stargazer import Stargazer
+
+mpg = sns.load_dataset("mpg").dropna(subset=["horsepower"])
+mpg["weight_tons"] = mpg["weight"] / 1000
+
+controls = ["horsepower", "weight_tons", "C(origin)"]
+models = []
+for i in range(1, len(controls) + 1):
+    rhs = " + ".join(controls[:i])
+    formula = f"mpg ~ {rhs}"
+    models.append(smf.ols(formula, data=mpg).fit())
+
+table = Stargazer(models)
+table
+```
+
+2. The table already shows all three models side by side with stars marking statistical significance, which is a big improvement over reading three separate `.summary()` outputs. However, the variable names — `weight_tons`, `C(origin)[T.japan]`, and so on — are still the raw internal statsmodels names, not something you would want to show in a report.
+
+</details>
+
+---
+
+### Exercise 5.4.3
+
+Customize the table from the previous exercise so it is ready to include in a
+report.
+
+1. Use `rename_covariates()` to relabel `horsepower`, `weight_tons`, `C(origin)[T.japan]`, `C(origin)[T.usa]`, and `Intercept` with reader-friendly names of your choice.
+2. Use `covariate_order()` to list the covariates in the order you want them to appear — for example, `horsepower` and `weight_tons` first, then the origin dummies, with `Intercept` last.
+3. Add a title with `.title()`, set the dependent variable's display name with `.dependent_variable_name()`, and add a note with `.add_custom_notes()`.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+table.rename_covariates({
+    "horsepower":            "Horsepower",
+    "weight_tons":           "Weight (tons)",
+    "C(origin)[T.japan]":    "Japan",
+    "C(origin)[T.usa]":      "USA",
+    "Intercept":             "Intercept",
+})
+
+table.covariate_order([
+    "horsepower",
+    "weight_tons",
+    "C(origin)[T.japan]",
+    "C(origin)[T.usa]",
+    "Intercept",
+])
+
+table.title("OLS Regression: Fuel Efficiency")
+table.dependent_variable_name("Miles per Gallon")
+table.add_custom_notes(["Standard errors in parentheses."])
+
+table
+```
+
+The table now reads like something you could put directly into a report: clear variable names in a sensible order, a descriptive title, and a note explaining what is shown in parentheses. This is the same set of customization steps
+shown in the video, applied to the `mpg` models instead of the gapminder ones.
+
+</details>
+
+---
+
+### Exercise 5.4.4
+
+Save the customized table to both HTML and LaTeX, using the `with open(...)` pattern from the video.
+
+1. Save the table as an HTML file at `output/mpg_regression_table.html` using `table.render_html()` inside a `with open(...) as f:` block.
+2. Save the same table as a LaTeX file at `output/mpg_regression_table.tex` using `table.render_latex()`, following the same pattern.
+3. If you have an `output` folder in your project, open the HTML file in a browser. Does it display the table correctly?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+# Uncomment the two blocks below to save the files — make sure an "output"
+# folder already exists in your project directory first, or this will raise
+# an error.
+
+# with open("output/mpg_regression_table.html", "w") as f:
+#     f.write(table.render_html())
+
+# with open("output/mpg_regression_table.tex", "w") as f:
+#     f.write(table.render_latex())
+
+print("Both render_html() and render_latex() produce a string, which the")
+print("with open(...) block writes directly to a file.")
+```
+
+The HTML version opens in a browser like a normal table and can be copy-pasted into Word. The LaTeX version contains a `tabular` environment that can be `\input{}` directly into a LaTeX document — you would not open it
+directly and expect it to look like a table, since LaTeX source only renders after being compiled.
+
+</details>
+
+---
+
+### Exercise 5.4.5
+
+The video told you not to worry about exactly how the `with` keyword works — just to treat `with open(...) as f:` as a standard pattern. This exercise shows you a second, more familiar situation where the exact same pattern shows
+up: applying a style sheet to a single chart.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 10, 50)
+y = np.sin(x)
+```
+
+Recall from Topic 4.7 that `plt.style.use("ggplot")` changes the style for every chart created afterward in the same session, until you explicitly reset it with `plt.style.use("default")`.
+
+1. Instead, use `with plt.style.context("ggplot"):` and create a Figure and Axes plotting `x` against `y` *inside* the `with` block.
+2. After the `with` block ends, create a second, completely separate Figure and Axes plotting the same data. Does this second chart use the `ggplot` style, or has it reverted to the default?
+3. Both `with open(...) as f:` and `with plt.style.context(...):` follow the same shape: something is temporarily set up, your code runs inside the block, and then it is automatically cleaned up again when the block ends — closing
+the file in one case, reverting the style in the other. Why is this pattern more convenient here than calling `plt.style.use()` and remembering to reset it manually afterward?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 10, 50)
+y = np.sin(x)
+
+# 1. Style applied only inside the with block
+with plt.style.context("ggplot"):
+    fig, ax = plt.subplots()
+    ax.plot(x, y)
+    ax.set_title("Styled chart (ggplot)")
+    plt.show()
+```
+
+```{python}
+# 2. Second chart, outside the with block
+fig, ax = plt.subplots()
+ax.plot(x, y)
+ax.set_title("Unstyled chart (default)")
+plt.show()
+```
+
+2. The second chart uses the default matplotlib style, not `ggplot`. The style change from `plt.style.context()` only applies to code running inside the `with` block — as soon as the block ends, matplotlib automatically
+reverts to whatever style was active before.
+
+3. With `plt.style.use()`, you have to remember to call `plt.style.use("default")` afterward yourself — if you forget, every subsequent chart in your script keeps the style, which can be a confusing bug if you only wanted it for one specific chart. The `with` pattern removes this risk entirely: the cleanup happens automatically the moment the indented block ends, whether that block finishes normally or even if an error occurs partway through. This is exactly the same benefit `with open(...)` gives you for files — you never have to remember to call `f.close()` yourself.
+
+</details>

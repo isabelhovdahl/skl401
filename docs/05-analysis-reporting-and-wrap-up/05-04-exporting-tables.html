@@ -23,10 +23,45 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -72,6 +107,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
 
 
 </head>
@@ -440,8 +481,21 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#exercise-5.4.1" id="toc-exercise-5.4.1" class="nav-link" data-scroll-target="#exercise-5.4.1">Exercise 5.4.1</a></li>
+  <li><a href="#exercise-5.4.2" id="toc-exercise-5.4.2" class="nav-link" data-scroll-target="#exercise-5.4.2">Exercise 5.4.2</a></li>
+  <li><a href="#exercise-5.4.3" id="toc-exercise-5.4.3" class="nav-link" data-scroll-target="#exercise-5.4.3">Exercise 5.4.3</a></li>
+  <li><a href="#exercise-5.4.4" id="toc-exercise-5.4.4" class="nav-link" data-scroll-target="#exercise-5.4.4">Exercise 5.4.4</a></li>
+  <li><a href="#exercise-5.4.5" id="toc-exercise-5.4.5" class="nav-link" data-scroll-target="#exercise-5.4.5">Exercise 5.4.5</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -465,9 +519,373 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>We cover how to get your results out of Python and into a report: saving DataFrames to Excel, and building publication-style regression tables with the stargazer package.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This video installs the <code>stargazer</code> package, which is not part of the standard packages covered in 1.6. If you have not installed it yet, run the following in the terminal before running the code below:</p>
+<pre><code>pip install stargazer</code></pre>
+</div>
+</div>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1196320132?h=094cbf89ae" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> stargazer.stargazer <span class="im">import</span> Stargazer</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>gapminder <span class="op">=</span> pd.read_csv(<span class="st">"data/gapminder.csv"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>gap_2007  <span class="op">=</span> gapminder[gapminder[<span class="st">"year"</span>] <span class="op">==</span> <span class="dv">2007</span>].copy()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>gap_2007[<span class="st">"log_gdp"</span>] <span class="op">=</span> np.log(gap_2007[<span class="st">"gdpPercap"</span>])</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>gap_2007[<span class="st">"pop_millions"</span>] <span class="op">=</span> gap_2007[<span class="st">"pop"</span>] <span class="op">/</span> <span class="dv">1_000_000</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Exporting a DataFrame to CSV or Excel ---</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> (</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    gap_2007</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"continent"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        n_countries <span class="op">=</span> (<span class="st">"country"</span>,  <span class="st">"count"</span>),</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        mean_life   <span class="op">=</span> (<span class="st">"lifeExp"</span>,  <span class="st">"mean"</span>),</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        mean_gdp    <span class="op">=</span> (<span class="st">"log_gdp"</span>, <span class="st">"mean"</span>),</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        mean_pop    <span class="op">=</span> (<span class="st">"pop_millions"</span>, <span class="st">"mean"</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>(<span class="dv">1</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>summary.to_excel(<span class="st">"output/continent_summary.xlsx"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Build models for stargazer ---</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>controls <span class="op">=</span> [<span class="st">"log_gdp"</span>, <span class="st">"pop_millions"</span>, <span class="st">"C(continent)"</span>]</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> []</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(controls) <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    rhs <span class="op">=</span> <span class="st">" + "</span>.join(controls[:i])</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    formula <span class="op">=</span> <span class="ss">f"lifeExp ~ </span><span class="sc">{</span>rhs<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    models.append(smf.ols(formula, data<span class="op">=</span>gap_2007).fit())</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Create a stargazer table ---</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Stargazer accepts a list of fitted model objects</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> Stargazer(models)</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Customize the table ---</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename covariates to readable labels</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>table.rename_covariates({</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">"log_gdp"</span>:                   <span class="st">"Log GDP per capita"</span>,</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pop_millions"</span>:              <span class="st">"Population (millions)"</span>,</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">"C(continent)[T.Americas]"</span>:  <span class="st">"Americas"</span>,</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">"C(continent)[T.Asia]"</span>:      <span class="st">"Asia"</span>,</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">"C(continent)[T.Europe]"</span>:    <span class="st">"Europe"</span>,</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    <span class="st">"C(continent)[T.Oceania]"</span>:   <span class="st">"Oceania"</span>,</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Intercept"</span>:                 <span class="st">"Intercept"</span>,</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Control the row order</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>table.covariate_order([</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    <span class="st">"log_gdp"</span>,</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pop_millions"</span>,</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    <span class="st">"C(continent)[T.Americas]"</span>,</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    <span class="st">"C(continent)[T.Asia]"</span>,</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    <span class="st">"C(continent)[T.Europe]"</span>,</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    <span class="st">"C(continent)[T.Oceania]"</span>,</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Intercept"</span>,</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Add title, rename dependent variable, and add a note</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>table.title(<span class="st">"OLS Regression: Life Expectancy (2007)"</span>)</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>table.dependent_variable_name(<span class="st">"Life Expectancy"</span>)</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>table.add_custom_notes([<span class="st">"Standard errors in parentheses."</span>])</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Save the table ---</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="co"># HTML format (for Quarto documents, Jupyter notebooks, websites)</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"output/regression_table.html"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    f.write(table.render_html())</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="co"># LaTeX format (for academic papers)</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"output/regression_table.tex"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>    f.write(table.render_latex())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="exercise-5.4.1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.4.1">Exercise 5.4.1</h3>
+<p>Build a summary table on the <code>mpg</code> dataset and export it to Excel.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna(subset<span class="op">=</span>[<span class="st">"horsepower"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Group <code>mpg</code> by <code>origin</code> and compute the number of cars, the mean <code>mpg</code>, and the mean <code>horsepower</code> for each group, using named aggregations. Round the result to 1 decimal place and reset the index.</li>
+<li>Save the result to an Excel file.</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="92a8e80b" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna(subset<span class="op">=</span>[<span class="st">"horsepower"</span>])</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> (</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    mpg.groupby(<span class="st">"origin"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    .agg(</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        n_cars<span class="op">=</span>(<span class="st">"name"</span>, <span class="st">"count"</span>),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        mean_mpg<span class="op">=</span>(<span class="st">"mpg"</span>, <span class="st">"mean"</span>),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        mean_hp<span class="op">=</span>(<span class="st">"horsepower"</span>, <span class="st">"mean"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>(<span class="dv">1</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(summary)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment the line below to save the file — make sure an "output" folder</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co"># already exists in your project directory first, or this will raise an error.</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># summary.to_excel("output/origin_summary.xlsx", index=False)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   origin  n_cars  mean_mpg  mean_hp
+0  europe      68      27.6     80.6
+1   japan      79      30.5     79.8
+2     usa     245      20.0    119.0</code></pre>
+</div>
+</div>
+<p>American cars have the lowest average fuel efficiency and the highest average horsepower among the three origins, consistent with the patterns explored throughout this topic’s regression exercises.</p>
+</details>
+<hr>
+</section>
+<section id="exercise-5.4.2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.4.2">Exercise 5.4.2</h3>
+<p>Use the <code>models</code> list from exercise 5.3.4 to build a formatted regression table with <code>Stargazer</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> stargazer.stargazer <span class="im">import</span> Stargazer</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna(subset<span class="op">=</span>[<span class="st">"horsepower"</span>])</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>mpg[<span class="st">"weight_tons"</span>] <span class="op">=</span> mpg[<span class="st">"weight"</span>] <span class="op">/</span> <span class="dv">1000</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>controls <span class="op">=</span> [<span class="st">"horsepower"</span>, <span class="st">"weight_tons"</span>, <span class="st">"C(origin)"</span>]</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> []</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(controls) <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    rhs <span class="op">=</span> <span class="st">" + "</span>.join(controls[:i])</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    formula <span class="op">=</span> <span class="ss">f"mpg ~ </span><span class="sc">{</span>rhs<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    models.append(smf.ols(formula, data<span class="op">=</span>mpg).fit())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Pass <code>models</code> to <code>Stargazer()</code> to build a side-by-side comparison table.</li>
+<li>Display the table (simply write <code>table</code> on its own line, or use <code>print()</code> in a script). Look at the variable names in the leftmost column — are they easy to read, or do they still look like raw statsmodels output?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="18fdd7c5" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> stargazer.stargazer <span class="im">import</span> Stargazer</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna(subset<span class="op">=</span>[<span class="st">"horsepower"</span>])</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>mpg[<span class="st">"weight_tons"</span>] <span class="op">=</span> mpg[<span class="st">"weight"</span>] <span class="op">/</span> <span class="dv">1000</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>controls <span class="op">=</span> [<span class="st">"horsepower"</span>, <span class="st">"weight_tons"</span>, <span class="st">"C(origin)"</span>]</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> []</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(controls) <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    rhs <span class="op">=</span> <span class="st">" + "</span>.join(controls[:i])</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    formula <span class="op">=</span> <span class="ss">f"mpg ~ </span><span class="sc">{</span>rhs<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    models.append(smf.ols(formula, data<span class="op">=</span>mpg).fit())</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> Stargazer(models)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<table style="text-align:center"><tbody><tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align:left"></td><td colspan="3"><em>Dependent variable: mpg</em></td></tr><tr><td style="text-align:left"></td></tr><tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td><td>(3)</td></tr>
+<tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr>
+
+<tr><td style="text-align:left">C(origin)[T.japan]</td><td></td><td></td><td>1.781<sup>**</sup></td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td><td>(0.696)</td></tr>
+<tr><td style="text-align:left">C(origin)[T.usa]</td><td></td><td></td><td>-0.961<sup></sup></td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td><td>(0.640)</td></tr>
+<tr><td style="text-align:left">Intercept</td><td>39.936<sup>***</sup></td><td>45.640<sup>***</sup></td><td>43.701<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.717)</td><td>(0.793)</td><td>(0.932)</td></tr>
+<tr><td style="text-align:left">horsepower</td><td>-0.158<sup>***</sup></td><td>-0.047<sup>***</sup></td><td>-0.054<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.006)</td><td>(0.011)</td><td>(0.011)</td></tr>
+<tr><td style="text-align:left">weight_tons</td><td></td><td>-5.794<sup>***</sup></td><td>-4.843<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td></td><td>(0.502)</td><td>(0.545)</td></tr>
+
+<tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align: left">Observations</td><td>392</td><td>392</td><td>392</td></tr><tr><td style="text-align: left">R<sup>2</sup></td><td>0.606</td><td>0.706</td><td>0.719</td></tr><tr><td style="text-align: left">Adjusted R<sup>2</sup></td><td>0.605</td><td>0.705</td><td>0.716</td></tr><tr><td style="text-align: left">Residual Std. Error</td><td>4.906 (df=390)</td><td>4.240 (df=389)</td><td>4.157 (df=387)</td></tr><tr><td style="text-align: left">F Statistic</td><td>599.718<sup>***</sup> (df=1; 390)</td><td>467.910<sup>***</sup> (df=2; 389)</td><td>247.899<sup>***</sup> (df=4; 387)</td></tr>
+<tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align: left">Note:</td><td colspan="3" style="text-align: right"><sup>*</sup>p&lt;0.1; <sup>**</sup>p&lt;0.05; <sup>***</sup>p&lt;0.01</td></tr></tbody></table>
+</div>
+</div>
+<ol start="2" type="1">
+<li>The table already shows all three models side by side with stars marking statistical significance, which is a big improvement over reading three separate <code>.summary()</code> outputs. However, the variable names — <code>weight_tons</code>, <code>C(origin)[T.japan]</code>, and so on — are still the raw internal statsmodels names, not something you would want to show in a report.</li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="exercise-5.4.3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.4.3">Exercise 5.4.3</h3>
+<p>Customize the table from the previous exercise so it is ready to include in a report.</p>
+<ol type="1">
+<li>Use <code>rename_covariates()</code> to relabel <code>horsepower</code>, <code>weight_tons</code>, <code>C(origin)[T.japan]</code>, <code>C(origin)[T.usa]</code>, and <code>Intercept</code> with reader-friendly names of your choice.</li>
+<li>Use <code>covariate_order()</code> to list the covariates in the order you want them to appear — for example, <code>horsepower</code> and <code>weight_tons</code> first, then the origin dummies, with <code>Intercept</code> last.</li>
+<li>Add a title with <code>.title()</code>, set the dependent variable’s display name with <code>.dependent_variable_name()</code>, and add a note with <code>.add_custom_notes()</code>.</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="d7da7296" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>table.rename_covariates({</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"horsepower"</span>:            <span class="st">"Horsepower"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"weight_tons"</span>:           <span class="st">"Weight (tons)"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"C(origin)[T.japan]"</span>:    <span class="st">"Japan"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"C(origin)[T.usa]"</span>:      <span class="st">"USA"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Intercept"</span>:             <span class="st">"Intercept"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>table.covariate_order([</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"horsepower"</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"weight_tons"</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"C(origin)[T.japan]"</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"C(origin)[T.usa]"</span>,</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Intercept"</span>,</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>table.title(<span class="st">"OLS Regression: Fuel Efficiency"</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>table.dependent_variable_name(<span class="st">"Miles per Gallon"</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>table.add_custom_notes([<span class="st">"Standard errors in parentheses."</span>])</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+OLS Regression: Fuel Efficiency<br><table style="text-align:center"><tbody><tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align:left"></td><td colspan="3"><em>Dependent variable: Miles per Gallon</em></td></tr><tr><td style="text-align:left"></td></tr><tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td><td>(3)</td></tr>
+<tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr>
+
+<tr><td style="text-align:left">Horsepower</td><td>-0.158<sup>***</sup></td><td>-0.047<sup>***</sup></td><td>-0.054<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.006)</td><td>(0.011)</td><td>(0.011)</td></tr>
+<tr><td style="text-align:left">Weight (tons)</td><td></td><td>-5.794<sup>***</sup></td><td>-4.843<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td></td><td>(0.502)</td><td>(0.545)</td></tr>
+<tr><td style="text-align:left">Japan</td><td></td><td></td><td>1.781<sup>**</sup></td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td><td>(0.696)</td></tr>
+<tr><td style="text-align:left">USA</td><td></td><td></td><td>-0.961<sup></sup></td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td><td>(0.640)</td></tr>
+<tr><td style="text-align:left">Intercept</td><td>39.936<sup>***</sup></td><td>45.640<sup>***</sup></td><td>43.701<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.717)</td><td>(0.793)</td><td>(0.932)</td></tr>
+
+<tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align: left">Observations</td><td>392</td><td>392</td><td>392</td></tr><tr><td style="text-align: left">R<sup>2</sup></td><td>0.606</td><td>0.706</td><td>0.719</td></tr><tr><td style="text-align: left">Adjusted R<sup>2</sup></td><td>0.605</td><td>0.705</td><td>0.716</td></tr><tr><td style="text-align: left">Residual Std. Error</td><td>4.906 (df=390)</td><td>4.240 (df=389)</td><td>4.157 (df=387)</td></tr><tr><td style="text-align: left">F Statistic</td><td>599.718<sup>***</sup> (df=1; 390)</td><td>467.910<sup>***</sup> (df=2; 389)</td><td>247.899<sup>***</sup> (df=4; 387)</td></tr>
+<tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align: left">Note:</td><td colspan="3" style="text-align: right"><sup>*</sup>p&lt;0.1; <sup>**</sup>p&lt;0.05; <sup>***</sup>p&lt;0.01</td></tr><tr><td colspan="4" style="text-align: right">Standard errors in parentheses.</td></tr></tbody></table>
+</div>
+</div>
+<p>The table now reads like something you could put directly into a report: clear variable names in a sensible order, a descriptive title, and a note explaining what is shown in parentheses. This is the same set of customization steps shown in the video, applied to the <code>mpg</code> models instead of the gapminder ones.</p>
+</details>
+<hr>
+</section>
+<section id="exercise-5.4.4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.4.4">Exercise 5.4.4</h3>
+<p>Save the customized table to both HTML and LaTeX, using the <code>with open(...)</code> pattern from the video.</p>
+<ol type="1">
+<li>Save the table as an HTML file at <code>output/mpg_regression_table.html</code> using <code>table.render_html()</code> inside a <code>with open(...) as f:</code> block.</li>
+<li>Save the same table as a LaTeX file at <code>output/mpg_regression_table.tex</code> using <code>table.render_latex()</code>, following the same pattern.</li>
+<li>If you have an <code>output</code> folder in your project, open the HTML file in a browser. Does it display the table correctly?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="3be62673" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncomment the two blocks below to save the files — make sure an "output"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># folder already exists in your project directory first, or this will raise</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># an error.</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># with open("output/mpg_regression_table.html", "w") as f:</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     f.write(table.render_html())</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># with open("output/mpg_regression_table.tex", "w") as f:</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     f.write(table.render_latex())</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Both render_html() and render_latex() produce a string, which the"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"with open(...) block writes directly to a file."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Both render_html() and render_latex() produce a string, which the
+with open(...) block writes directly to a file.</code></pre>
+</div>
+</div>
+<p>The HTML version opens in a browser like a normal table and can be copy-pasted into Word. The LaTeX version contains a <code>tabular</code> environment that can be <code>\input{}</code> directly into a LaTeX document — you would not open it directly and expect it to look like a table, since LaTeX source only renders after being compiled.</p>
+</details>
+<hr>
+</section>
+<section id="exercise-5.4.5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.4.5">Exercise 5.4.5</h3>
+<p>The video told you not to worry about exactly how the <code>with</code> keyword works — just to treat <code>with open(...) as f:</code> as a standard pattern. This exercise shows you a second, more familiar situation where the exact same pattern shows up: applying a style sheet to a single chart.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">50</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Recall from Topic 4.7 that <code>plt.style.use("ggplot")</code> changes the style for every chart created afterward in the same session, until you explicitly reset it with <code>plt.style.use("default")</code>.</p>
+<ol type="1">
+<li>Instead, use <code>with plt.style.context("ggplot"):</code> and create a Figure and Axes plotting <code>x</code> against <code>y</code> <em>inside</em> the <code>with</code> block.</li>
+<li>After the <code>with</code> block ends, create a second, completely separate Figure and Axes plotting the same data. Does this second chart use the <code>ggplot</code> style, or has it reverted to the default?</li>
+<li>Both <code>with open(...) as f:</code> and <code>with plt.style.context(...):</code> follow the same shape: something is temporarily set up, your code runs inside the block, and then it is automatically cleaned up again when the block ends — closing the file in one case, reverting the style in the other. Why is this pattern more convenient here than calling <code>plt.style.use()</code> and remembering to reset it manually afterward?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="52d15ae5" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">50</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(x)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Style applied only inside the with block</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> plt.style.context(<span class="st">"ggplot"</span>):</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, y)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">"Styled chart (ggplot)"</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-04-exporting-tables_files/figure-html/cell-6-output-1.png" width="590" height="433" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="132dd19a" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Second chart, outside the with block</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Unstyled chart (default)"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-04-exporting-tables_files/figure-html/cell-7-output-1.png" width="590" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li><p>The second chart uses the default matplotlib style, not <code>ggplot</code>. The style change from <code>plt.style.context()</code> only applies to code running inside the <code>with</code> block — as soon as the block ends, matplotlib automatically reverts to whatever style was active before.</p></li>
+<li><p>With <code>plt.style.use()</code>, you have to remember to call <code>plt.style.use("default")</code> afterward yourself — if you forget, every subsequent chart in your script keeps the style, which can be a confusing bug if you only wanted it for one specific chart. The <code>with</code> pattern removes this risk entirely: the cleanup happens automatically the moment the indented block ends, whether that block finishes normally or even if an error occurs partway through. This is exactly the same benefit <code>with open(...)</code> gives you for files — you never have to remember to call <code>f.close()</code> yourself.</p></li>
+</ol>
+</details>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

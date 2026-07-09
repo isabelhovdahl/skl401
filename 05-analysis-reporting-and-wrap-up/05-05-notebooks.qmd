@@ -1,3 +1,66 @@
 # Reproducible reporting with Jupyter notebooks
 
+We introduce Jupyter notebooks as a way to combine code, output, and written explanation in a single document, and walk through a prepared notebook that puts together several skills from this course into a small analysis.
+
 {{< video https://vimeo.com/1196320606/3acd0a68f8?fl=ml&fe=ec >}}
+
+The notebook used in the video is available on GitHub: [skl401-notebook.ipynb](https://github.com/isabelhovdahl/skl401/blob/master/skl401-notebook.ipynb). Open the page and use the download button there to save it to your computer.
+
+::: {.callout-note}
+The notebook loads its data with `pd.read_csv("data/gapminder.csv")`, a relative path. For this to work, place the notebook file in the root of your project folder, alongside a `data` subfolder that contains `gapminder.csv`.
+:::
+
+## Exercises
+
+### Exercise 5.5.1
+
+Start a new Jupyter notebook. You will build it up progressively across the exercises on this page, ending with a small finished analysis.
+
+1. Add a markdown cell at the top with a title (`# Health Spending and Life Expectancy`) and one sentence describing what the notebook explores: how health spending and life expectancy compare across six countries, using the `healthexp` dataset.
+2. Add a code cell below it that imports `pandas`, `seaborn`, and `matplotlib.pyplot`, loads `healthexp` with `sns.load_dataset()`, and prints its shape.
+3. Run both cells. Confirm the shape appears directly below the code cell, and that the markdown cell renders as formatted text rather than plain code.
+
+---
+
+### Exercise 5.5.2
+
+Continue the same notebook by adding a summary of the data.
+
+1. Add a markdown cell with a short header introducing a question: how does health spending compare across countries?
+2. Add a code cell below it that groups `healthexp` by `Country`, computes the mean `Spending_USD` and mean `Life_Expectancy` for each, rounds to 1 decimal place, resets the index, and sorts by mean spending in descending
+order. Assign the result to `summary`.
+3. Run the cell and confirm the table appears as output directly below the code.
+
+---
+
+### Exercise 5.5.3
+
+Add a "dynamic sentence" to the notebook — a sentence that inserts an actual computed value from your data, rather than a number you typed in by hand.
+
+1. Add a code cell that extracts the country name and mean spending value from the first row of `summary` (the highest-spending country).
+2. In the same cell, use an f-string inside a `print()` statement to display a sentence such as: `"The country with the highest average health spending is USA, at $4388.6 per capita."` — but built from the variables you just
+extracted, not typed as a fixed string.
+
+---
+
+### Exercise 5.5.4
+
+Add a chart to visualize the comparison from exercise 5.5.2.
+
+1. Add a markdown cell with a short line introducing the chart: a bar chart will make the differences across countries easier to see than the table alone.
+2. Add a code cell that creates a horizontal bar chart of `summary`, with country on the y-axis and mean spending on the x-axis, using `figsize=(8, 5)` and a colour of your choice. Add an axis label and a title.
+3. Run the cell and confirm the chart appears as output directly below the code, in the same way the table did in exercise 5.5.2.
+
+---
+
+### Exercise 5.5.5
+
+Export the finished notebook to a format you could share with someone who does not have Python installed.
+
+1. In Positron, find the notebook export option in the notebook toolbar and export your notebook to HTML. (If you'd rather do this from a terminal: it requires a package called `nbconvert`, which isn't installed by default in this course, so run `pip install nbconvert` once, then `python -m nbconvert --to html your-notebook.ipynb` — on a Mac, use `python3` instead of `python`.)
+2. Open the resulting HTML file in a browser. Does it look the same as the notebook?
+3. Try clicking on one of the code cells in the exported HTML file. Can you edit it and re-run it? What does this tell you about the difference between the notebook file itself and an exported copy of it?
+
+---
+
+A complete, worked version of this notebook — with all five exercises finished and every cell executed — is available on GitHub: [05-05-exercise-solution.ipynb](https://github.com/isabelhovdahl/skl401/blob/master/05-05-exercise-solution.ipynb). Open the page and use the download button there to save it to your computer.
