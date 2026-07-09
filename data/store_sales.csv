@@ -1,0 +1,8 @@
+Source: Fictional Retail Analytics Bureau
+Data collected for internal use, 2023
+date;store_id;region;units_sold;revenue;internal_flag
+2023-01-05;007;North;120;3600;x
+2023-01-06;012;South;95;NA_CODE;x
+2023-01-07;007;North;110;3300;x
+2023-01-08;004;East;99;2970;x
+2023-01-09;012;South;130;NA_CODE;x
