@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -125,6 +160,11 @@ ul.task-list li input[type="checkbox"] {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-01-introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1 Course Overview</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../01-getting-started-and-working-effectively/01-02-installing-python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.2 Installing Python</span></a>
@@ -430,7 +470,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../05-analysis-reporting-and-wrap-up/05-09-wrap-up.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">5.9 Course Wrap-up</span></a>
+  <a href="../05-analysis-reporting-and-wrap-up/05-09-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5.10 Further Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../05-analysis-reporting-and-wrap-up/05-10-wrap-up.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">5.10 Course Wrap-up</span></a>
   </div>
 </li>
       </ul>
@@ -440,8 +486,21 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#exercise-5.6.1" id="toc-exercise-5.6.1" class="nav-link" data-scroll-target="#exercise-5.6.1">Exercise 5.6.1</a></li>
+  <li><a href="#exercise-5.6.2" id="toc-exercise-5.6.2" class="nav-link" data-scroll-target="#exercise-5.6.2">Exercise 5.6.2</a></li>
+  <li><a href="#exercise-5.6.3" id="toc-exercise-5.6.3" class="nav-link" data-scroll-target="#exercise-5.6.3">Exercise 5.6.3</a></li>
+  <li><a href="#exercise-5.6.4" id="toc-exercise-5.6.4" class="nav-link" data-scroll-target="#exercise-5.6.4">Exercise 5.6.4</a></li>
+  <li><a href="#exercise-5.6.5" id="toc-exercise-5.6.5" class="nav-link" data-scroll-target="#exercise-5.6.5">Exercise 5.6.5</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -465,9 +524,270 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>We cover how to read a Python traceback, work through the most common error types you will encounter, and cover the difference between an error and a warning.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1196320726?h=a9d861ba42" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>gapminder <span class="op">=</span> pd.read_csv(<span class="st">"data/gapminder.csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>gap_2007  <span class="op">=</span> gapminder[gapminder[<span class="st">"year"</span>] <span class="op">==</span> <span class="dv">2007</span>].copy()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>gap_2007[<span class="st">"log_gdp"</span>] <span class="op">=</span> np.log(gap_2007[<span class="st">"gdpPercap"</span>])</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Demo 1: NameError ---</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Caused by a typo or forgetting to run a previous line</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gap_207[<span class="st">"lifeExp"</span>].mean())</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Demo 2: KeyError ---</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Caused by a column name that does not exist</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(gap_2007[<span class="st">"life_exp"</span>].mean())</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Demo 3: TypeError ---</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Caused by mixing incompatible types</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="st">"GDP is: "</span> <span class="op">+</span> gap_2007[<span class="st">"gdpPercap"</span>].mean()</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Demo 4: FileNotFoundError ---</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Caused by a wrong file path</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"files/gapminder_data.csv"</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Demo 5: SyntaxError ---</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Caused by missing punctuation (colon, parenthesis, quote)</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> gap_2007[<span class="st">"lifeExp"</span>].mean() <span class="op">&gt;</span> <span class="dv">70</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"High average life expectancy"</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Demo 6: RuntimeWarning ---</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Caused by undefined mathematical operations (log of zero, division by zero)</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> np.array([<span class="dv">10</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">5</span>])</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.log(values))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="exercise-5.6.1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.6.1">Exercise 5.6.1</h3>
+<p>Each of the two code snippets below raises an error. For each one: run it, identify the error type from the traceback, explain in plain language what went wrong, and then fix it.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>healthexp <span class="op">=</span> sns.load_dataset(<span class="st">"healthexp"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Snippet A</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(healthex[<span class="st">"Country"</span>].unique())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Snippet B</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(healthexp[<span class="st">"country"</span>].unique())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details>
+<summary>
+Solution
+</summary>
+<div id="71adfb8b" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>healthexp <span class="op">=</span> sns.load_dataset(<span class="st">"healthexp"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Snippet A — NameError, fixed</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(healthexp[<span class="st">"Country"</span>].unique())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;StringArray&gt;
+['Germany', 'France', 'Great Britain', 'Japan', 'USA', 'Canada']
+Length: 6, dtype: str</code></pre>
+</div>
+</div>
+<div id="cb8bf0cf" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Snippet B — KeyError, fixed</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(healthexp[<span class="st">"Country"</span>].unique())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;StringArray&gt;
+['Germany', 'France', 'Great Britain', 'Japan', 'USA', 'Canada']
+Length: 6, dtype: str</code></pre>
+</div>
+</div>
+<p><strong>Snippet A</strong> raises a <code>NameError</code>: <code>name 'healthex' is not defined</code>. The variable was misspelled — <code>healthex</code> instead of <code>healthexp</code>. This is the most common error beginners encounter, and the fix is almost always a typo in a variable name.</p>
+<p><strong>Snippet B</strong> raises a <code>KeyError</code>: <code>'country'</code>. The DataFrame does not have a column called <code>country</code> — the actual column is <code>Country</code>, capitalised. <code>KeyError</code> almost always means a column name is misspelled or has the wrong case; check <code>.columns</code> if you are not sure of the exact spelling.</p>
+</details>
+<hr>
+</section>
+<section id="exercise-5.6.2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.6.2">Exercise 5.6.2</h3>
+<p>Each of the two code snippets below raises an error. For each one: run it, identify the error type, explain what went wrong, and fix it.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> sns.load_dataset(<span class="st">"titanic"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Snippet A</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>titanic[<span class="st">"class"</span>] <span class="op">=</span> titanic[<span class="st">"class"</span>].strip()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Snippet B</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(titanic.iloc[<span class="dv">1000</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details>
+<summary>
+Solution
+</summary>
+<div id="3d1802bd" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> sns.load_dataset(<span class="st">"titanic"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Snippet A — AttributeError, fixed</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>titanic[<span class="st">"class"</span>] <span class="op">=</span> titanic[<span class="st">"class"</span>].<span class="bu">str</span>.strip()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="c88722dc" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Snippet B — IndexError, fixed</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(titanic.iloc[titanic.shape[<span class="dv">0</span>] <span class="op">-</span> <span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>survived                0
+pclass                  3
+sex                  male
+age                  32.0
+sibsp                   0
+parch                   0
+fare                 7.75
+embarked                Q
+class               Third
+who                   man
+adult_male           True
+deck                  NaN
+embark_town    Queenstown
+alive                  no
+alone                True
+Name: 890, dtype: object</code></pre>
+</div>
+</div>
+<p><strong>Snippet A</strong> raises an <code>AttributeError</code>: <code>'Series' object has no attribute 'strip'</code>. <code>.strip()</code> is a plain Python string method — it works on a single string, not on an entire column at once. To apply a string method to every value in a column, you need the <code>.str</code> accessor: <code>.str.strip()</code>. Forgetting <code>.str</code> is one of the most common <code>AttributeError</code>s in pandas work.</p>
+<p><strong>Snippet B</strong> raises an <code>IndexError</code>: <code>single positional indexer is out-of-bounds</code>. The Titanic dataset only has 891 rows (positions 0–890), so position 1000 does not exist. <code>IndexError</code> means you have asked for a position beyond the end (or before the start) of your data — checking <code>.shape</code> first tells you the valid range.</p>
+</details>
+<hr>
+</section>
+<section id="exercise-5.6.3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.6.3">Exercise 5.6.3</h3>
+<p>Each of the two code snippets below raises an error. For each one: run it, identify the error type, explain what went wrong, and fix it.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> sns.load_dataset(<span class="st">"titanic"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Snippet A</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="st">"Mean age: "</span> <span class="op">+</span> titanic[<span class="st">"age"</span>].mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Snippet B</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>mean_age <span class="op">=</span> titanic[<span class="st">"age"</span>].mean()</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> mean_age <span class="op">&gt;</span> <span class="dv">25</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"High average age"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details>
+<summary>
+Solution
+</summary>
+<div id="10b49a08" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> sns.load_dataset(<span class="st">"titanic"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Snippet A — TypeError, fixed</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="ss">f"Mean age: </span><span class="sc">{</span>titanic[<span class="st">'age'</span>]<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss">"</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mean age: 29.7</code></pre>
+</div>
+</div>
+<div id="4e628b92" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Snippet B — SyntaxError, fixed</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>mean_age <span class="op">=</span> titanic[<span class="st">"age"</span>].mean()</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> mean_age <span class="op">&gt;</span> <span class="dv">25</span>:</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"High average age"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>High average age</code></pre>
+</div>
+</div>
+<p><strong>Snippet A</strong> raises a <code>TypeError</code>: <code>can only concatenate str (not "numpy.float64") to str</code>. The <code>+</code> operator cannot combine a string and a number directly. The fix is to convert the number to a string first (e.g.&nbsp;<code>str(...)</code>), or — usually cleaner — use an f-string.</p>
+<p><strong>Snippet B</strong> raises a <code>SyntaxError</code>: <code>expected ':'</code>. Every <code>if</code> statement in Python needs a colon at the end of the condition. Python points a caret (<code>^</code>) at roughly where it got confused, which is often right where the missing colon should be.</p>
+</details>
+<hr>
+</section>
+<section id="exercise-5.6.4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.6.4">Exercise 5.6.4</h3>
+<p>Each of the two code snippets below raises an error. For each one: run it, identify the error type, explain what went wrong, and fix it.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Snippet A</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"files/titanic_data.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Snippet B</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stargazr</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details>
+<summary>
+Solution
+</summary>
+<div id="13ae68b0" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Snippet A — FileNotFoundError, fixed</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> sns.load_dataset(<span class="st">"titanic"</span>)      <span class="co"># import from seaborn</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>titanic <span class="op">=</span> pd.read_csv(<span class="st">"data/titanic.csv"</span>)  <span class="co"># or import from data subfolder</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(titanic.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(891, 15)</code></pre>
+</div>
+</div>
+<div id="aa93fafd" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Snippet B — ModuleNotFoundError, fixed (spelling corrected)</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stargazer</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Snippet A</strong> raises a <code>FileNotFoundError</code>: <code>No such file or directory: 'files/titanic_data.csv'</code>. Either the file does not exist at that path, the filename is wrong, or the folder structure is different from what you expect — for example, <code>data/titanic.csv</code> rather than <code>files/titanic_data.csv</code>. This connects directly to the relative-vs-absolute path lesson from Topic 3.1: the path is always relative to your current working directory, so double-check both the filename and the folder.</p>
+<p><strong>Snippet B</strong> raises a <code>ModuleNotFoundError</code>: <code>No module named 'stargazr'</code>. The package name is misspelled — it should be <code>stargazer</code>. If the spelling is correct and you still get this error, it usually means the package has not been installed yet, and you need to run <code>pip install &lt;package-name&gt;</code> first.</p>
+</details>
+<hr>
+</section>
+<section id="exercise-5.6.5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.6.5">Exercise 5.6.5</h3>
+<p>Unlike an error, a warning does not stop your code from running — but it is still worth understanding. Run the code below.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna(subset<span class="op">=</span>[<span class="st">"horsepower"</span>])</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>mpg.loc[<span class="dv">0</span>, <span class="st">"horsepower"</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>mpg.loc[<span class="dv">1</span>, <span class="st">"horsepower"</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">5</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>mpg[<span class="st">"log_horsepower"</span>] <span class="op">=</span> np.log(mpg[<span class="st">"horsepower"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>What warning appears? Does the code still finish running despite it?</li>
+<li>Print <code>mpg["log_horsepower"].head()</code>. What values appear in the first two rows, and why?</li>
+<li>In your own words, what does this <code>RuntimeWarning</code> tell you about the underlying data, and what would you check or fix before trusting the rest of this column?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="78dc84a6" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>mpg <span class="op">=</span> sns.load_dataset(<span class="st">"mpg"</span>).dropna(subset<span class="op">=</span>[<span class="st">"horsepower"</span>])</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>mpg.loc[<span class="dv">0</span>, <span class="st">"horsepower"</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>mpg.loc[<span class="dv">1</span>, <span class="st">"horsepower"</span>] <span class="op">=</span> <span class="op">-</span><span class="dv">5</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>mpg[<span class="st">"log_horsepower"</span>] <span class="op">=</span> np.log(mpg[<span class="st">"horsepower"</span>])</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mpg[<span class="st">"log_horsepower"</span>].head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0        -inf
+1         NaN
+2    5.010635
+3    5.010635
+4    4.941642
+Name: log_horsepower, dtype: float64</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\s14754\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\arraylike.py:402: RuntimeWarning: divide by zero encountered in log
+  result = getattr(ufunc, method)(*inputs, **kwargs)
+C:\Users\s14754\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\arraylike.py:402: RuntimeWarning: invalid value encountered in log
+  result = getattr(ufunc, method)(*inputs, **kwargs)</code></pre>
+</div>
+</div>
+<ol type="1">
+<li><p>A <code>RuntimeWarning</code> appears — <code>divide by zero encountered in log</code> and <code>invalid value encountered in log</code>. The code still finishes running; the warning does not stop execution the way an error would.</p></li>
+<li><p>The first row is <code>-inf</code> (the log of 0, which is undefined and represented as negative infinity), and the second row is <code>NaN</code> (the log of a negative number, which has no real value).</p></li>
+<li><p>A <code>RuntimeWarning</code> from a numerical operation like <code>np.log()</code> almost always means the input contains values the operation cannot handle — here, zero or negative horsepower, which should not exist for a real car. Before trusting this column further, you would want to go back and check why the original <code>horsepower</code> column contains zero or negative values in the first place — whether it is a genuine data entry error, a placeholder for missing data, or (as in this exercise) values you introduced yourself — and either correct, filter, or otherwise handle those rows before using the log-transformed column in any analysis.</p></li>
+</ol>
+</details>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

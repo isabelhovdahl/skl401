@@ -1,18 +1,12 @@
 # Topic 4 — Further Exercises {.unnumbered}
 
-These exercises give you an opportunity to consolidate everything covered in
-Topic 4 before moving on. Some combine skills from several videos into a single
-task, and some introduce new tools that were not shown in the videos — for
-these, you are expected to look up the documentation yourself, the same way
-you would when working independently.
+These exercises give you an opportunity to consolidate everything covered in Topic 4 before moving on. Many of these combine skills from several videos into a single task, and some may introduce new tools that were not shown in the videos — for these, you are expected to look up the documentation yourself, the same way you would when working independently.
 
 The exercises are organised into three levels:
 
 - 🟢 **Warm-up** — single-skill exercises to check your understanding of the basics.
 - 🟡 **Practice** — exercises that combine two or more topics.
-- 🔴 **Challenge** — multi-step tasks that may require you to combine ideas in
-ways you have not seen before, or to use a new tool introduced through its
-documentation.
+- 🔴 **Challenge** — multi-step tasks that may require you to combine ideas in ways you have not seen before.
 
 ---
 

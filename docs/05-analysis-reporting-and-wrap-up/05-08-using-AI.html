@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -33,7 +68,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../05-analysis-reporting-and-wrap-up/05-09-wrap-up.html" rel="next">
+<link href="../05-analysis-reporting-and-wrap-up/05-09-exercises.html" rel="next">
 <link href="../05-analysis-reporting-and-wrap-up/05-07-getting-help.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -125,6 +160,11 @@ ul.task-list li input[type="checkbox"] {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-01-introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1 Course Overview</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../01-getting-started-and-working-effectively/01-02-installing-python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.2 Installing Python</span></a>
@@ -430,7 +470,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../05-analysis-reporting-and-wrap-up/05-09-wrap-up.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">5.9 Course Wrap-up</span></a>
+  <a href="../05-analysis-reporting-and-wrap-up/05-09-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5.10 Further Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../05-analysis-reporting-and-wrap-up/05-10-wrap-up.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">5.10 Course Wrap-up</span></a>
   </div>
 </li>
       </ul>
@@ -440,8 +486,21 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link active" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#exercise-5.8.1" id="toc-exercise-5.8.1" class="nav-link" data-scroll-target="#exercise-5.8.1">Exercise 5.8.1</a></li>
+  <li><a href="#exercise-5.8.2" id="toc-exercise-5.8.2" class="nav-link" data-scroll-target="#exercise-5.8.2">Exercise 5.8.2</a></li>
+  <li><a href="#exercise-5.8.3" id="toc-exercise-5.8.3" class="nav-link" data-scroll-target="#exercise-5.8.3">Exercise 5.8.3</a></li>
+  <li><a href="#exercise-5.8.4" id="toc-exercise-5.8.4" class="nav-link" data-scroll-target="#exercise-5.8.4">Exercise 5.8.4</a></li>
+  <li><a href="#exercise-5.8.5" id="toc-exercise-5.8.5" class="nav-link" data-scroll-target="#exercise-5.8.5">Exercise 5.8.5</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -465,9 +524,210 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>We cover how to use generative AI responsibly: where it genuinely helps, where it commonly goes wrong, and some practical guidelines for checking its output.</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1196320770?h=5a34b28c55" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>gapminder <span class="op">=</span> pd.read_csv(<span class="st">"data/gapminder.csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>gap_2007  <span class="op">=</span> gapminder[gapminder[<span class="st">"year"</span>] <span class="op">==</span> <span class="dv">2007</span>].copy()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># This code produces an AttributeError </span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>gap_2007[<span class="st">"category"</span>] <span class="op">=</span> np.where(gap_2007[<span class="st">"gdpPercap"</span>] <span class="op">&gt;</span> <span class="dv">10000</span>, <span class="st">"High income"</span>, <span class="st">"Low income"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>gap_2007[<span class="st">"category"</span>] <span class="op">=</span> gap_2007[<span class="st">"category"</span>].lower()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="exercise-5.8.1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.8.1">Exercise 5.8.1</h3>
+<p>Before reaching for AI, try writing this yourself — the first practical guideline from the video.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>employees <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>:       [<span class="st">"Anna"</span>, <span class="st">"Bjorn"</span>, <span class="st">"Cecilia"</span>, <span class="st">"David"</span>, <span class="st">"Elin"</span>, <span class="st">"Fredrik"</span>],</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"department"</span>: [<span class="st">"Sales"</span>, <span class="st">"Sales"</span>, <span class="st">"IT"</span>, <span class="st">"IT"</span>, <span class="st">"Sales"</span>, <span class="st">"IT"</span>],</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"salary"</span>:     [<span class="dv">45000</span>, <span class="dv">52000</span>, <span class="dv">61000</span>, <span class="dv">58000</span>, <span class="dv">47000</span>, <span class="dv">63000</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Without using AI, write code to compute the median salary for each department.</li>
+<li>Now describe the same task in a prompt to an AI assistant of your choice, and compare the code it suggests to your own. Does it produce the same result? Is the approach essentially the same, or does it differ?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="ed8aad80" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>employees <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"name"</span>:       [<span class="st">"Anna"</span>, <span class="st">"Bjorn"</span>, <span class="st">"Cecilia"</span>, <span class="st">"David"</span>, <span class="st">"Elin"</span>, <span class="st">"Fredrik"</span>],</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"department"</span>: [<span class="st">"Sales"</span>, <span class="st">"Sales"</span>, <span class="st">"IT"</span>, <span class="st">"IT"</span>, <span class="st">"Sales"</span>, <span class="st">"IT"</span>],</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"salary"</span>:     [<span class="dv">45000</span>, <span class="dv">52000</span>, <span class="dv">61000</span>, <span class="dv">58000</span>, <span class="dv">47000</span>, <span class="dv">63000</span>]</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>median_by_dept <span class="op">=</span> employees.groupby(<span class="st">"department"</span>)[<span class="st">"salary"</span>].median()</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(median_by_dept)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>department
+IT       61000.0
+Sales    47000.0
+Name: salary, dtype: float64</code></pre>
+</div>
+</div>
+<p>IT has a median salary of 61,000, and Sales has a median salary of 47,000. For a task this simple, an AI assistant will almost always suggest essentially the same <code>groupby().median()</code> approach — there is usually only one natural way to do something this standard. The value of trying it yourself first is not that AI would get it wrong, but that you build and retain the skill yourself, and you have an immediate way to check the AI’s suggestion against something you already know to be correct.</p>
+</details>
+<hr>
+</section>
+<section id="exercise-5.8.2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.8.2">Exercise 5.8.2</h3>
+<p>AI tools are often useful for explaining an error message you do not understand. Suppose you wrote the following code and got an error:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"name"</span>: <span class="st">"Alice"</span>, <span class="st">"age"</span>: <span class="dv">30</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>ValueError: If using all scalar values, you must pass an index</code></pre>
+<ol type="1">
+<li>Paste this code and error message into an AI assistant and ask it to explain what went wrong and how to fix it.</li>
+<li>Write the explanation in your own words, and fix the code so it runs correctly.</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="afb20c6e" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"name"</span>: [<span class="st">"Alice"</span>], <span class="st">"age"</span>: [<span class="dv">30</span>]})</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    name  age
+0  Alice   30</code></pre>
+</div>
+</div>
+<p>The error occurs because <code>{"name": "Alice", "age": 30}</code> gives pandas two plain scalar values (a single string and a single number) with nothing to tell it how many rows to create. A DataFrame needs to know its row count from somewhere — normally from the length of the values you provide. Wrapping each value in a list, <code>{"name": ["Alice"], "age": [30]}</code>, tells pandas there is exactly one row, which resolves the error. Check whatever explanation your AI assistant gave against this: a good explanation should mention that dictionary values need to be list-like (or that you must supply an explicit <code>index=</code>), not just say “add brackets” without explaining why.</p>
+</details>
+<hr>
+</section>
+<section id="exercise-5.8.3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.8.3">Exercise 5.8.3</h3>
+<p>Try this yourself for a few minutes first. If you get stuck, ask an AI assistant.</p>
+<p><strong>Task:</strong> you have a bar chart, and you want to display the exact value above each bar, rather than making the reader estimate it from the y-axis.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> ax.bar([<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>], [<span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">15</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Look for a way to add the number above each bar. If you cannot find it within a few minutes, ask an AI assistant something like: “How do I display the value of each bar above it in a matplotlib bar chart?”</li>
+<li>Apply the suggested approach to the chart above.</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="27d28c10" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> ax.bar([<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>], [<span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">15</span>])</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ax.bar_label(bars)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-08-using-AI_files/figure-html/cell-4-output-1.png" width="662" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><code>ax.bar_label()</code> takes the container of bars returned by <code>ax.bar()</code> and automatically places each bar’s value directly above it. This is a genuinely useful matplotlib function that was not covered anywhere in this course — a realistic example of the kind of small, well-defined task that AI assistants are typically very good at answering quickly and correctly.</p>
+</details>
+<hr>
+</section>
+<section id="exercise-5.8.4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.8.4">Exercise 5.8.4</h3>
+<p>Ask an AI assistant to write a function for you, then verify it against a result you can check by hand.</p>
+<p><strong>Prompt idea:</strong> “Write a Python function that computes the compound annual growth rate (CAGR) between a start value, an end value, and a number of years.”</p>
+<ol type="1">
+<li>Ask an AI assistant for this function, and copy the suggested code.</li>
+<li>Test it using a start value of 100, an end value of 200, and 10 years. The correct answer is approximately 7.18%. Does the AI’s function produce this result?</li>
+<li>Why is having a value you can check by hand — rather than just trusting that the code runs without an error — an important part of using AI-suggested code responsibly?</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="58e708e4" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cagr(start_value, end_value, years):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (end_value <span class="op">/</span> start_value) <span class="op">**</span> (<span class="dv">1</span> <span class="op">/</span> years) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> cagr(<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">10</span>) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"CAGR: </span><span class="sc">{</span>result<span class="sc">:.2f}</span><span class="ss">%"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>CAGR: 7.18%</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li><p>This produces 7.18%, matching the expected value.</p></li>
+<li><p>Code that runs without error is not the same as code that is correct. <code>(end_value / start_value) ** (1 / years) - 1</code> is a specific formula — if an AI assistant made a subtle mistake, such as swapping the numerator and denominator, or using <code>years - 1</code> instead of <code>years</code>, the function would still run without any error and return a plausible-looking number. Only checking the result against a value you can compute or verify independently would reveal a mistake like that — this is exactly the “plausible-but-wrong logic” failure mode described in the video, and it is why “always run the code and check the result” applies even when a task involves a formula you could look up and verify.</p></li>
+</ol>
+</details>
+<hr>
+</section>
+<section id="exercise-5.8.5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5.8.5">Exercise 5.8.5</h3>
+<p>Suppose an AI assistant suggested the following function to compute a rolling average over a list of numbers:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rolling_avg(x, window<span class="op">=</span><span class="dv">3</span>):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(x)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> n</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(window, n):</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        result[i] <span class="op">=</span> <span class="bu">sum</span>(x[i<span class="op">-</span>window:i]) <span class="op">/</span> window</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Test this function using <code>x = [1, 2, 3, 4, 5]</code> and <code>window=3</code>. A rolling average with a window of 3 should have its first valid value at position 2 (using 0-indexing), computed as the average of the first three numbers: <code>(1 + 2 + 3) / 3 = 2</code>. Does the function’s output match this?</li>
+<li>If it does not match, identify exactly which line causes the problem, and explain why.</li>
+<li>Fix the function so that <code>rolling_avg([1, 2, 3, 4, 5], window=3)</code> returns <code>[None, None, 2.0, 3.0, 4.0]</code>.</li>
+</ol>
+<details>
+<summary>
+Solution
+</summary>
+<div id="96dbba2f" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rolling_avg_buggy(x, window<span class="op">=</span><span class="dv">3</span>):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(x)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> n</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(window, n):</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        result[i] <span class="op">=</span> <span class="bu">sum</span>(x[i<span class="op">-</span>window:i]) <span class="op">/</span> window</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rolling_avg_buggy([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>], window<span class="op">=</span><span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[None, None, None, 2.0, 3.0]</code></pre>
+</div>
+</div>
+<div id="b7b7afa6" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rolling_avg(x, window<span class="op">=</span><span class="dv">3</span>):</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(x)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> n</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(window <span class="op">-</span> <span class="dv">1</span>, n):</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        result[i] <span class="op">=</span> <span class="bu">sum</span>(x[i<span class="op">-</span>window<span class="op">+</span><span class="dv">1</span>:i<span class="op">+</span><span class="dv">1</span>]) <span class="op">/</span> window</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rolling_avg([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>], window<span class="op">=</span><span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[None, None, 2.0, 3.0, 4.0]</code></pre>
+</div>
+</div>
+<ol type="1">
+<li><p>The buggy version returns <code>[None, None, None, 2.0, 3.0]</code> — every value is shifted one position later than it should be.</p></li>
+<li><p>The loop starts at <code>range(window, n)</code>, meaning the first computed value lands at position 3 rather than position 2. The slice <code>x[i-window:i]</code> for <code>i=3</code> gives <code>x[0:3]</code>, the average of the <em>first</em> three values — but it is stored at position 3 instead of position 2, where the third value actually belongs. The loop’s starting point and the slice indices are off by one relative to each other.</p></li>
+<li><p>Starting the loop at <code>window - 1</code> and using the slice <code>x[i-window+1:i+1]</code> aligns each computed average with the correct position — the average of the three values ending at position <code>i</code> is stored at position <code>i</code> itself. This kind of off-by-one error is exactly the sort of “plausible-but-wrong logic” mistake the video warns about: the function runs without any error and produces numbers that look entirely reasonable, and the only way to catch the problem is to test it against a small example where you already know what the correct answer should be.</p></li>
+</ol>
+</details>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -877,8 +1137,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../05-analysis-reporting-and-wrap-up/05-09-wrap-up.html" class="pagination-link" aria-label="5.9 Course Wrap-up">
-        <span class="nav-page-text"><span class="chapter-title">5.9 Course Wrap-up</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../05-analysis-reporting-and-wrap-up/05-09-exercises.html" class="pagination-link" aria-label="5.10 Further Exercises">
+        <span class="nav-page-text">5.10 Further Exercises</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

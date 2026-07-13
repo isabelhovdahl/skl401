@@ -2,7 +2,7 @@
 
 We use for loops to automate common regression workflows such as estimating the same model separately across subgroups, and progressively adding variables to build up a set of model specifications.
 
-*Video will be embedded*
+{{< video https://vimeo.com/1208724575/9a7cc0f09a?share=copy&fl=sv&fe=ci >}}
 
 ```python
 import pandas as pd

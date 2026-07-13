@@ -162,6 +162,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-01-introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1 Course Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../01-getting-started-and-working-effectively/01-02-installing-python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.2 Installing Python</span></a>
   </div>
 </li>
@@ -465,7 +470,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../05-analysis-reporting-and-wrap-up/05-09-wrap-up.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">5.9 Course Wrap-up</span></a>
+  <a href="../05-analysis-reporting-and-wrap-up/05-09-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5.10 Further Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../05-analysis-reporting-and-wrap-up/05-10-wrap-up.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">5.10 Course Wrap-up</span></a>
   </div>
 </li>
       </ul>
@@ -526,12 +537,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>These exercises give you an opportunity to consolidate everything covered in Topic 2 before moving on. Unlike the exercises after each video, many of these combine skills from several videos into a single task. Some exercises also introduce new concepts that extend what you have learned.</p>
+<p>These exercises give you an opportunity to consolidate everything covered in Topic 2 before moving on. Many of these combine skills from several videos into a single task, and some may introduce new tools that were not shown in the videos — for these, you are expected to look up the documentation yourself, the same way you would when working independently.</p>
 <p>The exercises are organised into three levels:</p>
 <ul>
 <li>🟢 <strong>Warm-up</strong> — single-skill exercises to check your understanding of the basics.</li>
 <li>🟡 <strong>Practice</strong> — exercises that combine two or more topics.</li>
-<li>🔴 <strong>Challenge</strong> — multi-step tasks that may require you to combine ideas in ways you have not seen before. Some may require looking things up or experimenting.</li>
+<li>🔴 <strong>Challenge</strong> — multi-step tasks that may require you to combine ideas in ways you have not seen before.</li>
 </ul>
 <hr>
 <section id="warm-up" class="level2">
@@ -563,7 +574,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <summary>
 Solution
 </summary>
-<div id="e6289f27" class="cell" data-execution_count="1">
+<div id="ffc22b58" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ages <span class="op">=</span> [<span class="dv">8</span>, <span class="dv">15</span>, <span class="dv">45</span>, <span class="dv">70</span>]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> age <span class="kw">in</span> ages:</span>
@@ -608,7 +619,7 @@ With <code>elif</code>, Python stops evaluating as soon as the first <code>True<
 <summary>
 Solution
 </summary>
-<div id="7c982e78" class="cell" data-execution_count="2">
+<div id="e50c092d" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Norway"</span>,  <span class="st">"Europe"</span>,   <span class="dv">82500</span>],</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Brazil"</span>,  <span class="st">"Americas"</span>,  <span class="dv">8600</span>],</span>
@@ -658,7 +669,7 @@ Unpacking the list directly in the loop header — <code>for country, continent,
 <summary>
 Solution
 </summary>
-<div id="93fd755c" class="cell" data-execution_count="3">
+<div id="4b0548ce" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cities <span class="op">=</span> [<span class="st">"Oslo"</span>, <span class="st">"Bergen"</span>, <span class="st">"Trondheim"</span>, <span class="st">"Stavanger"</span>, <span class="st">"Tromsø"</span>]</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Using enumerate</span></span>
@@ -672,7 +683,7 @@ Solution
 5. Tromsø</code></pre>
 </div>
 </div>
-<div id="47cd1853" class="cell" data-execution_count="4">
+<div id="bf347361" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using range(len())</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(cities)):</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">. </span><span class="sc">{</span>cities[i]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -704,7 +715,7 @@ As a general rule, prefer <code>enumerate()</code> when you need both the index 
 <summary>
 Solution
 </summary>
-<div id="b802361c" class="cell" data-execution_count="5">
+<div id="9e8cc3c4" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>countries   <span class="op">=</span> [<span class="st">"Norway"</span>, <span class="st">"Germany"</span>, <span class="st">"Brazil"</span>, <span class="st">"Japan"</span>, <span class="st">"Nigeria"</span>]</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>gdp         <span class="op">=</span> [<span class="dv">82500</span>, <span class="dv">48000</span>, <span class="dv">8600</span>, <span class="dv">42000</span>, <span class="dv">2100</span>]</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>populations <span class="op">=</span> [<span class="dv">5_400_000</span>, <span class="dv">84_000_000</span>, <span class="dv">214_000_000</span>, <span class="dv">125_000_000</span>, <span class="dv">200_000_000</span>]</span>
@@ -747,7 +758,7 @@ Notice that <code>zip()</code> stops as soon as the shortest list is exhausted, 
 <summary>
 Solution
 </summary>
-<div id="db6a2c4f" class="cell" data-execution_count="6">
+<div id="dc132796" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">6</span>):</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">6</span>):</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> x </span><span class="sc">{</span>j<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>i <span class="op">*</span> j<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -824,7 +835,7 @@ The outer loop iterates over <code>i</code> from 1 to 5. For each value of <code
 <summary>
 Solution
 </summary>
-<div id="5accaa81" class="cell" data-execution_count="7">
+<div id="a2c8c559" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>countries <span class="op">=</span> [<span class="st">"Norway"</span>, <span class="st">"Germany"</span>, <span class="st">"Brazil"</span>, <span class="st">"Japan"</span>]</span>
@@ -889,7 +900,7 @@ Hint
 <summary>
 Solution
 </summary>
-<div id="4d2125fa" class="cell" data-execution_count="8">
+<div id="c2566db1" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sales      <span class="op">=</span> [<span class="dv">120</span>, <span class="dv">340</span>, <span class="dv">55</span>, <span class="dv">890</span>, <span class="dv">210</span>, <span class="dv">45</span>, <span class="dv">670</span>, <span class="dv">430</span>, <span class="dv">310</span>, <span class="dv">290</span>, <span class="dv">150</span>, <span class="dv">780</span>]</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>batch_size <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>index      <span class="op">=</span> <span class="dv">0</span></span>
@@ -932,7 +943,7 @@ The <code>while</code> loop controls which batch we are on by tracking <code>ind
 <summary>
 Solution
 </summary>
-<div id="b7516967" class="cell" data-execution_count="9">
+<div id="7f9d7790" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> <span class="st">"  -3.14  "</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> value.strip()</span>
@@ -947,7 +958,7 @@ Solution
 <pre><code>"-3.14" is a valid number.</code></pre>
 </div>
 </div>
-<div id="3ea13a44" class="cell" data-execution_count="10">
+<div id="3cca3bf3" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> <span class="st">"12.5.3"</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> value.strip()</span>
@@ -962,7 +973,7 @@ Solution
 <pre><code>"12.5.3" is not a valid number.</code></pre>
 </div>
 </div>
-<div id="383a70c9" class="cell" data-execution_count="11">
+<div id="1b4fd0bd" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> <span class="st">"+42"</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>cleaned <span class="op">=</span> value.strip()</span>
@@ -980,7 +991,7 @@ Solution
 <p>The key steps are: <code>.strip()</code> removes surrounding whitespace, <code>.lstrip("+-")</code> removes a leading sign, and <code>.replace(".", "", 1)</code> removes at most one decimal point — the second argument <code>""</code> replaces it with nothing, and the third argument <code>1</code> ensures only the first occurrence is removed. After these transformations, <code>.isdigit()</code> can reliably check whether what remains consists entirely of digits. While this works for most common cases, it requires careful thinking about every edge case.</p>
 <p><strong>Alternative approach — using try-except:</strong></p>
 <p>A simpler and more robust approach is to attempt the conversion directly and catch the error if it fails:</p>
-<div id="e1cb4c41" class="cell" data-execution_count="12">
+<div id="b394423f" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> <span class="st">"  -3.14  "</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
@@ -1009,7 +1020,7 @@ Solution
 <summary>
 Solution
 </summary>
-<div id="57b54791" class="cell" data-execution_count="13">
+<div id="b4be4887" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_numeric_strmethod(s):</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    cleaned <span class="op">=</span> s.strip()</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> cleaned:</span>
@@ -1069,7 +1080,7 @@ Use a <code>while</code> loop inside <code>collatz_sequence()</code> with the st
 <summary>
 Solution
 </summary>
-<div id="73a881d9" class="cell" data-execution_count="14">
+<div id="d2687c19" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> collatz_sequence(n):</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Generate the full Collatz sequence starting from n.</span></span>
@@ -1146,7 +1157,7 @@ Build and test one function at a time before combining them. Start with <code>pa
 <summary>
 Solution
 </summary>
-<div id="db35ec97" class="cell" data-execution_count="15">
+<div id="2372c7e9" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_record(record):</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Split a raw CSV string into its constituent fields.</span></span>
@@ -1278,7 +1289,7 @@ For <code>top_n_words()</code>, <code>sorted(word_counts.items(), key=lambda x: 
 <summary>
 Solution
 </summary>
-<div id="f53524bb" class="cell" data-execution_count="16">
+<div id="1e815751" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> tokenize(text):</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Convert text to a list of lowercase words with punctuation removed.</span></span>

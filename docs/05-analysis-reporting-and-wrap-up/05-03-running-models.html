@@ -162,6 +162,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../01-getting-started-and-working-effectively/01-01-introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1 Course Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../01-getting-started-and-working-effectively/01-02-installing-python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.2 Installing Python</span></a>
   </div>
 </li>
@@ -465,7 +470,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../05-analysis-reporting-and-wrap-up/05-09-wrap-up.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">5.9 Course Wrap-up</span></a>
+  <a href="../05-analysis-reporting-and-wrap-up/05-09-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5.10 Further Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../05-analysis-reporting-and-wrap-up/05-10-wrap-up.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">5.10 Course Wrap-up</span></a>
   </div>
 </li>
       </ul>
@@ -514,7 +525,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>We use for loops to automate common regression workflows such as estimating the same model separately across subgroups, and progressively adding variables to build up a set of model specifications.</p>
-<p><em>Video will be embedded</em></p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://player.vimeo.com/video/1208724575?h=9a7cc0f09a" frameborder="0" title="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -603,7 +614,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <summary>
 Solution
 </summary>
-<div id="46eb4fde" class="cell" data-execution_count="1">
+<div id="9ed9435a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
@@ -636,7 +647,7 @@ Solution
 2  europe    -0.221835 -0.280688 -0.162982</code></pre>
 </div>
 </div>
-<div id="1177892d" class="cell" data-execution_count="2">
+<div id="162a23a1" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Compare to the fully interacted pooled model</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>model_int <span class="op">=</span> smf.ols(<span class="st">"mpg ~ horsepower * C(origin)"</span>, data<span class="op">=</span>mpg).fit()</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model_int.params)</span>
@@ -686,7 +697,7 @@ USA slope (interaction model): -0.12132003702067533</code></pre>
 <summary>
 Solution
 </summary>
-<div id="d0a5121c" class="cell" data-execution_count="3">
+<div id="4f208725" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -746,7 +757,7 @@ Solution
 <summary>
 Solution
 </summary>
-<div id="a10b034e" class="cell" data-execution_count="4">
+<div id="affaeb52" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -807,7 +818,7 @@ Solution
 <summary>
 Solution
 </summary>
-<div id="0685d497" class="cell" data-execution_count="5">
+<div id="68a6015b" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
@@ -829,7 +840,7 @@ Model 2: mpg ~ horsepower + weight_tons
 Model 3: mpg ~ horsepower + weight_tons + C(origin)</code></pre>
 </div>
 </div>
-<div id="33405d8b" class="cell" data-execution_count="6">
+<div id="c04ca593" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(models[<span class="op">-</span><span class="dv">1</span>].summary())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                            OLS Regression Results                            
@@ -837,8 +848,8 @@ Model 3: mpg ~ horsepower + weight_tons + C(origin)</code></pre>
 Dep. Variable:                    mpg   R-squared:                       0.719
 Model:                            OLS   Adj. R-squared:                  0.716
 Method:                 Least Squares   F-statistic:                     247.9
-Date:                Wed, 08 Jul 2026   Prob (F-statistic):          2.44e-105
-Time:                        13:11:13   Log-Likelihood:                -1112.2
+Date:                Mon, 13 Jul 2026   Prob (F-statistic):          2.44e-105
+Time:                        13:14:24   Log-Likelihood:                -1112.2
 No. Observations:                 392   AIC:                             2234.
 Df Residuals:                     387   BIC:                             2254.
 Df Model:                           4                                         
@@ -879,7 +890,7 @@ Notes:
 <summary>
 Solution
 </summary>
-<div id="368562fa" class="cell" data-execution_count="7">
+<div id="6fd1c58d" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, model <span class="kw">in</span> <span class="bu">enumerate</span>(models, start<span class="op">=</span><span class="dv">1</span>):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Model </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> R-squared: </span><span class="sc">{</span>model<span class="sc">.</span>rsquared<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">

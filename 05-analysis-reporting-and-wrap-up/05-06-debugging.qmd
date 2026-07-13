@@ -1,3 +1,270 @@
 # Debugging: reading error messages
 
+We cover how to read a Python traceback, work through the most common error types you will encounter, and cover the difference between an error and a warning.
+
+
 {{< video https://vimeo.com/1196320726/a9d861ba42?fl=ml&fe=ec >}}
+
+```python
+import pandas as pd
+import numpy as np
+
+gapminder = pd.read_csv("data/gapminder.csv")
+gap_2007  = gapminder[gapminder["year"] == 2007].copy()
+gap_2007["log_gdp"] = np.log(gap_2007["gdpPercap"])
+
+# --- Demo 1: NameError ---
+# Caused by a typo or forgetting to run a previous line
+print(gap_207["lifeExp"].mean())
+
+# --- Demo 2: KeyError ---
+# Caused by a column name that does not exist
+print(gap_2007["life_exp"].mean())
+
+# --- Demo 3: TypeError ---
+# Caused by mixing incompatible types
+result = "GDP is: " + gap_2007["gdpPercap"].mean()
+print(result)
+
+# --- Demo 4: FileNotFoundError ---
+# Caused by a wrong file path
+df = pd.read_csv("files/gapminder_data.csv")
+
+# --- Demo 5: SyntaxError ---
+# Caused by missing punctuation (colon, parenthesis, quote)
+if gap_2007["lifeExp"].mean() > 70
+    print("High average life expectancy")
+
+# --- Demo 6: RuntimeWarning ---
+# Caused by undefined mathematical operations (log of zero, division by zero)
+values = np.array([10, 0, -5])
+print(np.log(values))
+```
+
+## Exercises
+
+### Exercise 5.6.1
+
+Each of the two code snippets below raises an error. For each one: run it, identify the error type from the traceback, explain in plain language what went wrong, and then fix it.
+
+```python
+import seaborn as sns
+
+healthexp = sns.load_dataset("healthexp")
+
+# Snippet A
+print(healthex["Country"].unique())
+```
+
+```python
+# Snippet B
+print(healthexp["country"].unique())
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import seaborn as sns
+
+healthexp = sns.load_dataset("healthexp")
+
+# Snippet A — NameError, fixed
+print(healthexp["Country"].unique())
+```
+
+```{python}
+# Snippet B — KeyError, fixed
+print(healthexp["Country"].unique())
+```
+
+**Snippet A** raises a `NameError`: `name 'healthex' is not defined`. The variable was misspelled — `healthex` instead of `healthexp`. This is the most common error beginners encounter, and the fix is almost always a typo in a
+variable name.
+
+**Snippet B** raises a `KeyError`: `'country'`. The DataFrame does not have a column called `country` — the actual column is `Country`, capitalised. `KeyError` almost always means a column name is misspelled or has the wrong
+case; check `.columns` if you are not sure of the exact spelling.
+
+</details>
+
+---
+
+### Exercise 5.6.2
+
+Each of the two code snippets below raises an error. For each one: run it, identify the error type, explain what went wrong, and fix it.
+
+```python
+import seaborn as sns
+
+titanic = sns.load_dataset("titanic")
+
+# Snippet A
+titanic["class"] = titanic["class"].strip()
+```
+
+```python
+# Snippet B
+print(titanic.iloc[1000])
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import seaborn as sns
+
+titanic = sns.load_dataset("titanic")
+
+# Snippet A — AttributeError, fixed
+titanic["class"] = titanic["class"].str.strip()
+```
+
+```{python}
+# Snippet B — IndexError, fixed
+print(titanic.iloc[titanic.shape[0] - 1])
+```
+
+**Snippet A** raises an `AttributeError`: `'Series' object has no attribute 'strip'`. `.strip()` is a plain Python string method — it works on a single string, not on an entire column at once. To apply a string method to every
+value in a column, you need the `.str` accessor: `.str.strip()`. Forgetting `.str` is one of the most common `AttributeError`s in pandas work.
+
+**Snippet B** raises an `IndexError`: `single positional indexer is out-of-bounds`. The Titanic dataset only has 891 rows (positions 0–890), so position 1000 does not exist. `IndexError` means you have asked for a position beyond the end (or before the start) of your data — checking `.shape` first tells you the valid range.
+
+</details>
+
+---
+
+### Exercise 5.6.3
+
+Each of the two code snippets below raises an error. For each one: run it, identify the error type, explain what went wrong, and fix it.
+
+```python
+import seaborn as sns
+
+titanic = sns.load_dataset("titanic")
+
+# Snippet A
+result = "Mean age: " + titanic["age"].mean()
+```
+
+```python
+# Snippet B
+mean_age = titanic["age"].mean()
+
+if mean_age > 25
+    print("High average age")
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import seaborn as sns
+
+titanic = sns.load_dataset("titanic")
+
+# Snippet A — TypeError, fixed
+result = f"Mean age: {titanic['age'].mean():.1f}"
+print(result)
+```
+
+```{python}
+# Snippet B — SyntaxError, fixed
+mean_age = titanic["age"].mean()
+
+if mean_age > 25:
+    print("High average age")
+```
+
+**Snippet A** raises a `TypeError`: `can only concatenate str (not "numpy.float64") to str`. The `+` operator cannot combine a string and a number directly. The fix is to convert the number to a string first (e.g. `str(...)`), or — usually cleaner — use an f-string.
+
+**Snippet B** raises a `SyntaxError`: `expected ':'`. Every `if` statement in Python needs a colon at the end of the condition. Python points a caret (`^`) at roughly where it got confused, which is often right where the missing
+colon should be.
+
+</details>
+
+---
+
+### Exercise 5.6.4
+
+Each of the two code snippets below raises an error. For each one: run it, identify the error type, explain what went wrong, and fix it.
+
+```python
+import pandas as pd
+
+# Snippet A
+df = pd.read_csv("files/titanic_data.csv")
+```
+
+```python
+# Snippet B
+import stargazr
+```
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+import seaborn as sns
+
+# Snippet A — FileNotFoundError, fixed
+titanic = sns.load_dataset("titanic")      # import from seaborn
+titanic = pd.read_csv("data/titanic.csv")  # or import from data subfolder
+print(titanic.shape)
+```
+
+```{python}
+# Snippet B — ModuleNotFoundError, fixed (spelling corrected)
+import stargazer
+```
+
+**Snippet A** raises a `FileNotFoundError`: `No such file or directory: 'files/titanic_data.csv'`. Either the file does not exist at that path, the filename is wrong, or the folder structure is different from what you expect — for example, `data/titanic.csv` rather than `files/titanic_data.csv`. This connects directly to the relative-vs-absolute path lesson from Topic 3.1: the path is always relative to your current working directory, so double-check both the filename and the folder.
+
+**Snippet B** raises a `ModuleNotFoundError`: `No module named 'stargazr'`. The package name is misspelled — it should be `stargazer`. If the spelling is correct and you still get this error, it usually means the package has not
+been installed yet, and you need to run `pip install <package-name>` first.
+
+</details>
+
+---
+
+### Exercise 5.6.5
+
+Unlike an error, a warning does not stop your code from running — but it is still worth understanding. Run the code below.
+
+```python
+import seaborn as sns
+import numpy as np
+
+mpg = sns.load_dataset("mpg").dropna(subset=["horsepower"])
+mpg.loc[0, "horsepower"] = 0
+mpg.loc[1, "horsepower"] = -5
+
+mpg["log_horsepower"] = np.log(mpg["horsepower"])
+```
+
+1. What warning appears? Does the code still finish running despite it?
+2. Print `mpg["log_horsepower"].head()`. What values appear in the first two rows, and why?
+3. In your own words, what does this `RuntimeWarning` tell you about the underlying data, and what would you check or fix before trusting the rest of this column?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import seaborn as sns
+import numpy as np
+
+mpg = sns.load_dataset("mpg").dropna(subset=["horsepower"])
+mpg.loc[0, "horsepower"] = 0
+mpg.loc[1, "horsepower"] = -5
+
+mpg["log_horsepower"] = np.log(mpg["horsepower"])
+
+print(mpg["log_horsepower"].head())
+```
+
+1. A `RuntimeWarning` appears — `divide by zero encountered in log` and `invalid value encountered in log`. The code still finishes running; the warning does not stop execution the way an error would.
+
+2. The first row is `-inf` (the log of 0, which is undefined and represented as negative infinity), and the second row is `NaN` (the log of a negative number, which has no real value).
+
+3. A `RuntimeWarning` from a numerical operation like `np.log()` almost always means the input contains values the operation cannot handle — here, zero or negative horsepower, which should not exist for a real car. Before trusting this column further, you would want to go back and check why the original `horsepower` column contains zero or negative values in the first place — whether it is a genuine data entry error, a placeholder for missing data, or (as in this exercise) values you introduced yourself — and either correct, filter, or otherwise handle those rows before using the log-transformed column in any analysis.
+
+</details>

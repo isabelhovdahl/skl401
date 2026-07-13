@@ -1,3 +1,216 @@
-# Using generative AI
+# Using generative AI 
+
+We cover how to use generative AI responsibly: where it genuinely helps, where it commonly goes wrong, and some practical guidelines for checking its output.
 
 {{< video https://vimeo.com/1196320770/5a34b28c55?fl=ml&fe=ec >}}
+
+```python
+import pandas as pd
+import numpy as np
+
+gapminder = pd.read_csv("data/gapminder.csv")
+gap_2007  = gapminder[gapminder["year"] == 2007].copy()
+
+# This code produces an AttributeError 
+gap_2007["category"] = np.where(gap_2007["gdpPercap"] > 10000, "High income", "Low income")
+gap_2007["category"] = gap_2007["category"].lower()
+```
+
+## Exercises
+
+### Exercise 5.8.1
+
+Before reaching for AI, try writing this yourself — the first practical guideline from the video.
+
+```python
+import pandas as pd
+
+employees = pd.DataFrame({
+    "name":       ["Anna", "Bjorn", "Cecilia", "David", "Elin", "Fredrik"],
+    "department": ["Sales", "Sales", "IT", "IT", "Sales", "IT"],
+    "salary":     [45000, 52000, 61000, 58000, 47000, 63000]
+})
+```
+
+1. Without using AI, write code to compute the median salary for each department.
+2. Now describe the same task in a prompt to an AI assistant of your choice, and compare the code it suggests to your own. Does it produce the same result? Is the approach essentially the same, or does it differ?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+employees = pd.DataFrame({
+    "name":       ["Anna", "Bjorn", "Cecilia", "David", "Elin", "Fredrik"],
+    "department": ["Sales", "Sales", "IT", "IT", "Sales", "IT"],
+    "salary":     [45000, 52000, 61000, 58000, 47000, 63000]
+})
+
+median_by_dept = employees.groupby("department")["salary"].median()
+print(median_by_dept)
+```
+
+IT has a median salary of 61,000, and Sales has a median salary of 47,000. For a task this simple, an AI assistant will almost always suggest essentially the same `groupby().median()` approach — there is usually only one natural
+way to do something this standard. The value of trying it yourself first is not that AI would get it wrong, but that you build and retain the skill yourself, and you have an immediate way to check the AI's suggestion against
+something you already know to be correct.
+
+</details>
+
+---
+
+### Exercise 5.8.2
+
+AI tools are often useful for explaining an error message you do not understand. Suppose you wrote the following code and got an error:
+
+```python
+import pandas as pd
+
+df = pd.DataFrame({"name": "Alice", "age": 30})
+```
+
+```
+ValueError: If using all scalar values, you must pass an index
+```
+
+1. Paste this code and error message into an AI assistant and ask it to explain what went wrong and how to fix it.
+2. Write the explanation in your own words, and fix the code so it runs correctly.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+df = pd.DataFrame({"name": ["Alice"], "age": [30]})
+print(df)
+```
+
+The error occurs because `{"name": "Alice", "age": 30}` gives pandas two plain scalar values (a single string and a single number) with nothing to tell it how many rows to create. A DataFrame needs to know its row count from somewhere — normally from the length of the values you provide. Wrapping each value in a list, `{"name": ["Alice"], "age": [30]}`, tells pandas there is exactly one row, which resolves the error. Check whatever explanation your AI assistant gave against this: a good explanation should mention that dictionary values need to be list-like (or that you must supply an explicit `index=`), not just say "add brackets" without explaining why.
+
+</details>
+
+---
+
+### Exercise 5.8.3
+
+Try this yourself for a few minutes first. If you get stuck, ask an AI assistant.
+
+**Task:** you have a bar chart, and you want to display the exact value above each bar, rather than making the reader estimate it from the y-axis.
+
+```python
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(7, 5))
+bars = ax.bar(["A", "B", "C"], [10, 25, 15])
+```
+
+1. Look for a way to add the number above each bar. If you cannot find it within a few minutes, ask an AI assistant something like: "How do I display the value of each bar above it in a matplotlib bar chart?"
+2. Apply the suggested approach to the chart above.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(7, 5))
+bars = ax.bar(["A", "B", "C"], [10, 25, 15])
+
+ax.bar_label(bars)
+
+plt.tight_layout()
+plt.show()
+```
+
+`ax.bar_label()` takes the container of bars returned by `ax.bar()` and automatically places each bar's value directly above it. This is a genuinely useful matplotlib function that was not covered anywhere in this course — a
+realistic example of the kind of small, well-defined task that AI assistants are typically very good at answering quickly and correctly.
+
+</details>
+
+---
+
+### Exercise 5.8.4
+
+Ask an AI assistant to write a function for you, then verify it against a result you can check by hand.
+
+**Prompt idea:** "Write a Python function that computes the compound annual growth rate (CAGR) between a start value, an end value, and a number of years."
+
+1. Ask an AI assistant for this function, and copy the suggested code.
+2. Test it using a start value of 100, an end value of 200, and 10 years. The correct answer is approximately 7.18%. Does the AI's function produce this result?
+3. Why is having a value you can check by hand — rather than just trusting that the code runs without an error — an important part of using AI-suggested code responsibly?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+def cagr(start_value, end_value, years):
+    return (end_value / start_value) ** (1 / years) - 1
+
+result = cagr(100, 200, 10) * 100
+print(f"CAGR: {result:.2f}%")
+```
+
+2. This produces 7.18%, matching the expected value.
+
+3. Code that runs without error is not the same as code that is correct. `(end_value / start_value) ** (1 / years) - 1` is a specific formula — if an AI assistant made a subtle mistake, such as swapping the numerator and denominator, or using `years - 1` instead of `years`, the function would still run without any error and return a plausible-looking number. Only checking the result against a value you can compute or verify independently
+would reveal a mistake like that — this is exactly the "plausible-but-wrong logic" failure mode described in the video, and it is why "always run the code and check the result" applies even when a task involves a formula you
+could look up and verify.
+
+</details>
+
+---
+
+### Exercise 5.8.5
+
+Suppose an AI assistant suggested the following function to compute a rolling average over a list of numbers:
+
+```python
+def rolling_avg(x, window=3):
+    n = len(x)
+    result = [None] * n
+    for i in range(window, n):
+        result[i] = sum(x[i-window:i]) / window
+    return result
+```
+
+1. Test this function using `x = [1, 2, 3, 4, 5]` and `window=3`. A rolling average with a window of 3 should have its first valid value at position 2 (using 0-indexing), computed as the average of the first three numbers:
+`(1 + 2 + 3) / 3 = 2`. Does the function's output match this?
+2. If it does not match, identify exactly which line causes the problem, and explain why.
+3. Fix the function so that `rolling_avg([1, 2, 3, 4, 5], window=3)` returns `[None, None, 2.0, 3.0, 4.0]`.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+def rolling_avg_buggy(x, window=3):
+    n = len(x)
+    result = [None] * n
+    for i in range(window, n):
+        result[i] = sum(x[i-window:i]) / window
+    return result
+
+print(rolling_avg_buggy([1, 2, 3, 4, 5], window=3))
+```
+
+```{python}
+def rolling_avg(x, window=3):
+    n = len(x)
+    result = [None] * n
+    for i in range(window - 1, n):
+        result[i] = sum(x[i-window+1:i+1]) / window
+    return result
+
+print(rolling_avg([1, 2, 3, 4, 5], window=3))
+```
+
+1. The buggy version returns `[None, None, None, 2.0, 3.0]` — every value is shifted one position later than it should be.
+
+2. The loop starts at `range(window, n)`, meaning the first computed value lands at position 3 rather than position 2. The slice `x[i-window:i]` for `i=3` gives `x[0:3]`, the average of the *first* three values — but it is
+stored at position 3 instead of position 2, where the third value actually belongs. The loop's starting point and the slice indices are off by one relative to each other.
+
+3. Starting the loop at `window - 1` and using the slice `x[i-window+1:i+1]` aligns each computed average with the correct position — the average of the three values ending at position `i` is stored at position `i` itself. This
+kind of off-by-one error is exactly the sort of "plausible-but-wrong logic" mistake the video warns about: the function runs without any error and produces numbers that look entirely reasonable, and the only way to catch the
+problem is to test it against a small example where you already know what the correct answer should be.
+
+</details>

@@ -1,0 +1,12 @@
+# Course overview
+
+The course is organized into five topics:
+
+1. **Getting Started and Working Effectively** — Installing Python, navigating files, writing scripts, and understanding basic data structures.
+2. **Programming Fundamentals** — Logical operators, control flow, loops, and writing your own functions.
+3. **Data Wrangling** — Importing, cleaning, and transforming data with pandas.
+4. **Graphics** — Building clear and informative visualizations with matplotlib.
+5. **Analysis, Reporting, and Wrap-up** — Linear regression, exporting results, working with Jupyter Notebooks, debugging, and using AI responsibly.
+
+{{< video https://vimeo.com/1208726826/972a6f7e29?share=copy&fl=sv&fe=ci >}}
+

@@ -15,6 +15,8 @@ book:
     - index.qmd
     - part: "1 - Getting Started and Working Effectively"
       chapters:
+        - file: 01-getting-started-and-working-effectively/01-01-introduction.qmd
+          text: "1.1 Course Overview"
         - file: 01-getting-started-and-working-effectively/01-02-installing-python.qmd
           text: "1.2 Installing Python"
         - file: 01-getting-started-and-working-effectively/01-03-installing-positron.qmd
@@ -125,8 +127,10 @@ book:
           text: "5.7 Getting Help"
         - file: 05-analysis-reporting-and-wrap-up/05-08-using-AI.qmd
           text: "5.8 Using AI"
-        - file: 05-analysis-reporting-and-wrap-up/05-09-wrap-up.qmd
-          text: "5.9 Course Wrap-up"
+        - file: 05-analysis-reporting-and-wrap-up/05-09-exercises.qmd
+          text: "5.10 Further Exercises"
+        - file: 05-analysis-reporting-and-wrap-up/05-10-wrap-up.qmd
+          text: "5.10 Course Wrap-up"
 
 format:
   html:

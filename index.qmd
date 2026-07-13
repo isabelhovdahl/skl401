@@ -4,20 +4,6 @@ Welcome to SKL401 — Introduction to Python. This is a digital seminar designed
 
 Python is a free, open-source programming language known for its clarity and versatility. First released in 1991, it has grown into one of the most widely used programming languages in the world, with particularly strong adoption in data science, economics, and finance. Its strength lies in a rich ecosystem of packages that extend the language to almost any analytical task. Throughout this course we will explore some of the most central and user-friendly packages for working with, analysing, and visualising data such as pandas, matplotlib, and statsmodels.
 
-<!-- Video 1.1: Welcome -->
-*Video will be embedded here.*
-
-
-## Course overview
-
-The course is organized into five topics:
-
-1. **Getting Started and Working Effectively** — Installing Python, navigating files, writing scripts, and understanding basic data structures.
-2. **Programming Fundamentals** — Logical operators, control flow, loops, and writing your own functions.
-3. **Data Wrangling** — Importing, cleaning, and transforming data with pandas.
-4. **Graphics** — Building clear and informative visualizations with matplotlib.
-5. **Analysis, Reporting, and Becoming Self-Sufficient** — Linear regression, exporting results, working with Jupyter Notebooks, debugging, and using AI responsibly.
-
 ## How the course works
 
 The material is presented as short video lessons, each covering a single topic. The videos are followed by a series of programming problems of varying difficulty, and it is *crucial* that you spend time on these problems in order to develop muscle memory and to get a sense of where you are in your own learning process. The course material is self-contained, which means that you can start learning **whenever and wherever you want.**

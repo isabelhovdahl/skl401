@@ -1,3 +1,239 @@
 # Reading documentation and getting help
 
+We cover how to read function documentation, and how to search effectively when documentation alone does not solve your problem.
+
+
 {{< video https://vimeo.com/1196320757/b2adae7bf1?fl=ml&fe=ec >}}
+
+```python
+# --- Accessing documentation in Positron ---
+import pandas as pd
+help(pd.read_csv)
+
+# --- Checking your package version ---
+print(pd.__version__)
+```
+
+## Exercises
+
+### Exercise 5.7.1
+
+Import `store_sales.csv` from the URL and try to load it with a plain `pd.read_csv()` call.
+
+```python
+import pandas as pd
+
+url = "https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/data/store_sales.csv"
+df = pd.read_csv(url)
+print(df)
+```
+
+The result is clearly wrong — everything has landed in one or two columns.
+
+1. Open the raw file in a text editor (or look at the printed output above) and identify what is different about this file compared to a standard CSV. How many metadata lines sit above the actual header row? What character
+separates the values?
+2. Look up the documentation for `pd.read_csv()` — either online or with `help(pd.read_csv)` — and find the parameter that skips a fixed number of rows at the top of a file. Use it together with the correct separator to load
+the file so the columns appear correctly.
+3. One column contains a code, `NA_CODE`, that should be treated as a missing value rather than as text. Find the relevant parameter in the documentation's Examples section and use it to fix this.
+4. The `internal_flag` column is not useful for analysis. Use `usecols=` to load only `date`, `store_id`, `region`, `units_sold`, and `revenue`.
+5. Print the dtypes of your final result. Do `date` and `store_id` look like you would expect a date and an ID column to look?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+url = "https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/data/store_sales.csv"
+
+df = pd.read_csv(
+    url,
+    sep=";",
+    skiprows=2,
+    na_values=["NA_CODE"],
+    usecols=["date", "store_id", "region", "units_sold", "revenue"]
+)
+
+print(df)
+print(df.dtypes)
+```
+
+**Task 1:** There are two metadata lines above the real header row, and values are separated by semicolons rather than commas.
+
+**Task 3:** Without `na_values=["NA_CODE"]`, the `revenue` column would be read as text (an `object` column) rather than as numbers, since pandas has no way of knowing `"NA_CODE"` is meant to represent a missing value rather than a
+genuine text entry.
+
+**Task 5:** `date` is still read as plain text (`object`), not a real date, and `store_id` has silently lost its leading zeros — `007` became the integer `7`. Both are genuine problems, and neither `sep`, `skiprows`, `na_values`,
+nor `usecols` fixes them. This is exactly what the next exercise addresses.
+
+</details>
+
+---
+
+### Exercise 5.7.2
+
+Continue with `store_sales.csv`, using the working combination of parameters from the previous exercise. This exercise introduces two `read_csv` parameters that were not covered in the video.
+
+1. `store_id` lost its leading zeros during import — `007` became `7`. Look up the `dtype=` parameter in the documentation and use it to force `store_id` to be read as text instead, preserving the leading zeros.
+2. `date` is still stored as plain text rather than an actual date. Look up the `parse_dates=` parameter and use it to convert `date` to a proper datetime column at the moment of import, rather than converting it
+afterward with `pd.to_datetime()`.
+3. Print the dtypes of the final result to confirm both columns now look correct.
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import pandas as pd
+
+url = "https://raw.githubusercontent.com/isabelhovdahl/skl401/refs/heads/master/data/store_sales.csv"
+
+df = pd.read_csv(
+    url,
+    sep=";",
+    skiprows=2,
+    na_values=["NA_CODE"],
+    usecols=["date", "store_id", "region", "units_sold", "revenue"],
+    dtype={"store_id": str},
+    parse_dates=["date"]
+)
+
+print(df)
+print(df.dtypes)
+```
+
+1. Passing `dtype={"store_id": str}` tells pandas to read that specific column as text from the start, before it has a chance to interpret `007` as the number 7 and drop the leading zeros. This matters any time an ID column
+happens to look numeric — postal codes and phone numbers have the exact same problem.
+
+2. `parse_dates=["date"]` converts the column to a proper datetime during the read itself, producing the same result as calling `pd.to_datetime()` afterward, but in one step at import time rather than two.
+
+</details>
+
+---
+
+### Exercise 5.7.3
+
+This exercise practices reading documentation for a function you have not used anywhere in this course: `pd.cut()`, which bins a continuous numeric column into discrete categories.
+
+```python
+import seaborn as sns
+
+titanic = sns.load_dataset("titanic").dropna(subset=["age"])
+```
+
+1. Look up the documentation for `pd.cut()` — either online or with `help(pd.cut)`. Based on the description and the parameter list, what are the two main arguments you need to provide, and what does each one do?
+2. Use `pd.cut()` to create an `age_group` column with three categories: `"child"` (0–18), `"adult"` (18–60), and `"senior"` (60–100). You will need to pass a list of bin edges and a list of labels.
+3. Print `.value_counts()` on the result. Back in the Topic 3, you built an equivalent age classification using `np.select()` with manually written conditions. Which approach do you find more concise for this specific task?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import seaborn as sns
+import pandas as pd
+
+titanic = sns.load_dataset("titanic").dropna(subset=["age"])
+
+bins = [0, 18, 60, 100]
+labels = ["child", "adult", "senior"]
+titanic["age_group"] = pd.cut(titanic["age"], bins=bins, labels=labels)
+
+print(titanic["age_group"].value_counts())
+```
+
+**Task 1:** `pd.cut()` needs a list of bin edges (`bins=`) defining the boundaries between categories, and a matching list of category names (`labels=`) one shorter than the number of edges, since each pair of adjacent edges defines
+one bin.
+
+**Task 3:** `pd.cut()` is considerably more concise here than `np.select()` — a single line replaces the conditions and choices lists needed before. This is another example of the recurring lesson from Topic 3: before writing conditional logic by hand, it is worth checking whether pandas already has a dedicated function for exactly the task you need.
+
+</details>
+
+---
+
+### Exercise 5.7.4
+
+This exercise practices turning a vague search query into an effective one. For each **bad query** below, a situation is described. Rewrite the query so it would actually lead to a useful, specific answer, and explain in one
+sentence what you changed and why.
+
+1. **Situation:** You wrote `titanic["class"] = titanic["class"].strip()` and got an `AttributeError`. **Bad query:** `python string method not working`
+
+2. **Situation:** You have two DataFrames that share a column, and you want to combine them into one, but you cannot remember the function name. **Bad query:** `python combine two tables`
+
+3. **Situation:** You plotted a date column against some values with `matplotlib`, but the x-axis labels are overlapping and unreadable. **Bad query:** `python plot date axis looks wrong`
+
+<details>
+<summary>Solution</summary>
+
+Example answers — yours do not need to match exactly, but should follow the same reasoning.
+
+1. **Good query:** `pandas AttributeError str strip Series`. The bad query never mentions pandas, the specific method (`strip`), the object involved (a Series), or the actual error type — all of which narrow the search
+directly to this specific mistake rather than any generic string-processing issue in any context.
+
+2. **Good query:** `pandas merge two dataframes on column`. Naming the package (`pandas`) and describing the task using the same words the documentation itself uses — "merge," "dataframes," "column" — leads directly to `pd.merge()`, even without knowing the function name in advance.
+
+3. **Good query:** `matplotlib date axis labels overlapping`. The bad query only adds the vague word "wrong," which tells a search engine nothing specific. Naming the library (`matplotlib`), the part of the chart involved
+(the date axis), and the precise, observable symptom (labels overlapping) gives a search engine enough to work with — without requiring you to already know that the underlying cause is a string column masquerading as a date,
+which is exactly the thing you are trying to discover.
+
+A good rule of thumb across all three: always include the package name, and either the function name, the exact error type, or the specific mechanism involved. Vague verbs like "not working" or "looks wrong" carry almost no
+useful information for a search engine.
+
+</details>
+
+---
+
+### Exercise 5.7.5
+
+This exercise introduces three `Stargazer` methods not shown in the video, using the `models` list built in exercise 5.3.4.
+
+```python
+import seaborn as sns
+import statsmodels.formula.api as smf
+from stargazer.stargazer import Stargazer
+
+mpg = sns.load_dataset("mpg").dropna(subset=["horsepower"])
+mpg["weight_tons"] = mpg["weight"] / 1000
+
+controls = ["horsepower", "weight_tons", "C(origin)"]
+models = []
+for i in range(1, len(controls) + 1):
+    rhs = " + ".join(controls[:i])
+    models.append(smf.ols(f"mpg ~ {rhs}", data=mpg).fit())
+
+table = Stargazer(models)
+```
+Take a look at the [Github page](https://github.com/StatsReporting/stargazer) for `Stargazer` (and especially the example notebook) to explore the available methods in the package.
+
+1. Use `significant_digits()` to display 2 decimal places instead of the default.
+2. Use `show_confidence_intervals(True)` to display confidence intervals instead of standard errors.
+3. Use `custom_columns()` to replace the default `(1)`, `(2)`, `(3)` column headers with more descriptive labels of your choice — for example `"Basic"`, `"Plus weight"`, and `"Plus origin"`. 
+4. Display the resulting table. How does it compare to the version you built in exercise 5.4.3?
+
+<details>
+<summary>Solution</summary>
+
+```{python}
+import seaborn as sns
+import statsmodels.formula.api as smf
+from stargazer.stargazer import Stargazer
+
+mpg = sns.load_dataset("mpg").dropna(subset=["horsepower"])
+mpg["weight_tons"] = mpg["weight"] / 1000
+
+controls = ["horsepower", "weight_tons", "C(origin)"]
+models = []
+for i in range(1, len(controls) + 1):
+    rhs = " + ".join(controls[:i])
+    models.append(smf.ols(f"mpg ~ {rhs}", data=mpg).fit())
+
+table = Stargazer(models)
+
+table.significant_digits(2)
+table.show_confidence_intervals(True)
+table.custom_columns(["Basic", "Plus weight", "Plus origin"], [1, 1, 1])
+
+table
+```
+
+4. The table now shows confidence intervals instead of standard errors beneath each coefficient, two decimal places throughout, and descriptive column headers instead of plain model numbers — all genuinely useful options that were never mentioned in the video. Finding these required looking past the five methods actually demonstrated and scanning the full list of available methods yourself, which is exactly the documentation-reading skill this video is about.
+
+</details>
