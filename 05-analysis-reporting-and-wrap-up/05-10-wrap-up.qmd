@@ -1,3 +1,34 @@
 # Course wrap-up
 
-*Content placeholder*
+Over this course you have built a complete data analysis workflow in Python — setting up your environment, wrangling and visualising real data, and estimating and reporting statistical models. Below are some pointers for continuing to build on these skills.
+
+{{< video https://vimeo.com/1209563185/da2a8280ee?share=copy&fl=sv&fe=ci >}}
+
+## Where to go from here
+
+Python is a huge language with vast functionality, and this course has only shown you the basics of a handful of its packages. What you have learned is a genuine foundation — the concepts, habits, and workflow carry over directly to everything below. None of this is required; think of it as a map of directions you could take if and when something here catches your interest.
+
+### Packages in this course
+
+Each of these has much more to offer than what was shown here, and each has official documentation and tutorials worth exploring:
+
+- **pandas** — the [User Guide](https://pandas.pydata.org/docs/user_guide/index.html) covers much more than wrangling, including time series and window functions.
+- **matplotlib** — the [Example Gallery](https://matplotlib.org/stable/gallery/index.html) shows the full range of chart types, each with runnable source code.
+- **seaborn** — used here only to load datasets, but its [Example Gallery](https://seaborn.pydata.org/examples/index.html) and [tutorial](https://seaborn.pydata.org/tutorial.html) show its real purpose: statistical plots in far fewer lines than matplotlib.
+- **NumPy** — the [User Guide](https://numpy.org/doc/stable/user/index.html) covers linear algebra, random number generation, and more.
+- **statsmodels** — the [Examples Gallery](https://www.statsmodels.org/stable/examples/index.html) covers many model types beyond OLS and logit, including time series models.
+
+### New territory
+
+**New packages worth exploring:** 
+
+- **Dashboards** — [Dash](https://dash.plotly.com/) turns a chart into an interactive web app. Their [20-minute tutorial](https://dash.plotly.com/tutorial) is a fast way to build your first one.
+- **Machine learning** — [scikit-learn](https://scikit-learn.org/) extends the fit-predict-evaluate workflow from Topic 5 to a much wider range of models. Start with their [Getting Started guide](https://scikit-learn.org/stable/getting_started.html).
+- **APIs** — the [requests](https://requests.readthedocs.io/en/latest/user/quickstart/) library lets you pull data directly from a service instead of a fixed file. Some services have dedicated wrapper packages, e.g. [fredapi](https://github.com/mortada/fredapi) for the FRED data used in this course, or [yfinance](https://ranaroussi.github.io/yfinance/) for stock data.
+
+**General programming skills worth having:**
+
+- **Version control** — Git and GitHub let you track changes to your code and collaborate with others. Positron has [built-in Git support](https://positron.posit.co/git.html); for the underlying concepts, see the free [Pro Git book](https://git-scm.com/book/en/v2) and GitHub's own [Hello World guide](https://docs.github.com/en/get-started/quickstart/hello-world).
+- **Virtual environments** — as projects grow, it becomes useful to give each one its own isolated set of package versions. `venv`, included with Python itself, is the simplest way to start — see the [official venv documentation](https://docs.python.org/3/library/venv.html). `conda` is a common alternative in data science, but requires a separate installation.
+
+Whatever direction you take next — good luck, and enjoy the coding journey ahead! 🐍🚀

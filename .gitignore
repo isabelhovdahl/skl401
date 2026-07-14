@@ -10,7 +10,9 @@
 /*_files/
 /*_cache/
 
-# Local Quarto render of data/FRED/README.md (GitHub renders the .md natively)
+# Local Quarto render of README.md files (GitHub renders the .md natively)
+README.html
+README_files/
 data/FRED/README.html
 data/FRED/README_files/
 
